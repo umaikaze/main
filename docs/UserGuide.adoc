@@ -75,7 +75,7 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   - **Edit slot**: `editslot i/INDEX t/TIME [nt/NEW_TIME]` +
   e.g. `editslot i/1 t/14:00 nt/8:00` +
   e.g. `editslot i/1 t/14:00 nt/19:00 nd/1:30` +
-  e.g. `editslot i/12 t/”20-2-2020 13:00” nd/2:00` 
+  e.g. `editslot i/12 t/”20-2-2020 13:00” nd/2:00`
   - **Show schedule**: `showslots [t/DATE]` +
   e.g. `showslots` +
   e.g. `showslots t/20-2-2020`
@@ -142,7 +142,7 @@ There is no need to save manually.
 
 ==== Statistics `[coming in v2.0]`
 
-Provides statistics about the pet tracker and schedule system, such as total number of pets, how many time slots are in conflict, etc. 
+Provides statistics about the pet tracker and schedule system, such as total number of pets, how many time slots are in conflict, etc.
 
 === Pet Tracker System
 
@@ -240,7 +240,7 @@ Examples:
 
 ==== Deleting a slot: `deleteslot`
 
-Deletes the slot from the schedule. 
+Deletes the slot from the schedule.
 
 Format: `deleteslot [i/INDEX] [n/PETNAME] t/TIME`
 
