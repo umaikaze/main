@@ -10,9 +10,6 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-
-
-
 === Zhu Ruicong
 image::Zhu-Ruicong.png[width="150", align="left"]
 {empty}[http://github.com/Zhu-Ruicong[github]] [<<johndoe#, portfolio>>]
@@ -49,12 +46,9 @@ Responsibilities: UI
 
 '''
 
-
 === Zhao Tianqi
 image::tianqi77.png[width="150", align="left"]
 {empty}[http://github.com/tianqi77[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
-
-'''
