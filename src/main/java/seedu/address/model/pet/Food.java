@@ -1,9 +1,9 @@
 package seedu.address.model.pet;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a Food object in Pet Shop Helper.
