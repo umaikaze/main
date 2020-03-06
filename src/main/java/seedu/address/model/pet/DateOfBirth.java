@@ -1,10 +1,11 @@
 package seedu.address.model.pet;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 /**
  * Represents a Pet's date of birth.
@@ -16,7 +17,7 @@ public class DateOfBirth {
     public static final String DATE_OF_BIRTH_FORMAT = "yyyy-mm-dd";
 
 
-    public final String value;
+    public final LocalDate value;
 
     /**
      * Constructs an {@code Email}.
@@ -26,7 +27,7 @@ public class DateOfBirth {
     public DateOfBirth(String dateOfBirth) {
         requireNonNull(dateOfBirth);
         checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_CONSTRAINTS);
-        this.value = dateOfBirth;
+        this.value = LocalDate.parse(dateOfBirth);
     }
 
     /**
@@ -45,7 +46,7 @@ public class DateOfBirth {
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
@@ -61,4 +62,3 @@ public class DateOfBirth {
     }
 
 }
-

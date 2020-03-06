@@ -1,5 +1,7 @@
 package seedu.address.model.pet;
 
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -36,13 +38,27 @@ public class Food {
     }
 
     /**
-     * Return true if a given food amount is positive.
+     * Returns true if a given food amount is positive.
      */
     public static boolean isValidFoodAmount(Integer test) {
         return test > 0;
     }
 
+    /**
+     * Returns true if the input food object is of same type as this food.
+     */
     public boolean isSameType(Food other) {
+        if (other == null) {
+            return false;
+        } else {
+            return foodName.equals(other.foodName);
+        }
+    }
+
+    /**
+     * Returns true if the input food object is of same amount as this food.
+     */
+    public boolean isSameAmount(Food other) {
         if (other == null) {
             return false;
         } else {
@@ -53,14 +69,14 @@ public class Food {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Food // instanceof handles nulls
-                && foodName.equals(((Food) other).foodName)
-                && foodAmount.equals(((Food) other).foodAmount)); // state check
+                || ((other instanceof Food) // instanceof handles nulls
+                && isSameType((Food) other)
+                && isSameAmount((Food) other)); // state checks
     }
 
     @Override
     public int hashCode() {
-        return foodName.hashCode();
+        return Objects.hash(foodAmount, foodName);
     }
 
     /**
