@@ -11,8 +11,9 @@ import java.util.Objects;
  */
 public class Food {
 
-    public static final String MESSAGE_CONSTRAINTS = "Food names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Food names should only contain alphanumeric characters and " +
+            "spaces only, and it should not be blank";
+    public static final String VALIDATION_REGEX =  "[^\\s].*";
 
     public final String foodName;
     public final Integer foodAmount;
