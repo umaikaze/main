@@ -1,4 +1,4 @@
-package seedu.address.logic.petParser;
+package seedu.address.logic.generalParser;
 
 import static java.util.Objects.requireNonNull;
 
@@ -63,7 +63,7 @@ public class ParserUtil {
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
-        return new Gender(trimmedGender);
+        return Gender.valueOf(trimmedGender);
     }
 
     /**
