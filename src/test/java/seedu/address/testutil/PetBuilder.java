@@ -1,11 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.pet.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.model.pet.DateOfBirth;
+import seedu.address.model.pet.Food;
+import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.Species;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
