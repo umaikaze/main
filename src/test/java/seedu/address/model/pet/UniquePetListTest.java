@@ -29,20 +29,20 @@ public class UniquePetListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_petNotInList_returnsFalse() {
         assertFalse(uniquePetList.contains(COCO));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_petInList_returnsTrue() {
         uniquePetList.add(COCO);
         assertTrue(uniquePetList.contains(COCO));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_petWithSameIdentityFieldsInList_returnsTrue() {
         uniquePetList.add(COCO);
-        Pet editedAlice = new PetBuilder(COCO).withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_FAT)
+        Pet editedAlice = new PetBuilder(COCO).withTags(VALID_TAG_FAT)
                 .build();
         assertTrue(uniquePetList.contains(editedAlice));
     }
@@ -115,7 +115,7 @@ public class UniquePetListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPetNotFoundException() {
+    public void remove_petDoesNotExist_throwsPetNotFoundException() {
         assertThrows(PetNotFoundException.class, () -> uniquePetList.remove(COCO));
     }
 
@@ -149,8 +149,8 @@ public class UniquePetListTest {
     @Test
     public void setPets_list_replacesOwnListWithProvidedList() {
         uniquePetList.add(COCO);
-        List<Pet> personList = Collections.singletonList(GARFIELD);
-        uniquePetList.setPets(personList);
+        List<Pet> petList = Collections.singletonList(GARFIELD);
+        uniquePetList.setPets(petList);
         UniquePetList expectedUniquePetList = new UniquePetList();
         expectedUniquePetList.add(GARFIELD);
         assertEquals(expectedUniquePetList, uniquePetList);
