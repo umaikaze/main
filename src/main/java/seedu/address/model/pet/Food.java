@@ -13,6 +13,7 @@ public class Food {
 
     public static final String MESSAGE_CONSTRAINTS = "Food names should only contain alphanumeric characters and "
             + "spaces only, and it should not be blank";
+    public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food amount must be a number and greater than 0";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String foodName;
