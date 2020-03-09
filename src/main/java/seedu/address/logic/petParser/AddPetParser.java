@@ -10,10 +10,8 @@ import static seedu.address.logic.petParser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.generalParser.ArgumentMultimap;
-import seedu.address.logic.generalParser.ArgumentTokenizer;
-import seedu.address.logic.generalParser.Parser;
+import seedu.address.commons.core.PshMessages;
+import seedu.address.logic.generalParser.*;
 import seedu.address.logic.generalParser.exceptions.ParseException;
 import seedu.address.logic.petCommands.AddPetCommand;
 import seedu.address.model.pet.DateOfBirth;
@@ -31,13 +29,13 @@ public class AddPetParser implements Parser<AddPetCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_SPECIES, PREFIX_FOODLIST)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(PshMessages.MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Gender gender = seedu.address.logic.petParser.ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        DateOfBirth dateOfBirth = seedu.address.logic.petParser.ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
-        Species species = seedu.address.logic.petParser.ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
+        Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        Species species = ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
         Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(seedu.address.logic.petParser.CliSyntax.PREFIX_FOODLIST));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(seedu.address.logic.petParser.CliSyntax.PREFIX_TAG));
 

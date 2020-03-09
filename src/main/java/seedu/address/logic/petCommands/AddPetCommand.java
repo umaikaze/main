@@ -11,8 +11,7 @@ import static seedu.address.logic.petParser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.generalCommands.Command;
 import seedu.address.logic.generalCommands.CommandResult;
 import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.model.GeneralModel;
-import seedu.address.model.PetModel;
+import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -54,20 +53,13 @@ public class AddPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(GeneralModel model) throws CommandException {
+    public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
-
-        if(model instanceof PetModel) {
-            if (((PetModel) model).hasPet(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
-            ((PetModel) model).addPet(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        }else{
-            //in case model is Schedule Model
-            //err msg printed for debug purpose
-            throw new CommandException("Something is wrong with model handling");
+        if (model.hasPet(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+        model.addPet(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

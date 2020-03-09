@@ -5,13 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import com.sun.javafx.image.impl.General;
-import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.generalCommands.CommandResult;
 import seedu.address.logic.generalCommands.exceptions.CommandException;
 import seedu.address.logic.generalCommands.Command;
-import seedu.address.model.GeneralModel;
-import seedu.address.model.PetModel;
+import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -35,21 +34,18 @@ public class DeletePetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(GeneralModel model) throws CommandException {
+    public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
-        if(model instanceof PetModel) {
-            List<Pet> lastShownList = ((PetModel) model).getFilteredPetList();
+            List<Pet> lastShownList = model.getFilteredPetList();
 
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
-            ((PetModel) model).deletePet(petToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, petToDelete));
-        } else {
-            throw new CommandException("Something is wrong with model handling");
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
+
+        Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePet(petToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, petToDelete));
+
     }
 
     @Override

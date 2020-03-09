@@ -7,18 +7,17 @@ import static seedu.address.logic.petParser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.PetModel.PREDICATE_SHOW_ALL_PETS;
+import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_PETS;
 
 import java.util.*;
 
-import seedu.address.commons.petCore.Messages;
+import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.generalCommands.Command;
 import seedu.address.logic.generalCommands.CommandResult;
 import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.model.GeneralModel;
-import seedu.address.model.PetModel;
+import seedu.address.model.PshModel;
 import seedu.address.model.pet.*;
 import seedu.address.model.tag.Tag;
 
@@ -63,28 +62,25 @@ public class EditPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(GeneralModel model) throws CommandException {
+        public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
-        if(model instanceof PetModel) {
-            List<Pet> lastShownList = ((PetModel) model).getFilteredPetList();
+        List<Pet> lastShownList = model.getFilteredPetList();
 
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
-            }
-
-            Pet petToEdit = lastShownList.get(index.getZeroBased());
-            Pet editedPet = createEditedPet(petToEdit, editPetDescriptor);
-
-            if (!petToEdit.isSamePet(editedPet) && ((PetModel) model).hasPet(editedPet)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PET);
-            }
-
-            ((PetModel) model).setPet(petToEdit, editedPet);
-            ((PetModel) model).updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet));
-        } else {
-            throw new CommandException("Something is wrong with model handling");
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
+
+        Pet petToEdit = lastShownList.get(index.getZeroBased());
+        Pet editedPet = createEditedPet(petToEdit, editPetDescriptor);
+
+        if (!petToEdit.isSamePet(editedPet) && model.hasPet(editedPet)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PET);
+        }
+
+        model.setPet(petToEdit, editedPet);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet));
+
     }
 
     /**

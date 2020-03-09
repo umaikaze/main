@@ -1,7 +1,7 @@
 package seedu.address.logic.generalCommands;
 
 
-import seedu.address.model.GeneralModel;
+import seedu.address.model.PshModel;
 
 public class HelpCommand extends Command{
     public static final String COMMAND_WORD = "help";
@@ -12,7 +12,7 @@ public class HelpCommand extends Command{
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(GeneralModel model) {
+    public CommandResult execute(PshModel model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic.petParser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.PshMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.petParser.CliSyntax.PREFIX_NAME;
@@ -19,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.generalParser.ArgumentMultimap;
 import seedu.address.logic.generalParser.ArgumentTokenizer;
 import seedu.address.logic.generalParser.Parser;
+import seedu.address.logic.generalParser.ParserUtil;
 import seedu.address.logic.generalParser.exceptions.ParseException;
 import seedu.address.logic.petCommands.EditPetCommand;
 import seedu.address.model.pet.Food;

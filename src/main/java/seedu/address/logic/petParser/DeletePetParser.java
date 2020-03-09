@@ -3,6 +3,7 @@ package seedu.address.logic.petParser;
 import seedu.address.commons.petCore.Messages;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.generalParser.ParserUtil;
 import seedu.address.logic.petCommands.DeletePetCommand;
 import seedu.address.logic.generalParser.exceptions.ParseException;
 

@@ -2,12 +2,11 @@ package seedu.address.logic.petCommands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.petCore.Messages;
+import seedu.address.commons.core.PshMessages;
 import seedu.address.logic.generalCommands.Command;
 import seedu.address.logic.generalCommands.CommandResult;
 import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.model.GeneralModel;
-import seedu.address.model.PetModel;
+import seedu.address.model.PshModel;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 
 /**
@@ -30,15 +29,12 @@ public class FindPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(GeneralModel model) throws CommandException {
+    public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
-        if(model instanceof PetModel) {
-            ((PetModel) model).updateFilteredPetList(predicate);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, ((PetModel) model).getFilteredPetList().size()));
-        } else {
-            throw new CommandException("Something is wrong with model handling");
-        }
+        model.updateFilteredPetList(predicate);
+        return new CommandResult(
+                String.format(PshMessages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()));
+
     }
 
     @Override
