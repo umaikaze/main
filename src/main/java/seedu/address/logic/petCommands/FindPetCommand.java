@@ -1,11 +1,11 @@
-package seedu.address.logic.petCommands;
+package seedu.address.logic.petcommands;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.PshMessages;
-import seedu.address.logic.generalCommands.Command;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 

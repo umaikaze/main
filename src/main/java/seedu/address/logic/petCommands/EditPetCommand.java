@@ -1,24 +1,33 @@
-package seedu.address.logic.petCommands;
+package seedu.address.logic.petcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_PETS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.generalCommands.Command;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
 import seedu.address.model.PshModel;
-import seedu.address.model.pet.*;
+import seedu.address.model.pet.DateOfBirth;
+import seedu.address.model.pet.Food;
+import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -62,7 +71,7 @@ public class EditPetCommand extends Command {
     }
 
     @Override
-        public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
         List<Pet> lastShownList = model.getFilteredPetList();
 

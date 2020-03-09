@@ -1,13 +1,20 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.pet.Pet;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
+/**
+ * The API of the Pet Store Helper Model component.
+ */
 public interface PshModel {
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -45,12 +52,6 @@ public interface PshModel {
 
     /** Returns the AddressBook */
     ReadOnlyPetTracker getPetTracker();
-
-
-
-
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

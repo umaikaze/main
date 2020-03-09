@@ -1,4 +1,4 @@
-package seedu.address.logic.generalCommands;
+package seedu.address.logic.generalcommands;
 
 import static java.util.Objects.requireNonNull;
 

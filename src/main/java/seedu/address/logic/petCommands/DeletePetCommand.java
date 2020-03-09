@@ -1,15 +1,14 @@
-package seedu.address.logic.petCommands;
+package seedu.address.logic.petcommands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import com.sun.javafx.image.impl.General;
 import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.logic.generalCommands.Command;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 
@@ -36,7 +35,7 @@ public class DeletePetCommand extends Command {
     @Override
     public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
-            List<Pet> lastShownList = model.getFilteredPetList();
+        List<Pet> lastShownList = model.getFilteredPetList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);

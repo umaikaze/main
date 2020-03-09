@@ -1,13 +1,17 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.UniquePetList;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Wraps all pet system data at the pet-tracker level
+ * Duplicates are not allowed (by .isSamePet comparison)
+ */
 public class PetTracker implements ReadOnlyPetTracker {
     private final UniquePetList pets;
 

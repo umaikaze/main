@@ -1,16 +1,16 @@
-package seedu.address.logic.petCommands;
+package seedu.address.logic.petcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.petParser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.petparser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.generalCommands.Command;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 

@@ -1,15 +1,24 @@
-package seedu.address.logic.petParser;
+package seedu.address.logic.petparser;
 
-import seedu.address.logic.generalCommands.*;
-import seedu.address.logic.petCommands.*;
-import seedu.address.logic.generalParser.exceptions.ParseException;
+import static seedu.address.commons.core.PshMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.PshMessages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.petCore.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.petCore.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.ExitCommand;
+import seedu.address.logic.generalcommands.HelpCommand;
+import seedu.address.logic.generalparser.exceptions.ParseException;
+import seedu.address.logic.petcommands.AddPetCommand;
+import seedu.address.logic.petcommands.DeletePetCommand;
+import seedu.address.logic.petcommands.EditPetCommand;
+import seedu.address.logic.petcommands.FindPetCommand;
+import seedu.address.logic.petcommands.ListCommand;
 
+/**
+ * Parse user input.
+ */
 public class PetTrackerParser {
     /**
      * Used for initial separation of command word and args.

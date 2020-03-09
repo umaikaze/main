@@ -1,17 +1,18 @@
 package seedu.address.logic;
 
+import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.logic.generalParser.exceptions.ParseException;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
+import seedu.address.logic.generalparser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.pet.Pet;
 
-import java.nio.file.Path;
-
-
+/**
+ * API of the Logic component for Pet Store Helper
+ */
 public interface PshLogic {
     /**
      * Executes the command and returns the result.

@@ -1,4 +1,4 @@
-package seedu.address.logic.generalParser;
+package seedu.address.logic.generalparser;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,12 +8,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.generalParser.exceptions.ParseException;
-import seedu.address.model.pet.Gender;
-import seedu.address.model.pet.Species;
-import seedu.address.model.pet.Name;
+import seedu.address.logic.generalparser.exceptions.ParseException;
 import seedu.address.model.pet.DateOfBirth;
 import seedu.address.model.pet.Food;
+import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +96,12 @@ public class ParserUtil {
         return new DateOfBirth(trimmedDateOfBirth);
     }
 
+    /**
+     * Parses a {@code String Food} into an {@code Food}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
     public static Food parseFood(String food) throws ParseException {
         requireNonNull(food);
         String[] foodDetails = food.split(":");
@@ -115,6 +121,9 @@ public class ParserUtil {
         return new Food(trimmedFood, foodAmount);
     }
 
+    /**
+     * Parses {@code Collection<String> foodList} into a {@code Set<Food>}.
+     */
     public static Set<Food> parseFoodList(Collection<String> foodList) throws ParseException {
         requireNonNull(foodList);
         final Set<Food> foodSet = new HashSet<>();

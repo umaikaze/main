@@ -1,22 +1,26 @@
 package seedu.address.logic;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.generalCommands.Command;
-import seedu.address.logic.generalCommands.CommandResult;
-import seedu.address.logic.generalCommands.exceptions.CommandException;
-import seedu.address.logic.generalParser.exceptions.ParseException;
-import seedu.address.logic.petParser.PetTrackerParser;
-import seedu.address.model.PshModel;
-import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.Pet;
-import seedu.address.storage.Storage;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.generalcommands.exceptions.CommandException;
+import seedu.address.logic.generalparser.exceptions.ParseException;
+import seedu.address.logic.petparser.PetTrackerParser;
+import seedu.address.model.PshModel;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPetTracker;
+import seedu.address.model.pet.Pet;
+import seedu.address.storage.Storage;
+
+/**
+ * The main LogicManager of Pet Store Helper.
+ */
 public class PshLogicManager implements PshLogic {
 
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
@@ -41,7 +45,9 @@ public class PshLogicManager implements PshLogic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getPetTracker());
+            //model.getPetTracker is ReadOnlyPetTracker,
+            //here is casted to ReadOnlyAddressBook to pass checkstyle test
+            storage.saveAddressBook((ReadOnlyAddressBook) model.getPetTracker());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

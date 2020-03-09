@@ -1,9 +1,11 @@
-package seedu.address.logic.generalCommands;
+package seedu.address.logic.generalcommands;
 
-import seedu.address.logic.generalCommands.CommandResult;
 import seedu.address.model.PshModel;
 
-public class ExitCommand extends Command{
+/**
+ * Terminates the program.
+ */
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 

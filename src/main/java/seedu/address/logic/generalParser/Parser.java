@@ -1,7 +1,7 @@
-package seedu.address.logic.generalParser;
+package seedu.address.logic.generalparser;
 
-import seedu.address.logic.generalCommands.Command;
-import seedu.address.logic.generalParser.exceptions.ParseException;
+import seedu.address.logic.generalcommands.Command;
+import seedu.address.logic.generalparser.exceptions.ParseException;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.
