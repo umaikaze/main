@@ -1,10 +1,10 @@
 package seedu.address.model.pet;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class SpeciesTest {
 
@@ -33,10 +33,10 @@ class SpeciesTest {
         // valid Species
         assertTrue(Species.isValidSpecies("dog cat")); // alphabets only
         assertTrue(Species.isValidSpecies("101")); // numbers only
-        assertTrue(Species.isValidSpecies("genetically engineered cat girls " +
-                "prototype 1")); // alphanumeric characters
+        assertTrue(Species.isValidSpecies("genetically engineered cat girls "
+                + "prototype 1")); // alphanumeric characters
         assertTrue(Species.isValidSpecies("Omega Wolf")); // with capital letters
-        assertTrue(Species.isValidSpecies("As if the previous species name is not long enough here is " +
-                "one to bring it to the next level")); // long Speciess
+        assertTrue(Species.isValidSpecies("As if the previous species name is not long enough here is "
+                + "one to bring it to the next level")); // long Speciess
     }
 }

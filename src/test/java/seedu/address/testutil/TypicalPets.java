@@ -1,13 +1,22 @@
 package seedu.address.testutil;
 
-import seedu.address.model.pet.Gender;
-import seedu.address.model.pet.Pet;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HYPER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Pet;
 
 /**
  * A utility class containing a list of {@code Pet} objects to be used in tests.
@@ -53,7 +62,7 @@ public class TypicalPets {
     /**
      * TBD
      */
-/*    public static AddressBook getTypicalSpeciesBook() {
+    /* public static AddressBook getTypicalSpeciesBook() {
         AddressBook ab = new AddressBook();
         for (Pet pet : getTypicalPets()) {
             ab.addPet(pet);
