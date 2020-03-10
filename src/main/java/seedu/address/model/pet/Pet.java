@@ -67,7 +67,7 @@ public class Pet {
     }
 
     /**
-     * Returns true if both pets of the same name and gender have at least one other identity field that is the same.
+     * Returns true if both pets have the same name.
      * This defines a weaker notion of equality between two pets.
      */
     public boolean isSamePet(Pet otherPet) {
@@ -75,10 +75,7 @@ public class Pet {
             return true;
         }
 
-        return otherPet != null
-                && otherPet.getName().equals(getName())
-                && otherPet.getSpecies().equals(getSpecies())
-                && (otherPet.getDateOfBirth().equals(getDateOfBirth()) || otherPet.getGender().equals(getGender()));
+        return otherPet != null && otherPet.getName().equals(getName());
     }
 
     /**
