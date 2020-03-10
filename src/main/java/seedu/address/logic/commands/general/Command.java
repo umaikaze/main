@@ -1,6 +1,6 @@
-package seedu.address.logic.generalcommands;
+package seedu.address.logic.commands.general;
 
-import seedu.address.logic.generalcommands.exceptions.CommandException;
+import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 
 /**

@@ -1,4 +1,4 @@
-package seedu.address.logic.petparser;
+package seedu.address.logic.parser.pet;
 
 import static seedu.address.commons.core.PshMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.PshMessages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,15 +6,15 @@ import static seedu.address.commons.core.PshMessages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.generalcommands.Command;
-import seedu.address.logic.generalcommands.ExitCommand;
-import seedu.address.logic.generalcommands.HelpCommand;
-import seedu.address.logic.generalparser.exceptions.ParseException;
-import seedu.address.logic.petcommands.AddPetCommand;
-import seedu.address.logic.petcommands.DeletePetCommand;
-import seedu.address.logic.petcommands.EditPetCommand;
-import seedu.address.logic.petcommands.FindPetCommand;
-import seedu.address.logic.petcommands.ListCommand;
+import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.ExitCommand;
+import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.pet.AddPetCommand;
+import seedu.address.logic.commands.pet.DeletePetCommand;
+import seedu.address.logic.commands.pet.EditPetCommand;
+import seedu.address.logic.commands.pet.FindPetCommand;
+import seedu.address.logic.commands.pet.ListCommand;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
  * Parse user input.

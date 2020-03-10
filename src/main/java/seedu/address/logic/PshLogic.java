@@ -4,9 +4,9 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.generalcommands.CommandResult;
-import seedu.address.logic.generalcommands.exceptions.CommandException;
-import seedu.address.logic.generalparser.exceptions.ParseException;
+import seedu.address.logic.commands.general.CommandResult;
+import seedu.address.logic.commands.general.exceptions.CommandException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.pet.Pet;
 
