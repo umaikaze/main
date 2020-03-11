@@ -1,13 +1,13 @@
-package seedu.address.logic.petparser;
+package seedu.address.logic.parser.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.PshMessages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.petparser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,12 +16,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.generalparser.ArgumentMultimap;
-import seedu.address.logic.generalparser.ArgumentTokenizer;
-import seedu.address.logic.generalparser.Parser;
-import seedu.address.logic.generalparser.ParserUtil;
-import seedu.address.logic.generalparser.exceptions.ParseException;
-import seedu.address.logic.petcommands.EditPetCommand;
+import seedu.address.logic.commands.pet.EditPetCommand;
+import seedu.address.logic.parser.general.ArgumentMultimap;
+import seedu.address.logic.parser.general.ArgumentTokenizer;
+import seedu.address.logic.parser.general.Parser;
+import seedu.address.logic.parser.general.ParserUtil;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.pet.Food;
 import seedu.address.model.tag.Tag;
 

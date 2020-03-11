@@ -1,11 +1,11 @@
-package seedu.address.logic.petparser;
+package seedu.address.logic.parser.pet;
 
 import java.util.Arrays;
 
 import seedu.address.commons.core.PshMessages;
-import seedu.address.logic.generalparser.Parser;
-import seedu.address.logic.generalparser.exceptions.ParseException;
-import seedu.address.logic.petcommands.FindPetCommand;
+import seedu.address.logic.commands.pet.FindPetCommand;
+import seedu.address.logic.parser.general.Parser;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 
 /**

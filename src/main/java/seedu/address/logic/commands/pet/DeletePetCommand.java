@@ -1,4 +1,4 @@
-package seedu.address.logic.petcommands;
+package seedu.address.logic.commands.pet;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.generalcommands.Command;
-import seedu.address.logic.generalcommands.CommandResult;
-import seedu.address.logic.generalcommands.exceptions.CommandException;
+import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.CommandResult;
+import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 

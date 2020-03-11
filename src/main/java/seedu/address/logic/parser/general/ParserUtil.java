@@ -1,4 +1,4 @@
-package seedu.address.logic.generalparser;
+package seedu.address.logic.parser.general;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.generalparser.exceptions.ParseException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.pet.DateOfBirth;
 import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Gender;

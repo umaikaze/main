@@ -1,10 +1,10 @@
-package seedu.address.logic.petcommands;
+package seedu.address.logic.commands.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_PETS;
 
-import seedu.address.logic.generalcommands.Command;
-import seedu.address.logic.generalcommands.CommandResult;
+import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.model.PshModel;
 
 /**
