@@ -273,7 +273,7 @@ Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 ****
 
 Examples:
- 
+
 - `editslot 1 t/16/11/2020 1300 d/120` +
 Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
 - `editslot 3 d/45` +
