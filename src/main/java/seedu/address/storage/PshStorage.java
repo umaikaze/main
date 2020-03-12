@@ -27,6 +27,6 @@ public interface PshStorage extends PetTrackerStorage, UserPrefsStorage {
     Optional<ReadOnlyPetTracker> readPetTracker() throws DataConversionException, IOException;
 
     @Override
-    void savePetTracker(ReadOnlyPetTracker addressBook) throws IOException;
+    void savePetTracker(ReadOnlyPetTracker petTracker) throws IOException;
 
 }
