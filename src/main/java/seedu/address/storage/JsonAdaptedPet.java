@@ -98,7 +98,7 @@ class JsonAdaptedPet {
         if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
-        final Gender modelGender = new Gender(gender);
+        final Gender modelGender = Gender.valueOf(gender);
 
         if (dateOfBirth == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName()));
