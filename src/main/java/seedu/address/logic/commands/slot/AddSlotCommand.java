@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 
 public class AddSlotCommand extends PshCommand {

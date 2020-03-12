@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
 
