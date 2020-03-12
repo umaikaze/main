@@ -49,7 +49,7 @@ public class AddPetCommandTest {
         AddPetCommand addCommand = new AddPetCommand(validPet);
         ModelStub modelStub = new ModelStubWithPet(validPet);
 
-        assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
     }
 
     @Test

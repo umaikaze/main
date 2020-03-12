@@ -40,7 +40,7 @@ public class AddPetCommand extends Command {
             + PREFIX_TAG + "lazy ";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This pet already exists in the pet store helper";
+    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper";
 
     private final Pet toAdd;
 
