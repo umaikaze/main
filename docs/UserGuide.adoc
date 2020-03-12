@@ -72,10 +72,10 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
   e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
   e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
-  - **Find slot**: `findslots [p/PETNAME] [t/DATE]` +
-  e.g. `findslots p/Brian Griffin` +
+  - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
+  e.g. `findpets n/Brian Griffin` +
   e.g. `findslots t/20/2/2020` +
-  e.g. `findslots p/Coco t/16/11/2020`
+  e.g. `findpets n/Coco t/16/11/2020`
   - **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
   e.g. `editslot 1 t/16/11/2020 1300 d/120` +
   e.g. `editslot 3 d/45` +
@@ -226,7 +226,7 @@ Adds a new occupied slot to the schedule.
 Format: `addslot n/PETNAME t/DATETIME d/DURATION`
 
 ****
-- The datetime must be in `dd/M/yyyy HH:mm` format.
+- The datetime must be in `dd/M/yyyy HHmm` format.
 * The time must be in 24-hour format.
 - The duration is to be specified in minutes as a positive integer.
 ****
@@ -240,23 +240,23 @@ Examples:
 
 Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both.
 
-Format: `findslots [p/PETNAME] [t/DATE]`
+Format: `findslots [n/PETNAME] [t/DATE]`
 
 ****
 - The name of the pet must match exactly.
 - At least one of the optional fields must be provided.
-- The date must be in `dd/M/yyyy HH:mm` format.
+- The date must be in `dd/M/yyyy HHmm` format.
 * Any time specified in the date will be ignored, e.g. `20/2/2020 1400` will be parsed as `20-2-2020`.
 
 ****
 
 Example:
 
-- `findslots p/Brian Griffin` +
+- `findpets n/Brian Griffin` +
 Displays the slots occupied by `Brian Griffin`. Note that slots occupied by `Griffin` or `brian griffin` will not be returned.
 - `findslots t/20/2/2020` +
 Displays the occupied slots on `20/2/2020`.
-- `findslots p/Coco t/16/11/2020` +
+- `findpets n/Coco t/16/11/2020` +
 Displays the slots occupied by `Coco` on `16/11/2020`.
 
 ==== Edting a slot: `editslot`
@@ -283,7 +283,7 @@ Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
 ==== Checking slot availability: `checkslot`
 
-Informs the user which pet(s), if any, is/are occupying the slot at the specified time.
+Informs the user which pet(s), if any, is/are occupying the slot at the specified datetime.
 
 Format: `checkslot t/DATETIME`
 
@@ -314,7 +314,7 @@ Examples:
 - `display s` +
 `deleteslot 2` +
 Deletes the 2nd slot in the schedule.
-- `findslots p/Coco` +
+- `findpets n/Coco` +
 `deleteslot 2` +
 Deletes the 2nd slot occupied by `Coco`.
 
