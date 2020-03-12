@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.PetTracker;
+import seedu.address.model.person.Person;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
 
@@ -60,15 +63,15 @@ public class TypicalPets {
     private TypicalPets() {} // prevents instantiation
 
     /**
-     * TBD
+     * Returns a {@code PetTracker} with all the typical pets.
      */
-    /* public static AddressBook getTypicalSpeciesBook() {
-        AddressBook ab = new AddressBook();
+    public static PetTracker getTypicalPetTracker() {
+        PetTracker pt = new PetTracker();
         for (Pet pet : getTypicalPets()) {
-            ab.addPet(pet);
+            pt.addPet(pet);
         }
-        return ab;
-    }*/
+        return pt;
+    }
 
     public static List<Pet> getTypicalPets() {
         return new ArrayList<>(Arrays.asList(COCO, GARFIELD, CARL, DANIEL, ELLE, FIONA, GEORGE));
