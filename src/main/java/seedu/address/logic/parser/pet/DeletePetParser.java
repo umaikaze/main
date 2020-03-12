@@ -1,11 +1,11 @@
-package seedu.address.logic.petparser;
+package seedu.address.logic.parser.pet;
 
 import seedu.address.commons.core.PshMessages;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.generalparser.ParserUtil;
-import seedu.address.logic.generalparser.exceptions.ParseException;
-import seedu.address.logic.petcommands.DeletePetCommand;
+import seedu.address.logic.commands.pet.DeletePetCommand;
+import seedu.address.logic.parser.general.ParserUtil;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeletePetCommand object
