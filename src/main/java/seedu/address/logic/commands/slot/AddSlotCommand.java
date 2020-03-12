@@ -5,12 +5,12 @@ import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.PshCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 
-public class AddSlotCommand extends Command {
+public class AddSlotCommand extends PshCommand {
 
     public static final String COMMAND_WORD = "addslot";
 

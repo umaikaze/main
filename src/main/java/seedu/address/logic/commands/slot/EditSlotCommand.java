@@ -12,8 +12,8 @@ import java.util.Optional;
 import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.PshCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
@@ -21,7 +21,7 @@ import seedu.address.model.pet.Pet;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditSlotCommand extends Command {
+public class EditSlotCommand extends PshCommand {
 
     public static final String COMMAND_WORD = "editslot";
 
@@ -83,7 +83,7 @@ public class EditSlotCommand extends Command {
     private static Slot createEditedSlot(Slot slotToEdit, EditSlotDescriptor editSlotDescriptor) {
         assert slotToEdit != null;
 
-        Pet updatedName = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
+        Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
         DateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
         Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getEmail());
 
