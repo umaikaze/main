@@ -1,12 +1,12 @@
-package seedu.address.ui;
+package seedu.address.petui;
 
-import static java.util.Objects.requireNonNull;
+import javafx.fxml.FXMLLoader;
+import seedu.address.MainApp;
 
 import java.io.IOException;
 import java.net.URL;
 
-import javafx.fxml.FXMLLoader;
-import seedu.address.MainApp;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.
@@ -15,7 +15,7 @@ import seedu.address.MainApp;
 public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
-    public static final String FXML_FILE_FOLDER = "/petview/";
+    public static final String FXML_FILE_FOLDER = "/view/";
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
