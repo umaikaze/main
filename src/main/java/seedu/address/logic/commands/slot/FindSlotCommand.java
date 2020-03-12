@@ -3,8 +3,8 @@ package seedu.address.logic.commands.slot;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.PshMessages;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.PshCommand;
+import seedu.address.logic.commands.general.CommandResult;
+import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.model.PshModel;
 import seedu.address.model.slot.SlotContainsKeywordsPredicate;
 

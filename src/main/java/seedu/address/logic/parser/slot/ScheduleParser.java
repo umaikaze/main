@@ -6,18 +6,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.PshCommand;
+import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.commands.slot.ListSlotCommand;
-import seedu.address.logic.parser.slot.AddSlotParser;
-import seedu.address.logic.parser.slot.DeleteSlotParser;
-import seedu.address.logic.parser.slot.EditSlotParser;
-import seedu.address.logic.parser.slot.FindSlotParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

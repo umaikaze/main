@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.PshCommand;
+import seedu.address.logic.commands.general.CommandResult;
+import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.PshModel;
 

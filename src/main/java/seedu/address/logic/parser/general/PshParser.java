@@ -1,6 +1,6 @@
 package seedu.address.logic.parser.general;
 
-import seedu.address.logic.commands.PshCommand;
+import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
