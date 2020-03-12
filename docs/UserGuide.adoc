@@ -55,35 +55,36 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   - **Help**: `help`
   - **Exit**: `exit`
   - **Navigate**: `pp` / `np`
-  - **Display**: `display SYSTEM`
+  - **Display**: `display SYSTEM` +
+  e.g. `display p` +
+  e.g. `display s` +
+  e.g. `display i`
 . Pet Tracker System
   - **Add pet**: `addpet n/NAME a/AGE s/SPECIES b/BREED g/GENDER f/FOOD [t/TAG]...` +
   e.g. `addpet n/Garfield a/5 s/cat b/ginger tabby g/M t/lazy f/30 t/good for nothing t/lasagna`
-  - **Find pet**: `findpet [n/NAME]... [t/TAG]...` +
-  e.g. `findpet n/garfield n/odie t/jon`
-  - **Tag pet**: `tagpet INDEX t/TAG [t/TAG]...` +
+  - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
+  e.g. `findpets n/garfield n/odie t/jon`
+  - **Tag pet**: `tagpet i/INDEX t/TAG [t/TAG]...` +
   e.g. `tagpet 2 t/smelly t/noisy t/cuddly`
-  - **Delete pet**: `deletepet INDEX` +
+  - **Delete pet**: `deletepet i/INDEX` +
   e.g. `deletepet 2`
 . Schedule System
-  - **Add slot**: `addslot [i/INDEX] [n/PETNAME] t/TIME d/DURATION` +
-  e.g. `addslot i/1 t/14:00 d/2:00` +
-  e.g. `addslot n/Coco t/"20-2-2020 13:00" d/1:30`
-  - **Delete slot**: `deleteslot [i/INDEX] [n/PETNAME] t/TIME` +
-  e.g. `deleteslot i/1 t/14:00` +
-  e.g. `deleteslot n/Coco t/"20-2-2020 13:00"`
-  - **Edit slot**: `editslot i/INDEX t/TIME [nt/NEW_TIME]` +
-  e.g. `editslot i/1 t/14:00 nt/8:00` +
-  e.g. `editslot i/1 t/14:00 nt/19:00 nd/1:30` +
-  e.g. `editslot i/12 t/”20-2-2020 13:00” nd/2:00`
-  - **Show schedule**: `showslots [t/DATE]` +
-  e.g. `showslots` +
-  e.g. `showslots t/20-2-2020`
+  - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
+  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
+  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
+  - **Find slot**: `findslots [p/PETNAME] [t/DATE]` +
+  e.g. `findslots p/Brian Griffin` +
+  e.g. `findslots t/20/2/2020` +
+  e.g. `findslots p/Coco t/16/11/2020`
+  - **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
+  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
+  e.g. `editslot 3 d/45` +
+  e.g. `editslot 12 n/Brian Griffin`
+  - **Check slot**: `checkslot t/DATETIME` +
+  e.g. `checkslot 17/4/2020 1700`
+  - **Delete slot**: `deleteslot i/INDEX` +
+  e.g. `deleteslot 2`
   - **Show conflicts**: `conflict`
-  - **Search**: `findslot PETNAME [PETNAME2]` +
-  e.g. `findslot ABC`
-  - **Check**: `findslot PETNAME [PETNAME2]` +
-  e.g. `checkslot 01-01-2020 1700`
 
 [[Features]]
 == Features
@@ -129,11 +130,11 @@ Format: `display SYSTEM`
 Examples:
 
 - `display p` +
-Shows the pets in the pet tracker system
+Displays all pets in the pet tracker system.
 - `display s` +
-Shows the slots in the schedule system
+Displays all slots in the schedule system.
 - `display i` +
-Shows a list of all pet food (inventory) and the needed amount per week
+Displays a list of all pet food (inventory) and the needed amount per week.
 
 ==== Saving the data
 
@@ -163,11 +164,11 @@ Example:
 
 - `addpet n/Garfield a/5 s/cat b/ginger tabby g/M f/30 t/lazy t/good for nothing t/lasagna`
 
-==== Finding pets by names or tags: `findpet`
+==== Finding pets by names or tags: `findpets`
 
 Finds pets whose name contains any of the given keywords.
 
-Format: `findpet [n/NAME]... [t/TAG]...`
+Format: `findpets [n/NAME]... [t/TAG]...`
 
 ****
 - At least one argument must be supplied.
@@ -176,14 +177,14 @@ Format: `findpet [n/NAME]... [t/TAG]...`
 
 Example:
 
-- `findpet n/garfield n/odie t/jon` +
+- `findpets n/garfield n/odie t/jon` +
 Returns a list of pets, whose names either contain `garfield` or `odie`, or have a tag labelled `jon`.
 
 ==== Tagging a pet: `tagpet`
 
 Tags an existing pet in the system.
 
-Format: `tagpet INDEX t/TAG [t/TAG]...`
+Format: `tagpet i/INDEX t/TAG [t/TAG]...`
 
 ****
 - The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
@@ -201,7 +202,7 @@ Overrides the tags of the 2nd pet in the system with 3 tags of “smelly”, “
 
 Deletes the specified pet from the system.
 
-Format: `deletepet INDEX`
+Format: `deletepet i/INDEX`
 
 ****
 - The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
@@ -220,115 +221,108 @@ Deletes the 2nd pet in the results of the `find garfield` command.
 
 ==== Adding a slot: `addslot`
 
-Adds a new slot to the schedule.
+Adds a new occupied slot to the schedule.
 
-Format: `addslot [i/INDEX] [n/PETNAME] t/TIME d/DURATION`
+Format: `addslot n/PETNAME t/DATETIME d/DURATION`
 
 ****
-- At least one of the optional fields must be provided.
-- When index is used to specify the pet, it must exist in the pet tracker system first.
-- Date is optional; by default, the current system date will be used if only time is specified.
-- The time must follow the `dd/M/yyyy HH:mm` format.
-- The time has to follow 24-hour format e.g. `13:00` instead of `1:00pm`.
-- The duration is to be specified in hours e.g. `0:30` instead of 30min.
+- The datetime must be in `dd/M/yyyy HH:mm` format.
+* The time must be in 24-hour format.
+- The duration is to be specified in minutes as a positive integer.
 ****
 
 Examples:
 
-- `addslot i/1 t/14:00 d/2:00`
-- `addslot n/Coco t/20-2-2020 13:00 d/1:30`
+- `addslot n/Coco t/16/11/2020 1300 d/90`
+- `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
 
-==== Deleting a slot: `deleteslot`
+==== Finding slots: `findslots`
 
-Deletes the slot from the schedule.
+Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both.
 
-Format: `deleteslot [i/INDEX] [n/PETNAME] t/TIME`
+Format: `findslots [p/PETNAME] [t/DATE]`
 
 ****
+- The name of the pet must match exactly.
 - At least one of the optional fields must be provided.
-- When a pet’s name is used to specify the slot, the pet name is case insensitive. e.g. `coco` will match `Coco`.
+- The date must be in `dd/M/yyyy HH:mm` format.
+* Any time specified in the date will be ignored, e.g. `20/2/2020 1400` will be parsed as `20-2-2020`.
+
 ****
 
-Examples:
+Example:
 
-- `deleteslot i/1 t/14:00`
-- `deleteslot n/Coco t/20-2-2020 13:00`
+- `findslots p/Brian Griffin` +
+Displays the slots occupied by `Brian Griffin`. Note that slots occupied by `Griffin` or `brian griffin` will not be returned.
+- `findslots t/20/2/2020` +
+Displays the occupied slots on `20/2/2020`.
+- `findslots p/Coco t/16/11/2020` +
+Displays the slots occupied by `Coco` on `16/11/2020`.
 
 ==== Edting a slot: `editslot`
 
-Edits an existing slot in the schedule.
+Edits an existing occupied slot in the schedule.
 
-Format: `editslot i/INDEX t/TIME [nt/NEW_TIME][nd/NEW_DURATION]`
+Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
 ****
+- The index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ...
 - At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- Formats for the datetime and/or duration passed in are the same as those specified in <<Adding a slot: `addslot`>>
+****
+
+Examples:
+ 
+- `editslot 1 t/16/11/2020 1300 d/120` +
+Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
+- `editslot 3 d/45` +
+Edits the duration of the 3rd slot to be `45` minutes.
+- `editslot 12 n/Brian Griffin` +
+Edits the pet occupying the 12th slot to be `Brian Griffin`.
+
+==== Checking slot availability: `checkslot`
+
+Informs the user which pet(s), if any, is/are occupying the slot at the specified time.
+
+Format: `checkslot t/DATETIME`
+
+****
+- The datetime must be in `dd/M/yyyy` format.
+* The time must be in 24-hour format.
+****
+
+Example:
+
+- `checkslot 17/4/2020 1700` +
+If the slot is occupied by Coco, returns: `Coco is occupying the slot at 17/4/2020 1700.` +
+If the slot is occupied by both Coco and Garfield (conflict), returns: `Coco and Garfield are occupying the slot at 17/4/2020 1700.` +
+If the slot is unoccupied, returns: `Unoccupied slot at 17/4/2020 1700.`
+
+==== Deleting a slot: `deleteslot`
+
+Deletes the specified slot from the schedule.
+
+Format: `deleteslot i/INDEX`
+
+****
+- The index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, …​
 ****
 
 Examples:
 
-- `editslot i/1 t/14:00 nt/8:00`
-- `editslot i/1 t/14:00 nt/19:00 nd/1:30`
-- `editslot i/12 t/”20-2-2020 13:00” nd/2:00`
-
-==== Showing current schedule: `showslots`
-
-Shows the current schedule of the specified date.
-
-Format: `showslots [t/DATE]`
-
-****
-- The date must follow the `dd/M/yyyy` format.
-- Any time specified in the date will be ignored, e.g. `20-2-2020 14:00` will be parsed as `20-2-2020`.
-- If no date is given, defaults to today, determined from system time.
-****
-
-Examples:
-
-- `showslots` +
-Returns a table of the bathing time slots for today.
-- `showslots t/20-2-2020` +
-Returns a table of the bathing time slots on the 20th of Feb.
+- `display s` +
+`deleteslot 2` +
+Deletes the 2nd slot in the schedule.
+- `findslots p/Coco` +
+`deleteslot 2` +
+Deletes the 2nd slot occupied by `Coco`.
 
 ==== Showing all conflicts: `conflict`
 
-Show all the time slots that have multiple showering bookings, ordered bydate.
+Displays the slots that have a conflict, i.e., an overlap in time with another occupied slot.
 
 Format: `conflict`
-
-Example:
-
-- `conflict` +
-Returns:
-
- 23rd Feb 2020 3pm-4pm: pet_name1, pet _name2
- 1st June 2020 10am-11am: pet_name3, pet_name4, pet_name 5
-
-==== Searching a slot: `findslot`
-
-Shows the time slot that some pet has booked.
-
-Format: `findslot PETNAME [PETNAME2]`
-
-Exmaple:
-
-- `findslot ABC` +
-Returns: `ABC has bathing booking at 1st Jan 2021 1700-1800`
-
-==== Check slot availability: `checkslot`
-
-Checks if the bathing space is empty at a given time.
-
-Format: `checkslot DATE TIME`
-
-****
-- The date must be in `DD-MM-YYYY` format.
-- The time must be in 24-hour format.
-****
-
-Example:
-
-- `checkslot 01-01-2020 1700` +
-Returns: `Bathing space is occupied at 1st Jan 2021 1700 ``
 
 == FAQ
 
