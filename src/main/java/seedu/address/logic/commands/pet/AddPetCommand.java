@@ -56,7 +56,7 @@ public class AddPetCommand extends Command {
     public CommandResult execute(PshModel model) throws CommandException {
         requireNonNull(model);
         if (model.hasPet(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PET);
         }
         model.addPet(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
