@@ -6,9 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Pet's gender in the pet shop helper.
  * Guarantees: Only two valid constants: FEMALE and MALE.
  */
-public enum Gender {
-    FEMALE ("female"),
-    MALE ("male");
+public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS = "Gender should be either male or female";
 
@@ -19,7 +17,7 @@ public enum Gender {
      *
      * @param gender A valid gender.
      */
-    Gender(String gender) {
+    public Gender(String gender) {
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
         this.value = gender;
     }
