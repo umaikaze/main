@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
+import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_SLOTS;
 
 import java.time.Duration;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
@@ -61,7 +61,7 @@ public class EditSlotCommand extends Command {
         List<Slot> lastShownList = model.getFilteredSlotList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
+            throw new CommandException(PshMessages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
         }
 
         Slot slotToEdit = lastShownList.get(index.getZeroBased());
