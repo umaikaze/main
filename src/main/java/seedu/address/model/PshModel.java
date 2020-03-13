@@ -20,6 +20,11 @@ public interface PshModel {
     Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<Slot> PREDICATE_SHOW_ALL_SLOTS = unused -> true;
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(PshReadOnlyUserPrefs userPrefs);

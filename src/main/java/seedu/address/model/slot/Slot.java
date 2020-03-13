@@ -39,7 +39,27 @@ public class Slot implements Comparable<Slot> {
         return duration;
     }
 
+    /**
+     * Returns the ending datetime of the slot, based on its starting datetime and duration.
+     */
+
     public LocalDateTime getEndDateTime() {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    /**
+     * Returns true if both slots fall on the same date, regardless of time of day.
+     */
+    public boolean isSameDate(Slot othersSlot) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    /**
+     * Returns true if this slot starts and ends on the same date.
+     */
+    public boolean isWithinOneDay() {
         //TODO
         throw new UnsupportedOperationException("Not implemented yet!");
     }
