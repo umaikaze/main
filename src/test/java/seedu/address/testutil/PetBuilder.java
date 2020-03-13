@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Pet objects.
  */
 public class PetBuilder {
 
@@ -39,7 +39,7 @@ public class PetBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code petToCopy}.
+     * Initializes the PetBuilder with the data of {@code petToCopy}.
      */
     public PetBuilder(Pet petToCopy) {
         name = petToCopy.getName();
@@ -51,7 +51,7 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Pet} that we are building.
      */
     public PetBuilder withName(String name) {
         this.name = new Name(name);
@@ -59,7 +59,7 @@ public class PetBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Pet} that we are building.
      */
     public PetBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -67,15 +67,15 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Species} of the {@code Pet} that we are building.
      */
-    public PetBuilder withSpecies(String address) {
-        this.species = new Species(address);
+    public PetBuilder withSpecies(String species) {
+        this.species = new Species(species);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Gender} of the {@code Pet} that we are building.
      */
     public PetBuilder withGender(Gender gender) {
         this.gender = gender;
@@ -83,7 +83,7 @@ public class PetBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code DateOfBirth} of the {@code Pet} that we are building.
      */
     public PetBuilder withDateOfBirth(String dob) {
         this.dob = new DateOfBirth(dob);
