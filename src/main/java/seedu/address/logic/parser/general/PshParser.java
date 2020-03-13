@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.general;
 
 import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.

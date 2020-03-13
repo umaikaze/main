@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.PshParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.slot.SlotContainsKeywordsPredicate;
 
 /**

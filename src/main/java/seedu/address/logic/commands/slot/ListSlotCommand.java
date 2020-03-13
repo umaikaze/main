@@ -19,7 +19,7 @@ public class ListSlotCommand extends PshCommand {
     @Override
     public CommandResult execute(PshModel model) {
         requireNonNull(model);
-        model.updateFilteredSlotsList(PREDICATE_SHOW_ALL_SLOTS);
+        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

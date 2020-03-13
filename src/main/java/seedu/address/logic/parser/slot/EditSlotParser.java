@@ -2,9 +2,9 @@ package seedu.address.logic.parser.slot;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 
 import seedu.address.commons.core.index.Index;
@@ -13,12 +13,19 @@ import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.PshParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.PshModel;
 
 /**
  * Parses input arguments and creates a new EditSlotCommand object
  */
 public class EditSlotParser implements PshParser<EditSlotCommand> {
+
+    private final PshModel model;
+
+    public EditSlotParser(PshModel model) {
+        this.model = model;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditSlotCommand
@@ -40,7 +47,7 @@ public class EditSlotParser implements PshParser<EditSlotCommand> {
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
         if (argMultimap.getValue(PREFIX_PETNAME).isPresent()) {
-            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_PETNAME).get()));
+            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_PETNAME).get(), model));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));

@@ -1,15 +1,18 @@
 package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
+import seedu.address.model.slot.Slot;
 
+/**
+ * Adds a slot to the schedule.
+ */
 public class AddSlotCommand extends PshCommand {
 
     public static final String COMMAND_WORD = "addslot";
@@ -38,12 +41,8 @@ public class AddSlotCommand extends PshCommand {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(PshModel model) {
         requireNonNull(model);
-
-        if (model.hasSlot(slotToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SLOT);
-        }
 
         model.addSlot(slotToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, slotToAdd));

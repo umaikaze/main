@@ -3,10 +3,15 @@ package seedu.address.logic.parser.slot;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.PshModel;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -15,8 +20,10 @@ import seedu.address.model.pet.Pet;
 public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATETIME = "Date and time must follow format d/M/yyyy HHmm.";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_PETNAME = "Pet name does not match any pet in record.";
+    public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
+    public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -37,12 +44,16 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code petName} is invalid.
      */
-    public static Pet parsePet(String petName) throws ParseException {
-        requireNonNull(petName);
-        String trimmedPetName = petName.trim();
-        Pet pet = SomeHowFindPetWithNameWithoutViolatingSOLID(trimmedPetName);
-        if (pet == null) {
+    public static Pet parsePet(String nameStr, PshModel model) throws ParseException {
+        requireNonNull(nameStr);
+        String trimmedPetName = nameStr.trim();
+        if (!Name.isValidName(trimmedPetName)) {
             throw new ParseException(MESSAGE_INVALID_PETNAME);
+        }
+        Name petName = new Name(trimmedPetName);
+        Pet pet = model.getPet(petName);
+        if (pet == null) {
+            throw new ParseException(MESSAGE_PET_DOES_NOT_EXIST);
         }
         return pet;
     }
@@ -53,13 +64,16 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static DateTime parseDateTime(String dateTime) throws ParseException {
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!DateTime.isValidDateTime(trimmedDateTime)) {
-            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        LocalDateTime parsedDateTime;
+        try {
+            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
-        return new DateTime(trimmedDateTime);
+        return parsedDateTime;
     }
 
     /**

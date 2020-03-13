@@ -1,6 +1,6 @@
 package seedu.address.logic.commands.general;
 
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 
 /**
@@ -16,5 +16,4 @@ public abstract class PshCommand {
      * @throws CommandException If an error occurs during command execution.
      */
     public abstract CommandResult execute(PshModel model) throws CommandException;
-
 }

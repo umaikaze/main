@@ -1,12 +1,14 @@
 package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_SLOTS;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.PshMessages;
@@ -17,9 +19,10 @@ import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an slot in the schedule.
  */
 public class EditSlotCommand extends PshCommand {
 
@@ -67,10 +70,6 @@ public class EditSlotCommand extends PshCommand {
         Slot slotToEdit = lastShownList.get(index.getZeroBased());
         Slot editedSlot = createEditedSlot(slotToEdit, editSlotDescriptor);
 
-        if (!slotToEdit.isSameSlot(editedSlot) && model.hasSlot(editedSlot)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SLOT);
-        }
-
         model.setSlot(slotToEdit, editedSlot);
         model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot));
@@ -84,10 +83,10 @@ public class EditSlotCommand extends PshCommand {
         assert slotToEdit != null;
 
         Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
-        DateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
-        Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getEmail());
+        LocalDateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
+        Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
 
-        return new Slot(updatedName, updatedDateTime, updatedDuration);
+        return new Slot(updatedPet, updatedDateTime, updatedDuration);
     }
 
     @Override
@@ -114,7 +113,7 @@ public class EditSlotCommand extends PshCommand {
      */
     public static class EditSlotDescriptor {
         private Pet pet;
-        private DateTime dateTime;
+        private LocalDateTime dateTime;
         private Duration duration;
 
         public EditSlotDescriptor() {}
@@ -144,11 +143,11 @@ public class EditSlotCommand extends PshCommand {
             return Optional.ofNullable(pet);
         }
 
-        public void setDateTime(DateTime dateTime) {
+        public void setDateTime(LocalDateTime dateTime) {
             this.dateTime = dateTime;
         }
 
-        public Optional<DateTime> getDateTime() {
+        public Optional<LocalDateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
         }
 
