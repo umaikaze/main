@@ -1,5 +1,7 @@
 package seedu.address.petui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,8 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.pet.Pet;
 import seedu.address.ui.UiPart;
-
-import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code Pet}.

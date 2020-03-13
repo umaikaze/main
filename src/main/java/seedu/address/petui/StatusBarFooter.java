@@ -1,12 +1,12 @@
 package seedu.address.petui;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
