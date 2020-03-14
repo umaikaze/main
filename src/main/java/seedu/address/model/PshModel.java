@@ -132,5 +132,5 @@ public interface PshModel {
      * Updates the filter of the filtered slot list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredSlotList(Predicate<Slot> predicate);
+    void updateFilteredSlotList(Predicate<Slot>... predicates);
 }

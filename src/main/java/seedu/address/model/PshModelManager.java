@@ -170,7 +170,7 @@ public class PshModelManager implements PshModel {
     }
 
     @Override
-    public void updateFilteredSlotList(Predicate<Slot> predicate) {
+    public void updateFilteredSlotList(Predicate<Slot>... predicates) {
         //TODO
         throw new UnsupportedOperationException("Not implemented yet!");
     }

@@ -22,10 +22,10 @@ public class FindSlotCommand extends PshCommand {
             + "Parameters: [n/PETNAME] [t/DATE]...\n"
             + "Example: " + COMMAND_WORD + " garfield 10/11/2020";
 
-    private final SlotPredicate predicate;
+    private final SlotPredicate[] predicate;
 
-    public FindSlotCommand(SlotPredicate predicate) {
-        this.predicate = predicate;
+    public FindSlotCommand(SlotPredicate... predicates) {
+        this.predicate = predicates;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package seedu.address.model.slot;
 
 /**
- * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches the given name exactly.
  */
 public class SlotPetNamePredicate extends SlotPredicate {
     private final String petName;
