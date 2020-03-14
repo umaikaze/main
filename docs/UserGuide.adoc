@@ -73,9 +73,9 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
   e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
   - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
-  e.g. `findpets n/Brian Griffin` +
+  e.g. `findslots n/Brian Griffin` +
   e.g. `findslots t/20/2/2020` +
-  e.g. `findpets n/Coco t/16/11/2020`
+  e.g. `findslots n/Coco t/16/11/2020`
   - **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
   e.g. `editslot 1 t/16/11/2020 1300 d/120` +
   e.g. `editslot 3 d/45` +
@@ -213,7 +213,7 @@ Examples:
 - `display p` +
   `deletepet 2` +
 Deletes the 2nd pet in the system.
-- `find n/garfield` +
+- `findpets n/garfield` +
   `deletepet 2` +
 Deletes the 2nd pet in the results of the `find garfield` command.
 
