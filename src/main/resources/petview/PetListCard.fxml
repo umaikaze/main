@@ -28,6 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
+      <FlowPane fx:id="foodList"/>
       <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
       <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
       <Label fx:id="species" styleClass="cell_small_label" text="\$species" />

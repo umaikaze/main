@@ -39,6 +39,8 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label species;
     @FXML
+    private  FlowPane foodList;
+    @FXML
     private FlowPane tags;
 
     public PetCard(Pet pet, int displayedIndex) {
@@ -49,6 +51,8 @@ public class PetCard extends UiPart<Region> {
         gender.setText(pet.getGender().toString());
         dateOfBirth.setText(pet.getDateOfBirth().toString());
         species.setText(pet.getSpecies().toString());
+        pet.getFoodList().stream()
+                .forEach(food -> foodList.getChildren().add(new Label(food.toString())));
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
