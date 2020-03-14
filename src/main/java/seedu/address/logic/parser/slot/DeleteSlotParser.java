@@ -9,7 +9,7 @@ import seedu.address.logic.parser.general.PshParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteSlotCommand object
  */
 public class DeleteSlotParser implements PshParser<DeleteSlotCommand> {
 

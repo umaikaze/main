@@ -10,7 +10,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.slot.SlotContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindSlotCommand object
  */
 public class FindSlotParser implements PshParser<FindSlotCommand> {
 

@@ -12,7 +12,6 @@ import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
-import seedu.address.logic.commands.slot.ListSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.PshModel;
 
@@ -66,9 +65,6 @@ public class ScheduleParser {
 
         case FindSlotCommand.COMMAND_WORD:
             return new FindSlotParser().parse(arguments);
-
-        case ListSlotCommand.COMMAND_WORD:
-            return new ListSlotCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

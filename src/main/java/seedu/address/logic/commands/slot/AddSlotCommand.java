@@ -28,7 +28,6 @@ public class AddSlotCommand extends PshCommand {
             + PREFIX_DURATION + "90 ";
 
     public static final String MESSAGE_SUCCESS = "New slot added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SLOT = "This slot already exists in the schedule";
 
     private final Slot slotToAdd;
 
