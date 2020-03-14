@@ -13,6 +13,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.PshModel;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.exceptions.PetNotFoundException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -24,6 +25,8 @@ public class SlotParserUtil {
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
+
+    public static final String DATETIME_FORMAT = "d/M/yyyy HHmm";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -51,11 +54,11 @@ public class SlotParserUtil {
             throw new ParseException(MESSAGE_INVALID_PETNAME);
         }
         Name petName = new Name(trimmedPetName);
-        Pet pet = model.getPet(petName);
-        if (pet == null) {
+        try {
+            return model.getPet(petName);
+        } catch (PetNotFoundException e) {
             throw new ParseException(MESSAGE_PET_DOES_NOT_EXIST);
         }
-        return pet;
     }
 
     /**
@@ -69,7 +72,7 @@ public class SlotParserUtil {
         String trimmedDateTime = dateTime.trim();
         LocalDateTime parsedDateTime;
         try {
-            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
