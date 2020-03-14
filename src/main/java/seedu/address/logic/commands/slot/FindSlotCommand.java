@@ -6,7 +6,7 @@ import seedu.address.commons.core.PshMessages;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.model.PshModel;
-import seedu.address.model.slot.SlotContainsKeywordsPredicate;
+import seedu.address.model.slot.SlotPredicate;
 
 /**
  * Finds and lists all slots in the schedule whose contents contains any of the argument keywords.
@@ -16,14 +16,15 @@ public class FindSlotCommand extends PshCommand {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots where pet name matches exactly "
+            + "(case-insensitive) or slots that is within the date specified (ignoring timing) and displays them as a "
+            + "list with index numbers.\n"
+            + "Parameters: [n/PETNAME] [t/DATE]...\n"
             + "Example: " + COMMAND_WORD + " garfield 10/11/2020";
 
-    private final SlotContainsKeywordsPredicate predicate;
+    private final SlotPredicate predicate;
 
-    public FindSlotCommand(SlotContainsKeywordsPredicate predicate) {
+    public FindSlotCommand(SlotPredicate predicate) {
         this.predicate = predicate;
     }
 

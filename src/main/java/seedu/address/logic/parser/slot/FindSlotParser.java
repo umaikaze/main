@@ -2,12 +2,11 @@ package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.PshParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.slot.SlotContainsKeywordsPredicate;
+import seedu.address.model.slot.SlotDatePredicate;
+import seedu.address.model.slot.SlotPetNamePredicate;
 
 /**
  * Parses input arguments and creates a new FindSlotCommand object
@@ -25,10 +24,11 @@ public class FindSlotParser implements PshParser<FindSlotCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
         }
-
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindSlotCommand(new SlotContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (!trimmedArgs.contains("/")) {
+            return new FindSlotCommand(new SlotPetNamePredicate(trimmedArgs));
+        } else {
+            return new FindSlotCommand(new SlotDatePredicate(SlotParserUtil.parseDateTime(trimmedArgs)));
+        }
     }
 
 }
