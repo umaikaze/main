@@ -39,7 +39,7 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label species;
     @FXML
-    private  FlowPane foodList;
+    private FlowPane foodList;
     @FXML
     private FlowPane tags;
 
