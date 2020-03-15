@@ -84,7 +84,8 @@ public class EditPetCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid gender followed by valid email
-        assertParseFailure(parser, "1" + INVALID_GENDER_DESC + PshCommandTestUtil.DOB_DESC_COCO, Gender.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_GENDER_DESC + PshCommandTestUtil.DOB_DESC_COCO,
+                Gender.MESSAGE_CONSTRAINTS);
 
         // valid gender followed by invalid gender. The test case for invalid gender followed by valid gender
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
@@ -97,7 +98,8 @@ public class EditPetCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FAT + TAG_DESC_LAZY, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_DOB_DESC + PshCommandTestUtil.VALID_SPECIES_COCO + VALID_GENDER_COCO.toString(),
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_DOB_DESC + PshCommandTestUtil.VALID_SPECIES_COCO
+                        + VALID_GENDER_COCO.toString(),
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -105,10 +107,12 @@ public class EditPetCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PET;
         String userInput = targetIndex.getOneBased() + GENDER_DESC_GARFIELD + TAG_DESC_LAZY
-                + PshCommandTestUtil.DOB_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO + NAME_DESC_COCO + TAG_DESC_FAT;
+                + PshCommandTestUtil.DOB_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO
+                + NAME_DESC_COCO + TAG_DESC_FAT;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
-                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(PshCommandTestUtil.VALID_DOB_COCO).withSpecies(PshCommandTestUtil.VALID_SPECIES_COCO)
+                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(PshCommandTestUtil.VALID_DOB_COCO)
+                .withSpecies(PshCommandTestUtil.VALID_SPECIES_COCO)
                 .withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
 
@@ -164,13 +168,15 @@ public class EditPetCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + PshCommandTestUtil.GENDER_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO + PshCommandTestUtil.DOB_DESC_COCO
-                + TAG_DESC_FAT + PshCommandTestUtil.GENDER_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO + PshCommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT
-                + GENDER_DESC_GARFIELD + SPECIES_DESC_GARFIELD + DOB_DESC_GARFIELD + TAG_DESC_LAZY;
+        String userInput = targetIndex.getOneBased() + PshCommandTestUtil.GENDER_DESC_COCO
+                + PshCommandTestUtil.SPECIES_DESC_COCO + PshCommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT
+                + PshCommandTestUtil.GENDER_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO
+                + PshCommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT + GENDER_DESC_GARFIELD + SPECIES_DESC_GARFIELD
+                + DOB_DESC_GARFIELD + TAG_DESC_LAZY;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
-                .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_FAT, VALID_TAG_LAZY)
-                .build();
+                .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD)
+                .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -181,14 +187,16 @@ public class EditPetCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PET;
         String userInput = targetIndex.getOneBased() + INVALID_GENDER_DESC + GENDER_DESC_GARFIELD;
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString()).build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+                .build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + DOB_DESC_GARFIELD + INVALID_GENDER_DESC + SPECIES_DESC_GARFIELD
                 + GENDER_DESC_GARFIELD;
-        descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
+        descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+                .withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).build();
         expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);

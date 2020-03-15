@@ -15,10 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.general.ParserUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.pet.Name;
 import seedu.address.model.pet.DateOfBirth;
-import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
@@ -45,8 +44,8 @@ public class PshParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()->
+            ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -99,9 +98,9 @@ public class PshParserUtilTest {
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
-        String GenderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
+        String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
         Gender expectedGender = Gender.valueOf(VALID_GENDER);
-        assertEquals(expectedGender, ParserUtil.parseGender(GenderWithWhitespace));
+        assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
     }
 
     @Test
@@ -145,9 +144,9 @@ public class PshParserUtilTest {
 
     @Test
     public void parseSpecies_validValueWithWhitespace_returnsTrimmedSpecies() throws Exception {
-        String SpeciesWithWhitespace = WHITESPACE + VALID_SPECIES + WHITESPACE;
+        String speciesWithWhitespace = WHITESPACE + VALID_SPECIES + WHITESPACE;
         Species expectedSpecies = new Species(VALID_SPECIES);
-        assertEquals(expectedSpecies, ParserUtil.parseSpecies(SpeciesWithWhitespace));
+        assertEquals(expectedSpecies, ParserUtil.parseSpecies(speciesWithWhitespace));
     }
 
     @Test

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.showPetAtIndex;
+import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
 import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_SECOND_PET;
-import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.Test;
 

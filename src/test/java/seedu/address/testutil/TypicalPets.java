@@ -15,9 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.PetTracker;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
 

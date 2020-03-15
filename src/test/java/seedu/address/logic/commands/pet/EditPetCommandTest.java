@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.DESC_COCO;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.DESC_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_TAG_LAZY;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.showPetAtIndex;
+import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
 import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_SECOND_PET;
-import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,11 +24,12 @@ import seedu.address.model.PshModel;
 import seedu.address.model.PshModelManager;
 import seedu.address.model.PshUserPrefs;
 import seedu.address.model.pet.Pet;
-import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditPetCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditPetCommand.
  */
 public class EditPetCommandTest {
 

@@ -33,7 +33,8 @@ public class AddPetCommandTest {
 
     @Test
     public void execute_petAcceptedByModel_addSuccessful() throws Exception {
-        seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded modelStub = new seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded();
+        seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded modelStub =
+                new seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded();
         Pet validPet = new PetBuilder().build();
 
         CommandResult commandResult = new AddPetCommand(validPet).execute(modelStub);

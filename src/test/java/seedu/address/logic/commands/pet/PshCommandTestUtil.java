@@ -3,9 +3,9 @@ package seedu.address.logic.commands.pet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -17,13 +17,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.model.PetTracker;
-import seedu.address.model.Model;
 import seedu.address.model.PshModel;
+import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
-import seedu.address.model.pet.Gender;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 
 /**
@@ -69,11 +67,11 @@ public class PshCommandTestUtil {
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
-                .withGender(VALID_GENDER_COCO.toString()).withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_COCO)
-                .withTags(VALID_TAG_HYPER).build();
+                .withGender(VALID_GENDER_COCO.toString()).withDateOfBirth(VALID_DOB_COCO)
+                .withSpecies(VALID_SPECIES_COCO).withTags(VALID_TAG_HYPER).build();
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
-                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD)
-                .withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
+                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
+                .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
     }
 
     /**
@@ -118,6 +116,7 @@ public class PshCommandTestUtil {
         assertEquals(expectedPetTracker, actualModel.getPetTracker());
         assertEquals(expectedFilteredList, actualModel.getFilteredPetList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
      * {@code model}'s address book.

@@ -87,24 +87,24 @@ public class AddPetCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD + SPECIES_DESC_GARFIELD,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
+                + SPECIES_DESC_GARFIELD, expectedMessage);
 
         // missing gender prefix
-        assertParseFailure(parser, NAME_DESC_GARFIELD + VALID_GENDER_GARFIELD + DOB_DESC_GARFIELD + SPECIES_DESC_GARFIELD,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_GARFIELD + VALID_GENDER_GARFIELD + DOB_DESC_GARFIELD
+                        + SPECIES_DESC_GARFIELD, expectedMessage);
 
         // missing date of birth prefix
-        assertParseFailure(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + VALID_DOB_GARFIELD + SPECIES_DESC_GARFIELD,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + VALID_DOB_GARFIELD
+                        + SPECIES_DESC_GARFIELD, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD + VALID_SPECIES_GARFIELD,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
+                        + VALID_SPECIES_GARFIELD, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, NAME_DESC_GARFIELD + VALID_GENDER_GARFIELD + VALID_DOB_GARFIELD + VALID_SPECIES_GARFIELD,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_GARFIELD + VALID_GENDER_GARFIELD + VALID_DOB_GARFIELD
+                        + VALID_SPECIES_GARFIELD, expectedMessage);
     }
 
     @Test

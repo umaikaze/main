@@ -2,8 +2,8 @@ package seedu.address.logic.commands.pet;
 
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.pet.PshCommandTestUtil.showPetAtIndex;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
