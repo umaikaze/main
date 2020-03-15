@@ -10,7 +10,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 /**
  * Contains helper methods for testing command parsers.
  */
-public class PetCommandParserTestUtil {
+public class PshCommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
