@@ -1,13 +1,18 @@
 package seedu.address.model.util;
 
-import seedu.address.model.PetTracker;
-import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.*;
-import seedu.address.model.tag.Tag;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import seedu.address.model.PetTracker;
+import seedu.address.model.ReadOnlyPetTracker;
+import seedu.address.model.pet.DateOfBirth;
+import seedu.address.model.pet.Food;
+import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.Species;
+import seedu.address.model.tag.Tag;
 
 
 
