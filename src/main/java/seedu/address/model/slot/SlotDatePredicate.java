@@ -14,7 +14,7 @@ public class SlotDatePredicate extends SlotPredicate {
 
     @Override
     public boolean test(Slot slot) {
-        return dateTime.toLocalDate().isEqual(slot.getDateTime().toLocalDate());
+        return dateTime.toLocalDate().isEqual(slot.getDate());
     }
 
     @Override

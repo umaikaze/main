@@ -46,9 +46,7 @@ public class EditSlotParser implements PshParser<EditSlotCommand> {
         }
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
-        if (argMultimap.getValue(PREFIX_PETNAME).isPresent()) {
-            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_PETNAME).get(), model));
-        }
+
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }

@@ -38,7 +38,7 @@ public class DeleteSlotCommand extends PshCommand {
         List<Slot> lastShownList = model.getFilteredSlotList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Slot slotToDelete = lastShownList.get(targetIndex.getZeroBased());

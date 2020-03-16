@@ -1,10 +1,15 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.logic.commands.slot.FindSlotCommand;
+import seedu.address.logic.parser.general.ArgumentMultimap;
+import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.PshParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.slot.SlotDatePredicate;
@@ -22,39 +27,27 @@ public class FindSlotParser implements PshParser<FindSlotCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSlotCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
-        }
-        return new FindSlotCommand(getSlotPredicate(trimmedArgs));
-    }
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_PETNAME, PREFIX_DATETIME);
 
-    private SlotPredicate[] getSlotPredicate(String trimmedArgs) throws ParseException {
-        if (!trimmedArgs.contains("/")) {
-            return new SlotPredicate[]{new SlotPetNamePredicate(trimmedArgs)}; // Shortcut if no date specified
-        }
-        if (!trimmedArgs.contains("\\s+")) {
-            return new SlotPredicate[]{new SlotDatePredicate(SlotParserUtil
-                    .parseDateTime(trimmedArgs))}; // If have slash but no space, assume date only
+        if (argMultimap.getValue(PREFIX_PETNAME).isEmpty()
+                && argMultimap.getValue(PREFIX_DATETIME).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
-        // To find separate strings for petName and date
+        List<SlotPredicate> predicates = new ArrayList<>();
 
-        String[] keywords = trimmedArgs.split("\\s+");
-        StringBuilder petName = new StringBuilder();
-        LocalDateTime date = null;
-        for (int i = 0; i < keywords.length; i++) {
-            String trimmedWord = keywords[i].trim();
-            if (trimmedWord.contains("/") && date == null) {
-                date = SlotParserUtil.parseDateTime(trimmedWord);
-            } else {
-                petName.append(trimmedWord);
-                if (i != keywords.length - 1) {
-                    petName.append(" ");
-                }
-            }
+        if (argMultimap.getValue(PREFIX_PETNAME).isPresent()) {
+            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_PETNAME).get()));
         }
-        return new SlotPredicate[]{new SlotPetNamePredicate(petName.toString()), new SlotDatePredicate(date)};
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            predicates.add(new SlotDatePredicate(
+                    SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())));
+        }
+        assert !(predicates.isEmpty()) : "No predicates for finding slots!";
+
+        return new FindSlotCommand(predicates.stream()
+                .reduce((pred1, pred2) -> (SlotPredicate) pred1.and(pred2))
+                .get());
     }
 }
