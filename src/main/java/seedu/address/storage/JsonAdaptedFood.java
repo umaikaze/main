@@ -38,7 +38,7 @@ class JsonAdaptedFood {
 
     @JsonValue
     public String getFoodAmount() {
-        return foodName;
+        return foodAmount;
     }
 
     /**
