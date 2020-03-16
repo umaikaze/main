@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Pet}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PetCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PetListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Pet pet;
 
     @FXML
     private HBox cardPane;
@@ -33,23 +33,27 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label gender;
     @FXML
-    private Label address;
+    private Label dateOfBirth;
     @FXML
-    private Label email;
+    private Label species;
+    @FXML
+    private FlowPane foodList;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Person person, int displayedIndex) {
+    public PetCard(Pet pet, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.pet = pet;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        name.setText(pet.getName().toString());
+        gender.setText(pet.getGender().toString());
+        dateOfBirth.setText(pet.getDateOfBirth().toString());
+        species.setText(pet.getSpecies().toString());
+        pet.getFoodList().stream()
+                .forEach(food -> foodList.getChildren().add(new Label(food.toString())));
+        pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -62,13 +66,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof PetCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        PetCard card = (PetCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && pet.equals(card.pet);
     }
 }

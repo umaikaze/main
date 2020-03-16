@@ -1,4 +1,4 @@
-package seedu.address.petui;
+package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

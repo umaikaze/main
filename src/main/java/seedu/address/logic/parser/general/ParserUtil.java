@@ -63,7 +63,7 @@ public class ParserUtil {
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
-        return Gender.valueOf(trimmedGender);
+        return Gender.valueOf(trimmedGender.toUpperCase());
     }
 
     /**
