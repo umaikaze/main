@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.PshReadOnlyUserPrefs;
+import seedu.address.model.PshUserPrefs;
 
 /**
  * Manages storage of PetTracker data in local storage.
@@ -18,10 +18,10 @@ public class PshStorageManager implements PshStorage {
 
     private static final Logger logger = LogsCenter.getLogger(PshStorageManager.class);
     private PetTrackerStorage petTrackerStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private PshUserPrefsStorage userPrefsStorage;
 
 
-    public PshStorageManager(PetTrackerStorage petTrackerStorage, UserPrefsStorage userPrefsStorage) {
+    public PshStorageManager(PetTrackerStorage petTrackerStorage, PshUserPrefsStorage userPrefsStorage) {
         super();
         this.petTrackerStorage = petTrackerStorage;
         this.userPrefsStorage = userPrefsStorage;
@@ -35,12 +35,12 @@ public class PshStorageManager implements PshStorage {
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
+    public Optional<PshUserPrefs> readUserPrefs() throws DataConversionException, IOException {
         return userPrefsStorage.readUserPrefs();
     }
 
     @Override
-    public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
+    public void saveUserPrefs(PshReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
