@@ -42,7 +42,7 @@ public class PetTracker implements ReadOnlyPetTracker {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPets(List<Pet> pet) {
+    public void setPets(List<Pet> pets) {
         this.pets.setPets(pets);
     }
 
@@ -108,7 +108,7 @@ public class PetTracker implements ReadOnlyPetTracker {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
+                || (other instanceof PetTracker // instanceof handles nulls
                 && pets.equals(((PetTracker) other).pets));
     }
 
