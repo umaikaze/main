@@ -2,7 +2,7 @@ package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.model.Model;
@@ -33,7 +33,7 @@ public class FindSlotCommand extends Command {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
-                String.format(PshMessages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()));
+                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()));
     }
 
     @Override

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.Command;
@@ -38,7 +38,7 @@ public class DeleteSlotCommand extends Command {
         List<Slot> lastShownList = model.getFilteredSlotList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
 
         Slot slotToDelete = lastShownList.get(targetIndex.getZeroBased());

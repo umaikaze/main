@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.general.CommandResult;
@@ -63,7 +63,7 @@ public class EditSlotCommand extends Command {
         List<Slot> lastShownList = model.getFilteredSlotList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(PshMessages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
         }
 
         Slot slotToEdit = lastShownList.get(index.getZeroBased());
