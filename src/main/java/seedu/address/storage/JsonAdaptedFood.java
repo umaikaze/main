@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,7 +19,8 @@ class JsonAdaptedFood {
      * Constructs a {@code JsonAdaptedFood} with the given {@code foodName}.
      */
     @JsonCreator
-    public JsonAdaptedFood(String foodName, Integer foodAmount) {
+    public JsonAdaptedFood(@JsonProperty("foodName") String foodName,
+                           @JsonProperty("foodAmount") Integer foodAmount) {
         this.foodName = foodName;
         this.foodAmount = foodAmount;
     }
@@ -32,13 +34,8 @@ class JsonAdaptedFood {
     }
 
     @JsonValue
-    public String getFoodName() {
-        return foodName;
-    }
-
-    @JsonValue
-    public String getFoodAmount() {
-        return foodName;
+    public String getFood() {
+        return foodName + ":" + foodAmount;
     }
 
     /**

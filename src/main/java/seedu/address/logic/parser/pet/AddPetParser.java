@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
@@ -34,16 +34,18 @@ public class AddPetParser implements Parser<AddPetCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddPetCommand
      * and returns an AddPetCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_SPECIES,
-                        PREFIX_FOODLIST, PREFIX_TAG);
+                        PREFIX_FOODLIST, PREFIX_TAG); //for now delete foodlist
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_SPECIES, PREFIX_FOODLIST)
+        //for now delete foodlist
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_FOODLIST, PREFIX_SPECIES)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(PshMessages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPetCommand.MESSAGE_USAGE));
         }
 

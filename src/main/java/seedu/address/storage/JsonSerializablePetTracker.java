@@ -38,6 +38,7 @@ class JsonSerializablePetTracker {
      */
     public JsonSerializablePetTracker(ReadOnlyPetTracker source) {
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
+        System.out.println(pets); //TODO: remove after debug
     }
 
     /**

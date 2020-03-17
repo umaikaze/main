@@ -36,17 +36,25 @@ class JsonAdaptedPet {
      * Constructs a {@code JsonAdaptedPet} with the given pet details.
      */
     @JsonCreator
+    /* ignore reading in food from json for now
     public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
                           @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("species") String species,
                           @JsonProperty("foodList") List<JsonAdaptedFood> foodList,
                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        */
+
+    public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
+                @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("species") String species,
+                @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.species = species;
+        /* ignore reading in food from json for now
         if (foodList != null) {
             this.foodList.addAll(foodList);
         }
+        */
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -98,7 +106,7 @@ class JsonAdaptedPet {
         if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
-        final Gender modelGender = Gender.valueOf(gender);
+        final Gender modelGender = Gender.valueOf(gender.toUpperCase()); // TODO: refactor gender
 
         if (dateOfBirth == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
