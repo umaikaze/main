@@ -45,16 +45,15 @@ class JsonAdaptedPet {
 
     public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
                 @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("species") String species,
+                @JsonProperty("foodList") List<JsonAdaptedFood> foodList,
                 @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.species = species;
-        /* ignore reading in food from json for now
         if (foodList != null) {
             this.foodList.addAll(foodList);
         }
-        */
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
