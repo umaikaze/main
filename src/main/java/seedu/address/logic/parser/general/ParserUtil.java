@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.PatternSyntaxException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -17,7 +18,7 @@ import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser classes under package parser/pet.
  */
 public class ParserUtil {
 
@@ -52,10 +53,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String gender} into a {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code gender} is invalid.
      */
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
@@ -67,10 +68,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String species} into an {@code Species}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code species} is invalid.
      */
     public static Species parseSpecies(String species) throws ParseException {
         requireNonNull(species);
@@ -82,10 +83,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String dateOfBirth} into an {@code DateOfBirth}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
      */
     public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
         requireNonNull(dateOfBirth);
@@ -97,28 +98,32 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Food} into an {@code Food}.
+     * Parses a {@code String food} into an {@code Food}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code food} is invalid.
      */
     public static Food parseFood(String food) throws ParseException {
         requireNonNull(food);
-        String[] foodDetails = food.split(":");
-        String trimmedFood = foodDetails[0].trim();
-        int foodAmount;
         try {
-            foodAmount = Integer.parseInt(foodDetails[1].trim());
-        } catch (NumberFormatException e) {
-            throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
-        }
-        if (!Food.isValidFoodName(trimmedFood)) {
+            String[] foodDetails = food.split(":");
+            String trimmedFood = foodDetails[0].trim();
+            int foodAmount;
+            try {
+                foodAmount = Integer.parseInt(foodDetails[1].trim());
+            } catch (NumberFormatException e) {
+                throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
+            }
+            if (!Food.isValidFoodName(trimmedFood)) {
+                throw new ParseException(Food.MESSAGE_NAME_CONSTRAINTS);
+            }
+            if (!Food.isValidFoodAmount(foodAmount)) {
+                throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
+            }
+            return new Food(trimmedFood, foodAmount);
+        } catch (PatternSyntaxException e) {
             throw new ParseException(Food.MESSAGE_CONSTRAINTS);
         }
-        if (!Food.isValidFoodAmount(foodAmount)) {
-            throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
-        }
-        return new Food(trimmedFood, foodAmount);
     }
 
     /**

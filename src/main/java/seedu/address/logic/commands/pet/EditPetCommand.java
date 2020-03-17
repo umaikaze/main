@@ -31,7 +31,7 @@ import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing pet in the pet tracker.
  */
 public class EditPetCommand extends Command {
 
@@ -59,8 +59,8 @@ public class EditPetCommand extends Command {
     private final EditPetDescriptor editPetDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPetDescriptor details to edit the person with
+     * @param index of the pet in the filtered pet list to edit
+     * @param editPetDescriptor details to edit the pet with
      */
     public EditPetCommand(Index index, EditPetDescriptor editPetDescriptor) {
         requireNonNull(index);
@@ -93,8 +93,8 @@ public class EditPetCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Pet} with the details of {@code petToEdit}
+     * edited with {@code editPetDescriptor}.
      */
     private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
         assert petToEdit != null;
@@ -128,8 +128,8 @@ public class EditPetCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the pet with. Each non-empty field value will replace the
+     * corresponding field value of the pet.
      */
     public static class EditPetDescriptor {
         private Name name;

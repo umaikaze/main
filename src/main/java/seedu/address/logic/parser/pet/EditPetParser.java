@@ -72,9 +72,9 @@ public class EditPetParser implements Parser<EditPetCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> foodList} into a {@code Set<Food>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> foodList} into a {@code Set<Food>} if {@code foodList} is non-empty.
      * If {@code foodList} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Food>} containing zero tags.
+     * {@code Set<Food>} containing zero food.
      */
     private Optional<Set<Food>> parseFoodListForEdit(Collection<String> foodList) throws ParseException {
         assert foodList != null;
