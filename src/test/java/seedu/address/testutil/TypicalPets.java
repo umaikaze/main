@@ -24,29 +24,29 @@ import seedu.address.model.pet.Pet;
 public class TypicalPets {
 
     public static final Pet COCO = new PetBuilder().withName("Coco")
-            .withSpecies("Dog").withDateOfBirth("1-6-2015")
+            .withSpecies("Dog").withDateOfBirth("1/6/2015")
             .withGender(Gender.FEMALE)
             .withTags("darkFur").build();
     public static final Pet GARFIELD = new PetBuilder().withName("Garfield Arbuckle")
             .withSpecies("Cat")
-            .withDateOfBirth("19-6-1978").withGender(Gender.MALE)
+            .withDateOfBirth("19/6/1978").withGender(Gender.MALE)
             .withTags("fat", "lazy").build();
     public static final Pet CARL = new PetBuilder().withName("Carl Kurz").withGender(Gender.MALE)
-            .withDateOfBirth("1-3-2015").withSpecies("Husky").build();
+            .withDateOfBirth("1/3/2015").withSpecies("Husky").build();
     public static final Pet DANIEL = new PetBuilder().withName("Daniel Meier").withGender(Gender.MALE)
-            .withDateOfBirth("2-3-2015").withSpecies("Dolphin").withTags("pink").build();
+            .withDateOfBirth("2/3/2015").withSpecies("Dolphin").withTags("pink").build();
     public static final Pet ELLE = new PetBuilder().withName("Elle Meyer").withGender(Gender.FEMALE)
-            .withDateOfBirth("3-3-2015").withSpecies("Parrot").build();
+            .withDateOfBirth("3/3/2015").withSpecies("Parrot").build();
     public static final Pet FIONA = new PetBuilder().withName("Fiona Kunz").withGender(Gender.FEMALE)
-            .withDateOfBirth("4-3-2015").withSpecies("Goldfish").build();
+            .withDateOfBirth("4/3/2015").withSpecies("Goldfish").build();
     public static final Pet GEORGE = new PetBuilder().withName("George Best").withGender(Gender.MALE)
-            .withDateOfBirth("5-3-2015").withSpecies("Slug").build();
+            .withDateOfBirth("5/3/2015").withSpecies("Slug").build();
 
     // Manually added
     public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withGender(Gender.MALE)
-            .withDateOfBirth("6-3-2015").withSpecies("little india").build();
+            .withDateOfBirth("6/3/2015").withSpecies("little india").build();
     public static final Pet IDA = new PetBuilder().withName("Ida Mueller").withGender(Gender.MALE)
-            .withDateOfBirth("7-3-2015").withSpecies("chicago ave").build();
+            .withDateOfBirth("7/3/2015").withSpecies("chicago ave").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
     public static final Pet AMY = new PetBuilder().withName(VALID_NAME_AMY).withGender(VALID_GENDER_COCO)

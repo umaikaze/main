@@ -15,5 +15,5 @@ public class DateTimeUtil {
     // date-related
     public static final String DATE_PATTERN = "d/M/yyyy";
     public static final DateTimeFormatter DATE_FORMAT =
-            DateTimeFormatter.ofPattern(DateTimeUtil.DATETIME_PATTERN);
+            DateTimeFormatter.ofPattern(DateTimeUtil.DATE_PATTERN);
 }
