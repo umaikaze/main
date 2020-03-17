@@ -3,6 +3,7 @@ package seedu.address.model.slot;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import seedu.address.model.pet.Pet;
@@ -33,6 +34,10 @@ public class Slot implements Comparable<Slot> {
 
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
     }
 
     public Duration getDuration() {
