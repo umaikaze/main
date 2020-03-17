@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.general.PshCommand;
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
@@ -26,12 +26,12 @@ public class ScheduleParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
-     * Used to add pets reference from the PshModelManager to the slots
+     * Used to add pets reference from the ModelManager to the slots
      */
     private final PshModel model;
 
     /**
-     * @param model Used to add pets reference from the PshModelManager to the slots
+     * @param model Used to add pets reference from the ModelManager to the slots
      */
     public ScheduleParser(PshModel model) {
         this.model = model;

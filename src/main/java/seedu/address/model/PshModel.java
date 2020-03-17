@@ -27,12 +27,12 @@ public interface PshModel {
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
-    void setUserPrefs(PshReadOnlyUserPrefs userPrefs);
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs.
      */
-    PshReadOnlyUserPrefs getUserPrefs();
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
