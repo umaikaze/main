@@ -11,11 +11,11 @@ import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Adds a person to the address book.
+ * Adds a pet to the pet tracker.
  */
 public class AddPetCommand extends Command {
 
@@ -40,12 +40,12 @@ public class AddPetCommand extends Command {
             + PREFIX_TAG + "lazy ";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This pet already exists in the pet store helper";
+    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper";
 
     private final Pet toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPetCommand to add the specified {@code Pet}
      */
     public AddPetCommand(Pet pet) {
         requireNonNull(pet);
@@ -53,10 +53,10 @@ public class AddPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasPet(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PET);
         }
         model.addPet(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

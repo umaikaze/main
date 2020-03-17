@@ -11,34 +11,36 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the pet tracker data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final PetTracker petTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Pet> filteredPets;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given petTracker and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPetTracker petTracker, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(petTracker, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with pet tracker: " + petTracker + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.petTracker = new PetTracker(petTracker);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPets = new FilteredList<>(this.petTracker.getPetList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new PetTracker(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +68,111 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPetTrackerFilePath() {
+        return userPrefs.getPetTrackerFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setPetTrackerFilePath(Path petTrackerFilePath) {
+        requireNonNull(petTrackerFilePath);
+        userPrefs.setPetTrackerFilePath(petTrackerFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Pet Tracker ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setPetTracker(ReadOnlyPetTracker petTracker) {
+        this.petTracker.resetData(petTracker);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyPetTracker getPetTracker() {
+        return petTracker;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasPet(Pet pet) {
+        requireNonNull(pet);
+        return petTracker.hasPet(pet);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public Pet getPet(Name name) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void deletePet(Pet target) {
+        petTracker.removePet(target);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void addPet(Pet pet) {
+        petTracker.addPet(pet);
+        updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
+
+    @Override
+    public void setPet(Pet target, Pet editedPet) {
+        requireAllNonNull(target, editedPet);
+
+        petTracker.setPet(target, editedPet);
+    }
+
+    //=========== Filtered Pet List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
+     * {@code versionedpetTracker}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Pet> getFilteredPetList() {
+        return filteredPets;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPets.setPredicate(predicate);
+    }
+
+    //=========== Slot  ================================================================================
+
+    @Override
+    public void deleteSlot(Slot target) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public void addSlot(Slot slot) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public void setSlot(Slot target, Slot editedSlot) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    //=========== Filtered Slot List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Slot} backed by the internal list of
+     * {@code versionedpetTracker}
+     */
+    @Override
+    public ObservableList<Slot> getFilteredSlotList() {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public void updateFilteredSlotList(Predicate<Slot> predicate) {
+        //TODO
+        throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     @Override
@@ -143,9 +189,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return petTracker.equals(other.petTracker)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPets.equals(other.filteredPets);
     }
 
 }

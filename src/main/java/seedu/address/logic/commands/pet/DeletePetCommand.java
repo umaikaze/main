@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a pet identified using it's displayed index from the pet tracker.
  */
 public class DeletePetCommand extends Command {
 
@@ -33,12 +33,12 @@ public class DeletePetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Pet> lastShownList = model.getFilteredPetList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
 
         Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());

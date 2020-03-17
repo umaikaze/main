@@ -7,10 +7,11 @@ import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
@@ -39,11 +40,12 @@ public class AddPetParser implements Parser<AddPetCommand> {
     public AddPetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_SPECIES,
-                        PREFIX_FOODLIST, PREFIX_TAG);
+                        PREFIX_FOODLIST, PREFIX_TAG); //for now delete foodlist
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_SPECIES, PREFIX_FOODLIST)
+        //for now delete foodlist
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_DOB, PREFIX_FOODLIST, PREFIX_SPECIES)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(PshMessages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPetCommand.MESSAGE_USAGE));
         }
 
@@ -51,7 +53,8 @@ public class AddPetParser implements Parser<AddPetCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
         Species species = ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
-        Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
+        Set<Food> foodList = new HashSet<>();
+        //Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
         Pet pet = new Pet(name, gender, dateOfBirth, species, foodList, tagList);

@@ -1,6 +1,6 @@
 package seedu.address.logic.parser.pet;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.pet.DeletePetCommand;
@@ -23,7 +23,7 @@ public class DeletePetParser {
             return new DeletePetCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(PshMessages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePetCommand.MESSAGE_USAGE), pe);
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePetCommand.MESSAGE_USAGE), pe);
         }
     }
 }
