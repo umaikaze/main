@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,21 @@ public class UniquePetList implements Iterable<Pet> {
     public boolean contains(Pet toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePet);
+    }
+
+    /**
+     * Returns the pet in the list with the matching name.
+     */
+    public Pet getPet(Name name) {
+        requireNonNull(name);
+        List<Pet> petsWithMatchingName = internalList.stream()
+                .filter(pet -> pet.getName().equals(name))
+                .collect(Collectors.toList());
+        assert petsWithMatchingName.size() <= 1 : "Duplicate pets detected!";
+        if (petsWithMatchingName.size() == 0) {
+            throw new PetNotFoundException();
+        }
+        return petsWithMatchingName.get(0);
     }
 
     /**
