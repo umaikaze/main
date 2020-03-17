@@ -32,7 +32,7 @@ public interface Logic {
     ObservableList<Pet> getFilteredPetList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' pet tracker file path.
      */
     Path getPetTrackerFilePath();
 

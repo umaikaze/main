@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a pet identified using it's displayed index from the pet tracker.
  */
 public class DeletePetCommand extends Command {
 

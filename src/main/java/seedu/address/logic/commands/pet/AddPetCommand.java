@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Adds a person to the address book.
+ * Adds a pet to the pet tracker.
  */
 public class AddPetCommand extends Command {
 
@@ -45,7 +45,7 @@ public class AddPetCommand extends Command {
     private final Pet toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPetCommand to add the specified {@code Pet}
      */
     public AddPetCommand(Pet pet) {
         requireNonNull(pet);
