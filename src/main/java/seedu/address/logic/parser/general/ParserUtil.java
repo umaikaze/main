@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.PatternSyntaxException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -104,21 +105,25 @@ public class ParserUtil {
      */
     public static Food parseFood(String food) throws ParseException {
         requireNonNull(food);
-        String[] foodDetails = food.split(":");
-        String trimmedFood = foodDetails[0].trim();
-        int foodAmount;
         try {
-            foodAmount = Integer.parseInt(foodDetails[1].trim());
-        } catch (NumberFormatException e) {
-            throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
-        }
-        if (!Food.isValidFoodName(trimmedFood)) {
+            String[] foodDetails = food.split(":");
+            String trimmedFood = foodDetails[0].trim();
+            int foodAmount;
+            try {
+                foodAmount = Integer.parseInt(foodDetails[1].trim());
+            } catch (NumberFormatException e) {
+                throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
+            }
+            if (!Food.isValidFoodName(trimmedFood)) {
+                throw new ParseException(Food.MESSAGE_NAME_CONSTRAINTS);
+            }
+            if (!Food.isValidFoodAmount(foodAmount)) {
+                throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
+            }
+            return new Food(trimmedFood, foodAmount);
+        } catch (PatternSyntaxException e) {
             throw new ParseException(Food.MESSAGE_CONSTRAINTS);
         }
-        if (!Food.isValidFoodAmount(foodAmount)) {
-            throw new ParseException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
-        }
-        return new Food(trimmedFood, foodAmount);
     }
 
     /**
