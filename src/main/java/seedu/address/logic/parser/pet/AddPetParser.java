@@ -53,8 +53,8 @@ public class AddPetParser implements Parser<AddPetCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
         Species species = ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
-        Set<Food> foodList = new HashSet<>();
-        //Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
+//        Set<Food> foodList = new HashSet<>();
+        Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
         Pet pet = new Pet(name, gender, dateOfBirth, species, foodList, tagList);
