@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 
-import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
 
