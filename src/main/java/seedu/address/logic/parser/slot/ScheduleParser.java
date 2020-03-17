@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -7,23 +7,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.general.Command;
-import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
-import seedu.address.logic.commands.pet.AddPetCommand;
-import seedu.address.logic.commands.pet.DeletePetCommand;
-import seedu.address.logic.commands.pet.EditPetCommand;
-import seedu.address.logic.commands.pet.FindPetCommand;
-import seedu.address.logic.commands.pet.ListCommand;
+import seedu.address.logic.commands.slot.AddSlotCommand;
+import seedu.address.logic.commands.slot.DeleteSlotCommand;
+import seedu.address.logic.commands.slot.EditSlotCommand;
+import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
- * Parse user input.
+ * Parses user input.
  */
-public class PetTrackerParser {
+public class ScheduleParser {
+
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
+     * Used to add pets reference from the ModelManager to the slots
+     */
+    private final Model model;
+
+    /**
+     * @param model Used to add pets reference from the ModelManager to the slots
+     */
+    public ScheduleParser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -42,26 +54,17 @@ public class PetTrackerParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddPetCommand.COMMAND_WORD:
-            return new AddPetParser().parse(arguments);
+        case AddSlotCommand.COMMAND_WORD:
+            return new AddSlotParser(model).parse(arguments);
 
-        case EditPetCommand.COMMAND_WORD:
-            return new EditPetParser().parse(arguments);
+        case EditSlotCommand.COMMAND_WORD:
+            return new EditSlotParser(model).parse(arguments);
 
-        case DeletePetCommand.COMMAND_WORD:
-            return new DeletePetParser().parse(arguments);
+        case DeleteSlotCommand.COMMAND_WORD:
+            return new DeleteSlotParser().parse(arguments);
 
-        case FindPetCommand.COMMAND_WORD:
-            return new FindPetParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+        case FindSlotCommand.COMMAND_WORD:
+            return new FindSlotParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
