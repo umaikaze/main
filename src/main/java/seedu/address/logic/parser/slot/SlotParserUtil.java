@@ -21,8 +21,8 @@ import seedu.address.model.pet.exceptions.PetNotFoundException;
 public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATETIME
-            = "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + "";
+    public static final String MESSAGE_INVALID_DATETIME =
+            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + "";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";

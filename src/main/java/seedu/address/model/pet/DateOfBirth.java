@@ -14,8 +14,8 @@ import seedu.address.commons.util.DateTimeUtil;
  */
 public class DateOfBirth {
 
-    public static final String MESSAGE_CONSTRAINTS
-            = "Date of Birth must follow the format of " + DateTimeUtil.DATETIME_PATTERN + ".";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date of Birth must follow the format of " + DateTimeUtil.DATETIME_PATTERN + ".";
 
     public final LocalDate value;
 
