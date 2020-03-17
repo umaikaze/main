@@ -37,10 +37,6 @@ public class Slot implements Comparable<Slot> {
         return dateTime;
     }
 
-    public LocalDate getDate() {
-        return dateTime.toLocalDate();
-    }
-
     public Duration getDuration() {
         return duration;
     }

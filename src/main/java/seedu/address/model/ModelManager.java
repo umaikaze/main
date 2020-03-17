@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final PetTracker petTracker;
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
+    private final FilteredList<Slot> filteredSlots;
 
     /**
      * Initializes a ModelManager with the given petTracker and userPrefs.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
         this.petTracker = new PetTracker(petTracker);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPets = new FilteredList<>(this.petTracker.getPetList());
+        filteredSlots = new FilteredList<>(this.petTracker.getSlotList());
     }
 
     public ModelManager() {
@@ -141,20 +143,19 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteSlot(Slot target) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        petTracker.removeSlot(target);
     }
 
     @Override
     public void addSlot(Slot slot) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        petTracker.addSlot(slot);
+        updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
     }
 
     @Override
     public void setSlot(Slot target, Slot editedSlot) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        requireAllNonNull(target, editedSlot);
+        petTracker.setSlot(target, editedSlot);
     }
 
     //=========== Filtered Slot List Accessors =============================================================
@@ -165,14 +166,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Slot> getFilteredSlotList() {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return filteredSlots;
     }
 
     @Override
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        requireNonNull(predicate);
+        filteredSlots.setPredicate(predicate);
     }
 
     @Override
@@ -191,7 +191,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return petTracker.equals(other.petTracker)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPets.equals(other.filteredPets);
+                && filteredPets.equals(other.filteredPets)
+                && filteredSlots.equals(other.filteredSlots);
     }
 
 }
