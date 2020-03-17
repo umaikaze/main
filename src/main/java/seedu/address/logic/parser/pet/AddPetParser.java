@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -35,6 +34,7 @@ public class AddPetParser implements Parser<AddPetCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddPetCommand
      * and returns an AddPetCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPetCommand parse(String args) throws ParseException {
@@ -53,8 +53,7 @@ public class AddPetParser implements Parser<AddPetCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
         Species species = ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
-        Set<Food> foodList = new HashSet<>();
-        //Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
+        Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
         Pet pet = new Pet(name, gender, dateOfBirth, species, foodList, tagList);
