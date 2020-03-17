@@ -162,7 +162,7 @@ public class PetTracker implements ReadOnlyPetTracker {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
+                || (other instanceof PetTracker // instanceof handles nulls
                 && pets.equals(((PetTracker) other).pets)
                 && slots.equals(((PetTracker) other).slots));
     }

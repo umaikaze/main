@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_PETS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.DateOfBirth;
 import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Gender;
@@ -31,7 +31,7 @@ import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing pet in the pet tracker.
  */
 public class EditPetCommand extends Command {
 
@@ -59,8 +59,8 @@ public class EditPetCommand extends Command {
     private final EditPetDescriptor editPetDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPetDescriptor details to edit the person with
+     * @param index of the pet in the filtered pet list to edit
+     * @param editPetDescriptor details to edit the pet with
      */
     public EditPetCommand(Index index, EditPetDescriptor editPetDescriptor) {
         requireNonNull(index);
@@ -71,12 +71,12 @@ public class EditPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Pet> lastShownList = model.getFilteredPetList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
 
         Pet petToEdit = lastShownList.get(index.getZeroBased());
@@ -93,8 +93,8 @@ public class EditPetCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Pet} with the details of {@code petToEdit}
+     * edited with {@code editPetDescriptor}.
      */
     private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
         assert petToEdit != null;
@@ -128,8 +128,8 @@ public class EditPetCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the pet with. Each non-empty field value will replace the
+     * corresponding field value of the pet.
      */
     public static class EditPetDescriptor {
         private Name name;

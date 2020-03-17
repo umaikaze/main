@@ -5,14 +5,24 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 
 /**
- * The API of the Model component.
+ * The API of the Pet Store Helper Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<Pet> PREDICATE_SHOW_ALL_PETS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<Slot> PREDICATE_SHOW_ALL_SLOTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +45,92 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' pet tracker file path.
      */
-    Path getAddressBookFilePath();
+    Path getPetTrackerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' pet tracker file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPetTrackerFilePath(Path petTrackerFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces pet tracker book data with the data in {@code petTracker}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    void setPetTracker(ReadOnlyPetTracker petTracker);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns the PetTracker.
      */
-    boolean hasPerson(Person person);
+    ReadOnlyPetTracker getPetTracker();
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a pet with the same identity as {@code pet} exists in the pet tracker.
      */
-    void deletePerson(Person target);
+    boolean hasPet(Pet pet);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Returns the pet with the given {@code name}.
      */
-    void addPerson(Person person);
+    Pet getPet(Name name);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given pet.
+     * The pet must exist in the pet tracker.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void deletePet(Pet target);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Adds the given pet.
+     * {@code pet} must not already exist in the pet tracker.
+     */
+    void addPet(Pet pet);
+
+    /**
+     * Replaces the given pet {@code target} with {@code editedPet}.
+     * {@code target} must exist in the pet tracker.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in the pet tracker.
+     */
+    void setPet(Pet target, Pet editedPet);
+
+    /**
+     * Returns an unmodifiable view of the filtered pet list
+     */
+    ObservableList<Pet> getFilteredPetList();
+
+    /**
+     * Updates the filter of the filtered pet list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPetList(Predicate<Pet> predicate);
+
+    // no need for hasSlot(), because duplicate slots are allowed
+
+    /**
+     * Deletes the given slot.
+     * The slot must exist in the pet tracker.
+     */
+    void deleteSlot(Slot target);
+
+    /**
+     * Adds the given slot.
+     */
+    void addSlot(Slot slot);
+
+    /**
+     * Replaces the given slot {@code target} with {@code editedSlot}.
+     * {@code target} must exist in the pet tracker.
+     */
+    void setSlot(Slot target, Slot editedSlot);
+
+    /**
+     * Returns an unmodifiable view of the filtered slot list
+     */
+    ObservableList<Slot> getFilteredSlotList();
+
+    /**
+     * Updates the filter of the filtered slot list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSlotList(Predicate<Slot> predicate);
 }

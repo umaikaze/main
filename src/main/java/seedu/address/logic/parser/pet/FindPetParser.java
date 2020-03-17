@@ -2,7 +2,7 @@ package seedu.address.logic.parser.pet;
 
 import java.util.Arrays;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
@@ -13,15 +13,15 @@ import seedu.address.model.pet.NameContainsKeywordsPredicate;
  */
 public class FindPetParser implements Parser<FindPetCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindPetCommand
+     * and returns a FindPetCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindPetCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(PshMessages.MESSAGE_INVALID_COMMAND_FORMAT, FindPetCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindPetCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
