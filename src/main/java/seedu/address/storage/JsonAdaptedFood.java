@@ -34,13 +34,8 @@ class JsonAdaptedFood {
     }
 
     @JsonValue
-    public String getFoodName() {
-        return foodName;
-    }
-
-    @JsonValue
-    public String getFoodAmount() {
-        return foodAmount.toString();
+    public String getFood() {
+        return foodName + ":" + foodAmount;
     }
 
     /**
