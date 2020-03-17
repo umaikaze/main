@@ -7,13 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.general.HelpCommand;
-import seedu.address.logic.commands.general.PshCommand;
+import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -28,12 +28,12 @@ public class ScheduleParser {
     /**
      * Used to add pets reference from the ModelManager to the slots
      */
-    private final PshModel model;
+    private final Model model;
 
     /**
      * @param model Used to add pets reference from the ModelManager to the slots
      */
-    public ScheduleParser(PshModel model) {
+    public ScheduleParser(Model model) {
         this.model = model;
     }
 
@@ -44,7 +44,7 @@ public class ScheduleParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public PshCommand parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

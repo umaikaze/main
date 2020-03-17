@@ -10,7 +10,7 @@ import java.util.List;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
-import seedu.address.logic.parser.general.PshParser;
+import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.slot.SlotDatePredicate;
 import seedu.address.model.slot.SlotPetNamePredicate;
@@ -19,7 +19,7 @@ import seedu.address.model.slot.SlotPredicate;
 /**
  * Parses input arguments and creates a new FindSlotCommand object
  */
-public class FindSlotParser implements PshParser<FindSlotCommand> {
+public class FindSlotParser implements Parser<FindSlotCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindSlotCommand

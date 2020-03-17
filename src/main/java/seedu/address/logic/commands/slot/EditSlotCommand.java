@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
-import static seedu.address.model.PshModel.PREDICATE_SHOW_ALL_SLOTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -15,16 +15,16 @@ import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.general.CommandResult;
-import seedu.address.logic.commands.general.PshCommand;
+import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
 /**
  * Edits the details of an slot in the schedule.
  */
-public class EditSlotCommand extends PshCommand {
+public class EditSlotCommand extends Command {
 
     public static final String COMMAND_WORD = "editslot";
 
@@ -58,7 +58,7 @@ public class EditSlotCommand extends PshCommand {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Slot> lastShownList = model.getFilteredSlotList();
 

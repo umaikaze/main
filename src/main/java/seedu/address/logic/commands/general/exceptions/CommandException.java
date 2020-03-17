@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.general.exceptions;
 
-import seedu.address.logic.commands.general.PshCommand;
+import seedu.address.logic.commands.general.Command;
 
 /**
- * Represents an error which occurs during execution of a {@link PshCommand}.
+ * Represents an error which occurs during execution of a {@link Command}.
  */
 public class CommandException extends Exception {
     public CommandException(String message) {

@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
@@ -47,7 +47,7 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code petName} is invalid.
      */
-    public static Pet parsePet(String nameStr, PshModel model) throws ParseException {
+    public static Pet parsePet(String nameStr, Model model) throws ParseException {
         requireNonNull(nameStr);
         String trimmedPetName = nameStr.trim();
         if (!Name.isValidName(trimmedPetName)) {

@@ -6,14 +6,14 @@ import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
 
 import seedu.address.logic.commands.general.CommandResult;
-import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.model.PshModel;
+import seedu.address.logic.commands.general.Command;
+import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
 
 /**
  * Adds a slot to the schedule.
  */
-public class AddSlotCommand extends PshCommand {
+public class AddSlotCommand extends Command {
 
     public static final String COMMAND_WORD = "addslot";
 
@@ -40,7 +40,7 @@ public class AddSlotCommand extends PshCommand {
     }
 
     @Override
-    public CommandResult execute(PshModel model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
 
         model.addSlot(slotToAdd);

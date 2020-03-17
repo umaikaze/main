@@ -7,15 +7,15 @@ import java.util.List;
 import seedu.address.commons.core.PshMessages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.CommandResult;
-import seedu.address.logic.commands.general.PshCommand;
+import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
 
 /**
  * Deletes a slot identified using it's displayed index from the address book.
  */
-public class DeleteSlotCommand extends PshCommand {
+public class DeleteSlotCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteslot";
 
@@ -33,7 +33,7 @@ public class DeleteSlotCommand extends PshCommand {
     }
 
     @Override
-    public CommandResult execute(PshModel model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Slot> lastShownList = model.getFilteredSlotList();
 

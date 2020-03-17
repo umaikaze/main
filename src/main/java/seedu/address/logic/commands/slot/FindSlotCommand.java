@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.PshMessages;
 import seedu.address.logic.commands.general.CommandResult;
-import seedu.address.logic.commands.general.PshCommand;
-import seedu.address.model.PshModel;
+import seedu.address.logic.commands.general.Command;
+import seedu.address.model.Model;
 import seedu.address.model.slot.SlotPredicate;
 
 /**
  * Finds and lists all slots in the schedule whose contents contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindSlotCommand extends PshCommand {
+public class FindSlotCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -29,7 +29,7 @@ public class FindSlotCommand extends PshCommand {
     }
 
     @Override
-    public CommandResult execute(PshModel model) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
         return new CommandResult(

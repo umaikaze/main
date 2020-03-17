@@ -12,18 +12,18 @@ import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
-import seedu.address.logic.parser.general.PshParser;
+import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 
 /**
  * Parses input arguments and creates a new EditSlotCommand object
  */
-public class EditSlotParser implements PshParser<EditSlotCommand> {
+public class EditSlotParser implements Parser<EditSlotCommand> {
 
-    private final PshModel model;
+    private final Model model;
 
-    public EditSlotParser(PshModel model) {
+    public EditSlotParser(Model model) {
         this.model = model;
     }
 

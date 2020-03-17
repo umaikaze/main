@@ -14,20 +14,20 @@ import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.Prefix;
-import seedu.address.logic.parser.general.PshParser;
+import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.PshModel;
+import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
 /**
  * Parses input arguments and creates a new AddSlotCommand object
  */
-public class AddSlotParser implements PshParser<AddSlotCommand> {
+public class AddSlotParser implements Parser<AddSlotCommand> {
 
-    private final PshModel model;
+    private final Model model;
 
-    public AddSlotParser(PshModel model) {
+    public AddSlotParser(Model model) {
         this.model = model;
     }
 
