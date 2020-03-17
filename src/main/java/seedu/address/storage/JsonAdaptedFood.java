@@ -19,10 +19,9 @@ class JsonAdaptedFood {
      * Constructs a {@code JsonAdaptedFood} with the given {@code foodName}.
      */
     @JsonCreator
-    public JsonAdaptedFood(@JsonProperty("foodName") String foodName,
-                           @JsonProperty("foodAmount") Integer foodAmount) {
-        this.foodName = foodName;
-        this.foodAmount = foodAmount;
+    public JsonAdaptedFood(String foodInfo) {
+        this.foodName = foodInfo.split(":")[0];
+        this.foodAmount = Integer.valueOf(foodInfo.split(":")[1]);
     }
 
     /**
