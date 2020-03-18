@@ -76,7 +76,7 @@ public class UiPartTest {
     }
 
     private URL getTestFileUrl(String testFilePath) {
-        String testFilePathInView = "/view/" + testFilePath;
+        String testFilePathInView = "/petview/" + testFilePath;
         URL testFileUrl = MainApp.class.getResource(testFilePathInView);
         assertNotNull(testFileUrl, testFilePathInView + " does not exist.");
         return testFileUrl;
