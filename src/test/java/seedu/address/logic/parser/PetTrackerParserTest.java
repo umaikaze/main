@@ -1,10 +1,10 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +18,7 @@ import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.commands.pet.ListCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.logic.parser.pet.PetTrackerParser;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PetBuilder;

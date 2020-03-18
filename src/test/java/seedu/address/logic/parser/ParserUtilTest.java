@@ -1,10 +1,10 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.general.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
-public class PshParserUtilTest {
+public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "mali";
     private static final String INVALID_DATEOFBIRTH = "";

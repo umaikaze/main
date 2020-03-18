@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +10,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 /**
  * Contains helper methods for testing command parsers.
  */
-public class PshCommandParserTestUtil {
+public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created

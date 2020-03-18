@@ -1,9 +1,9 @@
 package seedu.address.logic.parser.pet;
 
-import static seedu.address.commons.core.PshMessages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.pet.PshCommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.pet.PshCommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import org.junit.jupiter.api.Test;
 

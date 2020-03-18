@@ -1,10 +1,10 @@
 package seedu.address.testutil.pet;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
 
 import java.util.Set;
 

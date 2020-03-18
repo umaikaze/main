@@ -2,20 +2,20 @@ package seedu.address.logic.commands.pet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.showPetAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalPetTracker;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_SECOND_PET;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.PshMessages;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.PshModel;
-import seedu.address.model.PshModelManager;
-import seedu.address.model.PshUserPrefs;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -24,7 +24,7 @@ import seedu.address.model.pet.Pet;
  */
 public class DeletePetCommandTest {
 
-    private PshModel model = new PshModelManager(getTypicalPetTracker(), new PshUserPrefs());
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeletePetCommandTest {
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
-        PshModelManager expectedModel = new PshModelManager(model.getPetTracker(), new PshUserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getPetTracker(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -44,7 +44,7 @@ public class DeletePetCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         DeletePetCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class DeletePetCommandTest {
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
-        PshModel expectedModel = new PshModelManager(model.getPetTracker(), new PshUserPrefs());
+        Model expectedModel = new ModelManager(model.getPetTracker(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
         showNoPet(expectedModel);
 
@@ -73,7 +73,7 @@ public class DeletePetCommandTest {
 
         DeletePetCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, PshMessages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class DeletePetCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPet(PshModel model) {
+    private void showNoPet(Model model) {
         model.updateFilteredPetList(p -> false);
 
         assertTrue(model.getFilteredPetList().isEmpty());

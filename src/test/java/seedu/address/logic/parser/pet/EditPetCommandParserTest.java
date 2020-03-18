@@ -1,37 +1,37 @@
 package seedu.address.logic.parser.pet;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.DOB_DESC_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.GENDER_DESC_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.INVALID_DOB_DESC;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.INVALID_GENDER_DESC;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.INVALID_SPECIES_DESC;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.NAME_DESC_COCO;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.SPECIES_DESC_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.TAG_DESC_FAT;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.TAG_DESC_LAZY;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_DOB_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_GENDER_COCO;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_TAG_FAT;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.VALID_TAG_LAZY;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.pet.PshCommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.pet.PshCommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_FIRST_PET;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_SECOND_PET;
-import static seedu.address.testutil.pet.PshTypicalIndexes.INDEX_THIRD_PET;
+import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DOB_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SPECIES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.SPECIES_DESC_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAZY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PET;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand.EditPetDescriptor;
-import seedu.address.logic.commands.pet.PshCommandTestUtil;
 import seedu.address.model.pet.DateOfBirth;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Name;
@@ -84,7 +84,7 @@ public class EditPetCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid gender followed by valid email
-        assertParseFailure(parser, "1" + INVALID_GENDER_DESC + PshCommandTestUtil.DOB_DESC_COCO,
+        assertParseFailure(parser, "1" + INVALID_GENDER_DESC + CommandTestUtil.DOB_DESC_COCO,
                 Gender.MESSAGE_CONSTRAINTS);
 
         // valid gender followed by invalid gender. The test case for invalid gender followed by valid gender
@@ -98,7 +98,7 @@ public class EditPetCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FAT + TAG_DESC_LAZY, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_DOB_DESC + PshCommandTestUtil.VALID_SPECIES_COCO
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_DOB_DESC + CommandTestUtil.VALID_SPECIES_COCO
                         + VALID_GENDER_COCO.toString(),
                 Name.MESSAGE_CONSTRAINTS);
     }
@@ -107,12 +107,12 @@ public class EditPetCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PET;
         String userInput = targetIndex.getOneBased() + GENDER_DESC_GARFIELD + TAG_DESC_LAZY
-                + PshCommandTestUtil.DOB_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO
+                + CommandTestUtil.DOB_DESC_COCO + CommandTestUtil.SPECIES_DESC_COCO
                 + NAME_DESC_COCO + TAG_DESC_FAT;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
-                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(PshCommandTestUtil.VALID_DOB_COCO)
-                .withSpecies(PshCommandTestUtil.VALID_SPECIES_COCO)
+                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(CommandTestUtil.VALID_DOB_COCO)
+                .withSpecies(CommandTestUtil.VALID_SPECIES_COCO)
                 .withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
 
@@ -122,10 +122,10 @@ public class EditPetCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + GENDER_DESC_GARFIELD + PshCommandTestUtil.DOB_DESC_COCO;
+        String userInput = targetIndex.getOneBased() + GENDER_DESC_GARFIELD + CommandTestUtil.DOB_DESC_COCO;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
-                .withDateOfBirth(PshCommandTestUtil.VALID_DOB_COCO).build();
+                .withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -141,20 +141,20 @@ public class EditPetCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
-        userInput = targetIndex.getOneBased() + PshCommandTestUtil.GENDER_DESC_COCO;
+        userInput = targetIndex.getOneBased() + CommandTestUtil.GENDER_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_COCO.toString()).build();
         expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + PshCommandTestUtil.DOB_DESC_COCO;
-        descriptor = new EditPetDescriptorBuilder().withDateOfBirth(PshCommandTestUtil.VALID_DOB_COCO).build();
+        userInput = targetIndex.getOneBased() + CommandTestUtil.DOB_DESC_COCO;
+        descriptor = new EditPetDescriptorBuilder().withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
         expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = targetIndex.getOneBased() + PshCommandTestUtil.SPECIES_DESC_COCO;
-        descriptor = new EditPetDescriptorBuilder().withSpecies(PshCommandTestUtil.VALID_SPECIES_COCO).build();
+        userInput = targetIndex.getOneBased() + CommandTestUtil.SPECIES_DESC_COCO;
+        descriptor = new EditPetDescriptorBuilder().withSpecies(CommandTestUtil.VALID_SPECIES_COCO).build();
         expectedCommand = new EditPetCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -168,10 +168,10 @@ public class EditPetCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + PshCommandTestUtil.GENDER_DESC_COCO
-                + PshCommandTestUtil.SPECIES_DESC_COCO + PshCommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT
-                + PshCommandTestUtil.GENDER_DESC_COCO + PshCommandTestUtil.SPECIES_DESC_COCO
-                + PshCommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT + GENDER_DESC_GARFIELD + SPECIES_DESC_GARFIELD
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.GENDER_DESC_COCO
+                + CommandTestUtil.SPECIES_DESC_COCO + CommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT
+                + CommandTestUtil.GENDER_DESC_COCO + CommandTestUtil.SPECIES_DESC_COCO
+                + CommandTestUtil.DOB_DESC_COCO + TAG_DESC_FAT + GENDER_DESC_GARFIELD + SPECIES_DESC_GARFIELD
                 + DOB_DESC_GARFIELD + TAG_DESC_LAZY;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())

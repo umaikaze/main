@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.commands.pet.EditPetCommand;
-import seedu.address.model.PetTracker;
 import seedu.address.model.Model;
+import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;

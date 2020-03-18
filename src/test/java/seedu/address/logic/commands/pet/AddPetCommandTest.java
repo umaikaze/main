@@ -17,11 +17,13 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
-import seedu.address.model.PshModel;
-import seedu.address.model.PshReadOnlyUserPrefs;
 import seedu.address.model.ReadOnlyPetTracker;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 import seedu.address.testutil.PetBuilder;
 
 public class AddPetCommandTest {
@@ -79,14 +81,14 @@ public class AddPetCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements PshModel {
+    private class ModelStub implements Model {
         @Override
-        public PshReadOnlyUserPrefs getUserPrefs() {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setUserPrefs(PshReadOnlyUserPrefs userPrefs) {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -131,6 +133,11 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public Pet getPet(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePet(Pet target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -147,6 +154,31 @@ public class AddPetCommandTest {
 
         @Override
         public void updateFilteredPetList(Predicate<Pet> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSlot(Slot slot) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSlot(Slot slot) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSlot(Slot target, Slot editedSlot) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Slot> getFilteredSlotList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSlotList(Predicate<Slot> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

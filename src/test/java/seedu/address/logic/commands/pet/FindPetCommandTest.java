@@ -3,8 +3,8 @@ package seedu.address.logic.commands.pet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.PshMessages.MESSAGE_PETS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.pet.PshCommandTestUtil.assertCommandSuccess;
+import static seedu.address.commons.core.Messages.MESSAGE_PETS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPets.CARL;
 import static seedu.address.testutil.TypicalPets.ELLE;
 import static seedu.address.testutil.TypicalPets.FIONA;
@@ -15,17 +15,17 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.PshModel;
-import seedu.address.model.PshModelManager;
-import seedu.address.model.PshUserPrefs;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindPetCommand}.
  */
 public class FindPetCommandTest {
-    private PshModel model = new PshModelManager(getTypicalPetTracker(), new PshUserPrefs());
-    private PshModel expectedModel = new PshModelManager(getTypicalPetTracker(), new PshUserPrefs());
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPetTracker(), new UserPrefs());
 
     @Test
     public void equals() {
