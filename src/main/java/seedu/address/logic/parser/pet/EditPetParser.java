@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.pet.EditPetCommand;
@@ -82,7 +83,10 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (foodList.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> foodSet = foodList.size() == 1 && foodList.contains("") ? Collections.emptySet() : foodList;
+        if(foodList.stream().allMatch(t -> t.equals(""))) {
+            throw new ParseException(EditPetCommand.MESSAGE_EMPTY_FOODLIST);
+        }
+        Collection<String> foodSet = foodList.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
         return Optional.of(ParserUtil.parseFoodList(foodSet));
     }
 
@@ -97,7 +101,8 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() :
+                tags.stream().filter(t -> !t.equals("")).collect(Collectors.toList());;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
