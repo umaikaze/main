@@ -83,7 +83,7 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (foodList.isEmpty()) {
             return Optional.empty();
         }
-        if(foodList.stream().allMatch(t -> t.equals(""))) {
+        if (foodList.stream().allMatch(t -> t.equals(""))) {
             throw new ParseException(EditPetCommand.MESSAGE_EMPTY_FOODLIST);
         }
         Collection<String> foodSet = foodList.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
@@ -101,8 +101,8 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() :
-                tags.stream().filter(t -> !t.equals("")).collect(Collectors.toList());;
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet()
+                : tags.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
