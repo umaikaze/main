@@ -60,12 +60,12 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   e.g. `display s` +
   e.g. `display i`
 . Pet Tracker System
-  - **Add pet**: `addpet n/NAME a/AGE s/SPECIES b/BREED g/GENDER f/FOOD [t/TAG]...` +
-  e.g. `addpet n/Garfield a/5 s/cat b/ginger tabby g/M t/lazy f/30 t/good for nothing t/lasagna`
+  - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
+  e.g. `addpet n/Garfield g/male b/01-01-2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
   - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
   e.g. `findpets n/garfield n/odie t/jon`
-  - **Tag pet**: `tagpet i/INDEX t/TAG [t/TAG]...` +
-  e.g. `tagpet 2 t/smelly t/noisy t/cuddly`
+  - **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
+  e.g. `editpet 2 n/garfield t/cuddly`
   - **Delete pet**: `deletepet i/INDEX` +
   e.g. `deletepet 2`
 . Schedule System
@@ -93,9 +93,9 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
 **Command Format**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-- Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-- Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-- Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Some Pet t/lazy` or as `n/Some Pet`.
+- Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/cute`, `t/small t/white` etc.
+- Parameters can be in any order e.g. if the command specifies `n/NAME g/GENDER`, `G/GENDER n/NAME` is also acceptable.
 ====
 
 === Command  / general features
@@ -151,18 +151,18 @@ Provides statistics about the pet tracker and schedule system, such as total num
 
 Adds a pet to the pet tracker system.
 
-Format: `addpet n/NAME a/AGE s/SPECIES b/BREED g/GENDER f/FOOD [t/TAG]...`
+Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG]...`
 
 ****
-- The age must be a positive integer, e.g. 1, 2, 3, ..., denoting how many years old the pet is.
-- The gender must be either `F` or `M`.
-- Food is specified as a quantity of weekly consumption in an arbitrary unit.
-- A pet can have any number of tags (including 0)
+- The date of birth must be in the format of d-M-YYYY, e.g. 01-01-2019, 1-7-2018
+- The gender must be either `female` or `male`.
+- Food is specified as a type of food complied with quantity of weekly consumption in an arbitrary unit. The food name and amount should be separated by a colon ":". There can be more than 1 types of food for one pet.
+- A pet can have any number of tags (including 0). Each tag must be restricted to one word .
 ****
 
 Example:
 
-- `addpet n/Garfield a/5 s/cat b/ginger tabby g/M f/30 t/lazy t/good for nothing t/lasagna`
+- `addpet n/Garfield g/male b/01-01-2019 f/Brand A: 30 t/lazy t/lasagna`
 
 ==== Finding pets by names or tags: `findpets`
 
@@ -180,23 +180,23 @@ Example:
 - `findpets n/garfield n/odie t/jon` +
 Returns a list of pets, whose names either contain `garfield` or `odie`, or have a tag labelled `jon`.
 
-==== Tagging a pet: `tagpet`
+==== Tagging a pet: `editpet`
 
-Tags an existing pet in the system.
+Edits any field of an existing pet in the system.
 
-Format: `tagpet i/INDEX t/TAG [t/TAG]...`
+Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 
 ****
 - The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
-- The existing tags of the pet will be removed, i.e adding of tags is not cumulative.
+- The existing field(s) of the pet will be removed, i.e adding of list of food and tags is not cumulative.
 - You can remove all tags of a pet by typing `t/` without specifying any tags after it.
 ****
 
 Example:
 
 - `display p` +
-  `tagpet 2 t/smelly t/noisy t/cuddly` +
-Overrides the tags of the 2nd pet in the system with 3 tags of “smelly”, “noisy”, “cuddly”.
+  `tagpet 2 n/Coco b/02-01-2020 t/cuddly t/grey` +
+Overwrites information of the 2nd pet in the system with name "Coco", date of birth "2 Jan 2020, and 2 tags of “cuddly”, “grey”.
 
 ==== Deleting a pet: `deletepet`
 
