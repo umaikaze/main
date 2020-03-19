@@ -33,6 +33,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_COCO = "Coco";
     public static final String VALID_NAME_GARFIELD = "Garfield";
+    public static final String VALID_NAME_AMY = "Amy";
+    public static final String VALID_NAME_BOB = "Bob";
     public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
     public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
     public static final String VALID_DOB_COCO = "2/2/2015";
@@ -42,6 +44,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FAT = "fat";
     public static final String VALID_TAG_HYPER = "hyper";
     public static final String VALID_TAG_LAZY = "lazy";
+
+
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
 
     public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
     public static final String NAME_DESC_GARFIELD = " " + PREFIX_NAME + VALID_NAME_GARFIELD;
@@ -64,12 +70,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
-    private static final String VALID_FOOD_NAME_GARFIELD = "catfood";
-    private static final Integer VALID_FOOD_AMOUNT_GARFIELD = 30;
-    public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_NAME_GARFIELD + ":" + VALID_FOOD_AMOUNT_GARFIELD;
-    private static final String VALID_FOOD_NAME_COCO = "dogfood";
-    private static final Integer VALID_FOOD_AMOUNT_COCO = 20;
-    public static final String FOOD_DESC_COCO = " " + PREFIX_FOODLIST + VALID_FOOD_NAME_COCO + ":" + VALID_FOOD_AMOUNT_COCO;
+    public static final String VALID_FOOD_GARFIELD = "catfood:10";
+    public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_GARFIELD;
+    public static final String VALID_FOOD_COCO = "dogfood:10";
+    public static final String FOOD_DESC_COCO = " " + PREFIX_FOODLIST + VALID_FOOD_COCO;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
