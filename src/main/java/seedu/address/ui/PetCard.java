@@ -14,7 +14,7 @@ import seedu.address.model.pet.Pet;
  */
 public class PetCard extends UiPart<Region> {
 
-    private static final String FXML = "PetListCard.fxml";
+    private static final String FXML = "PetCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

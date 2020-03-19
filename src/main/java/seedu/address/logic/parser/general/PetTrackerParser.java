@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser.general;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.pet.AddPetCommand;
@@ -15,6 +16,10 @@ import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.commands.pet.ListCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.logic.parser.pet.AddPetParser;
+import seedu.address.logic.parser.pet.DeletePetParser;
+import seedu.address.logic.parser.pet.EditPetParser;
+import seedu.address.logic.parser.pet.FindPetParser;
 
 /**
  * Parse user input.
@@ -53,6 +58,9 @@ public class PetTrackerParser {
 
         case FindPetCommand.COMMAND_WORD:
             return new FindPetParser().parse(arguments);
+
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
