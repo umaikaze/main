@@ -11,7 +11,8 @@ import java.util.Objects;
  */
 public class Food {
 
-    public static final String MESSAGE_CONSTRAINTS = "Name and amount of food should both exist and separated by ':'.";
+    public static final String MESSAGE_CONSTRAINTS = "Name and amount of food should both exist "
+            + "and separated by a colon ':'.";
     public static final String MESSAGE_NAME_CONSTRAINTS = "Food names should only contain alphanumeric characters and "
             + "spaces only, and it should not be blank";
     public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food amount must be a positive integer number.";
