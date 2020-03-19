@@ -154,7 +154,7 @@ Adds a pet to the pet tracker system.
 Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG]...`
 
 ****
-- The date of birth must be in the format of d/M/YYYY, e.g. 01-01-2019, 1-7-2018
+- The date of birth must be in the format of d/M/YYYY, e.g. 01/01/2019, 1/7/2018
 - The gender must be either `female` or `male`.
 - Food is specified as a type of food complied with quantity of weekly consumption in an arbitrary unit. The food name and amount should be separated by a colon ":". There can be more than 1 types of food for one pet.
 - A pet can have any number of tags (including 0). Each tag must be restricted to one word .
