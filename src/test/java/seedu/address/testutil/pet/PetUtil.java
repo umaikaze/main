@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FOODLIST;
 
 import java.util.Set;
 
@@ -31,11 +32,12 @@ public class PetUtil {
     public static String getPetDetails(Pet pet) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + pet.getName().fullName + " ");
-        sb.append(PREFIX_GENDER + pet.getName().toString() + " ");
-        sb.append(PREFIX_DOB + pet.getGender().toString() + " ");
+        sb.append(PREFIX_GENDER + pet.getGender().toString() + " ");
+        sb.append(PREFIX_DOB + pet.getDateOfBirth().toString() + " ");
         sb.append(PREFIX_SPECIES + pet.getSpecies().toString() + " ");
-        pet.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        pet.getFoodList().stream().forEach(s -> sb.append(PREFIX_FOODLIST + s.foodName + ":" + s.foodAmount + " "));
+        pet.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        System.out.println(sb);
         return sb.toString();
     }
 
@@ -45,9 +47,9 @@ public class PetUtil {
     public static String getEditPetDescriptorDetails(EditPetDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.value)
-                .append(" "));
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.toString()).append(" "));
+        descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.toString())
+                .append(" "));
         descriptor.getSpecies().ifPresent(species -> sb.append(PREFIX_SPECIES).append(species.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

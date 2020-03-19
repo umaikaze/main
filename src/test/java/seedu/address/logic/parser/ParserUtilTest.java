@@ -25,11 +25,11 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "mali";
     private static final String INVALID_DATEOFBIRTH = "";
-    private static final String INVALID_SPECIES = "fruitcake";
+    private static final String INVALID_SPECIES = "!fruitcake";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel";
-    private static final String VALID_GENDER = "female";
+    private static final String VALID_GENDER = "FEMALE";
     private static final String VALID_DATEOFBIRTH = "2-12-2019";
     private static final String VALID_SPECIES = "Raccoon";
     private static final String VALID_TAG_1 = "friend";

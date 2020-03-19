@@ -17,10 +17,12 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PetBuilder {
 
-    public static final String DEFAULT_NAME = "Kiruya Momochi";
+    public static final String DEFAULT_NAME = "Kiruya";
     public static final Gender DEFAULT_GENDER = Gender.FEMALE;
     public static final String DEFAULT_DOB = "2-9-1998";
     public static final String DEFAULT_SPECIES = "Cat";
+    private static final String DEFAULT_FOOD_NAME = "catfood";
+    private static final Integer DEFAULT_FOOD_AMOUT = 30;
 
     private Name name;
     private Gender gender;
@@ -35,6 +37,7 @@ public class PetBuilder {
         dob = new DateOfBirth(DEFAULT_DOB);
         species = new Species(DEFAULT_SPECIES);
         foodSet = new HashSet<>();
+        foodSet.add(new Food(DEFAULT_FOOD_NAME, DEFAULT_FOOD_AMOUT));
         tags = new HashSet<>();
     }
 
@@ -63,6 +66,14 @@ public class PetBuilder {
      */
     public PetBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code food} into a {@code Set<Food>} and set it to the {@code Pet} that we are building.
+     */
+    public PetBuilder withFoods(String ... foodSet) {
+        this.foodSet = SampleDataUtil.getFoodSet(foodSet);
         return this;
     }
 

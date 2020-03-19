@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
@@ -59,12 +60,16 @@ public class CommandTestUtil {
     public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "07/04/00"; // must follow d-M-yyyy format
     public static final String INVALID_SPECIES_DESC = " " + PREFIX_SPECIES; // empty string not allowed for species
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
+    private static final String VALID_FOOD_NAME_GARFIELD = "catfood";
+    private static final Integer VALID_FOOD_AMOUNT_GARFIELD = 30;
+    public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_NAME_GARFIELD + ":" + VALID_FOOD_AMOUNT_GARFIELD;
+    private static final String VALID_FOOD_NAME_COCO = "dogfood";
+    private static final Integer VALID_FOOD_AMOUNT_COCO = 20;
+    public static final String FOOD_DESC_COCO = " " + PREFIX_FOODLIST + VALID_FOOD_NAME_COCO + ":" + VALID_FOOD_AMOUNT_COCO;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)

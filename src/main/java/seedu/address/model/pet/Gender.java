@@ -7,10 +7,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: Only two valid constants: FEMALE and MALE.
  */
 public enum Gender {
-    FEMALE ("female"),
-    MALE ("male");
+    FEMALE ("FEMALE"),
+    MALE ("MALE");
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender should be either male or female";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should be either MALE or FEMALE";
 
     private String value;
 
@@ -25,7 +25,7 @@ public enum Gender {
     }
 
     public static boolean isValidGender(String test) {
-        return (test.equals("male")) || (test.equals("female"));
+        return (test.equals("MALE")) || (test.equals("FEMALE"));
     }
 
     @Override

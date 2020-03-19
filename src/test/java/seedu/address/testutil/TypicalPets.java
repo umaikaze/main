@@ -2,10 +2,12 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.FOOD_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HYPER;
@@ -27,6 +29,7 @@ public class TypicalPets {
     public static final Pet COCO = new PetBuilder().withName("Coco")
             .withSpecies("Dog").withDateOfBirth("1-6-2015")
             .withGender(Gender.FEMALE)
+//            .withFoods(VALID_FOOD_COCO)
             .withTags("darkFur").build();
     public static final Pet GARFIELD = new PetBuilder().withName("Garfield Arbuckle")
             .withSpecies("Cat")
@@ -51,7 +54,7 @@ public class TypicalPets {
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
     public static final Pet AMY = new PetBuilder().withName(VALID_NAME_COCO).withGender(VALID_GENDER_COCO)
-            .withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_HYPER).build();
+            .withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_COCO).withTags(VALID_TAG_HYPER).build();
     public static final Pet BOB = new PetBuilder().withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
             .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD)
             .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();

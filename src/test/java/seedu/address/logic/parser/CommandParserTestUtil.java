@@ -17,6 +17,7 @@ public class CommandParserTestUtil {
      * equals to {@code expectedCommand}.
      */
     public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
+        System.out.println(userInput);
         try {
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
