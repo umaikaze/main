@@ -9,7 +9,8 @@ import java.util.Objects;
 
 import seedu.address.model.pet.Pet;
 import seedu.address.ui.DisplayItem;
-import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.DisplayItemCard;
+import seedu.address.ui.SlotCard;
 
 /**
  * Represents a Slot in the pet shop helper schedule system.
@@ -107,8 +108,8 @@ public class Slot implements Comparable<Slot>, DisplayItem {
     }
 
     @Override
-    public DisplaySystemType getSystemType() {
-        return DisplaySystemType.SCHEDULE;
+    public DisplayItemCard getDisplayCard(int displayedIndex) {
+        return new SlotCard(this, displayedIndex);
     }
 
     /**

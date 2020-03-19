@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.general;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
@@ -16,14 +18,11 @@ public class DisplayParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DisplayCommand parse(String args) throws ParseException {
-        switch (args.strip()) {
-        case "p":
-            return new DisplayCommand(DisplaySystemType.PET);
-        case "s":
-            return new DisplayCommand(DisplaySystemType.SCHEDULE);
-        case "i":
-            throw new ParseException("`display i` will be supported soon!");
-        default:
+        String trimmedArgs = requireNonNull(args.trim());
+        try {
+            DisplaySystemType type = DisplaySystemType.fromCliArg(trimmedArgs);
+            return new DisplayCommand(type);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     DisplayCommand.MESSAGE_USAGE));
         }

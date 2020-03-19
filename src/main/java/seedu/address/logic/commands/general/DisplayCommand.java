@@ -1,8 +1,6 @@
 package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.general.exceptions.CommandException;
@@ -19,8 +17,7 @@ public class DisplayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Changes the display board to show the specified system. Parameters: p|s|i";
 
-    public static final String MESSAGE_SUCCESS_PET = "Listed all pets";
-    public static final String MESSAGE_SUCCESS_SCHEDULE = "Listed all slots";
+    public static final String MESSAGE_SUCCESS = "Display changed to %s; showing all.";
 
     public static final String MESSAGE_INVALID_SYSTEM_TYPE = "Invalid system type specified.";
 
@@ -38,15 +35,7 @@ public class DisplayCommand extends Command {
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
-        switch (type) {
-        case PET:
-            model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
-            return new CommandResult(MESSAGE_SUCCESS_PET, false, false, type);
-        case SCHEDULE:
-            model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
-            return new CommandResult(MESSAGE_SUCCESS_SCHEDULE, false, false, type);
-        default:
-            throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
-        }
+        String message = String.format(MESSAGE_SUCCESS, type);
+        return new CommandResult(message, false, false, true);
     }
 }

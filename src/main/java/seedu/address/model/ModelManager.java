@@ -194,11 +194,13 @@ public class ModelManager implements Model {
     @Override
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
-        case PET:
+        case PETS:
             filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+            updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
             break;
         case SCHEDULE:
             filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+            updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);

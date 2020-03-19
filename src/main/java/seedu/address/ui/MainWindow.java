@@ -156,10 +156,9 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            commandResult.getDisplaySystemType().ifPresent(type -> {
-                displayListPanel = new DisplayListPanel(logic.getFilteredDisplayList());
-                displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
-            });
+            if (commandResult.hasDisplayChanged()) {
+                displayListPanel.updateWith(logic.getFilteredDisplayList());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

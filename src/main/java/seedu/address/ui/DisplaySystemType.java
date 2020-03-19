@@ -1,10 +1,32 @@
 package seedu.address.ui;
 
 /**
- * Represents the type of system to be shown in the display board in the Pet
- * Store Helper.
+ * Represents the type of system to be shown in the display board in the Pet Store Helper.
  */
 public enum DisplaySystemType {
-    PET,
-    SCHEDULE;
+    PETS("p"),
+    SCHEDULE("s");
+
+    private final String cliArg;
+
+    DisplaySystemType(String cliArg) {
+        this.cliArg = cliArg;
+    }
+
+    /**
+     * Returns the corresponding {@code DisplaySystemType} based on the {@code cliArg} passed in.
+     */
+    public static DisplaySystemType fromCliArg(String cliArg) throws IllegalArgumentException {
+        for (DisplaySystemType type : DisplaySystemType.values()) {
+            if (type.cliArg.equals(cliArg)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException(cliArg);
+    }
+
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
 }

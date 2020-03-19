@@ -3,9 +3,6 @@ package seedu.address.logic.commands.general;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-import java.util.Optional;
-
-import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents the result of a command execution.
@@ -25,30 +22,29 @@ public class CommandResult {
     private final boolean exit;
 
     /**
-     * The type of list to be displayed.
-     * If no type is specified, the type remains the same as before the command was executed.
+     * Whether or not the system to be displayed has changed.
      */
-    private final DisplaySystemType type;
+    private final boolean displayChanged;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, DisplaySystemType type) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean displayChanged) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.type = type;
+        this.displayChanged = displayChanged;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields,
-     * while keeping the type of list to be displayed the same.
+     * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.type = null;
+        this.displayChanged = false;
     }
 
     /**
@@ -56,7 +52,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -71,8 +67,8 @@ public class CommandResult {
         return exit;
     }
 
-    public Optional<DisplaySystemType> getDisplaySystemType() {
-        return Optional.ofNullable(type);
+    public boolean hasDisplayChanged() {
+        return displayChanged;
     }
 
     @Override

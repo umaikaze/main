@@ -33,11 +33,11 @@ public class Schedule {
     //TODO: remove this constructor after schedule commands are integrated in
     public Schedule() {
         this.internalList.add(new Slot(
-                new Pet(new Name("doggie (test slot)"), Gender.FEMALE, new DateOfBirth("1-1-1991"), new Species("dog"),
+                new Pet(new Name("doggie"), Gender.FEMALE, new DateOfBirth("1/1/1991"), new Species("dog"),
                     new HashSet<>(), new HashSet<>()),
                 LocalDateTime.now(), Duration.ofMinutes(90)));
         this.internalList.add(new Slot(
-                new Pet(new Name("kitty (test slot)"), Gender.MALE, new DateOfBirth("6-9-2002"), new Species("cat"),
+                new Pet(new Name("kitty"), Gender.MALE, new DateOfBirth("6/9/2002"), new Species("cat"),
                     new HashSet<>(), new HashSet<>()),
                 LocalDateTime.now(), Duration.ofMinutes(69)));
     }
