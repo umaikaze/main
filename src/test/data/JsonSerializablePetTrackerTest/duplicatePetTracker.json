@@ -1,0 +1,16 @@
+{
+  "pets": [ {
+    "name": "Garfield",
+    "gender": "male",
+    "dateOfBirth": "01/01/2019",
+    "species": "cat",
+    "foodList": [ "Brand A:5" ],
+    "tagged": [ "friends" ]
+  }, {
+    "name": "Garfield",
+    "gender": "male",
+    "dateOfBirth": "01/01/2019",
+    "species": "cat",
+    "foodList": [ "Brand A:5" ]
+  } ]
+}
