@@ -61,7 +61,7 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   e.g. `display i`
 . Pet Tracker System
   - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
-  e.g. `addpet n/Garfield g/male b/01-01-2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
+  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
   - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
   e.g. `findpets n/garfield n/odie t/jon`
   - **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
@@ -154,7 +154,7 @@ Adds a pet to the pet tracker system.
 Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG]...`
 
 ****
-- The date of birth must be in the format of d-M-YYYY, e.g. 01-01-2019, 1-7-2018
+- The date of birth must be in the format of d/M/YYYY, e.g. 01-01-2019, 1-7-2018
 - The gender must be either `female` or `male`.
 - Food is specified as a type of food complied with quantity of weekly consumption in an arbitrary unit. The food name and amount should be separated by a colon ":". There can be more than 1 types of food for one pet.
 - A pet can have any number of tags (including 0). Each tag must be restricted to one word .
@@ -162,7 +162,7 @@ Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG
 
 Example:
 
-- `addpet n/Garfield g/male b/01-01-2019 f/Brand A: 30 t/lazy t/lasagna`
+- `addpet n/Garfield g/male b/01/01/2019 f/Brand A: 30 t/lazy t/lasagna`
 
 ==== Finding pets by names or tags: `findpets`
 
@@ -180,7 +180,7 @@ Example:
 - `findpets n/garfield n/odie t/jon` +
 Returns a list of pets, whose names either contain `garfield` or `odie`, or have a tag labelled `jon`.
 
-==== Tagging a pet: `editpet`
+==== Editing a pet: `editpet`
 
 Edits any field of an existing pet in the system.
 
@@ -195,7 +195,7 @@ Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 Example:
 
 - `display p` +
-  `tagpet 2 n/Coco b/02-01-2020 t/cuddly t/grey` +
+  `tagpet 2 n/Coco b/02/01/2020 t/cuddly t/grey` +
 Overwrites information of the 2nd pet in the system with name "Coco", date of birth "2 Jan 2020, and 2 tags of “cuddly”, “grey”.
 
 ==== Deleting a pet: `deletepet`
