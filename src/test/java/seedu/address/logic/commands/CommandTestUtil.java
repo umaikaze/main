@@ -35,8 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_GARFIELD = "Garfield";
     public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
     public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
-    public static final String VALID_DOB_COCO = "2-2-2015";
-    public static final String VALID_DOB_GARFIELD = "19-6-1978";
+    public static final String VALID_DOB_COCO = "2/2/2015";
+    public static final String VALID_DOB_GARFIELD = "19/6/1978";
     public static final String VALID_SPECIES_COCO = "dog";
     public static final String VALID_SPECIES_GARFIELD = "cat";
     public static final String VALID_TAG_FAT = "fat";

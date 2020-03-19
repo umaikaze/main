@@ -37,7 +37,6 @@ public class PetUtil {
         sb.append(PREFIX_SPECIES + pet.getSpecies().toString() + " ");
         pet.getFoodList().stream().forEach(s -> sb.append(PREFIX_FOODLIST + s.foodName + ":" + s.foodAmount + " "));
         pet.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
-        System.out.println(sb);
         return sb.toString();
     }
 
@@ -50,6 +49,7 @@ public class PetUtil {
         descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.toString()).append(" "));
         descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.toString())
                 .append(" "));
+        descriptor.getFoodList().get().forEach(s -> sb.append(PREFIX_FOODLIST + s.foodName + ":" + s.foodAmount + " "));
         descriptor.getSpecies().ifPresent(species -> sb.append(PREFIX_SPECIES).append(species.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

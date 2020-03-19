@@ -36,6 +36,7 @@ public class EditPetDescriptorBuilder {
         descriptor.setGender(pet.getGender());
         descriptor.setDateOfBirth(pet.getDateOfBirth());
         descriptor.setSpecies(pet.getSpecies());
+        descriptor.setFoodList(pet.getFoodList());
         descriptor.setTags(pet.getTags());
     }
 

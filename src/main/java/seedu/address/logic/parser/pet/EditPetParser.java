@@ -101,8 +101,7 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet()
-                : tags.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
