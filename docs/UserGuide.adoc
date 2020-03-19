@@ -246,7 +246,7 @@ Format: `findslots [n/PETNAME] [t/DATE]`
 - The name of the pet must match exactly.
 - At least one of the optional fields must be provided.
 - The date must be in `dd/M/yyyy HHmm` format.
-* Any time specified in the date will be ignored, e.g. `20/2/2020 1400` will be parsed as `20-2-2020`.
+* Any time specified in the date will be ignored, e.g. `20/2/2020 1400` will be parsed as `20/2/2020`.
 
 ****
 

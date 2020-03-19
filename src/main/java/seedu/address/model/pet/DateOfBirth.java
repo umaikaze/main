@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.commons.util.DateTimeUtil;
 
 /**
  * Represents a Pet's date of birth.
@@ -13,8 +14,8 @@ import java.time.format.DateTimeParseException;
  */
 public class DateOfBirth {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date of Birth must follow the format of d-M-yyyy.";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy");
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date of Birth must follow the format of " + DateTimeUtil.DATE_PATTERN + ".";
 
     public final LocalDate value;
 
@@ -26,7 +27,7 @@ public class DateOfBirth {
     public DateOfBirth(String dateOfBirth) {
         requireNonNull(dateOfBirth);
         checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_CONSTRAINTS);
-        this.value = LocalDate.parse(dateOfBirth, FORMATTER);
+        this.value = LocalDate.parse(dateOfBirth, DateTimeUtil.DATE_FORMAT);
     }
 
     /**
@@ -34,7 +35,7 @@ public class DateOfBirth {
      */
     public static boolean isValidDateOfBirth(String test) {
         try {
-            LocalDate mightBeValid = LocalDate.parse(test, FORMATTER);
+            LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
             if (mightBeValid.isBefore(LocalDate.EPOCH)) {
                 return false;
             }
@@ -46,7 +47,7 @@ public class DateOfBirth {
 
     @Override
     public String toString() {
-        return value.format(FORMATTER); //TODO: originally is value.toString()
+        return value.format(DateTimeUtil.DATE_FORMAT);
     }
 
     @Override

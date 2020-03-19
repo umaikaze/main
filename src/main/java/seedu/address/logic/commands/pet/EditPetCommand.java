@@ -49,7 +49,7 @@ public class EditPetCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GENDER + "female "
-            + PREFIX_DOB + "01-02-2013";
+            + PREFIX_DOB + "01/02/2013";
 
     public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

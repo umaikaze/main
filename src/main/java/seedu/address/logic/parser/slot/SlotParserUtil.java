@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -21,12 +21,11 @@ import seedu.address.model.pet.exceptions.PetNotFoundException;
 public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATETIME = "Date and time must follow format d/M/yyyy HHmm.";
+    public static final String MESSAGE_INVALID_DATETIME =
+            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + "";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
-
-    public static final String DATETIME_FORMAT = "d/M/yyyy HHmm";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -72,7 +71,7 @@ public class SlotParserUtil {
         String trimmedDateTime = dateTime.trim();
         LocalDateTime parsedDateTime;
         try {
-            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }

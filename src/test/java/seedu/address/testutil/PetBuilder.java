@@ -19,7 +19,7 @@ public class PetBuilder {
 
     public static final String DEFAULT_NAME = "Kiruya Momochi";
     public static final Gender DEFAULT_GENDER = Gender.FEMALE;
-    public static final String DEFAULT_DOB = "2-9-1998";
+    public static final String DEFAULT_DOB = "2/9/1998";
     public static final String DEFAULT_SPECIES = "Cat";
 
     private Name name;
