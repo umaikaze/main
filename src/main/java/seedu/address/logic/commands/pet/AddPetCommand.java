@@ -27,7 +27,8 @@ public class AddPetCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_DOB + "DATE OF BIRTH "
             + PREFIX_SPECIES + "SPECIES "
-            + PREFIX_FOODLIST + "LIST OF FOOD AND AMOUNT "
+            + PREFIX_FOODLIST + "FOOD NAME: AMOUNT "
+            + "[" + PREFIX_FOODLIST + "FOOD NAME: AMOUNT]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Teddy "
@@ -36,7 +37,7 @@ public class AddPetCommand extends Command {
             + PREFIX_SPECIES + "dog "
             + PREFIX_FOODLIST + "brand A: 15 "
             + PREFIX_FOODLIST + "brand B: 20 "
-            + PREFIX_TAG + "small size "
+            + PREFIX_TAG + "small "
             + PREFIX_TAG + "lazy ";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";

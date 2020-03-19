@@ -49,11 +49,12 @@ public class EditPetCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GENDER + "female "
-            + PREFIX_DOB + "01-02-2013";
+            + PREFIX_DOB + "01/02/2013";
 
     public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper.";
+    public static final String MESSAGE_EMPTY_FOODLIST = "The list of food should not be empty.";
 
     private final Index index;
     private final EditPetDescriptor editPetDescriptor;

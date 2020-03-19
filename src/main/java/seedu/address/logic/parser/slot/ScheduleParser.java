@@ -58,7 +58,7 @@ public class ScheduleParser {
             return new AddSlotParser(model).parse(arguments);
 
         case EditSlotCommand.COMMAND_WORD:
-            return new EditSlotParser(model).parse(arguments);
+            return new EditSlotParser().parse(arguments);
 
         case DeleteSlotCommand.COMMAND_WORD:
             return new DeleteSlotParser().parse(arguments);
