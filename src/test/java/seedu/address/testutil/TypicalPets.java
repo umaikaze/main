@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
 
@@ -25,22 +26,22 @@ public class TypicalPets {
 
     public static final Pet COCO = new PetBuilder().withName("Coco")
             .withSpecies("Dog").withDateOfBirth("1/6/2015")
-            .withGender(Gender.FEMALE)
+            .withGender(Gender.FEMALE).withFoodList("Brand A")
             .withTags("darkFur").build();
     public static final Pet GARFIELD = new PetBuilder().withName("Garfield Arbuckle")
-            .withSpecies("Cat")
+            .withSpecies("Cat").withFoodList("Brand B")
             .withDateOfBirth("19/6/1978").withGender(Gender.MALE)
             .withTags("fat", "lazy").build();
     public static final Pet CARL = new PetBuilder().withName("Carl Kurz").withGender(Gender.MALE)
-            .withDateOfBirth("1/3/2015").withSpecies("Husky").build();
+            .withDateOfBirth("1/3/2015").withSpecies("Husky").withFoodList("Brand C").build();
     public static final Pet DANIEL = new PetBuilder().withName("Daniel Meier").withGender(Gender.MALE)
-            .withDateOfBirth("2/3/2015").withSpecies("Dolphin").withTags("pink").build();
+            .withDateOfBirth("2/3/2015").withSpecies("Dolphin").withTags("pink").withFoodList("Brand D").build();
     public static final Pet ELLE = new PetBuilder().withName("Elle Meyer").withGender(Gender.FEMALE)
-            .withDateOfBirth("3/3/2015").withSpecies("Parrot").build();
+            .withDateOfBirth("3/3/2015").withFoodList("Brand E").withSpecies("Parrot").build();
     public static final Pet FIONA = new PetBuilder().withName("Fiona Kunz").withGender(Gender.FEMALE)
-            .withDateOfBirth("4/3/2015").withSpecies("Goldfish").build();
+            .withDateOfBirth("4/3/2015").withFoodList("Brand F").withSpecies("Goldfish").build();
     public static final Pet GEORGE = new PetBuilder().withName("George Best").withGender(Gender.MALE)
-            .withDateOfBirth("5/3/2015").withSpecies("Slug").build();
+            .withDateOfBirth("5/3/2015").withSpecies("Slug").withFoodList("Brand G").build();
 
     // Manually added
     public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withGender(Gender.MALE)
@@ -69,6 +70,15 @@ public class TypicalPets {
         }
         return ab;
     }*/
+
+    //for JsonPetTrackerStorageTest
+    public static PetTracker getTypicalPetTracker() {
+        PetTracker ab = new PetTracker();
+        for (Pet pet : getTypicalPets()) {
+            ab.addPet(pet);
+        }
+        return ab;
+    }
 
     public static List<Pet> getTypicalPets() {
         return new ArrayList<>(Arrays.asList(COCO, GARFIELD, CARL, DANIEL, ELLE, FIONA, GEORGE));

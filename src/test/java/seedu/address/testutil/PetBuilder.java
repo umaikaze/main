@@ -90,6 +90,14 @@ public class PetBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code foodList} into a {@code Set<Food>} and set it to the {@code Pet} that we are building.
+     */
+    public PetBuilder withFoodList(String ... foodList) {
+        this.foodSet = SampleDataUtil.getFoodSet(foodList);
+        return this;
+    }
+
     public Pet build() {
         return new Pet(name, gender, dob, species, foodSet, tags);
     }

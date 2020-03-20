@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag implements Comparable<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and restricted to 1 word only.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
