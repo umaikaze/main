@@ -27,29 +27,29 @@ import seedu.address.model.pet.Pet;
  */
 public class TypicalPets {
 
-    public static final Pet AMY = new PetBuilder().withName("Coco")
+    public static final Pet AMY = new PetBuilder().withName("Amy")
             .withSpecies("Dog").withDateOfBirth("1/6/2015")
             .withGender(Gender.FEMALE).withFoodList("Brand A:10")
             .withTags("darkFur").build();
-    public static final Pet BOB = new PetBuilder().withName("Garfield Arbuckle")
+    public static final Pet BOB = new PetBuilder().withName("Bob")
             .withSpecies("Cat").withFoodList("Brand B:10")
             .withDateOfBirth("19/6/1978").withGender(Gender.MALE)
             .withTags("fat", "lazy").build();
-    public static final Pet CARL = new PetBuilder().withName("Carl Kurz").withGender(Gender.MALE)
+    public static final Pet CARL = new PetBuilder().withName("Carl").withGender(Gender.MALE)
             .withDateOfBirth("1/3/2015").withSpecies("Husky").withFoodList("Brand C:10").build();
-    public static final Pet DANIEL = new PetBuilder().withName("Daniel Meier").withGender(Gender.MALE)
+    public static final Pet DANIEL = new PetBuilder().withName("Daniel").withGender(Gender.MALE)
             .withDateOfBirth("2/3/2015").withSpecies("Dolphin").withTags("pink").withFoodList("Brand D:10").build();
-    public static final Pet ELLE = new PetBuilder().withName("Elle Meyer").withGender(Gender.FEMALE)
+    public static final Pet ELLE = new PetBuilder().withName("Elle").withGender(Gender.FEMALE)
             .withDateOfBirth("3/3/2015").withFoodList("Brand E:10").withSpecies("Parrot").build();
-    public static final Pet FIONA = new PetBuilder().withName("Fiona Kunz").withGender(Gender.FEMALE)
+    public static final Pet FIONA = new PetBuilder().withName("Fiona").withGender(Gender.FEMALE)
             .withDateOfBirth("4/3/2015").withFoodList("Brand F:10").withSpecies("Goldfish").build();
-    public static final Pet GEORGE = new PetBuilder().withName("George Best").withGender(Gender.MALE)
+    public static final Pet GEORGE = new PetBuilder().withName("George").withGender(Gender.MALE)
             .withDateOfBirth("5/3/2015").withSpecies("Slug").withFoodList("Brand G:10").build();
 
     // Manually added
-    public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withGender(Gender.MALE)
+    public static final Pet HOON = new PetBuilder().withName("Hoon").withGender(Gender.MALE)
             .withDateOfBirth("6/3/2015").withSpecies("little india").build();
-    public static final Pet IDA = new PetBuilder().withName("Ida Mueller").withGender(Gender.MALE)
+    public static final Pet IDA = new PetBuilder().withName("Ida").withGender(Gender.MALE)
             .withDateOfBirth("7/3/2015").withSpecies("chicago ave").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
@@ -59,8 +59,6 @@ public class TypicalPets {
     public static final Pet GARFIELD = new PetBuilder().withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
             .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD).withFoodList(VALID_FOOD_GARFIELD)
             .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPets() {
     } // prevents instantiation

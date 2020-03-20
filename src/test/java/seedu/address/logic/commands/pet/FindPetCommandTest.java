@@ -67,7 +67,7 @@ public class FindPetCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePetsFound() {
         String expectedMessage = String.format(MESSAGE_PETS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Carl Elle Fiona");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
