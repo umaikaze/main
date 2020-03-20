@@ -7,6 +7,9 @@ public enum DisplaySystemType {
     PETS("p"),
     SCHEDULE("s");
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "System type must be p (pets) or s (schedule).";
+
     private final String cliArg;
 
     DisplaySystemType(String cliArg) {
