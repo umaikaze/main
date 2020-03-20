@@ -2,10 +2,10 @@ package seedu.address.logic.parser.slot;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.slot.EditSlotCommand;
@@ -28,7 +28,7 @@ public class EditSlotParser implements Parser<EditSlotCommand> {
     public EditSlotCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DATETIME, PREFIX_DURATION, PREFIX_PETNAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DATETIME, PREFIX_DURATION, PREFIX_NAME);
 
         Index index;
 
