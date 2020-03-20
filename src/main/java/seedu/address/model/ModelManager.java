@@ -100,8 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public Pet getPet(Name name) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return petTracker.getPet(name);
     }
 
     @Override
