@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.PetTracker;
-import seedu.address.testutil.TypicalPets;
+import seedu.address.testutil.pet.TypicalPets;
 
 public class JsonSerializablePetTrackerTest {
 

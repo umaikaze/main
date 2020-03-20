@@ -24,7 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
-import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.pet.PetBuilder;
 
 public class AddPetCommandTest {
 

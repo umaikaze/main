@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.pet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +18,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
-import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
@@ -33,16 +32,15 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_COCO = "Coco";
     public static final String VALID_NAME_GARFIELD = "Garfield";
-    public static final String VALID_NAME_AMY = "Amy";
-    public static final String VALID_NAME_BOB = "Bob";
     public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
     public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
     public static final String VALID_DOB_COCO = "2/2/2015";
     public static final String VALID_DOB_GARFIELD = "19/6/1978";
     public static final String VALID_SPECIES_COCO = "dog";
     public static final String VALID_SPECIES_GARFIELD = "cat";
+    public static final String VALID_FOOD_COCO = "dogfood:10";
+    public static final String VALID_FOOD_GARFIELD = "catfood:10";
     public static final String VALID_TAG_FAT = "fat";
-    public static final String VALID_TAG_HYPER = "hyper";
     public static final String VALID_TAG_LAZY = "lazy";
 
     public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
@@ -53,7 +51,8 @@ public class CommandTestUtil {
     public static final String DOB_DESC_GARFIELD = " " + PREFIX_DOB + VALID_DOB_GARFIELD;
     public static final String SPECIES_DESC_COCO = " " + PREFIX_SPECIES + VALID_SPECIES_COCO;
     public static final String SPECIES_DESC_GARFIELD = " " + PREFIX_SPECIES + VALID_SPECIES_GARFIELD;
-    public static final String TAG_DESC_HYPER = " " + PREFIX_TAG + VALID_TAG_HYPER;
+    public static final String FOOD_DESC_COCO = " " + PREFIX_FOODLIST + VALID_FOOD_COCO;
+    public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_GARFIELD;
     public static final String TAG_DESC_LAZY = " " + PREFIX_TAG + VALID_TAG_LAZY;
     public static final String TAG_DESC_FAT = " " + PREFIX_TAG + VALID_TAG_FAT;
 
@@ -62,19 +61,17 @@ public class CommandTestUtil {
     public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "07/04/00"; // must follow d-M-yyyy format
     public static final String INVALID_SPECIES_DESC = " " + PREFIX_SPECIES; // empty string not allowed for species
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
-    public static final String VALID_FOOD_GARFIELD = "catfood:10";
-    public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_GARFIELD;
-    public static final String VALID_FOOD_COCO = "dogfood:10";
-    public static final String FOOD_DESC_COCO = " " + PREFIX_FOODLIST + VALID_FOOD_COCO;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
                 .withGender(VALID_GENDER_COCO.toString()).withDateOfBirth(VALID_DOB_COCO)
-                .withSpecies(VALID_SPECIES_COCO).withTags(VALID_TAG_HYPER).build();
+                .withSpecies(VALID_SPECIES_COCO).withTags(VALID_TAG_LAZY).build();
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();

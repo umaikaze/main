@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.pet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,11 +18,10 @@ import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.commands.pet.ListCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.logic.parser.pet.PetTrackerParser;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
-import seedu.address.testutil.PetBuilder;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
+import seedu.address.testutil.pet.PetBuilder;
 import seedu.address.testutil.pet.PetUtil;
 
 

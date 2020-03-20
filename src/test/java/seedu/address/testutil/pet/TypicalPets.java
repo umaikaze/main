@@ -1,18 +1,17 @@
-package seedu.address.testutil;
+package seedu.address.testutil.pet;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HYPER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_COCO;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_COCO;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_COCO;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_COCO;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_COCO;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_LAZY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,26 +54,16 @@ public class TypicalPets {
     // Manually added - Pet's details found in {@code CommandTestUtil}
     public static final Pet COCO = new PetBuilder().withName(VALID_NAME_COCO).withGender(VALID_GENDER_COCO)
             .withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_COCO).withFoodList(VALID_FOOD_COCO)
-            .withTags(VALID_TAG_HYPER).build();
+            .withTags(VALID_TAG_LAZY).build();
     public static final Pet GARFIELD = new PetBuilder().withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
             .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD).withFoodList(VALID_FOOD_GARFIELD)
             .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
 
-    private TypicalPets() {
-    } // prevents instantiation
+    private TypicalPets() {} // prevents instantiation
 
     /**
-     * TBD
+     * Returns a {@code PetTracker} with all the typical pets.
      */
-    /* public static AddressBook getTypicalSpeciesBook() {
-        AddressBook ab = new AddressBook();
-        for (Pet pet : getTypicalPets()) {
-            ab.addPet(pet);
-        }
-        return ab;
-    }*/
-
-    //for JsonPetTrackerStorageTest
     public static PetTracker getTypicalPetTracker() {
         PetTracker ab = new PetTracker();
         for (Pet pet : getTypicalPets()) {
