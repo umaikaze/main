@@ -45,10 +45,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HYPER = "hyper";
     public static final String VALID_TAG_LAZY = "lazy";
 
-
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-
     public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
     public static final String NAME_DESC_GARFIELD = " " + PREFIX_NAME + VALID_NAME_GARFIELD;
     public static final String GENDER_DESC_COCO = " " + PREFIX_GENDER + VALID_GENDER_COCO;

@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
@@ -27,11 +27,11 @@ import seedu.address.model.pet.Pet;
  */
 public class TypicalPets {
 
-    public static final Pet COCO = new PetBuilder().withName("Coco")
+    public static final Pet AMY = new PetBuilder().withName("Coco")
             .withSpecies("Dog").withDateOfBirth("1/6/2015")
             .withGender(Gender.FEMALE).withFoodList("Brand A:10")
             .withTags("darkFur").build();
-    public static final Pet GARFIELD = new PetBuilder().withName("Garfield Arbuckle")
+    public static final Pet BOB = new PetBuilder().withName("Garfield Arbuckle")
             .withSpecies("Cat").withFoodList("Brand B:10")
             .withDateOfBirth("19/6/1978").withGender(Gender.MALE)
             .withTags("fat", "lazy").build();
@@ -53,10 +53,10 @@ public class TypicalPets {
             .withDateOfBirth("7/3/2015").withSpecies("chicago ave").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
-    public static final Pet AMY = new PetBuilder().withName(VALID_NAME_AMY).withGender(VALID_GENDER_COCO)
+    public static final Pet COCO = new PetBuilder().withName(VALID_NAME_COCO).withGender(VALID_GENDER_COCO)
             .withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_COCO).withFoodList(VALID_FOOD_COCO)
             .withTags(VALID_TAG_HYPER).build();
-    public static final Pet BOB = new PetBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_GARFIELD)
+    public static final Pet GARFIELD = new PetBuilder().withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
             .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD).withFoodList(VALID_FOOD_GARFIELD)
             .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
 
@@ -86,6 +86,6 @@ public class TypicalPets {
     }
 
     public static List<Pet> getTypicalPets() {
-        return new ArrayList<>(Arrays.asList(COCO, GARFIELD, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
