@@ -1,16 +1,16 @@
 package seedu.address.logic.parser.pet;
 
 import seedu.address.commons.core.Messages;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.pet.DeletePetCommand;
+import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.ParserUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeletePetCommand object
  */
-public class DeletePetParser {
+public class DeletePetParser implements Parser<DeletePetCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeletePetCommand

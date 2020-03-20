@@ -3,11 +3,11 @@ package seedu.address.model.pet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_FAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.COCO;
-import static seedu.address.testutil.TypicalPets.GARFIELD;
+import static seedu.address.testutil.pet.TypicalPets.COCO;
+import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
-import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.pet.PetBuilder;
 
 public class UniquePetListTest {
 

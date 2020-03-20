@@ -1,0 +1,39 @@
+package seedu.address.logic.commands.pet;
+
+import static seedu.address.logic.commands.pet.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.pet.CommandTestUtil.showPetAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ */
+public class ListCommandTest {
+
+    private Model model;
+    private Model expectedModel;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPetTracker(), new UserPrefs());
+    }
+
+    @Test
+    public void execute_listIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
+        showPetAtIndex(model, INDEX_FIRST_PET);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+}
