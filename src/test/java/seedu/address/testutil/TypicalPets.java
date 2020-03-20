@@ -48,9 +48,9 @@ public class TypicalPets {
 
     // Manually added
     public static final Pet HOON = new PetBuilder().withName("Hoon").withGender(Gender.MALE)
-            .withDateOfBirth("6/3/2015").withSpecies("little india").build();
+            .withDateOfBirth("6/3/2015").withSpecies("passerine").build();
     public static final Pet IDA = new PetBuilder().withName("Ida").withGender(Gender.MALE)
-            .withDateOfBirth("7/3/2015").withSpecies("chicago ave").build();
+            .withDateOfBirth("7/3/2015").withSpecies("bull").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
     public static final Pet COCO = new PetBuilder().withName(VALID_NAME_COCO).withGender(VALID_GENDER_COCO)
