@@ -19,7 +19,7 @@ public class PetBuilder {
 
     public static final String DEFAULT_NAME = "Kiruya Momochi";
     public static final Gender DEFAULT_GENDER = Gender.FEMALE;
-    public static final String DEFAULT_DOB = "2-9-1998";
+    public static final String DEFAULT_DOB = "2/9/1998";
     public static final String DEFAULT_SPECIES = "Cat";
 
     private Name name;
@@ -87,6 +87,14 @@ public class PetBuilder {
      */
     public PetBuilder withDateOfBirth(String dob) {
         this.dob = new DateOfBirth(dob);
+        return this;
+    }
+
+    /**
+     * Parses the {@code foodList} into a {@code Set<Food>} and set it to the {@code Pet} that we are building.
+     */
+    public PetBuilder withFoodList(String ... foodList) {
+        this.foodSet = SampleDataUtil.getFoodSet(foodList);
         return this;
     }
 

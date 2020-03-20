@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPets.GARFIELD;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PetBuilder;
 
 public class PetTest {
@@ -20,7 +21,7 @@ public class PetTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Pet person = new PetBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(new Tag("unused")));
     }
 
     @Test

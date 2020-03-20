@@ -1,0 +1,15 @@
+{
+  "pets": [ {
+    "name": "Valid Pet",
+    "gender": "male",
+    "dateOfBirth": "01/01/2019",
+    "species": "dog",
+    "foodList": [ "Brand A:10" ]
+  }, {
+    "name": "Pet With Invalid dateOfBirth Field",
+    "gender": "female",
+    "dateOfBirth": "2019/01/01",
+    "species": "cat",
+    "foodList": [ "Brand B:5" ]
+  } ]
+}
