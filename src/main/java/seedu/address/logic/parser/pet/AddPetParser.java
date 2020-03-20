@@ -1,17 +1,18 @@
 package seedu.address.logic.parser.pet;
 
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.pet.AddPetCommand;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.Parser;

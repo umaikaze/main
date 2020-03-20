@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser;
 
 import seedu.address.logic.parser.general.Prefix;
 
