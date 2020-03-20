@@ -9,8 +9,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.DisplayItem;
-import seedu.address.ui.DisplayItemCard;
-import seedu.address.ui.PetCard;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents a Pet in the pet shop helper.
@@ -82,8 +81,8 @@ public class Pet implements DisplayItem {
     }
 
     @Override
-    public DisplayItemCard getDisplayCard(int displayedIndex) {
-        return new PetCard(this, displayedIndex);
+    public DisplaySystemType getDisplaySystemType() {
+        return DisplaySystemType.PETS;
     }
 
     /**

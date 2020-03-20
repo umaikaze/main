@@ -8,7 +8,7 @@ package seedu.address.ui;
  */
 public interface DisplayItem {
     /**
-     * Returns the UI component that displays this item.
+     * Returns the type of system that this item constitutes of.
      */
-    DisplayItemCard getDisplayCard(int displayedIndex);
+    DisplaySystemType getDisplaySystemType();
 }
