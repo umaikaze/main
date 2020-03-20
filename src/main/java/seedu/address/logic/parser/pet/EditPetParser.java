@@ -86,7 +86,7 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (foodList.stream().allMatch(t -> t.equals(""))) {
             throw new ParseException(EditPetCommand.MESSAGE_EMPTY_FOODLIST);
         }
-        Collection<String> foodSet = foodList.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
+        Collection<String> foodSet = foodList;
         return Optional.of(ParserUtil.parseFoodList(foodSet));
     }
 
