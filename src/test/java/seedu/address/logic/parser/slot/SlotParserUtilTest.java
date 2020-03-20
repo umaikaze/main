@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModelManagers.JUST_COCO;
 import static seedu.address.testutil.TypicalPets.COCO;
 
 import java.time.Duration;
@@ -12,10 +13,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.testutil.PetTrackerBuilder;
 
 class SlotParserUtilTest {
     private static final String NON_EXIST_PET = "Bob";
@@ -30,8 +27,6 @@ class SlotParserUtilTest {
 
     private static final String WHITESPACE = " \t\r\n";
 
-    private static final Model model = new ModelManager(
-            new PetTrackerBuilder().withPet(COCO).build(), new UserPrefs());
     private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE,
             DATETIME_FORMAT);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
@@ -50,10 +45,10 @@ class SlotParserUtilTest {
     @Test
     public void parsePet_invalidInput_throwsParseException() {
         // Bad pet name
-        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(INVALID_PETNAME, model));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(INVALID_PETNAME, JUST_COCO));
 
         // Pet doesn't exist
-        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(NON_EXIST_PET, model));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(NON_EXIST_PET, JUST_COCO));
     }
 
     @Test
@@ -65,16 +60,16 @@ class SlotParserUtilTest {
         assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(EXIST_PET, null));
 
         // nameStr null
-        assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(null, model));
+        assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(null, JUST_COCO));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(COCO, SlotParserUtil.parsePet(EXIST_PET, model));
+        assertEquals(COCO, SlotParserUtil.parsePet(EXIST_PET, JUST_COCO));
 
         // Leading and trailing whitespaces
-        assertEquals(COCO, SlotParserUtil.parsePet(WHITESPACE + EXIST_PET + WHITESPACE, model));
+        assertEquals(COCO, SlotParserUtil.parsePet(WHITESPACE + EXIST_PET + WHITESPACE, JUST_COCO));
     }
 
     @Test
