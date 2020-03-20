@@ -16,7 +16,6 @@ import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
-import seedu.address.logic.commands.pet.ListCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
@@ -58,12 +57,6 @@ public class PetTrackerParserTest {
         FindPetCommand command = (FindPetCommand) parser.parseCommand(
                 FindPetCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindPetCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
