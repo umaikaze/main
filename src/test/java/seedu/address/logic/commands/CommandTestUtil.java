@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.pet.Gender;
+import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
 
+import seedu.address.model.pet.Gender;
 
 /**
  * Contains helper methods for testing commands.
@@ -29,6 +32,18 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FAT = "fat";
     public static final String VALID_TAG_HYPER = "hyper";
     public static final String VALID_TAG_LAZY = "lazy";
+    public static final String VALID_DATETIME_MAR_SLOT = "1/3/2020 1200";
+    public static final String VALID_DATETIME_APR_SLOT = "1/4/2020 1200";
+    public static final String VALID_DURATION_20_MIN = "20";
+    public static final String VALID_DURATION_40_MIN = "20";
 
+    public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
+    public static final String NAME_DESC_GARFIELD = " " + PREFIX_NAME + VALID_NAME_GARFIELD;
+    public static final String DATETIME_DESC_MAR_SLOT = " " + PREFIX_DATETIME + VALID_DATETIME_MAR_SLOT;
+    public static final String DATETIME_DESC_APR_SLOT = " " + PREFIX_DATETIME + VALID_DATETIME_APR_SLOT;
+    public static final String DURATION_DESC_20_MIN = " " + PREFIX_DURATION + VALID_DURATION_20_MIN;
+    public static final String DURATION_DESC_40_MIN = " " + PREFIX_DURATION + VALID_DURATION_40_MIN;
 
+    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 }
