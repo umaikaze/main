@@ -3,18 +3,10 @@ package seedu.address.model.slot;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.pet.DateOfBirth;
-import seedu.address.model.pet.Gender;
-import seedu.address.model.pet.Name;
-import seedu.address.model.pet.Pet;
-import seedu.address.model.pet.Species;
 import seedu.address.model.slot.exceptions.SlotNotFoundException;
 
 /**
@@ -29,18 +21,6 @@ public class Schedule {
     private final ObservableList<Slot> internalList = FXCollections.observableArrayList();
     private final ObservableList<Slot> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
-    //TODO: remove this constructor after schedule commands are integrated in
-    public Schedule() {
-        this.internalList.add(new Slot(
-                new Pet(new Name("doggie"), Gender.FEMALE, new DateOfBirth("1/1/1991"), new Species("dog"),
-                    new HashSet<>(), new HashSet<>()),
-                LocalDateTime.now(), Duration.ofMinutes(90)));
-        this.internalList.add(new Slot(
-                new Pet(new Name("kitty"), Gender.MALE, new DateOfBirth("6/9/2002"), new Species("cat"),
-                    new HashSet<>(), new HashSet<>()),
-                LocalDateTime.now(), Duration.ofMinutes(69)));
-    }
 
     /**
      * Returns true if the schedule contains an identical slot as the given argument.
