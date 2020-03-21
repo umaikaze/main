@@ -1,12 +1,10 @@
-package seedu.address.testutil;
+package seedu.address.testutil.slot;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
-import static seedu.address.commons.util.DateTimeUtil.DATE_FORMAT;
-import static seedu.address.testutil.TypicalModelManagers.JUST_COCO;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
@@ -17,7 +15,7 @@ import seedu.address.model.slot.Slot;
  */
 public class SlotBuilder {
 
-    public static final String DEFAULT_NAME = "Coco";
+    public static final String DEFAULT_NAME = "Amy";
     public static final String DEFAULT_DATETIME = "2/3/2020 1200";
     public static final String DEFAULT_DURATION = "20";
 
@@ -26,7 +24,7 @@ public class SlotBuilder {
     private Duration duration;
 
     public SlotBuilder() {
-        pet = JUST_COCO.getPet(new Name(DEFAULT_NAME));
+        pet = getTypicalModelManager().getPet(new Name(DEFAULT_NAME));
         dateTime = LocalDateTime.parse(DEFAULT_DATETIME, DATETIME_FORMAT);
         duration = Duration.ofMinutes(Long.parseLong(DEFAULT_DURATION));
     }

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModelManagers.JUST_COCO;
-import static seedu.address.testutil.TypicalPets.COCO;
+import static seedu.address.testutil.pet.TypicalPets.COCO;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,23 +13,25 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.Model;
 
 class SlotParserUtilTest {
+    //TODO Move to CommandTestUtil
     private static final String NON_EXIST_PET = "Bob";
-    private static final String INVALID_DATE = "2-3-2020 12:00";
+    private static final String INVALID_DATETIME = "1-3-2020 12:00";
     private static final String INVALID_DURATION = "14.5";
     private static final String INVALID_INDEX = "1a";
     private static final String INVALID_PETNAME = "Bob";
 
-    private static final String EXIST_PET = "Coco";
-    private static final String VALID_DATE = "2/3/2020 1200";
+    private static final String EXIST_PET = "Amy";
+    private static final String VALID_DATE = "1/3/2020 1200";
     private static final String VALID_DURATION = "20";
 
     private static final String WHITESPACE = " \t\r\n";
 
-    private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE,
-            DATETIME_FORMAT);
+    private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE, DATETIME_FORMAT);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
+    private static final Model model = getTypicalModelManager();
 
     @Test
     void parseIndex_invalidInput_throwsParseException() {
@@ -39,16 +41,16 @@ class SlotParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-                -> SlotParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+            -> SlotParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parsePet_invalidInput_throwsParseException() {
         // Bad pet name
-        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(INVALID_PETNAME, JUST_COCO));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(INVALID_PETNAME, model));
 
         // Pet doesn't exist
-        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(NON_EXIST_PET, JUST_COCO));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parsePet(NON_EXIST_PET, model));
     }
 
     @Test
@@ -60,21 +62,21 @@ class SlotParserUtilTest {
         assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(EXIST_PET, null));
 
         // nameStr null
-        assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(null, JUST_COCO));
+        assertThrows(NullPointerException.class, () -> SlotParserUtil.parsePet(null, model));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(COCO, SlotParserUtil.parsePet(EXIST_PET, JUST_COCO));
+        assertEquals(COCO, SlotParserUtil.parsePet(EXIST_PET, model));
 
         // Leading and trailing whitespaces
-        assertEquals(COCO, SlotParserUtil.parsePet(WHITESPACE + EXIST_PET + WHITESPACE, JUST_COCO));
+        assertEquals(COCO, SlotParserUtil.parsePet(WHITESPACE + EXIST_PET + WHITESPACE, model));
     }
 
     @Test
     public void parseDateTime_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATE));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME));
     }
 
     @Test

@@ -17,7 +17,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.PetTracker;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
 
@@ -70,6 +73,13 @@ public class TypicalPets {
             ab.addPet(pet);
         }
         return ab;
+    }
+
+    /**
+     * Returns a {@code ModelManager} with all the typical pets.
+     */
+    public static Model getTypicalModelManager() {
+        return new ModelManager(getTypicalPetTracker(), new UserPrefs());
     }
 
     public static List<Pet> getTypicalPets() {
