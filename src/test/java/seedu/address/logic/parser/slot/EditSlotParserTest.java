@@ -7,11 +7,11 @@ import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -25,12 +25,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
-import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotParserTest {
-    
+
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
@@ -41,10 +40,10 @@ class EditSlotParserTest {
     public void parse_missingParts_failure() {
         // No index
         assertParseFailure(parser, VALID_NAME_COCO, MESSAGE_INVALID_FORMAT);
-        
+
         // No field
         assertParseFailure(parser, "1", EditSlotCommand.MESSAGE_NOT_EDITED);
-        
+
         // No index or field
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
@@ -57,8 +56,8 @@ class EditSlotParserTest {
         String userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO
                 + DURATION_DESC_COCO + NAME_DESC_COCO;
 
-        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(VALID_NAME_GARFIELD, model).withDateTime(VALID_DATETIME_COCO)
-                .withDuration(VALID_DURATION_COCO).build();
+        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(VALID_NAME_GARFIELD, model)
+                .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -78,7 +77,7 @@ class EditSlotParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        
+
         // pet
         Index targetIndex = INDEX_THIRD_SLOT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
@@ -101,7 +100,7 @@ class EditSlotParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        
+
         Index targetIndex = INDEX_FIRST_SLOT;
         String userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO + DURATION_DESC_COCO + DURATION_DESC_COCO
                 + DATETIME_DESC_COCO + DURATION_DESC_COCO + DURATION_DESC_COCO
@@ -116,7 +115,7 @@ class EditSlotParserTest {
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
-        
+
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_SLOT;
         String userInput = targetIndex.getOneBased() + INVALID_DATETIME_DESC + DATETIME_DESC_GARFIELD;
