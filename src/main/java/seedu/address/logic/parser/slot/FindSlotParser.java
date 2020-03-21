@@ -43,7 +43,7 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             predicates.add(new SlotDatePredicate(
-                    SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())));
+                    SlotParserUtil.parseDate(argMultimap.getValue(PREFIX_DATETIME).get())));
         }
         assert !(predicates.isEmpty()) : "No predicates for finding slots!";
 
