@@ -8,12 +8,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.pet.Pet;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents a Slot in the pet shop helper schedule system.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Slot implements Comparable<Slot> {
+public class Slot implements Comparable<Slot>, DisplayItem {
 
     private final Pet pet;
     private final LocalDateTime dateTime;
@@ -102,6 +104,11 @@ public class Slot implements Comparable<Slot> {
             return duration.compareTo(other.duration);
         }
         return pet.getName().compareTo(other.pet.getName());
+    }
+
+    @Override
+    public DisplaySystemType getDisplaySystemType() {
+        return DisplaySystemType.SCHEDULE;
     }
 
     /**

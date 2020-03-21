@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser.general;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.general.Command;
+import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.pet.AddPetCommand;
@@ -14,6 +15,10 @@ import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.logic.parser.pet.AddPetParser;
+import seedu.address.logic.parser.pet.DeletePetParser;
+import seedu.address.logic.parser.pet.EditPetParser;
+import seedu.address.logic.parser.pet.FindPetParser;
 
 /**
  * Parse user input.
@@ -39,8 +44,19 @@ public class PetTrackerParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        return parseCommand(commandWord, arguments);
+    }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandWord the command name
+     * @param arguments the string of arguments to the command
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    private Command parseCommand(String commandWord, String arguments) throws ParseException {
+        switch (commandWord) {
         case AddPetCommand.COMMAND_WORD:
             return new AddPetParser().parse(arguments);
 
@@ -52,6 +68,9 @@ public class PetTrackerParser {
 
         case FindPetCommand.COMMAND_WORD:
             return new FindPetParser().parse(arguments);
+
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

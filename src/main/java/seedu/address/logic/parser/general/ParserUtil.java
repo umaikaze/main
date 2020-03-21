@@ -15,6 +15,7 @@ import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes under package parser/pet.
@@ -161,5 +162,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String type} into the corresponding {@code DisplaySystemType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static DisplaySystemType parseDisplaySystemType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        try {
+            return DisplaySystemType.fromCliArg(trimmedType);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(DisplaySystemType.MESSAGE_CONSTRAINTS);
+        }
     }
 }

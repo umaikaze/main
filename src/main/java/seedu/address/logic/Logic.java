@@ -8,7 +8,7 @@ import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.Pet;
+import seedu.address.ui.DisplayItem;
 
 /**
  * API of the Logic component for Pet Store Helper
@@ -28,8 +28,10 @@ public interface Logic {
      */
     ReadOnlyPetTracker getPetTracker();
 
-    /** Returns an unmodifiable view of the filtered list of pets */
-    ObservableList<Pet> getFilteredPetList();
+    /**
+     * Returns an unmodifiable view of the filtered list to be displayed.
+     */
+    ObservableList<DisplayItem> getFilteredDisplayList();
 
     /**
      * Returns the user prefs' pet tracker file path.
