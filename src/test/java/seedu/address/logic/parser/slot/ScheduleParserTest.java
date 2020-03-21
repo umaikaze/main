@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.slot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
@@ -61,11 +60,7 @@ class ScheduleParserTest {
         assertEquals(new FindSlotCommand(FindSlotParser.getPredicates(sb.toString())), command);
     }
 
-    @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSlotCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
-    }
+    // Test for help already done in PetTrackerParserTest
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {

@@ -8,14 +8,15 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.slot.Slot;
 import seedu.address.model.slot.SlotDatePredicate;
 import seedu.address.model.slot.SlotPetNamePredicate;
-import seedu.address.model.slot.SlotPredicate;
 
 class FindSlotParserTest {
 
@@ -31,18 +32,12 @@ class FindSlotParserTest {
     public void parse_validArgs_returnsFindCommand() throws ParseException {
 
         // no leading and trailing whitespaces
-
-        List<SlotPredicate> predicates = new ArrayList<>();
+        List<Predicate<Slot>> predicates = new ArrayList<>();
         predicates.add(new SlotPetNamePredicate(VALID_NAME_COCO));
         predicates.add(new SlotDatePredicate(SlotParserUtil.parseDateTime(VALID_DATETIME_COCO)));
         FindSlotCommand expectedFindCommand = new FindSlotCommand(predicates.stream()
-                        .reduce((pred1, pred2) -> (SlotPredicate) pred1.and(pred2))
+                        .reduce(Predicate::and)
                         .get());
-        //TODO REMOVE COMMENTED OUT CODE
-        /*
-        FindSlotCommand expectedFindCommand = new FindSlotCommand((SlotPredicate) (new SlotPetNamePredicate(VALID_NAME_COCO))
-                .and(new SlotDatePredicate(SlotParserUtil.parseDateTime(VALID_DATETIME_COCO))));
-         */
         assertParseSuccess(parser, VALID_NAME_COCO + " " + VALID_DATETIME_COCO, expectedFindCommand);
 
         // multiple whitespaces between keywords
