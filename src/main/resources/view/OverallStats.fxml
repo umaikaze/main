@@ -9,13 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="363.0" prefWidth="600.0">
          <children>
-            <PieChart />
-            <BarChart alternativeRowFillVisible="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+            <PieChart fx:id="petStats" />
+            <BarChart fx:id="foodStats" alternativeRowFillVisible="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -27,12 +26,12 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text fill="WHITE" text="Pets" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="300.0">
+            <Text fx:id="petTitle" stroke="WHITE" strokeType="OUTSIDE" text="Pets" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="300.0">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="WHITE" text="Food" textAlignment="CENTER" wrappingWidth="300.0">
+            <Text fx:id="foodTitle" stroke="WHITE" strokeType="OUTSIDE" text="Food" textAlignment="CENTER" wrappingWidth="300.0">
                <font>
                   <Font size="24.0" />
                </font>

@@ -12,6 +12,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
@@ -31,6 +32,14 @@ public class OverallStats extends UiPart<Region> {
 
     @FXML
     private BarChart<String, Number> foodStats;
+
+    @FXML
+    private Text petTitle;
+
+    @FXML
+    private Text foodTitle;
+
+
 
     public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
         super(FXML);
@@ -64,6 +73,7 @@ public class OverallStats extends UiPart<Region> {
         BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
         tempFoodStats.getData().add(getBarChartData(pets));
         foodStats.setData(tempFoodStats.getData());
+        //TODO: set background colour to be transparent
     }
 
     public XYChart.Series<String, Number> getBarChartData(ObservableList<Pet> pets) {
