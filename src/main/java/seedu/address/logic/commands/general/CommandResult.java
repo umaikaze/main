@@ -17,15 +17,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean showStats;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showStats, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showStats = showStats;
         this.showHelp = showHelp;
         this.exit = exit;
     }
 
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, false, showHelp, exit);
+    }
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
@@ -36,6 +41,10 @@ public class CommandResult {
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public boolean isShowStats() {
+        return showStats;
     }
 
     public boolean isShowHelp() {
@@ -59,13 +68,14 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && showStats == otherCommandResult.showStats
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showStats, showHelp, exit);
     }
 
 }

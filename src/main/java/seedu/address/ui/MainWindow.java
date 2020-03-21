@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PetListPanel petListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private OverallStats overallStats;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -118,6 +119,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     *  Display overall statistics
+     */
+    public void handleStats() {
+        petListPanelPlaceholder.getChildren().clear();
+        overallStats = new OverallStats(logic.getFilteredPetList());
+        petListPanelPlaceholder.getChildren().add(overallStats.getRoot());
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -149,6 +159,10 @@ public class MainWindow extends UiPart<Stage> {
         return petListPanel;
     }
 
+    public OverallStats getOverallStats() {
+        return overallStats;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -159,6 +173,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (commandResult.isShowStats()) {
+                handleStats();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

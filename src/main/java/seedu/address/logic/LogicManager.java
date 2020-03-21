@@ -44,9 +44,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            //model.getPetTracker is ReadOnlyPetTracker,
-            //here is casted to ReadOnlyPetTracker to pass checkstyle test
-            storage.savePetTracker((ReadOnlyPetTracker) model.getPetTracker());
+            storage.savePetTracker(model.getPetTracker());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
