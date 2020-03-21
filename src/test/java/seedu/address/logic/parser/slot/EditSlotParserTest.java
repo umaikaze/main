@@ -6,12 +6,12 @@ import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIEL
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;

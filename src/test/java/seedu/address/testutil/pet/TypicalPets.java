@@ -1,17 +1,17 @@
 package seedu.address.testutil.pet;
 
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_FAT;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_LAZY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
 
 import java.util.ArrayList;
 import java.util.Arrays;

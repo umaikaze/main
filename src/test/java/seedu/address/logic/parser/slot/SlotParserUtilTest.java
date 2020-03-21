@@ -16,7 +16,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 
 class SlotParserUtilTest {
-    //TODO Move to CommandTestUtil
+
     private static final String NON_EXIST_PET = "Bob";
     private static final String INVALID_DATETIME = "1-3-2020 12:00";
     private static final String INVALID_DURATION = "14.5";
