@@ -70,14 +70,6 @@ public class PetBuilder {
     }
 
     /**
-     * Parses the {@code food} into a {@code Set<Food>} and set it to the {@code Pet} that we are building.
-     */
-    public PetBuilder withFoods(String ... foodSet) {
-        this.foodSet = SampleDataUtil.getFoodSet(foodSet);
-        return this;
-    }
-
-    /**
      * Sets the {@code Species} of the {@code Pet} that we are building.
      */
     public PetBuilder withSpecies(String species) {
