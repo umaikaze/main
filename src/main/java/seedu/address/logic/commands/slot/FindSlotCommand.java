@@ -14,7 +14,7 @@ import seedu.address.model.slot.SlotPredicate;
  */
 public class FindSlotCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findslot";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots where pet name matches exactly "
             + "(case-insensitive) or slots that is within the date specified (ignoring timing) and displays them as a "

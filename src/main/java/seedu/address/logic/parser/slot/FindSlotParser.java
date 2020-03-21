@@ -27,12 +27,18 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSlotCommand parse(String args) throws ParseException {
+
+        return new FindSlotCommand(getPredicates(args));
+    }
+
+    public static SlotPredicate getPredicates(String args) throws ParseException {
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 && argMultimap.getValue(PREFIX_DATETIME).isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
         }
 
         List<SlotPredicate> predicates = new ArrayList<>();
@@ -46,8 +52,8 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         }
         assert !(predicates.isEmpty()) : "No predicates for finding slots!";
 
-        return new FindSlotCommand(predicates.stream()
+        return predicates.stream()
                 .reduce((pred1, pred2) -> (SlotPredicate) pred1.and(pred2))
-                .get());
+                .get();
     }
 }

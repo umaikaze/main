@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Tests that a {@code Slot}'s {@code DateTime} matches the given date.
  */
-public class SlotDatePredicate extends SlotPredicate {
+public class SlotDatePredicate implements SlotPredicate {
     private final LocalDateTime dateTime;
 
     public SlotDatePredicate(LocalDateTime dateTime) {
