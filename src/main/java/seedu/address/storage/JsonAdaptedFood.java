@@ -38,13 +38,13 @@ class JsonAdaptedFood {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Food} object.
+     * Converts this Jackson-friendly adapted food object into the model's {@code Food} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted food.
      */
     public Food toModelType() throws IllegalValueException {
         if (!Food.isValidFoodName(foodName)) {
-            throw new IllegalValueException(Food.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Food.MESSAGE_NAME_CONSTRAINTS);
         }
         if (!Food.isValidFoodAmount(foodAmount)) {
             throw new IllegalValueException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
