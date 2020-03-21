@@ -1,12 +1,14 @@
 package seedu.address.logic.commands.pet;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_TAG;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.util.Collections;

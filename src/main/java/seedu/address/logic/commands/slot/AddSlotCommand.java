@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
@@ -19,11 +19,11 @@ public class AddSlotCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to the pet store helper. "
             + "Parameters: "
-            + PREFIX_PETNAME + "PETNAME "
+            + PREFIX_NAME + "PETNAME "
             + PREFIX_DATETIME + "DATETIME "
             + PREFIX_DURATION + "DURATION\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PETNAME + "Coco "
+            + PREFIX_NAME + "Coco "
             + PREFIX_DATETIME + "16/11/2020 1300 "
             + PREFIX_DURATION + "90 ";
 

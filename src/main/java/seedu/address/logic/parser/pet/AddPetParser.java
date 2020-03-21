@@ -1,18 +1,17 @@
 package seedu.address.logic.parser.pet;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FOODLIST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.pet.AddPetCommand;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.Parser;
@@ -54,8 +53,8 @@ public class AddPetParser implements Parser<AddPetCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
         Species species = ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get());
-        Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(CliSyntax.PREFIX_FOODLIST));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+        Set<Food> foodList = ParserUtil.parseFoodList(argMultimap.getAllValues(PREFIX_FOODLIST));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Pet pet = new Pet(name, gender, dateOfBirth, species, foodList, tagList);
 
