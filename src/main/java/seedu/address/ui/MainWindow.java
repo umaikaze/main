@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PetListPanel petListPanel;
+    private DisplayListPanel displayListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private OverallStats overallStats;
@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane petListPanelPlaceholder;
+    private StackPane displayListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -93,8 +93,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        petListPanel = new PetListPanel(logic.getFilteredPetList());
-        petListPanelPlaceholder.getChildren().add(petListPanel.getRoot());
+        displayListPanel = new DisplayListPanel(logic.getFilteredDisplayList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -122,9 +122,9 @@ public class MainWindow extends UiPart<Stage> {
      *  Display overall statistics
      */
     public void handleStats() {
-        petListPanelPlaceholder.getChildren().clear();
-        overallStats = new OverallStats(logic.getFilteredPetList());
-        petListPanelPlaceholder.getChildren().add(overallStats.getRoot());
+        displayListPanelPlaceholder.getChildren().clear();
+        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList());
+        displayListPanelPlaceholder.getChildren().add(overallStats.getRoot());
     }
 
     /**
@@ -155,10 +155,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PetListPanel getPetListPanel() {
-        return petListPanel;
-    }
-
     public OverallStats getOverallStats() {
         return overallStats;
     }
@@ -175,6 +171,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             if (commandResult.isShowStats()) {
                 handleStats();
+            }
+
+            if (commandResult.hasDisplayChanged()) {
+                displayListPanel.updateWith(logic.getFilteredDisplayList());
             }
 
             if (commandResult.isShowHelp()) {

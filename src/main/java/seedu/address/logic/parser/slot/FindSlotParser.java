@@ -1,8 +1,8 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +28,17 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
      */
     public FindSlotCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PETNAME, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
 
-        if (argMultimap.getValue(PREFIX_PETNAME).isEmpty()
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 && argMultimap.getValue(PREFIX_DATETIME).isEmpty()) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         List<SlotPredicate> predicates = new ArrayList<>();
 
-        if (argMultimap.getValue(PREFIX_PETNAME).isPresent()) {
-            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_PETNAME).get()));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             predicates.add(new SlotDatePredicate(

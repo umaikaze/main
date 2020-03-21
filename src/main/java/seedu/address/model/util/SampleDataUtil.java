@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,17 +24,17 @@ public class SampleDataUtil {
     public static Pet[] getSamplePets() {
         return new Pet[] {
             new Pet(new Name("Alex"), Gender.MALE, new DateOfBirth("1/12/2005"), new Species("cat"),
-                    getFoodSet("cat food"), getTagSet("dumb")),
+                    getFoodSet("cat food:10"), getTagSet("dumb")),
             new Pet(new Name("Bob"), Gender.FEMALE, new DateOfBirth("10/12/2001"), new Species("cat"),
-                    getFoodSet("cat food"), getTagSet("tall")),
+                    getFoodSet("cat food:10"), getTagSet("tall")),
             new Pet(new Name("Cindy"), Gender.MALE, new DateOfBirth("2/10/2019"), new Species("cat"),
-                    getFoodSet("cat food"), getTagSet("small")),
+                    getFoodSet("cat food:10"), getTagSet("small")),
             new Pet(new Name("David"), Gender.FEMALE, new DateOfBirth("4/12/2017"), new Species("dog"),
-                    getFoodSet("dog food"), getTagSet("angry")),
+                    getFoodSet("dog food:10"), getTagSet("angry")),
             new Pet(new Name("Elsa"), Gender.FEMALE, new DateOfBirth("6/6/2019"), new Species("dog"),
-                    getFoodSet("dog food"), getTagSet("lazy")),
+                    getFoodSet("dog food:10"), getTagSet("lazy")),
             new Pet(new Name("Foo"), Gender.MALE, new DateOfBirth("1/1/2011"), new Species("dog"),
-                    getFoodSet("dog food"), getTagSet("new"))};
+                    getFoodSet("dog food:10"), getTagSet("new"))};
     }
 
 
@@ -58,9 +59,13 @@ public class SampleDataUtil {
      * Returns a food set containing the list of strings given.
      */
     public static Set<Food> getFoodSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(t -> new Food(t, 10))
-                .collect(Collectors.toSet());
+        Set<Food> set = new HashSet<>();
+        for (String t : strings) {
+            String[] temp = t.split(":");
+            Food food = new Food(temp[0], Integer.parseInt(temp[1]));
+            set.add(food);
+        }
+        return set;
     }
 
 }

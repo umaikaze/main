@@ -16,7 +16,7 @@ public class StatsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        return new CommandResult(MESSAGE_SUCCESS, true, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
     }
 
 }

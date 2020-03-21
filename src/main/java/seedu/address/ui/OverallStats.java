@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
+import seedu.address.model.slot.Slot;
 
 /**
  * Panel containing the overall statistics as charts and tables.
@@ -31,7 +32,7 @@ public class OverallStats extends UiPart<Region> {
     @FXML
     private BarChart<String, Number> foodStats;
 
-    public OverallStats(ObservableList<Pet> pets) {
+    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
         super(FXML);
         setPetStats(pets);
         setFoodStats(pets);
