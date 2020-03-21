@@ -2,6 +2,7 @@ package seedu.address.logic.parser.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
@@ -13,7 +14,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.pet.EditPetCommand;
@@ -86,7 +86,7 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (foodList.stream().allMatch(t -> t.equals(""))) {
             throw new ParseException(EditPetCommand.MESSAGE_EMPTY_FOODLIST);
         }
-        Collection<String> foodSet = foodList.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
+        Collection<String> foodSet = foodList;
         return Optional.of(ParserUtil.parseFoodList(foodSet));
     }
 
@@ -101,8 +101,7 @@ public class EditPetParser implements Parser<EditPetCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet()
-                : tags.stream().filter(t -> !t.equals("")).collect(Collectors.toList());
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

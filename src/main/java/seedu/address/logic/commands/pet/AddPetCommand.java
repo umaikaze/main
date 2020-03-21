@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.pet;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
