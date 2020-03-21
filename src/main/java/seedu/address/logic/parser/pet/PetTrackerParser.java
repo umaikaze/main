@@ -13,7 +13,6 @@ import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
-import seedu.address.logic.commands.pet.ListCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 
 /**
@@ -53,9 +52,6 @@ public class PetTrackerParser {
 
         case FindPetCommand.COMMAND_WORD:
             return new FindPetParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

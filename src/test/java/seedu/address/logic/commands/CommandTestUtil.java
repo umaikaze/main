@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.pet.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
 
 import seedu.address.model.pet.Gender;
 
