@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
+import seedu.address.model.Model;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
@@ -35,15 +37,15 @@ public class EditSlotDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditSlotDescriptor} that we are building.
+     * Sets the {@code Pet} of the {@code EditSlotDescriptor} that we are building.
      */
-    public EditSlotDescriptorBuilder withPet(Pet pet) {
-        descriptor.setPet(pet);
+    public EditSlotDescriptorBuilder withPet(String name, Model model) {
+        descriptor.setPet(model.getPet(new Name(name)));
         return this;
     }
 
     /**
-     * Sets the {@code Gender} of the {@code EditSlotDescriptor} that we are building.
+     * Sets the {@code LocalDateTime} of the {@code EditSlotDescriptor} that we are building.
      */
     public EditSlotDescriptorBuilder withDateTime(String dateTime) {
         descriptor.setDateTime(LocalDateTime.parse(dateTime, DATETIME_FORMAT));
@@ -51,7 +53,7 @@ public class EditSlotDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code DateOfBirth} of the {@code EditSlotDescriptor} that we are building.
+     * Sets the {@code Duration} of the {@code EditSlotDescriptor} that we are building.
      */
     public EditSlotDescriptorBuilder withDuration(String dateOfBirth) {
         descriptor.setDuration(Duration.ofMinutes(Long.parseLong(dateOfBirth)));

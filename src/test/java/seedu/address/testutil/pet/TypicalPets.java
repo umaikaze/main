@@ -68,11 +68,11 @@ public class TypicalPets {
      * Returns a {@code PetTracker} with all the typical pets.
      */
     public static PetTracker getTypicalPetTracker() {
-        PetTracker ab = new PetTracker();
+        PetTracker pt = new PetTracker();
         for (Pet pet : getTypicalPets()) {
-            ab.addPet(pet);
+            pt.addPet(pet);
         }
-        return ab;
+        return pt;
     }
 
     /**
@@ -83,6 +83,6 @@ public class TypicalPets {
     }
 
     public static List<Pet> getTypicalPets() {
-        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, COCO, GARFIELD));
     }
 }
