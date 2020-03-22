@@ -16,7 +16,7 @@ public class DisplayCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Changes the display board to show the specified system.\n"
-            + "Parameter: SYSTEM (must be p (pets) or s (schedule)).\n"
+            + "Parameter: SYSTEM (must be p (pets) or s (schedule) or i (inventory)).\n"
             + "Example: display p";
 
     public static final String MESSAGE_SUCCESS = "Display changed to %s; showing all.";
