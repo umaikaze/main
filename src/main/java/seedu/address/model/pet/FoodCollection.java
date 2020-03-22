@@ -1,12 +1,12 @@
 package seedu.address.model.pet;
 
-import seedu.address.ui.DisplayItem;
-import seedu.address.ui.DisplaySystemType;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
+
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents a Food Collection object in Pet Shop Helper.
@@ -21,8 +21,8 @@ public class FoodCollection implements DisplayItem {
     public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food collection amount must be a positive integer number.";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String foodCollectionName;
-    public Integer foodCollectionAmount;
+    private final String foodCollectionName;
+    private Integer foodCollectionAmount;
 
     /**
      * Constructs a {@code Food}.
@@ -38,16 +38,11 @@ public class FoodCollection implements DisplayItem {
     }
 
     /**
-     * Returns true if the input food object is of same type as this food collection.
+     * Adds food into the food collection.
+     * @param other The food to be added.
+     * @return true if it is successfully added, which means
+     * the type of food has the same name as that of the food collection.
      */
-    public boolean isSameType(Food other) {
-        if (other == null) {
-            return false;
-        } else {
-            return foodCollectionName.equals(other.foodName);
-        }
-    }
-
     public boolean addFoodToCollection(Food other) {
         if (foodCollectionName.equals(other.foodName)) {
             foodCollectionAmount += other.foodAmount;
@@ -57,7 +52,10 @@ public class FoodCollection implements DisplayItem {
         }
     }
 
-    public static FoodCollection GenerateFoodCollection(Food food) {
+    /**
+     * Generates a food collection from a given food object.
+     */
+    public static FoodCollection generateFoodCollection(Food food) {
         return new FoodCollection(food.foodName, food.foodAmount);
     }
 
@@ -83,6 +81,17 @@ public class FoodCollection implements DisplayItem {
             return false;
         } else {
             return foodCollectionName.equals(other.foodCollectionName);
+        }
+    }
+
+    /**
+     * Returns true if the input food object is of same type as this food collection.
+     */
+    public boolean isSameType(Food other) {
+        if (other == null) {
+            return false;
+        } else {
+            return foodCollectionName.equals(other.foodName);
         }
     }
 

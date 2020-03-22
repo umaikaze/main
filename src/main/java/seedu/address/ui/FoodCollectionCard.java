@@ -10,13 +10,7 @@ import seedu.address.model.pet.FoodCollection;
  * An UI component that displays information of a {@code Pet}.
  */
 
-public class FoodCollectionCard extends  UiPart<Region> {
-
-
-/**
- * An UI component that displays information of a {@code Pet}.
- */
-
+public class FoodCollectionCard extends UiPart<Region> {
     private static final String FXML = "FoodCollectionCard.fxml";
 
     /**

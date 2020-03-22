@@ -224,7 +224,7 @@ public class ModelManager implements Model {
             break;
         case INVENTORY:
             filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
-                    foodCollection -> foodCollection);
+                foodCollection -> foodCollection);
             updateFilteredFoodCollectionList(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             break;
         default:
