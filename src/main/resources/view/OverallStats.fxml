@@ -4,17 +4,69 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="363.0" prefWidth="600.0">
+      <HBox>
          <children>
-            <PieChart fx:id="petStats" />
-            <BarChart fx:id="foodStats" alternativeRowFillVisible="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+         </children></HBox>
+      <HBox>
+         <children>
+            <PieChart fx:id="petStats" HBox.hgrow="SOMETIMES" />
+            <Pane>
+               <children>
+                  <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="400.0" prefWidth="302.0">
+                    <items>
+                        <Pane>
+                           <children>
+                              <GridPane alignment="CENTER">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fx:id="firstDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="97.33675074577332" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="secondDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="98.13672256469727" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="thridDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="96.53668141365051" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="timeTablePlaceHolder" />
+                    </items>
+                  </SplitPane>
+               </children>
+            </Pane>
+            <BarChart fx:id="foodStats" alternativeRowFillVisible="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false" HBox.hgrow="SOMETIMES">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -24,14 +76,19 @@
             </BarChart>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
-            <Text fx:id="petTitle" stroke="WHITE" strokeType="OUTSIDE" text="Pets" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="300.0">
+            <Text fx:id="petTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="499.20001220703125" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fx:id="foodTitle" stroke="WHITE" strokeType="OUTSIDE" text="Food" textAlignment="CENTER" wrappingWidth="300.0">
+            <Text fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" textAlignment="CENTER" wrappingWidth="304.8468322753906" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="foodTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER" wrappingWidth="521.2000279426575" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="24.0" />
                </font>

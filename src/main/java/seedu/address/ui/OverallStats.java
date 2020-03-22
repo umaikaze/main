@@ -1,6 +1,12 @@
 package seedu.address.ui;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.collections.FXCollections;
@@ -11,9 +17,15 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.Food;
+import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
 import seedu.address.model.slot.Slot;
@@ -27,9 +39,6 @@ public class OverallStats extends UiPart<Region> {
     @FXML
     private PieChart petStats;
 
-    /*@FXML
-    private  Table  scheduleStats;*/
-
     @FXML
     private BarChart<String, Number> foodStats;
 
@@ -39,13 +48,29 @@ public class OverallStats extends UiPart<Region> {
     @FXML
     private Text foodTitle;
 
+    @FXML
+    private Text firstDay;
+
+    @FXML
+    private Text secondDay;
+
+    @FXML
+    private Text thridDay;
+
+    @FXML
+    private Pane timeTablePlaceHolder;
+
+    private List<Rectangle> rectangles;
 
 
     public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
         super(FXML);
+        timeTablePlaceHolder.getChildren().clear();
         setPetStats(pets);
+        setScheduleStats(slots);
         setFoodStats(pets);
     }
+
 
     public void setPetStats(ObservableList<Pet> pets) {
         petStats.setData(getPieChartData(pets));
@@ -67,13 +92,99 @@ public class OverallStats extends UiPart<Region> {
         return data;
     }
 
+    /**
+     * Fill up the time table in recent 3 days, each rectangle represents the time slots where there is an appointment.
+     * @param slots The list of time slots
+     */
+
+    public void setScheduleStats(ObservableList<Slot> slots) {
+        setHeader();
+        rectangles = new ArrayList<>();
+        getScheduleStats(slots);
+        for (Rectangle rec : rectangles) {
+            timeTablePlaceHolder.getChildren().add(rec);
+        }
+    }
+
+    public void getScheduleStats(ObservableList<Slot> slots) {
+        for (Slot s : slots) {
+            if (s.getDate().equals(LocalDate.now())) {
+                createRectangles(s.getDateTime(), s.getDuration(), 0, false);
+            } else if (s.getDate().equals(LocalDate.now().plusDays(1))) {
+                createRectangles(s.getDateTime(), s.getDuration(),
+                        timeTablePlaceHolder.getWidth() / 3.0, false);
+            } else if (s.getDate().equals(LocalDate.now().plusDays(2))) {
+                createRectangles(s.getDateTime(), s.getDuration(),
+                        2.0 * timeTablePlaceHolder.getWidth() / 3.0, true);
+            }
+        }
+    }
+
+    /**
+     * Create rectangles which represents appointments.
+     * @param time start time of the appointment
+     * @param duration duration of the appointment
+     * @param xCoordinate x coordinate of the rectangle
+     * @param isLastDay if the date is thrid day from now
+     */
+    public void createRectangles(LocalDateTime time, Duration duration, double xCoordinate, boolean isLastDay) {
+        Rectangle rec = new Rectangle();
+        long minutes = ChronoUnit.MINUTES.between(time,
+                time.toLocalDate().plusDays(1).atStartOfDay());
+        //set position of the rectangles
+        rec.setX(xCoordinate);
+        rec.setY(((double) minutes) / (60.0 * 24.0) * timeTablePlaceHolder.getHeight());
+        //set style
+        rec.setArcHeight(timeTablePlaceHolder.getWidth() / 10.0);
+        rec.setArcWidth(timeTablePlaceHolder.getWidth() / 10.0);
+        rec.setFill(Paint.valueOf("#ff8000"));
+        //set size of rectangle
+        rec.setWidth(timeTablePlaceHolder.getWidth() / 3.0);
+        double height = duration.toMinutes() / (24.0 * 60.0) * timeTablePlaceHolder.getHeight();
+        if (height > rec.getY()) {
+            //consider the case where the appointment involves more than 1 day.
+            rec.setHeight(rec.getY());
+            if (!isLastDay) {
+                if (time.toLocalDate().equals(LocalDate.now().plusDays(2))) {
+                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
+                            Duration.ofMinutes((long) (1 - rec.getY() / height) * 24 * 60),
+                            xCoordinate + timeTablePlaceHolder.getWidth() / 3.0, true);
+                } else {
+                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
+                            Duration.ofMinutes((long) (1 - rec.getY() / height) * 24 * 60),
+                            xCoordinate + timeTablePlaceHolder.getWidth() / 3.0, false);
+                }
+            }
+        } else {
+            rec.setHeight(height);
+        }
+        rectangles.add(rec);
+    }
+
+    /**
+     * Set the header of time table to be recent dates.
+     */
+    public void setHeader() {
+        String firstDayOfWeek = LocalDate.now().getDayOfWeek().toString().substring(0, 1)
+                + LocalDate.now().getDayOfWeek().toString().substring(1).toLowerCase();
+        String secondDayOfWeek = LocalDate.now().getDayOfWeek().plus(1).toString().substring(0, 1)
+                + LocalDate.now().getDayOfWeek().plus(1).toString().substring(1).toLowerCase();
+        String thridDayOfWeek = LocalDate.now().getDayOfWeek().plus(2).toString().substring(0, 1)
+                + LocalDate.now().getDayOfWeek().plus(2).toString().substring(1).toLowerCase();
+        firstDay.setText(firstDayOfWeek.substring(0, 3) + " "
+                + LocalDate.now().format(DateTimeUtil.DATE_FORMAT));
+        secondDay.setText(secondDayOfWeek.substring(0, 3) + " "
+                + LocalDate.now().plusDays(1).format(DateTimeUtil.DATE_FORMAT));
+        thridDay.setText(thridDayOfWeek.substring(0, 3) + " "
+                + LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT));
+    }
+
     public void setFoodStats(ObservableList<Pet> pets) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
         tempFoodStats.getData().add(getBarChartData(pets));
         foodStats.setData(tempFoodStats.getData());
-        //TODO: set background colour to be transparent
     }
 
     public XYChart.Series<String, Number> getBarChartData(ObservableList<Pet> pets) {
