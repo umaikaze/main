@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -32,14 +34,15 @@ public class SlotCard extends UiPart<Region> {
     @FXML
     private Label id;
 
-    public SlotCard(Slot slot, int displayedIndex) {
+    public SlotCard(Slot slot, int displayedIndex, List<Slot> allSlots) {
         super(FXML);
         this.slot = slot;
         id.setText(displayedIndex + ". ");
         //TODO: make the layout nicer
         // this is just a quick a dirty way of displaying a slot
         String dateTimeString = String.format("%s - %s", slot.getDateTime(), slot.getEndDateTime());
-        dateTime.setText(dateTimeString);
+        String conflict = slot.hasConflict(allSlots) ? "[CONFLICT]" : "";
+        dateTime.setText(dateTimeString + " " + conflict);
         petName.setText(slot.getPet().getName().toString());
     }
 

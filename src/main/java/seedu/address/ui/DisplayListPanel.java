@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -47,7 +50,11 @@ public class DisplayListPanel extends UiPart<Region> {
                     setGraphic(new PetCard((Pet) item, getIndex() + 1).getRoot());
                     break;
                 case SCHEDULE:
-                    setGraphic(new SlotCard((Slot) item, getIndex() + 1).getRoot());
+                    List<Slot> allSlots = displayListView.getItems()
+                            .stream()
+                            .map(slot -> (Slot) slot)
+                            .collect(Collectors.toList());
+                    setGraphic(new SlotCard((Slot) item, getIndex() + 1, allSlots).getRoot());
                     break;
                 default:
                     setGraphic(null);
