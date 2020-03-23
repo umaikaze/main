@@ -24,7 +24,7 @@ public class Food {
     /**
      * Constructs a {@code Food}.
      *
-     * @param foodName A valid tag name.
+     * @param foodName A valid food name.
      */
     public Food(String foodName, int foodAmount) {
         requireNonNull(foodName);
@@ -35,7 +35,7 @@ public class Food {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid food name.
      */
     public static boolean isValidFoodName(String test) {
         return test.matches(VALIDATION_REGEX);
