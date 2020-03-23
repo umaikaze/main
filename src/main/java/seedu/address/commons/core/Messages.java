@@ -10,4 +10,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_SLOT_DISPLAYED_INDEX = "The slot index provided is invalid";
     public static final String MESSAGE_PETS_LISTED_OVERVIEW = "%1$d pets listed!";
     public static final String MESSAGE_SLOTS_LISTED_OVERVIEW = "%1$d slots listed!";
+    public static final String MESSAGE_SLOT_NOT_IN_ONE_DAY = "Slot does not start and end on the same day!";
 }
