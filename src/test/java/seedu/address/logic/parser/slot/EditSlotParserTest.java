@@ -24,18 +24,18 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
+import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Name;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
-//TODO pass all tests
 class EditSlotParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
     private static final Model model = getTypicalModelManager();
-    private EditSlotParser parser = new EditSlotParser();
+    private EditSlotParser parser = new EditSlotParser(model);
 
     @Test
     public void parse_missingParts_failure() {
@@ -51,6 +51,7 @@ class EditSlotParserTest {
 
     // Invalid values use static functions in SlotParserUtil, so there is no need to test them here
 
+    // TODO Problem: Somehow they don't think the 2 predicates are the same
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_SLOT;
@@ -78,7 +79,7 @@ class EditSlotParserTest {
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() {
+    public void parse_oneFieldSpecified_success() throws ParseException {
 
         // pet
         Index targetIndex = INDEX_THIRD_SLOT;

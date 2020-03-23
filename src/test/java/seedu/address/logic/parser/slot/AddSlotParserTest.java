@@ -30,7 +30,7 @@ public class AddSlotParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Slot expectedSlot = new SlotBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO)))
+        Slot expectedSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
 
         // Whitespace only preamble

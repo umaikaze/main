@@ -30,7 +30,7 @@ class ScheduleParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Slot slot = new SlotBuilder().build();
+        Slot slot = new SlotBuilder(model).build();
         AddSlotCommand command = (AddSlotCommand) parser.parseCommand(SlotUtil.getAddSlotCommand(slot));
         assertEquals(new AddSlotCommand(slot), command);
     }
@@ -44,7 +44,7 @@ class ScheduleParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Slot slot = new SlotBuilder().build();
+        Slot slot = new SlotBuilder(model).build();
         EditSlotCommand.EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(slot).build();
         EditSlotCommand command = (EditSlotCommand) parser.parseCommand(EditSlotCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));

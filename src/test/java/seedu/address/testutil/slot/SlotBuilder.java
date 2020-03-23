@@ -6,6 +6,8 @@ import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import seedu.address.model.Model;
+import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
@@ -15,16 +17,16 @@ import seedu.address.model.slot.Slot;
  */
 public class SlotBuilder {
 
-    public static final String DEFAULT_NAME = "Amy";
-    public static final String DEFAULT_DATETIME = "2/3/2020 1200";
+    public static final String DEFAULT_NAME = "Coco";
+    public static final String DEFAULT_DATETIME = "1/3/2020 1200";
     public static final String DEFAULT_DURATION = "20";
 
     private Pet pet;
     private LocalDateTime dateTime;
     private Duration duration;
 
-    public SlotBuilder() {
-        pet = getTypicalModelManager().getPet(new Name(DEFAULT_NAME));
+    public SlotBuilder(Model model) {
+        pet = model.getPet(new Name(DEFAULT_NAME));
         dateTime = LocalDateTime.parse(DEFAULT_DATETIME, DATETIME_FORMAT);
         duration = Duration.ofMinutes(Long.parseLong(DEFAULT_DURATION));
     }

@@ -101,7 +101,7 @@ public class PetTrackerParser {
             return new AddSlotParser(model).parse(arguments);
 
         case EditSlotCommand.COMMAND_WORD:
-            return new EditSlotParser().parse(arguments);
+            return new EditSlotParser(model).parse(arguments);
 
         case DeleteSlotCommand.COMMAND_WORD:
             return new DeleteSlotParser().parse(arguments);

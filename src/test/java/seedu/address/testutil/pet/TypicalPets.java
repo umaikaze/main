@@ -23,7 +23,10 @@ import seedu.address.model.PetTracker;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
+import seedu.address.testutil.slot.TypicalSlotsGenerator;
 
+//TODO the package it belongs to does not fit its usage (potentially used for slots too, make it outside or split up)
 /**
  * A utility class containing a list of {@code Pet} objects to be used in tests.
  */
@@ -72,6 +75,7 @@ public class TypicalPets {
         for (Pet pet : getTypicalPets()) {
             pt.addPet(pet);
         }
+
         return pt;
     }
 
@@ -79,7 +83,12 @@ public class TypicalPets {
      * Returns a {@code ModelManager} with all the typical pets.
      */
     public static Model getTypicalModelManager() {
-        return new ModelManager(getTypicalPetTracker(), new UserPrefs());
+        ModelManager modelManager = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+        TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(modelManager);
+        for (Slot slot : slotsGen.getTypicalSlots()) {
+            modelManager.addSlot(slot);
+        }
+        return modelManager;
     }
 
     public static List<Pet> getTypicalPets() {

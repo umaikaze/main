@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,14 +28,13 @@ import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 
-//TODO Pass all tests
 class EditSlotCommandTest {
 
-    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+    private Model model = getTypicalModelManager();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Slot editedSlot = new SlotBuilder().build();
+        Slot editedSlot = new SlotBuilder(model).build();
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(editedSlot).build();
         EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, descriptor);
 

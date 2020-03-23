@@ -14,11 +14,19 @@ import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
 import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses input arguments and creates a new EditSlotCommand object
  */
 public class EditSlotParser implements Parser<EditSlotCommand> {
+
+    Model model;
+
+    public EditSlotParser(Model model) {
+        this.model = model;
+    }
+
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditSlotCommand
@@ -39,6 +47,10 @@ public class EditSlotParser implements Parser<EditSlotCommand> {
         }
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model));
+        }
 
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
