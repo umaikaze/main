@@ -1,26 +1,26 @@
 package seedu.address.model.slot;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Tests that a {@code Slot}'s {@code DateTime} matches the given date.
  */
 public class SlotDatePredicate extends SlotPredicate {
-    private final LocalDateTime dateTime;
+    private final LocalDate date;
 
-    public SlotDatePredicate(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public SlotDatePredicate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
     public boolean test(Slot slot) {
-        return dateTime.toLocalDate().isEqual(slot.getDate());
+        return date.isEqual(slot.getDate());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SlotDatePredicate // instanceof handles nulls
-                && dateTime.equals(((SlotDatePredicate) other).dateTime)); // state check
+                && date.equals(((SlotDatePredicate) other).date)); // state check
     }
 }
