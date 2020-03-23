@@ -25,6 +25,8 @@ import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.pet.PetBuilder;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 public class AddPetCommandTest {
 
@@ -179,6 +181,16 @@ public class AddPetCommandTest {
 
         @Override
         public void updateFilteredSlotList(Predicate<Slot> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<DisplayItem> getFilteredDisplayList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void changeDisplaySystem(DisplaySystemType newDisplayType) {
             throw new AssertionError("This method should not be called.");
         }
     }

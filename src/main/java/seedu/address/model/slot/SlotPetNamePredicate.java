@@ -14,7 +14,7 @@ public class SlotPetNamePredicate implements Predicate<Slot> {
 
     @Override
     public boolean test(Slot slot) {
-        return petName.toLowerCase().equals(slot.getPet().getName().fullName.toLowerCase());
+        return petName.equals(slot.getPet().getName().toString());
     }
 
     @Override

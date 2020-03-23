@@ -8,12 +8,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents a Pet in the pet shop helper.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Pet {
+public class Pet implements DisplayItem {
 
     // Identity fields
     private final Name name;
@@ -76,6 +78,11 @@ public class Pet {
         }
 
         return otherPet != null && otherPet.getName().equals(getName());
+    }
+
+    @Override
+    public DisplaySystemType getDisplaySystemType() {
+        return DisplaySystemType.PETS;
     }
 
     /**

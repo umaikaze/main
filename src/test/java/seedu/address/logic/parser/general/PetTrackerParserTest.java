@@ -1,9 +1,10 @@
-package seedu.address.logic.parser.pet;
+package seedu.address.logic.parser.general;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
@@ -25,7 +27,8 @@ import seedu.address.testutil.pet.PetUtil;
 
 public class PetTrackerParserTest {
 
-    private final PetTrackerParser parser = new PetTrackerParser();
+    private final Model model = getTypicalModelManager();
+    private final PetTrackerParser parser = new PetTrackerParser(model);
 
     @Test
     public void parseCommand_add() throws Exception {

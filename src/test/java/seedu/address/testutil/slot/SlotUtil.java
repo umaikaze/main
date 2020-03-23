@@ -1,6 +1,5 @@
 package seedu.address.testutil.slot;
 
-
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;

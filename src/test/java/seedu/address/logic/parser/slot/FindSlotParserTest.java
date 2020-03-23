@@ -3,7 +3,7 @@ package seedu.address.logic.parser.slot;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -36,7 +36,7 @@ class FindSlotParserTest {
         // no leading and trailing whitespaces
         List<Predicate<Slot>> predicates = new ArrayList<>();
         predicates.add(new SlotPetNamePredicate(VALID_NAME_COCO));
-        predicates.add(new SlotDatePredicate(SlotParserUtil.parseDateTime(VALID_DATETIME_COCO)));
+        predicates.add(new SlotDatePredicate(SlotParserUtil.parseDate(VALID_DATE_COCO)));
         FindSlotCommand expectedFindCommand = new FindSlotCommand(predicates.stream()
                         .reduce(Predicate::and)
                         .get());
