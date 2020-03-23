@@ -12,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
@@ -26,8 +25,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
+import seedu.address.model.pet.Name;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
+//TODO pass all tests
 class EditSlotParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
@@ -56,7 +57,8 @@ class EditSlotParserTest {
         String userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO
                 + DURATION_DESC_COCO + NAME_DESC_COCO;
 
-        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(VALID_NAME_GARFIELD, model)
+        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
+                .withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
 
@@ -81,7 +83,8 @@ class EditSlotParserTest {
         // pet
         Index targetIndex = INDEX_THIRD_SLOT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
-        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(VALID_NAME_COCO, model).build();
+        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
+                .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

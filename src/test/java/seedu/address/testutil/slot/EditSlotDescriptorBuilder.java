@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -38,9 +39,8 @@ public class EditSlotDescriptorBuilder {
     /**
      * Sets the {@code Pet} of the {@code EditSlotDescriptor} that we are building.
      */
-    public EditSlotDescriptorBuilder withPet(String name, Model model) {
-        descriptor.setPet(model.getPet(new Name(name)));
-        assert descriptor.getPet().isPresent();
+    public EditSlotDescriptorBuilder withPet(Pet pet) {
+        descriptor.setPet(pet);
         return this;
     }
 

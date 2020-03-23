@@ -22,6 +22,7 @@ import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.testutil.slot.SlotUtil;
 
+//TODO Pass all tests
 class ScheduleParserTest {
 
     private final Model model = getTypicalModelManager();

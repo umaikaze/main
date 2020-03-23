@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.pet.TypicalPets.COCO;
+import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,12 +23,16 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.commands.pet.EditPetCommand;
+import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
+import seedu.address.model.slot.SlotPetNamePredicate;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
+import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -84,6 +90,8 @@ public class CommandTestUtil {
 
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
+    public static final EditSlotDescriptor SLOT_DESC_COCO;
+    public static final EditSlotDescriptor SLOT_DESC_GARFIELD;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
@@ -92,6 +100,11 @@ public class CommandTestUtil {
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
+        //TODO Make it refer to a pet initialized at runtime
+        SLOT_DESC_COCO = new EditSlotDescriptorBuilder().withPet(COCO)
+                .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
+        SLOT_DESC_GARFIELD = new EditSlotDescriptorBuilder().withPet(GARFIELD)
+                .withDateTime(VALID_DATETIME_GARFIELD).withDuration(VALID_DURATION_COCO).build();
     }
 
     /**
@@ -139,7 +152,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s pet tracker.
      */
     public static void showPetAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPetList().size());
@@ -149,6 +162,20 @@ public class CommandTestUtil {
         model.updateFilteredPetList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPetList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the slot at the given {@code targetIndex} in the
+     * {@code model}'s pet tracker.
+     */
+    public static void showSlotAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSlotList().size());
+
+        Slot slot = model.getFilteredSlotList().get(targetIndex.getZeroBased());
+        final String name = slot.getPet().getName().fullName;
+        model.updateFilteredSlotList(new SlotPetNamePredicate(name));
+
+        assertEquals(1, model.getFilteredSlotList().size());
     }
 
 }

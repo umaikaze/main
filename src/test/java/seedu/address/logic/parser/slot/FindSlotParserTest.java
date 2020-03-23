@@ -30,6 +30,7 @@ class FindSlotParserTest {
                 FindSlotCommand.MESSAGE_USAGE));
     }
 
+    //TODO Pass test
     @Test
     public void parse_validArgs_returnsFindCommand() throws ParseException {
 
