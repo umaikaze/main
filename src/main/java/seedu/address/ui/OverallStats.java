@@ -25,7 +25,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.Food;
-import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
 import seedu.address.model.slot.Slot;
@@ -63,12 +63,12 @@ public class OverallStats extends UiPart<Region> {
     private List<Rectangle> rectangles;
 
 
-    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
+    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots, ObservableList<FoodCollection> foodList) {
         super(FXML);
         timeTablePlaceHolder.getChildren().clear();
         setPetStats(pets);
         setScheduleStats(slots);
-        setFoodStats(pets);
+        setFoodStats(foodList);
     }
 
 
@@ -179,27 +179,19 @@ public class OverallStats extends UiPart<Region> {
                 + LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT));
     }
 
-    public void setFoodStats(ObservableList<Pet> pets) {
+    public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
-        tempFoodStats.getData().add(getBarChartData(pets));
+        tempFoodStats.getData().add(getBarChartData(foodCollectionList));
         foodStats.setData(tempFoodStats.getData());
     }
 
-    public XYChart.Series<String, Number> getBarChartData(ObservableList<Pet> pets) {
+    public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
-        Map<String, Integer> listOfFood = new HashMap<>();
-        for (Pet p : pets) {
-            for (Food f : p.getFoodList()) {
-                if (!listOfFood.containsKey(f.foodName)) {
-                    listOfFood.put(f.foodName, 0);
-                }
-                listOfFood.replace(f.foodName, listOfFood.get(f.foodName) + f.foodAmount);
-            }
-        }
-        for (String f : listOfFood.keySet()) {
-            barChartData.getData().add(new XYChart.Data<>(f, listOfFood.get(f)));
+        for (FoodCollection f : foodCollectionList) {
+            barChartData.getData().add(new XYChart.Data<>(
+                    f.getFoodCollectionName(), f.getFoodCollectionAmount()));
         }
         return barChartData;
     }
