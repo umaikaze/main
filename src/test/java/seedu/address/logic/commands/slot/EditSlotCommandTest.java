@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PetTracker;
@@ -26,7 +27,6 @@ import seedu.address.model.pet.Name;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
-import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 
 class EditSlotCommandTest {
 
@@ -100,7 +100,8 @@ class EditSlotCommandTest {
     @Test
     public void execute_invalidSlotIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSlotList().size() + 1);
-        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
+        EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
+                .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
         EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);

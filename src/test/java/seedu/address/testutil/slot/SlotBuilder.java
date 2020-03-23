@@ -1,13 +1,11 @@
 package seedu.address.testutil.slot;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import seedu.address.model.Model;
-import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;

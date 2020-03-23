@@ -6,8 +6,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
-import seedu.address.model.Model;
-import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 

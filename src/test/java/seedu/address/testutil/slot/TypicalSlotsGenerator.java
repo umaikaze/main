@@ -15,6 +15,9 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Name;
 import seedu.address.model.slot.Slot;
 
+/**
+ * Class to generate sample slots, needs to be initialized first in order to correctly reference the pets in model
+ */
 public class TypicalSlotsGenerator {
 
     //TODO Modify this for getTypicalModelManager
@@ -25,12 +28,12 @@ public class TypicalSlotsGenerator {
     }
 
     public List<Slot> getTypicalSlots() {
-        final Slot COCO_SLOT = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
+        final Slot cocoSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO)
                 .withDuration(VALID_DURATION_COCO).build();
-        final Slot GARFIELD_SLOT = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
+        final Slot garfieldSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
                 .withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
-        return new ArrayList<>(Arrays.asList(COCO_SLOT, GARFIELD_SLOT));
+        return new ArrayList<>(Arrays.asList(cocoSlot, garfieldSlot));
     }
 }
