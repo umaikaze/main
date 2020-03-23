@@ -14,11 +14,20 @@ import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
+import seedu.address.logic.commands.slot.AddSlotCommand;
+import seedu.address.logic.commands.slot.DeleteSlotCommand;
+import seedu.address.logic.commands.slot.EditSlotCommand;
+import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.logic.parser.pet.AddPetParser;
 import seedu.address.logic.parser.pet.DeletePetParser;
 import seedu.address.logic.parser.pet.EditPetParser;
 import seedu.address.logic.parser.pet.FindPetParser;
+import seedu.address.logic.parser.slot.AddSlotParser;
+import seedu.address.logic.parser.slot.DeleteSlotParser;
+import seedu.address.logic.parser.slot.EditSlotParser;
+import seedu.address.logic.parser.slot.FindSlotParser;
+import seedu.address.model.Model;
 
 /**
  * Parse user input.
@@ -28,6 +37,12 @@ public class PetTrackerParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private final Model model;
+
+    public PetTrackerParser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -57,6 +72,18 @@ public class PetTrackerParser {
      */
     private Command parseCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
+
+        // general
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        // pet tracker
         case AddPetCommand.COMMAND_WORD:
             return new AddPetParser().parse(arguments);
 
@@ -69,15 +96,20 @@ public class PetTrackerParser {
         case FindPetCommand.COMMAND_WORD:
             return new FindPetParser().parse(arguments);
 
-        case DisplayCommand.COMMAND_WORD:
-            return new DisplayParser().parse(arguments);
+        // schedule
+        case AddSlotCommand.COMMAND_WORD:
+            return new AddSlotParser(model).parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case EditSlotCommand.COMMAND_WORD:
+            return new EditSlotParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+        case DeleteSlotCommand.COMMAND_WORD:
+            return new DeleteSlotParser().parse(arguments);
 
+        case FindSlotCommand.COMMAND_WORD:
+            return new FindSlotParser().parse(arguments);
+
+        // none of the above
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

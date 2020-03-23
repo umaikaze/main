@@ -32,7 +32,8 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 && argMultimap.getValue(PREFIX_DATETIME).isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
         }
 
         List<SlotPredicate> predicates = new ArrayList<>();
@@ -42,7 +43,7 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             predicates.add(new SlotDatePredicate(
-                    SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())));
+                    SlotParserUtil.parseDate(argMultimap.getValue(PREFIX_DATETIME).get())));
         }
         assert !(predicates.isEmpty()) : "No predicates for finding slots!";
 
