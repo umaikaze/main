@@ -17,6 +17,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -24,14 +26,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.model.pet.Food;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
 import seedu.address.model.slot.Slot;
 
 /**
- * Panel containing the overall statistics as charts and tables.
+ * Panel containing the overall statistics as charts and tables. The stats are displayed vertically.
  */
 public class OverallStats extends UiPart<Region> {
     private static final String FXML = "OverallStats.fxml";
@@ -55,10 +56,13 @@ public class OverallStats extends UiPart<Region> {
     private Text secondDay;
 
     @FXML
-    private Text thridDay;
+    private Text thirdDay;
 
     @FXML
     private Pane timeTablePlaceHolder;
+
+    @FXML
+    private VBox vbox;
 
     private List<Rectangle> rectangles;
 
@@ -77,6 +81,11 @@ public class OverallStats extends UiPart<Region> {
         petStats.setLabelsVisible(false);
     }
 
+    /**
+     * Group the pets by their species and returns the count number as data for pie chart
+     * @param pets list of pets
+     * @return data for pie chart
+     */
     public ObservableList<PieChart.Data> getPieChartData(ObservableList<Pet> pets) {
         Map<Species, Integer> petsBySpecies = new HashMap<>();
         for (Pet p : pets) {
@@ -138,6 +147,8 @@ public class OverallStats extends UiPart<Region> {
         rec.setArcHeight(timeTablePlaceHolder.getWidth() / 10.0);
         rec.setArcWidth(timeTablePlaceHolder.getWidth() / 10.0);
         rec.setFill(Paint.valueOf("#ff8000"));
+        //merge all conflicted slots together.
+        rec.setStrokeWidth(0);
         //set size of rectangle
         rec.setWidth(timeTablePlaceHolder.getWidth() / 3.0);
         double height = duration.toMinutes() / (24.0 * 60.0) * timeTablePlaceHolder.getHeight();
@@ -169,16 +180,24 @@ public class OverallStats extends UiPart<Region> {
                 + LocalDate.now().getDayOfWeek().toString().substring(1).toLowerCase();
         String secondDayOfWeek = LocalDate.now().getDayOfWeek().plus(1).toString().substring(0, 1)
                 + LocalDate.now().getDayOfWeek().plus(1).toString().substring(1).toLowerCase();
-        String thridDayOfWeek = LocalDate.now().getDayOfWeek().plus(2).toString().substring(0, 1)
+        String thirdDayOfWeek = LocalDate.now().getDayOfWeek().plus(2).toString().substring(0, 1)
                 + LocalDate.now().getDayOfWeek().plus(2).toString().substring(1).toLowerCase();
-        firstDay.setText(firstDayOfWeek.substring(0, 3) + " "
+        firstDay.setText(firstDayOfWeek.substring(0, 3) + "\n"
                 + LocalDate.now().format(DateTimeUtil.DATE_FORMAT));
-        secondDay.setText(secondDayOfWeek.substring(0, 3) + " "
+        secondDay.setText(secondDayOfWeek.substring(0, 3) + "\n"
                 + LocalDate.now().plusDays(1).format(DateTimeUtil.DATE_FORMAT));
-        thridDay.setText(thridDayOfWeek.substring(0, 3) + " "
+        thirdDay.setText(thirdDayOfWeek.substring(0, 3) + "\n"
                 + LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT));
+        //firstDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
+        //secondDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
+        //thirdDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
+
     }
 
+    /**
+     * create new bar chart and gather data
+     * @param foodCollectionList list of food collections
+     */
     public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
@@ -187,6 +206,11 @@ public class OverallStats extends UiPart<Region> {
         foodStats.setData(tempFoodStats.getData());
     }
 
+    /**
+     * Get stats for food bar chart
+     * @param foodCollectionList The list of all food collections
+     * @return data for bar chart
+     */
     public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
         for (FoodCollection f : foodCollectionList) {

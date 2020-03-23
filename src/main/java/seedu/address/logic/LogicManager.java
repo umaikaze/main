@@ -14,7 +14,6 @@ import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.Food;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
