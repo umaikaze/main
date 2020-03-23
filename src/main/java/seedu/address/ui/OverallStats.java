@@ -22,7 +22,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.FoodCollection;
@@ -184,11 +183,12 @@ public class OverallStats extends UiPart<Region> {
         String date2 = LocalDate.now().plusDays(1).format(DateTimeUtil.DATE_FORMAT);
         String date3 = LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT);
         firstDay.setText(firstDayOfWeek.substring(0, 3) + "\n"
-                + date1.substring(0, date1.length()-5));
+                + date1.substring(0, date1.length() - 5));
         secondDay.setText(secondDayOfWeek.substring(0, 3) + "\n"
-                + date1.substring(0, date2.length()-5));
+                + date1.substring(0, date2.length() - 5));
         thirdDay.setText(thirdDayOfWeek.substring(0, 3) + "\n"
-                + date1.substring(0, date3.length()-5));    }
+                + date1.substring(0, date3.length() - 5));
+    }
 
     /**
      * create new bar chart and gather data
