@@ -187,22 +187,15 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
-    /**
-     * Returns an unmodifiable view of the list of {@code FoodCollection} backed by the internal list of
-     * {@code versionedpetTracker}
-     */
-    @Override
-    public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
-        return filteredFoodCollections;
-    }
 
-    @Override
+    /**
+     * Updates the filter of the filtered food collection list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     public void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate) {
         requireNonNull(predicate);
         filteredFoodCollections.setPredicate(predicate);
     }
-
-
 
     //=========== Common methods =============================================================
 

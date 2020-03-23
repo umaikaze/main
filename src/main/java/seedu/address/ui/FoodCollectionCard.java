@@ -35,8 +35,8 @@ public class FoodCollectionCard extends UiPart<Region> {
         super(FXML);
         this.foodCollection = foodCollection;
         id.setText(displayedIndex + ". ");
-        name.setText(foodCollection.getFoodCollectionName());
-        amount.setText(foodCollection.getFoodCollectionAmount().toString());
+        name.setText(foodCollection.getName());
+        amount.setText(foodCollection.getAmount().toString());
     }
 
     @Override
