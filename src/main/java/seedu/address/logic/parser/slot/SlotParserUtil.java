@@ -3,6 +3,7 @@ package seedu.address.logic.parser.slot;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -22,7 +23,8 @@ public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATETIME =
-            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + "";
+            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + ".";
+    public static final String MESSAGE_INVALID_DATE = "Date must follow format " + DateTimeUtil.DATE_PATTERN + ".";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
@@ -76,6 +78,28 @@ public class SlotParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
         return parsedDateTime;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        LocalDate parsedDate;
+        try {
+            parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            try {
+                parsedDate = SlotParserUtil.parseDateTime(date).toLocalDate();
+            } catch (DateTimeParseException ex) {
+                throw new ParseException(MESSAGE_INVALID_DATE);
+            }
+        }
+        return parsedDate;
     }
 
     /**
