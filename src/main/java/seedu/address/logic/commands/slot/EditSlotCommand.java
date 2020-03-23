@@ -3,7 +3,6 @@ package seedu.address.logic.commands.slot;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 
 import java.time.Duration;
@@ -32,11 +31,9 @@ public class EditSlotCommand extends Command {
             + "by the index number used in the displayed slots list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATETIME + "DATETIME] "
             + "[" + PREFIX_DURATION + "DURATION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Garfield "
             + PREFIX_DURATION + "360";
 
     public static final String MESSAGE_EDIT_SLOT_SUCCESS = "Edited slot: %1$s";

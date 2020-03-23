@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        petTrackerParser = new PetTrackerParser();
+        petTrackerParser = new PetTrackerParser(model);
     }
 
     @Override
