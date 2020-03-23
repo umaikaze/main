@@ -2,6 +2,7 @@ package seedu.address.logic.parser.slot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
@@ -22,7 +23,6 @@ import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.testutil.slot.SlotUtil;
 
-//TODO Pass all tests
 class ScheduleParserTest {
 
     private final Model model = getTypicalModelManager();
@@ -55,7 +55,7 @@ class ScheduleParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         StringBuilder sb = new StringBuilder();
-        keywords.forEach(x -> sb.append(x).append(" "));
+        keywords.forEach(x -> sb.append(PREFIX_NAME).append(x).append(" "));
         FindSlotCommand command = (FindSlotCommand) parser.parseCommand(
                 FindSlotCommand.COMMAND_WORD + " " + sb.toString());
         assertEquals(new FindSlotCommand(FindSlotParser.getPredicates(sb.toString())), command);
