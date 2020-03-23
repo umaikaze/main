@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -38,9 +40,9 @@ class FindSlotParserTest {
         FindSlotCommand expectedFindCommand = new FindSlotCommand(predicates.stream()
                         .reduce(Predicate::and)
                         .get());
-        assertParseSuccess(parser, VALID_NAME_COCO + " " + VALID_DATETIME_COCO, expectedFindCommand);
+        assertParseSuccess(parser, NAME_DESC_COCO + " " + DATETIME_DESC_COCO, expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n" + VALID_NAME_COCO + "\n \t" + VALID_DATETIME_COCO + "\t", expectedFindCommand);
+        assertParseSuccess(parser, " \n" + NAME_DESC_COCO + "\n \t" + DATETIME_DESC_COCO + "\t", expectedFindCommand);
     }
 }

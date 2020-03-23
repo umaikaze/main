@@ -40,6 +40,7 @@ public class EditSlotDescriptorBuilder {
      */
     public EditSlotDescriptorBuilder withPet(String name, Model model) {
         descriptor.setPet(model.getPet(new Name(name)));
+        assert descriptor.getPet().isPresent();
         return this;
     }
 

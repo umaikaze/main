@@ -17,13 +17,13 @@ import seedu.address.model.Model;
 
 class SlotParserUtilTest {
 
-    private static final String NON_EXIST_PET = "Bob";
+    private static final String NON_EXIST_PET = "Kyaru";
     private static final String INVALID_DATETIME = "1-3-2020 12:00";
     private static final String INVALID_DURATION = "14.5";
     private static final String INVALID_INDEX = "1a";
-    private static final String INVALID_PETNAME = "Bob";
+    private static final String INVALID_PETNAME = "Bob*";
 
-    private static final String EXIST_PET = "Amy";
+    private static final String EXIST_PET = "Coco";
     private static final String VALID_DATE = "1/3/2020 1200";
     private static final String VALID_DURATION = "20";
 
