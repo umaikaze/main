@@ -11,9 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents the in-memory model of the pet tracker data.
@@ -25,6 +30,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
     private final FilteredList<Slot> filteredSlots;
+
+    private ObservableList<DisplayItem> filteredDisplayItems;
 
     /**
      * Initializes a ModelManager with the given petTracker and userPrefs.
@@ -39,6 +46,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPets = new FilteredList<>(this.petTracker.getPetList());
         filteredSlots = new FilteredList<>(this.petTracker.getSlotList());
+
+        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet); // display list of pets initially
     }
 
     public ModelManager() {
@@ -100,8 +109,7 @@ public class ModelManager implements Model {
 
     @Override
     public Pet getPet(Name name) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return petTracker.getPet(name);
     }
 
     @Override
@@ -173,6 +181,29 @@ public class ModelManager implements Model {
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
         requireNonNull(predicate);
         filteredSlots.setPredicate(predicate);
+    }
+
+    //=========== Common methods =============================================================
+
+    @Override
+    public ObservableList<DisplayItem> getFilteredDisplayList() {
+        return filteredDisplayItems;
+    }
+
+    @Override
+    public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
+        switch (newDisplayType) {
+        case PETS:
+            filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+            updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+            break;
+        case SCHEDULE:
+            filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+            updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
+            break;
+        default:
+            throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
+        }
     }
 
     @Override

@@ -11,19 +11,40 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Whether or not help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * Whether or not the application should exit.
+     */
     private final boolean exit;
 
     /**
+     * Whether or not the system to be displayed has changed.
+     */
+    private final boolean displayChanged;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean displayChanged) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.displayChanged = displayChanged;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields,
+     * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.displayChanged = false;
     }
 
     /**
@@ -31,7 +52,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +65,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean hasDisplayChanged() {
+        return displayChanged;
     }
 
     @Override

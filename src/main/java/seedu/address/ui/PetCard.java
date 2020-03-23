@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -14,7 +12,7 @@ import seedu.address.model.pet.Pet;
  */
 public class PetCard extends UiPart<Region> {
 
-    private static final String FXML = "PetListCard.fxml";
+    private static final String FXML = "PetCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -51,11 +49,19 @@ public class PetCard extends UiPart<Region> {
         gender.setText(pet.getGender().toString());
         dateOfBirth.setText(pet.getDateOfBirth().toString());
         species.setText(pet.getSpecies().toString());
-        pet.getFoodList().stream()
-                .forEach(food -> foodList.getChildren().add(new Label(food.toString())));
-        pet.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        pet.getFoodList()
+                .stream()
+                .forEach(food -> {
+                    Label foodLabel = new Label(food.toString());
+                    foodList.getChildren().add(foodLabel);
+                });
+        pet.getTags()
+                .stream()
+                .sorted()
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tags.getChildren().add(tagLabel);
+                });
     }
 
     @Override

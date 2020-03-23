@@ -10,12 +10,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
+import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.logic.parser.pet.PetTrackerParser;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.Pet;
 import seedu.address.storage.Storage;
+import seedu.address.ui.DisplayItem;
 
 /**
  * The main LogicManager of Pet Store Helper.
@@ -32,7 +32,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        petTrackerParser = new PetTrackerParser();
+        petTrackerParser = new PetTrackerParser(model);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Pet> getFilteredPetList() {
-        return model.getFilteredPetList();
+    public ObservableList<DisplayItem> getFilteredDisplayList() {
+        return model.getFilteredDisplayList();
     }
 
     @Override
