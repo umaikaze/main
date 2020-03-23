@@ -12,49 +12,49 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-               <children>
-      <HBox minHeight="1.0" minWidth="1.0">
-         <children>
-                        <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0">
-                           <children>
-                              <PieChart fx:id="petStats" minHeight="1.0" minWidth="1.0" VBox.vgrow="ALWAYS">
-                           <padding>
-                              <Insets bottom="0.1" left="0.1" right="0.1" top="0.001" />
-                           </padding>
-                              </PieChart>
-                              <Text fx:id="petTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets" textAlignment="CENTER" textOrigin="CENTER" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="vbox" alignment="CENTER" minHeight="1.0" minWidth="200.0" >
-                           <children>
-                        <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" VBox.vgrow="NEVER">
-                           <children>
-                              <HBox alignment="CENTER" minHeight="1.0" minWidth="68.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                          <Text fx:id="firstDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+<StackPane minHeight="1.0" minWidth="1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+         <HBox minHeight="1.0" minWidth="1.0">
+             <children>
+                 <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0">
+                     <children>
+                         <PieChart fx:id="petStats" minHeight="1.0" minWidth="1.0" VBox.vgrow="ALWAYS">
+                             <padding>
+                                 <Insets bottom="0.1" left="0.1" right="0.1" top="0.001" />
+                             </padding>
+                         </PieChart>
+                         <Text fx:id="petTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets" textAlignment="CENTER" textOrigin="CENTER" VBox.vgrow="ALWAYS">
+                             <font>
+                                 <Font size="24.0" />
+                             </font>
+                         </Text>
+                     </children>
+                 </VBox>
+                 <VBox alignment="CENTER" minHeight="1.0" minWidth="140.0">
+                     <children>
+                         <HBox fx:id="hbox" alignment="CENTER" minHeight="1.0" minWidth="1.0" VBox.vgrow="NEVER">
+                             <children>
+                                 <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
+                                     <children>
+                                         <Text fx:id="firstDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
-                                                <Font size="14.0" />
+                                                 <Font size="14.0" />
                                              </font>
-                                          </Text>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" minHeight="1.0" minWidth="68.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                          <Text fx:id="thirdDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" minHeight="1.0" minWidth="68.0" HBox.hgrow="ALWAYS">
-                                 <children>
+                                         </Text>
+                                     </children>
+                                 </HBox>
+                                 <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
+                           <children>
                                           <Text fx:id="secondDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Text>
+                           </children>
+                              </HBox>
+                              <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                         <Text fx:id="thirdDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -63,7 +63,7 @@
                               </HBox>
                            </children>
                         </HBox>
-                              <Pane fx:id="timeTablePlaceHolder" minHeight="1.0" minWidth="180.0" VBox.vgrow="ALWAYS" />
+                              <Pane fx:id="timeTablePlaceHolder" minHeight="1.0" minWidth="1.0" VBox.vgrow="ALWAYS" />
                               <Text fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="24.0" />
@@ -90,5 +90,5 @@
                         </VBox>
          </children>
       </HBox>
-               </children>
-            </StackPane>
+    </children>
+</StackPane>

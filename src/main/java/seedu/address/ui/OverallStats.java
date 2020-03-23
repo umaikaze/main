@@ -17,13 +17,12 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.FoodCollection;
@@ -62,19 +61,18 @@ public class OverallStats extends UiPart<Region> {
     private Pane timeTablePlaceHolder;
 
     @FXML
-    private VBox vbox;
+    private HBox hbox;
 
     private List<Rectangle> rectangles;
-
 
     public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots, ObservableList<FoodCollection> foodList) {
         super(FXML);
         timeTablePlaceHolder.getChildren().clear();
         setPetStats(pets);
+        hbox.prefWidthProperty().bind(this.getRoot().widthProperty().divide(2.5));
         setScheduleStats(slots);
         setFoodStats(foodList);
     }
-
 
     public void setPetStats(ObservableList<Pet> pets) {
         petStats.setData(getPieChartData(pets));
@@ -182,17 +180,15 @@ public class OverallStats extends UiPart<Region> {
                 + LocalDate.now().getDayOfWeek().plus(1).toString().substring(1).toLowerCase();
         String thirdDayOfWeek = LocalDate.now().getDayOfWeek().plus(2).toString().substring(0, 1)
                 + LocalDate.now().getDayOfWeek().plus(2).toString().substring(1).toLowerCase();
+        String date1 = LocalDate.now().format(DateTimeUtil.DATE_FORMAT);
+        String date2 = LocalDate.now().plusDays(1).format(DateTimeUtil.DATE_FORMAT);
+        String date3 = LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT);
         firstDay.setText(firstDayOfWeek.substring(0, 3) + "\n"
-                + LocalDate.now().format(DateTimeUtil.DATE_FORMAT));
+                + date1.substring(0, date1.length()-5));
         secondDay.setText(secondDayOfWeek.substring(0, 3) + "\n"
-                + LocalDate.now().plusDays(1).format(DateTimeUtil.DATE_FORMAT));
+                + date1.substring(0, date2.length()-5));
         thirdDay.setText(thirdDayOfWeek.substring(0, 3) + "\n"
-                + LocalDate.now().plusDays(2).format(DateTimeUtil.DATE_FORMAT));
-        //firstDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
-        //secondDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
-        //thirdDay.wrappingWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
-
-    }
+                + date1.substring(0, date3.length()-5));    }
 
     /**
      * create new bar chart and gather data
