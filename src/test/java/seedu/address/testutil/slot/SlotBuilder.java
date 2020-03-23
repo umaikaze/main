@@ -38,6 +38,7 @@ public class SlotBuilder {
         duration = slotToCopy.getDuration();
     }
 
+    // TODO Make use of the model passed in
     /**
      * Sets the {@code Pet} of the {@code Slot} that we are building.
      */
