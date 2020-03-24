@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
@@ -26,6 +27,11 @@ public interface Model {
      * {@code Predicate} that always evaluate to true.
      */
     Predicate<Slot> PREDICATE_SHOW_ALL_SLOTS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<FoodCollection> PREDICATE_SHOW_ALL_FOOD_COLLECTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

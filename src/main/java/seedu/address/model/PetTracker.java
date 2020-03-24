@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.UniquePetList;
@@ -154,9 +155,16 @@ public class PetTracker implements ReadOnlyPetTracker {
         return pets.asUnmodifiableObservableList();
     }
 
+
+
     @Override
     public ObservableList<Slot> getSlotList() {
         return slots.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<FoodCollection> getFoodCollectionList() {
+        return pets.acquireUnmodifiableFoodCollectionList();
     }
 
     @Override
