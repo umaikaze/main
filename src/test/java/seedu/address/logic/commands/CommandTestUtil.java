@@ -40,6 +40,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_COCO = "Coco";
     public static final String VALID_NAME_GARFIELD = "Garfield";
+    public static final String VALID_NAME_DOG = "Dog";
     public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
     public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
     public static final String VALID_DOB_COCO = "2/2/2015";
@@ -50,8 +51,6 @@ public class CommandTestUtil {
     public static final String VALID_FOOD_GARFIELD = "catfood:10";
     public static final String VALID_TAG_FAT = "fat";
     public static final String VALID_TAG_LAZY = "lazy";
-    public static final String VALID_DATE_COCO = "1/3/2020";
-    public static final String VALID_DATE_GARFIELD = "1/4/2020";
     public static final String VALID_DATETIME_COCO = "1/3/2020 1200";
     public static final String VALID_DATETIME_GARFIELD = "1/4/2020 1200";
     public static final String VALID_DURATION_COCO = "20";

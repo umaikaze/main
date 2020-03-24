@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.util.Collections;
@@ -56,7 +57,7 @@ class FindSlotCommandTest {
     @Test
     public void execute_zeroKeywords_noSlotFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 0);
-        Predicate<Slot> predicate = FindSlotParser.getPredicates(" ");
+        Predicate<Slot> predicate = FindSlotParser.getPredicates(" " + PREFIX_NAME);
         FindSlotCommand command = new FindSlotCommand(predicate);
         expectedModel.updateFilteredSlotList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

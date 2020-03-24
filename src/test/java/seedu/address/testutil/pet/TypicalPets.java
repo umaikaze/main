@@ -92,6 +92,6 @@ public class TypicalPets {
     }
 
     public static List<Pet> getTypicalPets() {
-        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE, HOON, IDA, COCO, GARFIELD));
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE, COCO, GARFIELD));
     }
 }
