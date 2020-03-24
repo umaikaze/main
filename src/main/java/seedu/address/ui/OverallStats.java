@@ -211,7 +211,7 @@ public class OverallStats extends UiPart<Region> {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
         for (FoodCollection f : foodCollectionList) {
             barChartData.getData().add(new XYChart.Data<>(
-                    f.getFoodCollectionName(), f.getFoodCollectionAmount()));
+                    f.getName(), f.getAmount()));
         }
         return barChartData;
     }
