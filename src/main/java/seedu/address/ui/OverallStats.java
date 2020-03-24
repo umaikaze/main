@@ -6,11 +6,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,12 +20,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.model.pet.Food;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
@@ -125,7 +121,8 @@ public class OverallStats extends UiPart<Region> {
     public void getScheduleStats(ObservableList<Slot> slots) {
         for (Slot s : slots) {
             if (s.getDate().equals(LocalDate.now())) {
-                createRectangles(s.getDateTime(), s.getDuration(), timeTablePlaceHolder.widthProperty().divide(10000000), false, false);
+                createRectangles(s.getDateTime(), s.getDuration(),
+                        timeTablePlaceHolder.widthProperty().divide(10000000), false, false);
             } else if (s.getDate().equals(LocalDate.now().plusDays(1))) {
                 createRectangles(s.getDateTime(), s.getDuration(),
                         timeTablePlaceHolder.widthProperty().divide(3), true, false);
@@ -143,13 +140,14 @@ public class OverallStats extends UiPart<Region> {
      * @param xCoordinate x coordinate of the rectangle
      * @param isLastDay if the date is third day from now
      */
-    public void createRectangles(LocalDateTime time, Duration duration, DoubleBinding xCoordinate, boolean isSecondDay, boolean isLastDay) {
+    public void createRectangles(LocalDateTime time, Duration duration,
+                                 DoubleBinding xCoordinate, boolean isSecondDay, boolean isLastDay) {
         Rectangle rec = new Rectangle();
         //find start point of the rectangle
-        long minutes = ChronoUnit.MINUTES.between(time.toLocalDate().atStartOfDay(),time);
+        long minutes = ChronoUnit.MINUTES.between(time.toLocalDate().atStartOfDay(), time);
         //set position of the rectangles
         rec.xProperty().bind(xCoordinate);
-        rec.yProperty().bind(timeTablePlaceHolder.heightProperty().multiply(minutes).divide(60*24));
+        rec.yProperty().bind(timeTablePlaceHolder.heightProperty().multiply(minutes).divide(60 * 24));
         //set style
         rec.arcHeightProperty().bind(timeTablePlaceHolder.widthProperty().divide(10));
         rec.arcWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(10));
@@ -158,21 +156,25 @@ public class OverallStats extends UiPart<Region> {
         rec.setStrokeWidth(0);
         //set size of rectangle
         rec.widthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
-        if(duration.toMinutes() > 24 * 60 - minutes) {
-            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty().multiply(24 * 60 - minutes).divide(24 * 60));
+        if (duration.toMinutes() > 24 * 60 - minutes) {
+            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
+                    .multiply(24 * 60 - minutes).divide(24 * 60));
             if (!isLastDay) {
                 if (isSecondDay) {
                     createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),  timeTablePlaceHolder.widthProperty().divide(3).multiply(2)
-                            , false, true);
+                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3).multiply(2),
+                            false, true);
                 } else {
                     createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)), timeTablePlaceHolder.widthProperty().divide(3),
+                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3),
                             true, false);
                 }
             }
         } else {
-            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty().multiply(duration.toMinutes()).divide(24 * 60));
+            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
+                    .multiply(duration.toMinutes()).divide(24 * 60));
         }
         rectangles.add(rec);
     }
@@ -215,12 +217,12 @@ public class OverallStats extends UiPart<Region> {
      * @param foodCollectionList The list of all food collections
      * @return data for bar chart
      */
-     public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
+    public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
         for (FoodCollection f : foodCollectionList) {
             barChartData.getData().add(new XYChart.Data<>(
                     f.getName(), f.getAmount()));
         }
         return barChartData;
-     }
+    }
 }
