@@ -9,7 +9,9 @@ import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
 /**
- * Represents a Food Collection object in Pet Shop Helper.
+ * Represents a Food Collection object in Pet Shop Helper. It is used to model a collection of the same type
+ * of food that could exist in a pet list. (If there are 3 pets in a list, each requiring 10 units of cat food,
+ * a food collection of the cat food in the list will have name as catfood and amount as 30.)
  * Guarantees: immutable; name is valid as declared in {@link #isValidFoodCollectionName(String)}
  */
 public class FoodCollection implements DisplayItem {
@@ -21,20 +23,20 @@ public class FoodCollection implements DisplayItem {
     public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food collection amount must be a positive integer number.";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    private final String foodCollectionName;
-    private Integer foodCollectionAmount;
+    private final String name;
+    private int amount;
 
     /**
      * Constructs a {@code Food}.
      *
-     * @param foodCollectionName A valid food collection name.
+     * @param name A valid food collection name.
      */
-    private FoodCollection(String foodCollectionName, int foodCollectionAmount) {
-        requireNonNull(foodCollectionName);
-        checkArgument(isValidFoodCollectionName(foodCollectionName), MESSAGE_NAME_CONSTRAINTS);
-        this.foodCollectionName = foodCollectionName;
-        checkArgument(isValidFoodCollectionAmount(foodCollectionAmount), MESSAGE_AMOUNT_CONSTRAINTS);
-        this.foodCollectionAmount = foodCollectionAmount;
+    private FoodCollection(String name, int amount) {
+        requireNonNull(name);
+        checkArgument(isValidFoodCollectionName(name), MESSAGE_NAME_CONSTRAINTS);
+        this.name = name;
+        checkArgument(isValidFoodCollectionAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
+        this.amount = amount;
     }
 
     /**
@@ -44,8 +46,8 @@ public class FoodCollection implements DisplayItem {
      * the type of food has the same name as that of the food collection.
      */
     public boolean addFoodToCollection(Food other) {
-        if (foodCollectionName.equals(other.foodName)) {
-            foodCollectionAmount += other.foodAmount;
+        if (isSameType(other)) {
+            amount += other.foodAmount;
             return true;
         } else {
             return false;
@@ -80,7 +82,7 @@ public class FoodCollection implements DisplayItem {
         if (other == null) {
             return false;
         } else {
-            return foodCollectionName.equals(other.foodCollectionName);
+            return name.equals(other.name);
         }
     }
 
@@ -91,7 +93,7 @@ public class FoodCollection implements DisplayItem {
         if (other == null) {
             return false;
         } else {
-            return foodCollectionName.equals(other.foodName);
+            return name.equals(other.foodName);
         }
     }
 
@@ -102,36 +104,36 @@ public class FoodCollection implements DisplayItem {
         if (other == null) {
             return false;
         } else {
-            return foodCollectionAmount.equals(other.foodCollectionAmount);
+            return amount == other.amount;
         }
     }
 
-    public String getFoodCollectionName() {
-        return foodCollectionName;
+    public String getName() {
+        return name;
     }
 
-    public Integer getFoodCollectionAmount() {
-        return foodCollectionAmount;
+    public Integer getAmount() {
+        return amount;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || ((other instanceof Food) // instanceof handles nulls
+                || ((other instanceof FoodCollection) // instanceof handles nulls
                 && isSameType((FoodCollection) other)
                 && isSameAmount((FoodCollection) other)); // state checks
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(foodCollectionAmount, foodCollectionName);
+        return Objects.hash(amount, name);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return "[" + foodCollectionName + "]: " + foodCollectionAmount;
+        return "[" + name + "]: " + amount;
     }
 
     @Override

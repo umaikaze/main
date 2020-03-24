@@ -1,10 +1,11 @@
-package seedu.address.logic.commands.pet;
+package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.general.CommandResult;
-import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
@@ -24,50 +25,42 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
-import seedu.address.testutil.pet.PetBuilder;
+import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
-public class AddPetCommandTest {
+class AddSlotCommandTest {
+
+    private Model typicalModel = getTypicalModelManager();
 
     @Test
-    public void constructor_nullPet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddPetCommand(null));
+    public void constructor_nullSlot_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddSlotCommand(null));
     }
 
     @Test
-    public void execute_petAcceptedByModel_addSuccessful() throws Exception {
-        seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded modelStub =
-                new seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded();
-        Pet validPet = new PetBuilder().build();
+    public void execute_personAcceptedByModel_addSuccessful() {
+        ModelStubAcceptingSlotAdded modelStub = new ModelStubAcceptingSlotAdded();
+        Slot validSlot = new SlotBuilder(typicalModel).build();
 
-        CommandResult commandResult = new AddPetCommand(validPet).execute(modelStub);
+        CommandResult commandResult = new AddSlotCommand(validSlot).execute(modelStub);
 
-        assertEquals(String.format(AddPetCommand.MESSAGE_SUCCESS, validPet), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPet), modelStub.petsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePet_throwsCommandException() {
-        Pet validPet = new PetBuilder().build();
-        AddPetCommand addCommand = new AddPetCommand(validPet);
-        ModelStub modelStub = new ModelStubWithPet(validPet);
-
-        assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+        assertEquals(String.format(AddSlotCommand.MESSAGE_SUCCESS, validSlot), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validSlot), modelStub.slotsAdded);
     }
 
     @Test
     public void equals() {
-        Pet alice = new PetBuilder().withName("Alice").build();
-        Pet bob = new PetBuilder().withName("Bob").build();
-        AddPetCommand addAliceCommand = new AddPetCommand(alice);
-        AddPetCommand addBobCommand = new AddPetCommand(bob);
+        Slot alice = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Coco"))).build();
+        Slot bob = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Garfield"))).build();
+        AddSlotCommand addAliceCommand = new AddSlotCommand(alice);
+        AddSlotCommand addBobCommand = new AddSlotCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddPetCommand addAliceCommandCopy = new AddPetCommand(alice);
+        AddSlotCommand addAliceCommandCopy = new AddSlotCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -76,21 +69,22 @@ public class AddPetCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different pet -> returns false
+        // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
+    // TODO Merge with the one in AddPetCommandTest
     /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -110,22 +104,17 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void setPetTrackerFilePath(Path petTrackerFilePath) {
+        public void setPetTrackerFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPet(Pet pet) {
+        public void setPetTracker(ReadOnlyPetTracker petTracker) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyPetTracker getPetTracker() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPetTracker(ReadOnlyPetTracker newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +134,11 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public void addPet(Pet pet) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPet(Pet target, Pet editedPet) {
             throw new AssertionError("This method should not be called.");
         }
@@ -160,7 +154,7 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void deleteSlot(Slot slot) {
+        public void deleteSlot(Slot target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -190,45 +184,21 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void changeDisplaySystem(DisplaySystemType newDisplayType) {
+        public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single pet.
+     * A Model stub that always accept the slot being added.
      */
-    private class ModelStubWithPet extends ModelStub {
-        private final Pet pet;
-
-        ModelStubWithPet(Pet pet) {
-            requireNonNull(pet);
-            this.pet = pet;
-        }
+    private class ModelStubAcceptingSlotAdded extends ModelStub {
+        final ArrayList<Slot> slotsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPet(Pet pet) {
-            requireNonNull(pet);
-            return this.pet.isSamePet(pet);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the pet being added.
-     */
-    private class ModelStubAcceptingPetAdded extends ModelStub {
-        final ArrayList<Pet> petsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPet(Pet pet) {
-            requireNonNull(pet);
-            return petsAdded.stream().anyMatch(pet::isSamePet);
-        }
-
-        @Override
-        public void addPet(Pet pet) {
-            requireNonNull(pet);
-            petsAdded.add(pet);
+        public void addSlot(Slot slot) {
+            requireNonNull(slot);
+            slotsAdded.add(slot);
         }
 
         @Override
@@ -236,5 +206,4 @@ public class AddPetCommandTest {
             return new PetTracker();
         }
     }
-
 }

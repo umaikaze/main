@@ -144,18 +144,6 @@ public interface Model {
     void updateFilteredSlotList(Predicate<Slot> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered food collection list
-     */
-    ObservableList<FoodCollection> getFilteredFoodCollectionList();
-
-    /**
-     * Updates the filter of the filtered food collection list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate);
-
-
-    /**
      * Returns an unmodifiable view of the filtered list of display items.
      */
     ObservableList<DisplayItem> getFilteredDisplayList();

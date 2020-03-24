@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
@@ -30,6 +31,21 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private final FoodCollectionList foodCollectionList = new FoodCollectionList(getFoodList());
+
+    public UniquePetList() {
+        setInternalListListenerForFoodCollectionList();
+    }
+
+    public void setInternalListListenerForFoodCollectionList() {
+        internalList.addListener(new ListChangeListener<Pet>() {
+            @Override
+            public void onChanged(Change<? extends Pet> change) {
+                if (change.next()) {
+                    updateFoodCollectionList();
+                }
+            }
+        });
+    }
 
     /**
      * Returns true if the list contains an equivalent pet as the given argument.
@@ -64,7 +80,6 @@ public class UniquePetList implements Iterable<Pet> {
             throw new DuplicatePetException();
         }
         internalList.add(toAdd);
-        updateFoodCollectionList();
     }
 
     /**
@@ -85,7 +100,6 @@ public class UniquePetList implements Iterable<Pet> {
         }
 
         internalList.set(index, editedPet);
-        updateFoodCollectionList();
     }
 
     /**
@@ -97,13 +111,11 @@ public class UniquePetList implements Iterable<Pet> {
         if (!internalList.remove(toRemove)) {
             throw new PetNotFoundException();
         }
-        updateFoodCollectionList();
     }
 
     public void setPets(UniquePetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        updateFoodCollectionList();
     }
 
     /**
@@ -117,7 +129,6 @@ public class UniquePetList implements Iterable<Pet> {
         }
 
         internalList.setAll(pets);
-        updateFoodCollectionList();
     }
 
     public List<Food> getFoodList() {

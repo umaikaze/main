@@ -2,11 +2,11 @@ package seedu.address.model.pet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.pet.TypicalPets.COCO;
 import static seedu.address.testutil.pet.TypicalPets.GARFIELD;

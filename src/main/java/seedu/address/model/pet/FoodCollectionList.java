@@ -3,21 +3,14 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A list of pets that enforces uniqueness between its elements and does not allow nulls.
- * A pet is considered unique by comparing using {@code Pet#isSamePet(Pet)}. As such, adding and updating of
- * pets uses Pet#isSamePet(Pet) for equality so as to ensure that the pet being added or updated is
- * unique in terms of identity in the UniquePetList. However, the removal of a pet uses Pet#equals(Object) so
- * as to ensure that the pet with exactly the same fields will be removed.
- *
- * Supports a minimal set of list operations.
- *
- * @see Pet#isSamePet(Pet)
+ * A FoodCollectionList represents a list of unique Food Collections, where Food Collections are uniquely identified
+ * through FoodCollection#name. FoodCollectionList wraps around an internal ObservableList of FoodCollection and it
+ * mainly interacts with Food object or a list of Food objects.
  */
 public class FoodCollectionList {
 
@@ -44,17 +37,17 @@ public class FoodCollectionList {
     }
 
     /**
-     * Gets the food collection in the list whose food collection name is of the given input. name
-     * is assumed to exist.
+     * Gets the food collection in the list whose food collection name is of the given input.
+     * Note that the caller of the function has to ensure that the input name given already
+     * exists in the FoodCollectionList.
      * @param name The name of the Food Collection to be checked.
      * @return The FoodCollection with the matching name.
      */
     public FoodCollection getFoodCollection(String name) {
         requireNonNull(name);
-        List<FoodCollection> foodCollectionsWithMatchingName = internalList.stream()
-                .filter(fc -> fc.getFoodCollectionName().equals(name))
-                .collect(Collectors.toList());
-        return foodCollectionsWithMatchingName.get(0);
+        return internalList.stream()
+                .filter(fc -> fc.getName().equals(name))
+                .findFirst().get();
     }
 
     /**
