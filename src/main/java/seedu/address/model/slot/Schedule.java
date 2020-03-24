@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import seedu.address.model.slot.exceptions.SlotNotFoundException;
 
@@ -21,6 +23,17 @@ public class Schedule {
     private final ObservableList<Slot> internalList = FXCollections.observableArrayList();
     private final ObservableList<Slot> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    public Schedule() {
+        ListChangeListener<Slot> sortListOnChange = (Change<? extends Slot> c) -> {
+            while (c.next()) {
+                if (c.wasAdded() || c.wasRemoved()) {
+                    c.getList().sort(null); // sort using natural ordering
+                }
+            }
+        };
+        this.internalList.addListener(sortListOnChange);
+    }
 
     /**
      * Returns true if the schedule contains an identical slot as the given argument.
