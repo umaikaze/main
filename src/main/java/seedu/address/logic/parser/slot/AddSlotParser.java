@@ -1,10 +1,11 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.slot.CliSyntax.PREFIX_PETNAME;
+import static seedu.address.commons.core.Messages.MESSAGE_SLOT_NOT_IN_ONE_DAY;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -38,18 +39,22 @@ public class AddSlotParser implements Parser<AddSlotCommand> {
      */
     public AddSlotCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_PETNAME, PREFIX_DATETIME, PREFIX_DURATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_NAME, PREFIX_DATETIME, PREFIX_DURATION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PETNAME, PREFIX_DATETIME, PREFIX_DURATION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATETIME, PREFIX_DURATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSlotCommand.MESSAGE_USAGE));
         }
 
-        Pet pet = SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_PETNAME).get(), model);
+        Pet pet = SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model);
         LocalDateTime dateTime = SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         Duration duration = SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
 
         Slot slot = new Slot(pet, dateTime, duration);
+
+        if (!slot.isWithinOneDay()) {
+            throw new ParseException(MESSAGE_SLOT_NOT_IN_ONE_DAY);
+        }
 
         return new AddSlotCommand(slot);
     }

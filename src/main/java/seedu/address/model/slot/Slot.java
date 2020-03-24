@@ -5,15 +5,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.pet.Pet;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Represents a Slot in the pet shop helper schedule system.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Slot implements Comparable<Slot> {
+public class Slot implements Comparable<Slot>, DisplayItem {
 
     private final Pet pet;
     private final LocalDateTime dateTime;
@@ -75,16 +78,29 @@ public class Slot implements Comparable<Slot> {
      * Returns true if this slot is in conflict with the given other slot.
      */
     public boolean isInConflictWith(Slot otherSlot) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+        if (this == otherSlot) {
+            // otherSlot is a reference to this object,
+            // and a slot cannot be in conflict with itself
+            return false;
+        }
+        if (this.equals(otherSlot)) {
+            // two separate slots occuring on the same datetime
+            // and having the same duration must be in conflict with each other.
+            return true;
+        }
+        LocalDateTime start = getDateTime();
+        LocalDateTime end = getEndDateTime();
+        LocalDateTime otherStart = otherSlot.getDateTime();
+        LocalDateTime otherEnd = otherSlot.getEndDateTime();
+        return start.isBefore(otherEnd) && otherStart.isBefore(end);
     }
 
     /**
      * Returns true if this slot is in conflict with one or more other slots.
      */
-    public boolean hasConflict() {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented yet!");
+    public boolean hasConflict(List<Slot> allSlots) {
+        return allSlots.stream()
+                .anyMatch(otherSlot -> isInConflictWith(otherSlot));
     }
 
     /**
@@ -102,6 +118,11 @@ public class Slot implements Comparable<Slot> {
             return duration.compareTo(other.duration);
         }
         return pet.getName().compareTo(other.pet.getName());
+    }
+
+    @Override
+    public DisplaySystemType getDisplaySystemType() {
+        return DisplaySystemType.SCHEDULE;
     }
 
     /**
@@ -130,6 +151,11 @@ public class Slot implements Comparable<Slot> {
 
     @Override
     public String toString() {
+        if (isWithinOneDay()) {
+            return String.format("%s %s - %s (%s)",
+                    getDate(), getDateTime().toLocalTime(), getEndDateTime().toLocalTime(),
+                    getPet().getName());
+        }
         return String.format("%s - %s (%s)",
                 getDateTime(), getEndDateTime(), getPet().getName());
     }

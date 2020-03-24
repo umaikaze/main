@@ -10,12 +10,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
+import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.logic.parser.pet.PetTrackerParser;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 import seedu.address.storage.Storage;
+import seedu.address.ui.DisplayItem;
 
 /**
  * The main LogicManager of Pet Store Helper.
@@ -32,7 +34,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        petTrackerParser = new PetTrackerParser();
+        petTrackerParser = new PetTrackerParser(model);
     }
 
     @Override
@@ -44,9 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            //model.getPetTracker is ReadOnlyPetTracker,
-            //here is casted to ReadOnlyPetTracker to pass checkstyle test
-            storage.savePetTracker((ReadOnlyPetTracker) model.getPetTracker());
+            storage.savePetTracker(model.getPetTracker());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -60,9 +60,24 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<DisplayItem> getFilteredDisplayList() {
+        return model.getFilteredDisplayList();
+    }
+
+    @Override
     public ObservableList<Pet> getFilteredPetList() {
         return model.getFilteredPetList();
     }
+
+    @Override
+    public ObservableList<Slot> getFilteredSlotList() {
+        return model.getFilteredSlotList();
+    }
+
+    /*@Override
+    public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
+        return model.getFilteredFoodCollectionList();
+    }*/
 
     @Override
     public Path getPetTrackerFilePath() {

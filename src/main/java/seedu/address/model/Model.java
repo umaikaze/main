@@ -5,9 +5,13 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * The API of the Pet Store Helper Model component.
@@ -23,6 +27,11 @@ public interface Model {
      * {@code Predicate} that always evaluate to true.
      */
     Predicate<Slot> PREDICATE_SHOW_ALL_SLOTS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<FoodCollection> PREDICATE_SHOW_ALL_FOOD_COLLECTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -133,4 +142,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSlotList(Predicate<Slot> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered list of display items.
+     */
+    ObservableList<DisplayItem> getFilteredDisplayList();
+
+    /**
+     * Changes the list to be displayed.
+     */
+    void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException;
 }

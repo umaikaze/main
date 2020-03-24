@@ -31,9 +31,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PetListPanel petListPanel;
+    private DisplayListPanel displayListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private OverallStats overallStats;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane petListPanelPlaceholder;
+    private StackPane displayListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -92,8 +93,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        petListPanel = new PetListPanel(logic.getFilteredPetList());
-        petListPanelPlaceholder.getChildren().add(petListPanel.getRoot());
+        displayListPanel = new DisplayListPanel(logic.getFilteredDisplayList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -115,6 +116,16 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     *  Display overall statistics
+     */
+    public void handleStats() {
+        displayListPanelPlaceholder.getChildren().clear();
+        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList());
+        //logic.getFilteredFoodCollectionList());
+        displayListPanelPlaceholder.getChildren().add(overallStats.getRoot());
     }
 
     /**
@@ -145,8 +156,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PetListPanel getPetListPanel() {
-        return petListPanel;
+    public OverallStats getOverallStats() {
+        return overallStats;
     }
 
     /**
@@ -159,6 +170,15 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            displayListPanelPlaceholder.getChildren().clear();
+            displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+            if (commandResult.isShowStats()) {
+                handleStats();
+            }
+
+            if (commandResult.hasDisplayChanged()) {
+                displayListPanel.updateWith(logic.getFilteredDisplayList());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

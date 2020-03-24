@@ -8,13 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPets.COCO;
-import static seedu.address.testutil.TypicalPets.GARFIELD;
+import static seedu.address.testutil.pet.TypicalPets.COCO;
+import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.pet.PetBuilder;
 
 public class PetTest {
 
