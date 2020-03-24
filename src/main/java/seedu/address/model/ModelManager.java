@@ -196,6 +196,10 @@ public class ModelManager implements Model {
         filteredFoodCollections.setPredicate(predicate);
     }
 
+    public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
+        return filteredFoodCollections;
+    }
+
     //=========== Common methods =============================================================
 
     @Override
