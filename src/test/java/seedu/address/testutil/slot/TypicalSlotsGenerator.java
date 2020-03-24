@@ -20,6 +20,9 @@ import seedu.address.model.slot.Slot;
  */
 public class TypicalSlotsGenerator {
 
+    private Slot cocoSlot;
+    private Slot garfieldSlot;
+
     //TODO Modify this for getTypicalModelManager
     private final Model model;
 
@@ -28,10 +31,10 @@ public class TypicalSlotsGenerator {
     }
 
     public List<Slot> getTypicalSlots() {
-        final Slot cocoSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
+        cocoSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO)
                 .withDuration(VALID_DURATION_COCO).build();
-        final Slot garfieldSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
+        garfieldSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
                 .withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
         return new ArrayList<>(Arrays.asList(cocoSlot, garfieldSlot));

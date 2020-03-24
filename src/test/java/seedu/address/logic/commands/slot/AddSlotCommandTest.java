@@ -31,7 +31,7 @@ import seedu.address.ui.DisplaySystemType;
 
 class AddSlotCommandTest {
 
-    Model typicalModel = getTypicalModelManager();
+    private Model typicalModel = getTypicalModelManager();
 
     @Test
     public void constructor_nullSlot_throwsNullPointerException() {

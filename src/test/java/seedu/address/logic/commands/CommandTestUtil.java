@@ -11,8 +11,6 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.pet.TypicalPets.COCO;
-import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +25,7 @@ import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
@@ -56,7 +55,7 @@ public class CommandTestUtil {
     public static final String VALID_DATETIME_COCO = "1/3/2020 1200";
     public static final String VALID_DATETIME_GARFIELD = "1/4/2020 1200";
     public static final String VALID_DURATION_COCO = "20";
-    public static final String VALID_DURATION_GARFIELD = "20";
+    public static final String VALID_DURATION_GARFIELD = "120";
 
     public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
     public static final String NAME_DESC_GARFIELD = " " + PREFIX_NAME + VALID_NAME_GARFIELD;
@@ -90,8 +89,6 @@ public class CommandTestUtil {
 
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
-    public static final EditSlotDescriptor SLOT_DESC_COCO;
-    public static final EditSlotDescriptor SLOT_DESC_GARFIELD;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
@@ -100,11 +97,15 @@ public class CommandTestUtil {
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
-        //TODO Make it refer to a pet initialized at runtime
-        SLOT_DESC_COCO = new EditSlotDescriptorBuilder().withPet(COCO)
+    }
+
+    public static EditSlotDescriptor getSlotDescCoco(Model model) {
+        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
-        SLOT_DESC_GARFIELD = new EditSlotDescriptorBuilder().withPet(GARFIELD)
-                .withDateTime(VALID_DATETIME_GARFIELD).withDuration(VALID_DURATION_COCO).build();
+    }
+    public static EditSlotDescriptor getSlotDescGarfield(Model model) {
+        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
+                .withDateTime(VALID_DATETIME_GARFIELD).withDuration(VALID_DURATION_GARFIELD).build();
     }
 
     /**

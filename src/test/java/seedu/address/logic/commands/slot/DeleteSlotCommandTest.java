@@ -25,7 +25,7 @@ import seedu.address.model.slot.Slot;
 class DeleteSlotCommandTest {
 
     private Model model = getTypicalModelManager();
-    
+
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Slot slotToDelete = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());

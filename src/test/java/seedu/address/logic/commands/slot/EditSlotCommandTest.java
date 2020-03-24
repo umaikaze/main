@@ -2,13 +2,13 @@ package seedu.address.logic.commands.slot;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.SLOT_DESC_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.SLOT_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.getSlotDescCoco;
+import static seedu.address.logic.commands.CommandTestUtil.getSlotDescGarfield;
 import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
@@ -127,10 +127,10 @@ class EditSlotCommandTest {
 
     @Test
     public void equals() {
-        final EditSlotCommand standardCommand = new EditSlotCommand(INDEX_FIRST_SLOT, SLOT_DESC_COCO);
+        final EditSlotCommand standardCommand = new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescCoco(model));
 
         // same values -> returns true
-        EditSlotDescriptor copyDescriptor = new EditSlotDescriptor(SLOT_DESC_COCO);
+        EditSlotDescriptor copyDescriptor = new EditSlotDescriptor(getSlotDescCoco(model));
         EditSlotCommand commandWithSameValues = new EditSlotCommand(INDEX_FIRST_SLOT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -141,9 +141,9 @@ class EditSlotCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, SLOT_DESC_COCO)));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, getSlotDescCoco(model))));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, SLOT_DESC_GARFIELD)));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescGarfield(model))));
     }
 }
