@@ -2,11 +2,12 @@ package seedu.address.model.slot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Slot} is in conflict with any other slots.
  */
-public class SlotConflictPredicate extends SlotPredicate {
+public class SlotConflictPredicate implements Predicate<Slot> {
     private final List<Slot> allSlots;
 
     public SlotConflictPredicate(List<Slot> allSlots) {
