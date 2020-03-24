@@ -10,6 +10,7 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.StatsCommand;
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
@@ -102,7 +103,7 @@ public class PetTrackerParser {
             return new AddSlotParser(model).parse(arguments);
 
         case EditSlotCommand.COMMAND_WORD:
-            return new EditSlotParser().parse(arguments);
+            return new EditSlotParser(model).parse(arguments);
 
         case DeleteSlotCommand.COMMAND_WORD:
             return new DeleteSlotParser().parse(arguments);
@@ -113,7 +114,9 @@ public class PetTrackerParser {
         case ConflictCommand.COMMAND_WORD:
             return new ConflictCommand();
 
-        // none of the above
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

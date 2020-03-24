@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
@@ -55,6 +56,9 @@ public class DisplayListPanel extends UiPart<Region> {
                             .map(slot -> (Slot) slot)
                             .collect(Collectors.toList());
                     setGraphic(new SlotCard((Slot) item, getIndex() + 1, allSlots).getRoot());
+                    break;
+                case INVENTORY:
+                    setGraphic(new FoodCollectionCard((FoodCollection) item, getIndex() + 1).getRoot());
                     break;
                 default:
                     setGraphic(null);

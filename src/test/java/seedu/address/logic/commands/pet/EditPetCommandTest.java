@@ -2,14 +2,15 @@ package seedu.address.logic.commands.pet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.pet.CommandTestUtil.DESC_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.DESC_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_LAZY;
-import static seedu.address.logic.commands.pet.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.pet.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.pet.CommandTestUtil.showPetAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DOG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
@@ -55,10 +56,10 @@ public class EditPetCommandTest {
         Pet lastPet = model.getFilteredPetList().get(indexLastPet.getZeroBased());
 
         PetBuilder petInList = new PetBuilder(lastPet);
-        Pet editedPet = petInList.withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
+        Pet editedPet = petInList.withName(VALID_NAME_DOG).withGender(VALID_GENDER_GARFIELD)
                 .withTags(VALID_TAG_LAZY).build();
 
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_DOG)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withTags(VALID_TAG_LAZY).build();
         EditPetCommand editCommand = new EditPetCommand(indexLastPet, descriptor);
 
@@ -87,9 +88,9 @@ public class EditPetCommandTest {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
         Pet petInFilteredList = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPet = new PetBuilder(petInFilteredList).withName(VALID_NAME_GARFIELD).build();
+        Pet editedPet = new PetBuilder(petInFilteredList).withName(VALID_NAME_DOG).build();
         EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET,
-                new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD).build());
+                new EditPetDescriptorBuilder().withName(VALID_NAME_DOG).build());
 
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 

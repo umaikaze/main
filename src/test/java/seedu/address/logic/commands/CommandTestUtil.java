@@ -1,8 +1,10 @@
-package seedu.address.logic.commands.pet;
+package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
@@ -18,12 +20,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
+import seedu.address.logic.commands.pet.EditPetCommand;
+import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Gender;
+import seedu.address.model.pet.Name;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
+import seedu.address.model.slot.SlotPetNamePredicate;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
+import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -32,6 +40,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_COCO = "Coco";
     public static final String VALID_NAME_GARFIELD = "Garfield";
+    public static final String VALID_NAME_DOG = "Dog";
     public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
     public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
     public static final String VALID_DOB_COCO = "2/2/2015";
@@ -42,6 +51,10 @@ public class CommandTestUtil {
     public static final String VALID_FOOD_GARFIELD = "catfood:10";
     public static final String VALID_TAG_FAT = "fat";
     public static final String VALID_TAG_LAZY = "lazy";
+    public static final String VALID_DATETIME_COCO = "1/3/2020 1200";
+    public static final String VALID_DATETIME_GARFIELD = "1/4/2020 1200";
+    public static final String VALID_DURATION_COCO = "20";
+    public static final String VALID_DURATION_GARFIELD = "120";
 
     public static final String NAME_DESC_COCO = " " + PREFIX_NAME + VALID_NAME_COCO;
     public static final String NAME_DESC_GARFIELD = " " + PREFIX_NAME + VALID_NAME_GARFIELD;
@@ -55,6 +68,10 @@ public class CommandTestUtil {
     public static final String FOOD_DESC_GARFIELD = " " + PREFIX_FOODLIST + VALID_FOOD_GARFIELD;
     public static final String TAG_DESC_LAZY = " " + PREFIX_TAG + VALID_TAG_LAZY;
     public static final String TAG_DESC_FAT = " " + PREFIX_TAG + VALID_TAG_FAT;
+    public static final String DATETIME_DESC_COCO = " " + PREFIX_DATETIME + VALID_DATETIME_COCO;
+    public static final String DATETIME_DESC_GARFIELD = " " + PREFIX_DATETIME + VALID_DATETIME_GARFIELD;
+    public static final String DURATION_DESC_COCO = " " + PREFIX_DURATION + VALID_DURATION_COCO;
+    public static final String DURATION_DESC_GARFIELD = " " + PREFIX_DURATION + VALID_DURATION_GARFIELD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "femali"; // only "male" and "female" allowed
@@ -64,6 +81,10 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String INVALID_DATETIME = "1-3-2020 12:00";
+
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + INVALID_DATETIME;
 
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
@@ -75,6 +96,15 @@ public class CommandTestUtil {
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
+    }
+
+    public static EditSlotDescriptor getSlotDescCoco(Model model) {
+        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO)))
+                .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
+    }
+    public static EditSlotDescriptor getSlotDescGarfield(Model model) {
+        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
+                .withDateTime(VALID_DATETIME_GARFIELD).withDuration(VALID_DURATION_GARFIELD).build();
     }
 
     /**
@@ -122,7 +152,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s pet tracker.
      */
     public static void showPetAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPetList().size());
@@ -132,6 +162,20 @@ public class CommandTestUtil {
         model.updateFilteredPetList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPetList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the slot at the given {@code targetIndex} in the
+     * {@code model}'s pet tracker.
+     */
+    public static void showSlotAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSlotList().size());
+
+        Slot slot = model.getFilteredSlotList().get(targetIndex.getZeroBased());
+        final String name = slot.getPet().getName().fullName;
+        model.updateFilteredSlotList(new SlotPetNamePredicate(name));
+
+        assertEquals(1, model.getFilteredSlotList().size());
     }
 
 }
