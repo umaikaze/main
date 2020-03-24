@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
@@ -19,4 +20,9 @@ public interface ReadOnlyPetTracker {
      * Returns an unmodifiable view of the slots list.
      */
     ObservableList<Slot> getSlotList();
+
+    /**
+     * Returns an unmodifiable view of the food collection list.
+     */
+    ObservableList<FoodCollection> getFoodCollectionList();
 }
