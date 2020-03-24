@@ -123,8 +123,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleStats() {
         displayListPanelPlaceholder.getChildren().clear();
-        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
-                logic.getFilteredFoodCollectionList());
+        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList());
+        //logic.getFilteredFoodCollectionList());
         displayListPanelPlaceholder.getChildren().add(overallStats.getRoot());
     }
 

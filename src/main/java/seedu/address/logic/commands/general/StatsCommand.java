@@ -17,7 +17,7 @@ public class StatsCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
         model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
-        model.updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+        // model.up(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
     }
 

@@ -24,7 +24,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.model.pet.FoodCollection;
+import seedu.address.model.pet.Food;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
 import seedu.address.model.slot.Slot;
@@ -64,13 +64,14 @@ public class OverallStats extends UiPart<Region> {
 
     private List<Rectangle> rectangles;
 
-    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots, ObservableList<FoodCollection> foodList) {
+    //public OverallStats(ObservableList<FoodCollection> foodList) {
+    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
         super(FXML);
         timeTablePlaceHolder.getChildren().clear();
         setPetStats(pets);
         hbox.prefWidthProperty().bind(this.getRoot().widthProperty().divide(2.5));
         setScheduleStats(slots);
-        setFoodStats(foodList);
+        setFoodStats(pets);
     }
 
     public void setPetStats(ObservableList<Pet> pets) {
@@ -189,12 +190,13 @@ public class OverallStats extends UiPart<Region> {
         thirdDay.setText(thirdDayOfWeek.substring(0, 3) + "\n"
                 + date1.substring(0, date3.length() - 5));
     }
-
+    /*
     /**
      * create new bar chart and gather data
      * @param foodCollectionList list of food collections
      */
-    public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
+
+    /*   public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
@@ -206,12 +208,37 @@ public class OverallStats extends UiPart<Region> {
      * Get stats for food bar chart
      * @param foodCollectionList The list of all food collections
      * @return data for bar chart
-     */
-    public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
+    /* public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
         for (FoodCollection f : foodCollectionList) {
             barChartData.getData().add(new XYChart.Data<>(
                     f.getName(), f.getAmount()));
+        }
+        return barChartData;
+     }*/
+
+    public void setFoodStats(ObservableList<Pet> pets) {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
+        tempFoodStats.getData().add(getBarChartData(pets));
+        foodStats.setData(tempFoodStats.getData());
+        //TODO: set background colour to be transparent
+    }
+
+    public XYChart.Series<String, Number> getBarChartData(ObservableList<Pet> pets) {
+        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
+        Map<String, Integer> listOfFood = new HashMap<>();
+        for (Pet p : pets) {
+            for (Food f : p.getFoodList()) {
+                if (!listOfFood.containsKey(f.foodName)) {
+                    listOfFood.put(f.foodName, 0);
+                }
+                listOfFood.replace(f.foodName, listOfFood.get(f.foodName) + f.foodAmount);
+            }
+        }
+        for (String f : listOfFood.keySet()) {
+            barChartData.getData().add(new XYChart.Data<>(f, listOfFood.get(f)));
         }
         return barChartData;
     }

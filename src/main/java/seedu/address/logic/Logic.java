@@ -8,7 +8,6 @@ import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.ui.DisplayItem;
@@ -40,7 +39,7 @@ public interface Logic {
 
     ObservableList<Slot> getFilteredSlotList();
 
-    ObservableList<FoodCollection> getFilteredFoodCollectionList();
+    /* ObservableList<FoodCollection> getFilteredFoodCollectionList();*/
 
     /**
      * Returns the user prefs' pet tracker file path.

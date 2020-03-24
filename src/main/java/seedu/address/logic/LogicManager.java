@@ -14,7 +14,6 @@ import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.storage.Storage;
@@ -75,10 +74,10 @@ public class LogicManager implements Logic {
         return model.getFilteredSlotList();
     }
 
-    @Override
+    /*@Override
     public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
         return model.getFilteredFoodCollectionList();
-    }
+    }*/
 
     @Override
     public Path getPetTrackerFilePath() {
