@@ -262,6 +262,14 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+=== Statistics
+
+We are generating the overall statistics of Pet Store Helper.
+
+* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
+* The schedule statistics is in the form of a timetable of recent 3 days. Slots are represented as a shaded region in the timetable.
+* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
+
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
