@@ -21,4 +21,5 @@ JsonPetTrackerStorage .left.|> PetTrackerStorage
 JsonPetTrackerStorage .down.> JsonSerializablePetTrackerStorage
 JsonSerializablePetTrackerStorage .right.> JsonSerializablePet
 JsonSerializablePet .right.> JsonAdaptedTag
+JsonSerializablePet .right.> JsonAdaptedFood
 @enduml
