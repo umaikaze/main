@@ -184,7 +184,7 @@ public class AddPetCommandTest {
         public void updateFilteredSlotList(Predicate<Slot> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
             throw new AssertionError("This method should not be called.");
