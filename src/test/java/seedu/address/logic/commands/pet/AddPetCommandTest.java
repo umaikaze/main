@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
@@ -181,6 +182,16 @@ public class AddPetCommandTest {
 
         @Override
         public void updateFilteredSlotList(Predicate<Slot> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
+        public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
