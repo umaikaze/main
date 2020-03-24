@@ -16,6 +16,7 @@ import seedu.address.logic.commands.pet.DeletePetCommand;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.pet.FindPetCommand;
 import seedu.address.logic.commands.slot.AddSlotCommand;
+import seedu.address.logic.commands.slot.ConflictCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
@@ -109,6 +110,9 @@ public class PetTrackerParser {
 
         case FindSlotCommand.COMMAND_WORD:
             return new FindSlotParser().parse(arguments);
+
+        case ConflictCommand.COMMAND_WORD:
+            return new ConflictCommand();
 
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();

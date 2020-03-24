@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_SLOT_NOT_IN_ONE_DAY;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_INDEX;
@@ -50,6 +51,10 @@ public class AddSlotParser implements Parser<AddSlotCommand> {
         Duration duration = SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
 
         Slot slot = new Slot(pet, dateTime, duration);
+
+        if (!slot.isWithinOneDay()) {
+            throw new ParseException(MESSAGE_SLOT_NOT_IN_ONE_DAY);
+        }
 
         return new AddSlotCommand(slot);
     }

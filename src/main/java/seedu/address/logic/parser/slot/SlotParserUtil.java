@@ -117,6 +117,9 @@ public class SlotParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_DURATION);
         }
+        if (newDuration.isNegative() || newDuration.isZero()) {
+            throw new ParseException(MESSAGE_INVALID_DURATION);
+        }
         return newDuration;
     }
 }
