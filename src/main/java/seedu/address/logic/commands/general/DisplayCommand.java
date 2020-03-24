@@ -38,6 +38,6 @@ public class DisplayCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
         String message = String.format(MESSAGE_SUCCESS, type);
-        return new CommandResult(message, false, false, true);
+        return new CommandResult(message, false, false, true, false);
     }
 }

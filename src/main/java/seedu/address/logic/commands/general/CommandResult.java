@@ -21,6 +21,7 @@ public class CommandResult {
      */
     private final boolean exit;
 
+    private final boolean showStats;
     /**
      * Whether or not the system to be displayed has changed.
      */
@@ -29,11 +30,14 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean displayChanged) {
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean displayChanged, boolean showStats) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.displayChanged = displayChanged;
+        this.showStats = showStats;
     }
 
     /**
@@ -41,10 +45,7 @@ public class CommandResult {
      * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.displayChanged = false;
+        this(feedbackToUser, showHelp, exit, false, false);
     }
 
     /**
@@ -52,11 +53,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public boolean isShowStats() {
+        return showStats;
     }
 
     public boolean isShowHelp() {
@@ -84,13 +89,15 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && showStats == otherCommandResult.showStats
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && displayChanged == otherCommandResult.displayChanged;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, displayChanged, showStats);
     }
 
 }

@@ -203,6 +203,7 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
+
     @Override
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
