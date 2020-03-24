@@ -5,10 +5,11 @@ package seedu.address.ui;
  */
 public enum DisplaySystemType {
     PETS("p"),
-    SCHEDULE("s");
+    SCHEDULE("s"),
+    INVENTORY("i");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "System type must be p (pets) or s (schedule).";
+            "System type must be p (pets) or s (schedule) or i(inventory).";
 
     private final String cliArg;
 

@@ -1,9 +1,11 @@
 package seedu.address.model.slot;
 
+import java.util.function.Predicate;
+
 /**
  * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches the given name exactly.
  */
-public class SlotPetNamePredicate extends SlotPredicate {
+public class SlotPetNamePredicate implements Predicate<Slot> {
     private final String petName;
 
     public SlotPetNamePredicate(String petName) {

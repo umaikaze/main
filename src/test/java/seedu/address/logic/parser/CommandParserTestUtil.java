@@ -6,7 +6,6 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.parser.general.Parser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 
-
 /**
  * Contains helper methods for testing command parsers.
  */

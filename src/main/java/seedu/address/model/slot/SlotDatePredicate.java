@@ -1,11 +1,13 @@
 package seedu.address.model.slot;
 
 import java.time.LocalDate;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Slot}'s {@code DateTime} matches the given date.
  */
-public class SlotDatePredicate extends SlotPredicate {
+
+public class SlotDatePredicate implements Predicate<Slot> {
     private final LocalDate date;
 
     public SlotDatePredicate(LocalDate date) {

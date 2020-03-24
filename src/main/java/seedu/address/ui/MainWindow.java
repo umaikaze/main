@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private DisplayListPanel displayListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private OverallStats overallStats;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -118,6 +119,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     *  Display overall statistics
+     */
+    public void handleStats() {
+        displayListPanelPlaceholder.getChildren().clear();
+        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList());
+        //logic.getFilteredFoodCollectionList());
+        displayListPanelPlaceholder.getChildren().add(overallStats.getRoot());
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -145,6 +156,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    public OverallStats getOverallStats() {
+        return overallStats;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -155,6 +170,11 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            displayListPanelPlaceholder.getChildren().clear();
+            displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+            if (commandResult.isShowStats()) {
+                handleStats();
+            }
 
             if (commandResult.hasDisplayChanged()) {
                 displayListPanel.updateWith(logic.getFilteredDisplayList());

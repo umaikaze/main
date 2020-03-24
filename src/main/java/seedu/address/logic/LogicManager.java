@@ -14,6 +14,8 @@ import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 import seedu.address.storage.Storage;
 import seedu.address.ui.DisplayItem;
 
@@ -44,9 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            //model.getPetTracker is ReadOnlyPetTracker,
-            //here is casted to ReadOnlyPetTracker to pass checkstyle test
-            storage.savePetTracker((ReadOnlyPetTracker) model.getPetTracker());
+            storage.savePetTracker(model.getPetTracker());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -63,6 +63,21 @@ public class LogicManager implements Logic {
     public ObservableList<DisplayItem> getFilteredDisplayList() {
         return model.getFilteredDisplayList();
     }
+
+    @Override
+    public ObservableList<Pet> getFilteredPetList() {
+        return model.getFilteredPetList();
+    }
+
+    @Override
+    public ObservableList<Slot> getFilteredSlotList() {
+        return model.getFilteredSlotList();
+    }
+
+    /*@Override
+    public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
+        return model.getFilteredFoodCollectionList();
+    }*/
 
     @Override
     public Path getPetTrackerFilePath() {

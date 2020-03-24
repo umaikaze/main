@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.general.DisplayCommand;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
@@ -30,7 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
     private final FilteredList<Slot> filteredSlots;
-
+    private final FilteredList<FoodCollection> filteredFoodCollections;
     private ObservableList<DisplayItem> filteredDisplayItems;
 
     /**
@@ -46,6 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPets = new FilteredList<>(this.petTracker.getPetList());
         filteredSlots = new FilteredList<>(this.petTracker.getSlotList());
+        filteredFoodCollections = new FilteredList<>(this.petTracker.getFoodCollectionList());
 
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet); // display list of pets initially
     }
@@ -183,12 +185,24 @@ public class ModelManager implements Model {
         filteredSlots.setPredicate(predicate);
     }
 
+    //=========== Filtered Food Collection List Accessors =============================================================
+
+    /**
+     * Updates the filter of the filtered food collection list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate) {
+        requireNonNull(predicate);
+        filteredFoodCollections.setPredicate(predicate);
+    }
+
     //=========== Common methods =============================================================
 
     @Override
     public ObservableList<DisplayItem> getFilteredDisplayList() {
         return filteredDisplayItems;
     }
+
 
     @Override
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
@@ -200,6 +214,11 @@ public class ModelManager implements Model {
         case SCHEDULE:
             filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
             updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
+            break;
+        case INVENTORY:
+            filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
+                foodCollection -> foodCollection);
+            updateFilteredFoodCollectionList(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
