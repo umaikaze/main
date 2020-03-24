@@ -49,5 +49,19 @@
     "species" : "Slug",
     "foodList": [ "Brand G:10" ],
     "tagged" : [ ]
+  }, {
+    "name" : "Coco",
+    "gender" : "FEMALE",
+    "dateOfBirth" : "2/2/2015",
+    "species" : "dog",
+    "foodList": [ "dogfood:10" ],
+    "tagged" : [ "lazy" ]
+  }, {
+    "name" : "Garfield",
+    "gender" : "MALE",
+    "dateOfBirth" : "19/6/1978",
+    "species" : "cat",
+    "foodList": [ "catfood:10" ],
+    "tagged" : [ "fat","lazy" ]
   } ]
 }

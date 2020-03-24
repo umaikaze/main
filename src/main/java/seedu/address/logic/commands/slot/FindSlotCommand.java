@@ -2,11 +2,13 @@ package seedu.address.logic.commands.slot;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.slot.SlotPredicate;
+import seedu.address.model.slot.Slot;
 
 /**
  * Finds and lists all slots in the schedule whose contents contains any of the argument keywords.
@@ -22,9 +24,9 @@ public class FindSlotCommand extends Command {
             + "Parameters: [n/PETNAME] [t/DATE]...\n"
             + "Example: " + COMMAND_WORD + " n/garfield t/10/11/2020";
 
-    private final SlotPredicate predicate;
+    private final Predicate<Slot> predicate;
 
-    public FindSlotCommand(SlotPredicate predicate) {
+    public FindSlotCommand(Predicate<Slot> predicate) {
         this.predicate = predicate;
     }
 
