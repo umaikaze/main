@@ -264,10 +264,15 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 === Statistics
 
-We are generating the overall statistics of Pet Store Helper.
+We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
+
+* `OverallStatistics` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
+* Data is obtained from `Logic`.
+
+How we implemented overall statistic on UI:
 
 * The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
-* The schedule statistics is in the form of a timetable of recent 3 days. Slots are represented as a shaded region in the timetable.
+* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
 * The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
 
 == Documentation
