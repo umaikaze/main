@@ -2,9 +2,9 @@ package seedu.address.logic.commands.pet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.pet.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.pet.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.pet.CommandTestUtil.showPetAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;

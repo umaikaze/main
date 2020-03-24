@@ -98,7 +98,7 @@ image::LogicClassDiagram.png[]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `PetTrackerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a pet).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -122,12 +122,12 @@ image::ModelClassDiagram.png[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Pet Tracker data.
 * exposes an unmodifiable `ObservableList<Pet>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Pet` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Pet` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Pet Tracker`, which `Pet` can reference. This would allow `Pet Tracker` to only require one `Tag` object per unique `Tag`, instead of each `Pet` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -142,12 +142,12 @@ image::StorageClassDiagram.png[]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in json format and read it back.
+* can save the Pet Tracker data in json format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -208,6 +208,14 @@ compares it with `getDate()`.
 ** Cons: Does not update when original pet is edited, which is not something the user will expect.
 
 // end::schedule[]
+
+=== Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+
+* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
+* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
+* Currently log messages are output through: `Console` and to a `.log` file.
 
 [[Implementation-Configuration]]
 === Configuration
@@ -284,7 +292,7 @@ Priorities: High (must have) - `* * \*`, Low (nice to have) - `* *`
 1.  User requests to list pets
 2.  PSH shows a list of pets
 3.  User requests to delete a specific pet in the list
-4.  AddressBook deletes the pet
+4.  PetTracker deletes the pet
 +
 Use case ends.
 

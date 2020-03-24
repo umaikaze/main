@@ -1,17 +1,17 @@
 package seedu.address.testutil.pet;
 
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_DOB_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_FOOD_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_GENDER_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_NAME_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_SPECIES_GARFIELD;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_FAT;
-import static seedu.address.logic.commands.pet.CommandTestUtil.VALID_TAG_LAZY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOOD_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,10 @@ import seedu.address.model.PetTracker;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
+import seedu.address.testutil.slot.TypicalSlotsGenerator;
 
+//TODO the package it belongs to does not fit its usage (potentially used for slots too, make it outside or split up)
 /**
  * A utility class containing a list of {@code Pet} objects to be used in tests.
  */
@@ -68,21 +71,27 @@ public class TypicalPets {
      * Returns a {@code PetTracker} with all the typical pets.
      */
     public static PetTracker getTypicalPetTracker() {
-        PetTracker ab = new PetTracker();
+        PetTracker pt = new PetTracker();
         for (Pet pet : getTypicalPets()) {
-            ab.addPet(pet);
+            pt.addPet(pet);
         }
-        return ab;
+
+        return pt;
     }
 
     /**
      * Returns a {@code ModelManager} with all the typical pets.
      */
     public static Model getTypicalModelManager() {
-        return new ModelManager(getTypicalPetTracker(), new UserPrefs());
+        ModelManager modelManager = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+        TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(modelManager);
+        for (Slot slot : slotsGen.getTypicalSlots()) {
+            modelManager.addSlot(slot);
+        }
+        return modelManager;
     }
 
     public static List<Pet> getTypicalPets() {
-        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE, COCO, GARFIELD));
     }
 }

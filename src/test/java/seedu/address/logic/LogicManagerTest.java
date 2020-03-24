@@ -3,11 +3,11 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.pet.CommandTestUtil.DOB_DESC_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.FOOD_DESC_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.GENDER_DESC_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.NAME_DESC_COCO;
-import static seedu.address.logic.commands.pet.CommandTestUtil.SPECIES_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.FOOD_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.SPECIES_DESC_COCO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.pet.TypicalPets.COCO;
 
