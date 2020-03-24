@@ -21,7 +21,7 @@ import seedu.address.model.Model;
  */
 public class EditSlotParser implements Parser<EditSlotCommand> {
 
-    Model model;
+    private Model model;
 
     public EditSlotParser(Model model) {
         this.model = model;
