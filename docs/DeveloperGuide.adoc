@@ -153,7 +153,7 @@ This section describes some noteworthy details on how certain features are imple
 === Display
 ==== Implementation
 
-The display mechanism is facilitated by an `ObservableList` of `DisplayItem` called `filteredDisplayItems`, which is an attribute stored in `ModelManager`. 
+The display mechanism is facilitated by an `ObservableList` of `DisplayItem` called `filteredDisplayItems`, which is an attribute stored in `ModelManager`.
 
 Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot` and `FoodCollection` classes implement this interface.
 
@@ -171,9 +171,9 @@ image::displayDiagram1.png[]
 
 Step 2. The user executes `display s` to have the **s**lots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to be re-binded to `filteredSlots` instead. Because the display is still making use of `DisplayListPanel`, no change is made to `resultDisplayPlaceholder` afterwards.
 
-Step 3. The user executes `display c` to have the slots displayed in **c**alendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`. 
+Step 3. The user executes `display c` to have the slots displayed in **c**alendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`.
 
-Step 4. The user executes `display p` to view the list of **p**ets. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredPets`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`. 
+Step 4. The user executes `display p` to view the list of **p**ets. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredPets`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`.
 
 The following \____ diagram shows how the display operation works: (WIP)
 
