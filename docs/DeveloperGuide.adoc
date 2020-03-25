@@ -151,6 +151,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::schedule[]
 === Schedule feature
+==== Implementation
 
 The schedule feature uses instances of class `Slot` to organise bathing schedule for the pets. Each `Slot` contains a
 starting time of the bath, stored internally as a `LocalDateTime`, and the duration of the bath stored internally as a
@@ -192,6 +193,7 @@ slots:
 * `SlotDateTimePredicate()` -- Internally stores the `LocalDateTime` to search for (Timing will be ignored), and
 compares it with `getDate()`.
 
+==== Design Considerations
 ===== Aspect: How schedule stores the pets internally
 
 * **Alternative 1 (current choice):** Makes a reference to the the memory address in `ModelManager` .
@@ -233,7 +235,7 @@ The following shows a typical usage scenario that involves the Display Inventory
 ** Pros: Higher Extendability that supports more independent operations of FoodCollection List.
 ** Cons: More difficult to constantly update and maintain the food collection list should food list changes.
 
-==== Aspect: Updating the collection of food when pet list is modified.
+===== Aspect: Updating the collection of food when pet list is modified.
 * Alternative 1(current choice): Replace the entire list by a new food collection list created from the updated pet list.
 ** Pros: Easy to implement and no adaptation is required for different types of modification of pet list.
 ** Cons: Computationally intensive when there is a huge pet list.
