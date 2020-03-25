@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PetListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DisplayListPanel`,`OverallStatistics`,  `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -209,6 +209,19 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
+
+=== Statistics
+
+We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
+
+* `OverallStatistics` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
+* Data is obtained from `Logic`.
+
+How we implemented overall statistic on UI:
+
+* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
+* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
+* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
 
 == Documentation
 
