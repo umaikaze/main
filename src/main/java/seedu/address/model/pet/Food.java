@@ -42,7 +42,7 @@ public class Food {
     public String formatFoodName(String foodName) {
         String[] foodNameSubStrings = foodName.split(" ");
         String formattedFoodName = "";
-        for(String n : foodNameSubStrings) {
+        for (String n : foodNameSubStrings) {
             n = n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase();
             formattedFoodName += (n + " ");
         }

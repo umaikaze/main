@@ -39,7 +39,7 @@ public class Species {
     public String formatSpecies(String species) {
         String[] speciesSubStrings = species.split(" ");
         String formattedSpecies = "";
-        for(String s : speciesSubStrings) {
+        for (String s : speciesSubStrings) {
             s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
             formattedSpecies += (s + " ");
         }

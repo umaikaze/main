@@ -37,9 +37,9 @@ public class Name implements Comparable<Name> {
      * @return The formatted name
      */
     public String formatName(String name) {
-        String[] names = name.split(" ");
+        String[] nameSubStrings = name.split(" ");
         String formattedName = "";
-        for(String n : names) {
+        for (String n : nameSubStrings) {
             n = n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase();
             formattedName += (n + " ");
         }
