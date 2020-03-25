@@ -149,6 +149,60 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::schedule[]
+=== Schedule feature
+
+The schedule feature uses instances of class `Slot` to organise bathing schedule for the pets. Each `Slot` contains a
+starting time of the bath, stored internally as a `LocalDateTime`, and the duration of the bath stored internally as a
+`Duration`. It stores a reference to the `Pet` in the `ModelManager` as specified by the user.
+
+Given below is an example usage scenario and how the `Schedule` mechanism behaves at each step.
+
+Step 1. The user launches the application with some pets stored (`Garfield`, for instance). `ObservableList<Slot>`
+in `Schedule` is currently empty.
+
+Step 2. The user executes `addslot n/Garfield t/1/4/2020 1200 d/120` command to create a `Slot` for `Garfield`.
+The `AddSlotParser` calls `parsePet()` in `SlotParserUtil`, which then takes in the `Model` passed in to find a
+reference for the specific `Pet` with `Model.getPet()`. Prior to this stage, if the name string is invalid, a
+`ParseException(MESSAGE_INVALID_PETNAME)` will be thrown. Or the program cannot find the `Pet` in the model, a
+`ParseException(MESSAGE_PET_DOES_NOT_EXIST)` will be thrown. This ensures that every slot created actually points to an
+existing `Pet` found in `PetTracker`.
+
+[NOTE]
+If `parsePet()` fails its execution, no new `Slot` is created.
+
+Step 3. New `Slot` is created.
+
+Step 4. The user now decides that this exact slot should be occupied by another pet, and decides to edit it, executing
+the `editslot` command.
+
+Step 5. `SlotParserUtil` is used again to create a reference to a pet in the `ModelManager`.
+
+Step 6. The user now decides that they need to see slots occupied by a particular pet on a particular date, executing
+the `findslots n/Garfield t/1/4/2020` command.
+
+Step 7. The `FindSlotCommand` reduces the two predicates* and pass it to `ModelManager` to create a filtered list of
+slots.
+
+*The `FindSlotCommand` uses the following classes which both inherit `Predicate<Slot>` to search for the user specified
+slots:
+
+* `SlotPetNamePredicate()` -- Internally stores the `Name` to search for, and compares it with
+`getPet().getName().fullName`.
+* `SlotDateTimePredicate()` -- Internally stores the `LocalDateTime` to search for (Timing will be ignored), and
+compares it with `getDate()`.
+
+===== Aspect: How schedule stores the pets internally
+
+* **Alternative 1 (current choice):** Makes a reference to the the memory address in `ModelManager` .
+** Pros: When the pet is edited, the slot is also updated.
+** Cons: Hard to implement and test.
+* **Alternative 2:** Simply create a new Pet.
+** Pros: Easy to implement and test (A refactor of `Pet`), low coupling with `Model`.
+** Cons: Does not update when original pet is edited, which is not something the user will expect.
+
+// end::schedule[]
+
 // tag::displayintentoryfeature
 === Display Inventory feature
 ==== Implementation
@@ -189,7 +243,6 @@ The following shows a typical usage scenario that involves the Display Inventory
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
 // end::displayintentoryfeature
 
-
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -203,7 +256,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of
+just its size
 
 [[Implementation-Configuration]]
 === Configuration
