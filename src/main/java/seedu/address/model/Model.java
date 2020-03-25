@@ -133,7 +133,7 @@ public interface Model {
     void setSlot(Slot target, Slot editedSlot);
 
     /**
-     * Returns an unmodifiable view of the filtered slot list
+     * Returns an unmodifiable view of the filtered slot list.
      */
     ObservableList<Slot> getFilteredSlotList();
 
@@ -142,6 +142,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSlotList(Predicate<Slot> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered slot list.
+     */
+    ObservableList<FoodCollection> getFilteredFoodCollectionList();
+
+    /**
+     * Updates the filter of the filtered food colection list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate);
 
     /**
      * Returns an unmodifiable view of the filtered list of display items.

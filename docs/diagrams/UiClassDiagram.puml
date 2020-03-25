@@ -11,8 +11,11 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class DisplayListPanel
+Class PetCard
+Class SlotCard
+Class FoodCollectionCard
+Class OverallStatistics
 Class StatusBarFooter
 Class CommandBox
 }
@@ -29,29 +32,38 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> MainWindow
+UiManager -right-> MainWindow
 MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
-MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PersonListPanel
-MainWindow *-down-> StatusBarFooter
+MainWindow *-down--> CommandBox
+MainWindow *-down--> ResultDisplay
+MainWindow *-down--> DisplayListPanel
+MainWindow *-down--> StatusBarFooter
+MainWindow *-down--> OverallStatistics
 
-PersonListPanel -down-> PersonCard
+DisplayListPanel -down---> PetCard
+DisplayListPanel -down---> SlotCard
+DisplayListPanel -down---> FoodCollectionCard
 
-MainWindow -left-|> UiPart
+MainWindow --down--|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
+ResultDisplay -----|> UiPart
+CommandBox -----|> UiPart
+DisplayListPanel -----|> UiPart
+PetCard --|> UiPart
+SlotCard --|> UiPart
+FoodCollectionCard --|> UiPart
+OverallStatistics -----|> UiPart
+StatusBarFooter -----|> UiPart
+HelpWindow --down--|> UiPart
 
-PersonCard ..> Model
+PetCard .right.> Model
+SlotCard .right.> Model
+FoodCollectionCard .right.> Model
+OverallStatistics .down.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+DisplayListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

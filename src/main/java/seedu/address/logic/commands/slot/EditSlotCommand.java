@@ -66,6 +66,10 @@ public class EditSlotCommand extends Command {
         Slot slotToEdit = lastShownList.get(index.getZeroBased());
         Slot editedSlot = createEditedSlot(slotToEdit, editSlotDescriptor);
 
+        if (!editedSlot.isWithinOneDay()) {
+            throw new CommandException(Messages.MESSAGE_SLOT_NOT_IN_ONE_DAY);
+        }
+
         model.setSlot(slotToEdit, editedSlot);
         model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot));
