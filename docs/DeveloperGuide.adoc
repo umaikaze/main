@@ -205,7 +205,6 @@ compares it with `getDate()`.
 
 // tag::displayintentoryfeature
 === Display Inventory feature
-==== Implementation
 
 The Display Inventory feature, i.e `display i` displays a summary of all the food items involved in a pet tracker system.
 It is supported by `FoodCollection` which resembles a collection of food of the same type and `FoodCollectionList` which is a list of these collections.
