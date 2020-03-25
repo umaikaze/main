@@ -86,3 +86,4 @@ public class FoodCollectionList {
         return internalUnmodifiableList;
     }
 }
+
