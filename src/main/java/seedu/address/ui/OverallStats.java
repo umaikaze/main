@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.model.pet.Food;
+import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.Species;
 import seedu.address.model.slot.Slot;
@@ -62,16 +62,22 @@ public class OverallStats extends UiPart<Region> {
     @FXML
     private HBox hbox;
 
-    private List<Rectangle> rectangles;
+    private ArrayList<Rectangle> rectangles;
 
-    //public OverallStats(ObservableList<FoodCollection> foodList) {
-    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots) {
+    public OverallStats(ObservableList<Pet> pets, ObservableList<Slot> slots, ObservableList<FoodCollection> foodList) {
         super(FXML);
-        timeTablePlaceHolder.getChildren().clear();
+        setPaneProperty();;
         setPetStats(pets);
-        hbox.prefWidthProperty().bind(this.getRoot().widthProperty().divide(2.5));
         setScheduleStats(slots);
-        setFoodStats(pets);
+        setFoodStats(foodList);
+    }
+
+    public void setPaneProperty() {
+        //make sure size of timetable is same as charts
+        hbox.prefWidthProperty().bind(this.getRoot().widthProperty().divide(2.5));
+        timeTablePlaceHolder.prefWidthProperty().bind(this.getRoot().widthProperty().divide(2.5));
+        //60 is slightly larger than the sum of height of header and text "Schedule"
+        timeTablePlaceHolder.prefHeightProperty().bind(hbox.heightProperty().subtract(60));
     }
 
     public void setPetStats(ObservableList<Pet> pets) {
@@ -103,7 +109,6 @@ public class OverallStats extends UiPart<Region> {
      * Fill up the time table in recent 3 days, each rectangle represents the time slots where there is an appointment.
      * @param slots The list of time slots
      */
-
     public void setScheduleStats(ObservableList<Slot> slots) {
         setHeader();
         rectangles = new ArrayList<>();
@@ -116,56 +121,60 @@ public class OverallStats extends UiPart<Region> {
     public void getScheduleStats(ObservableList<Slot> slots) {
         for (Slot s : slots) {
             if (s.getDate().equals(LocalDate.now())) {
-                createRectangles(s.getDateTime(), s.getDuration(), 0, false);
+                createRectangles(s.getDateTime(), s.getDuration(),
+                        timeTablePlaceHolder.widthProperty().divide(10000000), false, false);
             } else if (s.getDate().equals(LocalDate.now().plusDays(1))) {
                 createRectangles(s.getDateTime(), s.getDuration(),
-                        timeTablePlaceHolder.getWidth() / 3.0, false);
+                        timeTablePlaceHolder.widthProperty().divide(3), true, false);
             } else if (s.getDate().equals(LocalDate.now().plusDays(2))) {
                 createRectangles(s.getDateTime(), s.getDuration(),
-                        2.0 * timeTablePlaceHolder.getWidth() / 3.0, true);
+                        timeTablePlaceHolder.widthProperty().divide(3).multiply(2), false, true);
             }
         }
     }
 
     /**
-     * Create rectangles which represents appointments.
+     * Create rectangles which represents slots.
      * @param time start time of the appointment
      * @param duration duration of the appointment
      * @param xCoordinate x coordinate of the rectangle
-     * @param isLastDay if the date is thrid day from now
+     * @param isLastDay if the date is third day from now
      */
-    public void createRectangles(LocalDateTime time, Duration duration, double xCoordinate, boolean isLastDay) {
+    public void createRectangles(LocalDateTime time, Duration duration,
+                                 DoubleBinding xCoordinate, boolean isSecondDay, boolean isLastDay) {
         Rectangle rec = new Rectangle();
-        long minutes = ChronoUnit.MINUTES.between(time,
-                time.toLocalDate().plusDays(1).atStartOfDay());
+        //find start point of the rectangle
+        long minutes = ChronoUnit.MINUTES.between(time.toLocalDate().atStartOfDay(), time);
         //set position of the rectangles
-        rec.setX(xCoordinate);
-        rec.setY(((double) minutes) / (60.0 * 24.0) * timeTablePlaceHolder.getHeight());
+        rec.xProperty().bind(xCoordinate);
+        rec.yProperty().bind(timeTablePlaceHolder.heightProperty().multiply(minutes).divide(60 * 24));
         //set style
-        rec.setArcHeight(timeTablePlaceHolder.getWidth() / 10.0);
-        rec.setArcWidth(timeTablePlaceHolder.getWidth() / 10.0);
+        rec.arcHeightProperty().bind(timeTablePlaceHolder.widthProperty().divide(10));
+        rec.arcWidthProperty().bind(timeTablePlaceHolder.widthProperty().divide(10));
         rec.setFill(Paint.valueOf("#ff8000"));
         //merge all conflicted slots together.
         rec.setStrokeWidth(0);
         //set size of rectangle
-        rec.setWidth(timeTablePlaceHolder.getWidth() / 3.0);
-        double height = duration.toMinutes() / (24.0 * 60.0) * timeTablePlaceHolder.getHeight();
-        if (height > rec.getY()) {
-            //consider the case where the appointment involves more than 1 day.
-            rec.setHeight(rec.getY());
+        rec.widthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
+        if (duration.toMinutes() > 24 * 60 - minutes) {
+            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
+                    .multiply(24 * 60 - minutes).divide(24 * 60));
             if (!isLastDay) {
-                if (time.toLocalDate().equals(LocalDate.now().plusDays(2))) {
+                if (isSecondDay) {
                     createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes((long) (1 - rec.getY() / height) * 24 * 60),
-                            xCoordinate + timeTablePlaceHolder.getWidth() / 3.0, true);
+                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3).multiply(2),
+                            false, true);
                 } else {
                     createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes((long) (1 - rec.getY() / height) * 24 * 60),
-                            xCoordinate + timeTablePlaceHolder.getWidth() / 3.0, false);
+                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3),
+                            true, false);
                 }
             }
         } else {
-            rec.setHeight(height);
+            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
+                    .multiply(duration.toMinutes()).divide(24 * 60));
         }
         rectangles.add(rec);
     }
@@ -186,17 +195,16 @@ public class OverallStats extends UiPart<Region> {
         firstDay.setText(firstDayOfWeek.substring(0, 3) + "\n"
                 + date1.substring(0, date1.length() - 5));
         secondDay.setText(secondDayOfWeek.substring(0, 3) + "\n"
-                + date1.substring(0, date2.length() - 5));
+                + date2.substring(0, date2.length() - 5));
         thirdDay.setText(thirdDayOfWeek.substring(0, 3) + "\n"
-                + date1.substring(0, date3.length() - 5));
+                + date3.substring(0, date3.length() - 5));
     }
-    /*
+
     /**
      * create new bar chart and gather data
      * @param foodCollectionList list of food collections
      */
-
-    /*   public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
+    public void setFoodStats(ObservableList<FoodCollection> foodCollectionList) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
@@ -208,37 +216,12 @@ public class OverallStats extends UiPart<Region> {
      * Get stats for food bar chart
      * @param foodCollectionList The list of all food collections
      * @return data for bar chart
-    /* public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
+     */
+    public XYChart.Series<String, Number> getBarChartData(ObservableList<FoodCollection> foodCollectionList) {
         XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
         for (FoodCollection f : foodCollectionList) {
             barChartData.getData().add(new XYChart.Data<>(
                     f.getName(), f.getAmount()));
-        }
-        return barChartData;
-     }*/
-
-    public void setFoodStats(ObservableList<Pet> pets) {
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        BarChart<String, Number> tempFoodStats = new BarChart<>(xAxis, yAxis);
-        tempFoodStats.getData().add(getBarChartData(pets));
-        foodStats.setData(tempFoodStats.getData());
-        //TODO: set background colour to be transparent
-    }
-
-    public XYChart.Series<String, Number> getBarChartData(ObservableList<Pet> pets) {
-        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
-        Map<String, Integer> listOfFood = new HashMap<>();
-        for (Pet p : pets) {
-            for (Food f : p.getFoodList()) {
-                if (!listOfFood.containsKey(f.foodName)) {
-                    listOfFood.put(f.foodName, 0);
-                }
-                listOfFood.replace(f.foodName, listOfFood.get(f.foodName) + f.foodAmount);
-            }
-        }
-        for (String f : listOfFood.keySet()) {
-            barChartData.getData().add(new XYChart.Data<>(f, listOfFood.get(f)));
         }
         return barChartData;
     }
