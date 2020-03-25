@@ -149,6 +149,58 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::display[]
+=== Display
+==== Implementation
+
+The display mechanism is facilitated by an `ObservableList` of `DisplayItem` called `filteredDisplayItems`, which is an attribute stored in `ModelManager`. 
+
+Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot` and `FoodCollection` classes implement this interface.
+
+Step 1. The user opens the app the the 1st time. A few things happen at start-up:
+
+- In `Model` (`ModelManager`), `filteredDisplayItems` is created, and is set to bind to `filteredPets`. This way, `filteredDisplayItems` contains all the elements of `filteredPets`, and any changes to `filteredPets` will also be automatically propogated to `filteredDisplayItems`.
+
+- In the `MainWindow`, a `DisplayListPanel` and a `CalendarPanel` are initialized. The `DisplayListPanel` is created with `filteredDisplayItems` as its backing list, while the `CalendarPanel` will be initialized with the `List` of `Slot`s obtained from `logic.getPetTracker().getSlotList()`.
+
+- The `resultDisplayPlaceholder` component in the `MainWindow` is set to display the `DisplayListPanel`. As such, the user sees the list of pets as the initial display.
+
+The following \____ diagram summarises Step 1 and shows what happens at initialization: (WIP)
+
+image::displayDiagram1.png[]
+
+Step 2. The user executes `display s` to have the **s**lots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to be re-binded to `filteredSlots` instead. Because the display is still making use of `DisplayListPanel`, no change is made to `resultDisplayPlaceholder` afterwards.
+
+Step 3. The user executes `display c` to have the slots displayed in **c**alendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`. 
+
+Step 4. The user executes `display p` to view the list of **p**ets. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredPets`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`. 
+
+The following \____ diagram shows how the display operation works: (WIP)
+
+image::displayDiagram2.png[]
+
+==== Design Considerations (WIP)
+
+===== Aspect: How undo & redo executes
+
+* **Alternative 1 (current choice):** Saves the entire pet tracker.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Have seperate .
+** Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
+** Cons: We must ensure that the implementation of each individual command are correct.
+
+===== Aspect: Data structure to support the undo/redo commands
+
+* **Alternative 1 (current choice):** Use a list to store the history of pet tracker states.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedPetTracker`.
+* **Alternative 2:** Use `HistoryManager` for undo/redo
+** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+
+// end::display[]
+
 // tag::schedule[]
 === Schedule feature
 ==== Implementation
@@ -205,11 +257,11 @@ compares it with `getDate()`.
 
 // end::schedule[]
 
-// tag::displayintentoryfeature
-=== Display Inventory feature
+// tag::intentoryfeature
+=== Inventory feature
 ==== Implementation
 
-The Display Inventory feature, i.e `display i` displays a summary of all the food items involved in a pet tracker system.
+The Inventory feature gives a summary of all the food items involved in a pet tracker system.
 It is supported by `FoodCollection` which resembles a collection of food of the same type and `FoodCollectionList` which is a list of these collections.
 A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the following reasons:
 
@@ -243,7 +295,7 @@ The following shows a typical usage scenario that involves the Display Inventory
 * Alternative 2: Modify `FoodCollection` affected by the command.
 ** Pros: Less computationally intensive and more responsive given a large database.
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
-// end::displayintentoryfeature
+// end::intentoryfeature
 
 === Logging
 
