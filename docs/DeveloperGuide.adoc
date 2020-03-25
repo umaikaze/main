@@ -122,14 +122,10 @@ image::ModelClassDiagram.png[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Pet Tracker data.
-* exposes an unmodifiable `ObservableList<Pet>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
+* exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Pet Tracker`, which `Pet` can reference. This would allow `Pet Tracker` to only require one `Tag` object per unique `Tag`, instead of each `Pet` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
@@ -152,6 +148,47 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+// tag::displayintentoryfeature
+=== Display Inventory feature
+==== Implementation
+
+The Display Inventory feature, i.e `display i` displays a summary of all the food items involved in a pet tracker system.
+It is supported by `FoodCollection` which resembles a collection of food of the same type and `FoodCollectionList` which is a list of these collections.
+A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the following reasons:
+
+* The list of `FoodCollection` items associated with a `UniquePetList` can be directly derived from the `UniquePetList` itself.
+* Changes in FoodCollection occurs only if there is a change in `UniquePetList#internalList`.
+
+Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
+`ModelManager` then passes the list of `FoodCollection` to ui for display as a list of `DisplayItem` when `display i` is called.
+
+The following shows a typical usage scenario that involves the Display Inventory feature.
+
+* Step 1: The user launches the application. A `UniquePetList` is initialized in `PetTracker`, upon which a `FoodCollectionList` item is created to store the food data of the pets in the list(if it is an empty list, `FoodCollectionList` is also stores an empty list of `FoodCollection`)
+* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model$getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
+* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList$internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList$updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
+
+==== Design Considerations
+===== Aspect: Maintaining the collection of food in a pet tracker
+* Alternative 1(current choice): Maintains the list as an attribute of `UniquePetList`.
+** Pros: Easier to initialize and update the list.
+** Cons: Less extendability. Adding additional food items in inventory(independent of pet list) is difficult.
+
+* Alternative 2: Maintains a list of food collections separate from `UniquePetList`.
+** Pros: Higher Extendability that supports more independent operations of FoodCollection List.
+** Cons: More difficult to constantly update and maintain the food collection list should food list changes.
+
+==== Aspect: Updating the collection of food when pet list is modified.
+* Alternative 1(current choice): Replace the entire list by a new food collection list created from the updated pet list.
+** Pros: Easy to implement and no adaptation is required for different types of modification of pet list.
+** Cons: Computationally intensive when there is a huge pet list.
+
+* Alternative 2: Modify `FoodCollection` affected by the command.
+** Pros: Less computationally intensive and more responsive given a large database.
+** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
+// end::displayintentoryfeature
+
 
 === Logging
 
