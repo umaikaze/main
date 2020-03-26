@@ -30,7 +30,7 @@ public enum Gender {
 
     @Override
     public String toString() {
-        return value;
+        return value.substring(0, 1) + value.substring(1).toLowerCase();
     }
 
 }
