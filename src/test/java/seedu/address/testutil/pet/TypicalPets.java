@@ -33,7 +33,7 @@ public class TypicalPets {
 
     public static final Pet AMY = new PetBuilder().withName("Amy")
             .withSpecies("Dog").withDateOfBirth("1/6/2015")
-            .withGender("male").withFoodList("Brand A:10")
+            .withGender("female").withFoodList("Brand A:10")
             .withTags("darkFur").build();
     public static final Pet BOB = new PetBuilder().withName("Bob")
             .withSpecies("Cat").withFoodList("Brand B:10")
