@@ -34,7 +34,6 @@ public class FindSlotCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
-        model.changeSystemToFilteredSlots();
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()), false,
                 false, true, false);

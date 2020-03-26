@@ -147,6 +147,7 @@ public class ModelManager implements Model {
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
+        changeSystemToFilteredPets();
     }
 
     //=========== Slot  ================================================================================
@@ -183,6 +184,7 @@ public class ModelManager implements Model {
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
         requireNonNull(predicate);
         filteredSlots.setPredicate(predicate);
+        changeSystemToFilteredSlots();
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -207,12 +209,10 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
-    @Override
     public void changeSystemToFilteredPets() {
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
     }
 
-    @Override
     public void changeSystemToFilteredSlots() {
         filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
     }

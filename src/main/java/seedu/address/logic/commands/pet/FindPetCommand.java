@@ -32,7 +32,6 @@ public class FindPetCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPetList(predicate);
-        model.changeSystemToFilteredPets();
         return new CommandResult(
                 String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()),
                 false, false, true, false);

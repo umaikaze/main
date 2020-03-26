@@ -154,10 +154,6 @@ public interface Model {
      */
     void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate);
 
-    void changeSystemToFilteredPets();
-
-    void changeSystemToFilteredSlots();
-
     /**
      * Returns an unmodifiable view of the filtered list of display items.
      */

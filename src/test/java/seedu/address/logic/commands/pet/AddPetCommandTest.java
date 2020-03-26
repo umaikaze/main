@@ -201,16 +201,6 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void changeSystemToFilteredPets() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void changeSystemToFilteredSlots() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void changeDisplaySystem(DisplaySystemType newDisplayType) {
             throw new AssertionError("This method should not be called.");
         }
