@@ -25,7 +25,7 @@ public enum Gender {
     }
 
     public static boolean isValidGender(String test) {
-        return (test.equals("MALE")) || (test.equals("FEMALE"));
+        return (test.equalsIgnoreCase("MALE")) || (test.equalsIgnoreCase("FEMALE"));
     }
 
     @Override
