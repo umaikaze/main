@@ -3,14 +3,11 @@ package seedu.address.logic.commands.pet;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
-import seedu.address.ui.DisplayItem;
-import seedu.address.ui.DisplaySystemType;
 
 /**
  * Finds and lists all pets in pet tracker whose name contains any of the argument keywords.
