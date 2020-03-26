@@ -10,7 +10,7 @@ public enum Gender {
     FEMALE ("FEMALE"),
     MALE ("MALE");
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender should be either MALE or FEMALE";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should be either male or female";
 
     private String value;
 
