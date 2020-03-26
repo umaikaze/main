@@ -207,8 +207,21 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
+    @Override
+    public void changeSystemToFilteredPets() {
+        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+    }
 
     @Override
+    public void changeSystemToFilteredSlots() {
+        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+    }
+
+
+    @Override
+    /**
+     * Used for display all pets/slots/inventory in display command.
+     */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
         case PETS:
