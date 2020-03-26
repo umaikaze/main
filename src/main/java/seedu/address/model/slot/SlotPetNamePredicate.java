@@ -2,6 +2,8 @@ package seedu.address.model.slot;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches the given name exactly.
  */
@@ -14,7 +16,7 @@ public class SlotPetNamePredicate implements Predicate<Slot> {
 
     @Override
     public boolean test(Slot slot) {
-        return petName.equals(slot.getPet().getName().toString());
+        return petName.equalsIgnoreCase(slot.getPet().getName().toString());
     }
 
     @Override
