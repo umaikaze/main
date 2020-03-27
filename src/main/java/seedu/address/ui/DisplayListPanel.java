@@ -20,6 +20,8 @@ public class DisplayListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<DisplayItem> displayListView;
+    @FXML
+    private ListView<DisplayItem> displayInformationView;
 
     public DisplayListPanel(ObservableList<DisplayItem> displayList) {
         super(FXML);

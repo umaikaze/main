@@ -30,7 +30,7 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalList = FXCollections.observableArrayList();
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    private final FoodCollectionList foodCollectionList = new FoodCollectionList(getFoodList());
+    private final FoodCollectionList foodCollectionList = new FoodCollectionList(getPetList());
 
     public UniquePetList() {
         setInternalListListenerForFoodCollectionList();
@@ -131,12 +131,12 @@ public class UniquePetList implements Iterable<Pet> {
         internalList.setAll(pets);
     }
 
-    public List<Food> getFoodList() {
-        List<Food> foods = new ArrayList<>();
+    public List<Pet> getPetList() {
+        List<Pet> pets = new ArrayList<>();
         for (Pet pet:internalList) {
-            foods.addAll(pet.getFoodList());
+            pets.add(pet);
         }
-        return foods;
+        return pets;
     }
 
 
@@ -183,7 +183,6 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     private void updateFoodCollectionList() {
-        List<Food> foods = getFoodList();
-        foodCollectionList.update(foods);
+        foodCollectionList.update(internalList);
     }
 }

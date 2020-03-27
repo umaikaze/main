@@ -3,6 +3,7 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,10 +21,10 @@ public class FoodCollectionList {
 
     /**
      * Creates a FoodCollectionList that contains a given list of foods
-     * @param foods The list of foods to be used to create the food collection list.
+     * @param pets The list of foods to be used to create the food collection list.
      */
-    public FoodCollectionList(List<Food> foods) {
-        addFoodList(foods);
+    public FoodCollectionList(List<Pet> pets) {
+        addFoodList(pets);
     }
 
     /**
@@ -54,29 +55,34 @@ public class FoodCollectionList {
      * Adds a food item into the food collection list.
      * @param food The food to be added.
      */
-    public void addFood(Food food) {
+    public void addFood(Food food, Pet pet) {
         if (contains(food)) {
             FoodCollection foodCollection = getFoodCollection(food.foodName);
-            foodCollection.addFoodToCollection(food);
+            foodCollection.addFoodToCollection(food, pet);
         } else {
-            internalList.add(FoodCollection.generateFoodCollection(food));
+            internalList.add(FoodCollection.generateFoodCollection(food, pet));
         }
     }
 
     /**
      * Adds a list of food items into the food collection list.
-     * @param foods The list of food to be added.
+     * @param pets The list of food to be added.
      */
-    public void addFoodList(List<Food> foods) {
-        foods.forEach(this::addFood);
+    public void addFoodList(List<Pet> pets) {
+        for (Pet pet:pets) {
+            Set<Food> foodList = pet.getFoodList();
+            for (Food food:foodList) {
+                addFood(food, pet);
+            }
+        }
     }
 
     /**
      * Updates the food collection list by replacing the items originally in the list with the given list of foods.
-     * @param foods The list of food used to replace the original list.
+     * @param pets The list of pets used to replace the original list.
      */
-    public void update(List<Food> foods) {
-        internalList.setAll(new FoodCollectionList(foods).internalList);
+    public void update(List<Pet> pets) {
+        internalList.setAll(new FoodCollectionList(pets).internalList);
     }
 
     /**

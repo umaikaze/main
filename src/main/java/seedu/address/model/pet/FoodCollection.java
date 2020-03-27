@@ -3,6 +3,9 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.ui.DisplayItem;
@@ -25,18 +28,22 @@ public class FoodCollection implements DisplayItem {
 
     private final String name;
     private int amount;
+    private HashMap<Pet, Integer> pets = new HashMap<>();
 
     /**
      * Constructs a {@code Food}.
      *
-     * @param name A valid food collection name.
+     * @param food A valid food to generate Food Collection from.
+     * @param pet The owner of the food being added.
      */
-    private FoodCollection(String name, int amount) {
-        requireNonNull(name);
-        checkArgument(isValidFoodCollectionName(name), MESSAGE_NAME_CONSTRAINTS);
-        this.name = name;
+    private FoodCollection(Food food, Pet pet) {
+        requireNonNull(food);
+        requireNonNull(pet);
+        checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
+        this.name = food.foodName;
         checkArgument(isValidFoodCollectionAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
-        this.amount = amount;
+        this.amount = food.foodAmount;
+        this.pets.put(pet, amount);
     }
 
     /**
@@ -45,9 +52,10 @@ public class FoodCollection implements DisplayItem {
      * @return true if it is successfully added, which means
      * the type of food has the same name as that of the food collection.
      */
-    public boolean addFoodToCollection(Food other) {
+    public boolean addFoodToCollection(Food other, Pet pet) {
         if (isSameType(other)) {
             amount += other.foodAmount;
+            pets.put(pet, amount);
             return true;
         } else {
             return false;
@@ -57,8 +65,8 @@ public class FoodCollection implements DisplayItem {
     /**
      * Generates a food collection from a given food object.
      */
-    public static FoodCollection generateFoodCollection(Food food) {
-        return new FoodCollection(food.foodName, food.foodAmount);
+    public static FoodCollection generateFoodCollection(Food food, Pet pet) {
+        return new FoodCollection(food, pet);
     }
 
     /**
