@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertFindCommandSucc
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Predicate;
 
@@ -30,9 +31,9 @@ class FindSlotCommandTest {
     @Test
     public void equals() {
         Predicate<Slot> firstPredicate =
-                new SlotPetNamePredicate("Coco");
+                new SlotPetNamePredicate(Arrays.asList("Coco"));
         Predicate<Slot> secondPredicate =
-                new SlotPetNamePredicate("Garfield");
+                new SlotPetNamePredicate(Arrays.asList("Garfield"));
 
         FindSlotCommand findFirstCommand = new FindSlotCommand(firstPredicate);
         FindSlotCommand findSecondCommand = new FindSlotCommand(secondPredicate);

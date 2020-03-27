@@ -183,7 +183,7 @@ public class CommandTestUtil {
 
         Slot slot = model.getFilteredSlotList().get(targetIndex.getZeroBased());
         final String name = slot.getPet().getName().fullName;
-        model.updateFilteredSlotList(new SlotPetNamePredicate(name));
+        model.updateFilteredSlotList(new SlotPetNamePredicate(Arrays.asList(name.split("\\s+"))));
 
         assertEquals(1, model.getFilteredSlotList().size());
     }
