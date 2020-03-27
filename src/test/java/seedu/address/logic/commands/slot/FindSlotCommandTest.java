@@ -60,7 +60,7 @@ class FindSlotCommandTest {
         Predicate<Slot> predicate = FindSlotParser.getPredicates(" " + PREFIX_NAME);
         FindSlotCommand command = new FindSlotCommand(predicate);
         expectedModel.updateFilteredSlotList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredSlotList());
     }
 
