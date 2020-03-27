@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Pet> filteredPets;
     private final FilteredList<Slot> filteredSlots;
     private final FilteredList<FoodCollection> filteredFoodCollections;
+    private DisplaySystemType currentDisplaySystemType;
     private ObservableList<DisplayItem> filteredDisplayItems;
 
     /**
@@ -50,6 +51,7 @@ public class ModelManager implements Model {
         filteredFoodCollections = new FilteredList<>(this.petTracker.getFoodCollectionList());
 
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet); // display list of pets initially
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
     public ModelManager() {
@@ -207,6 +209,9 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
+    public DisplaySystemType getCurrentDisplaySystemType() {
+        return currentDisplaySystemType;
+    }
 
     @Override
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
@@ -227,6 +232,7 @@ public class ModelManager implements Model {
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
         }
+        currentDisplaySystemType = newDisplayType;
     }
 
     @Override

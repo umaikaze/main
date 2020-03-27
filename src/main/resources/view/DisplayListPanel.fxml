@@ -2,7 +2,15 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
-<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="displayListView" HBox.Hgrow="ALWAYS" />
-  <ListView fx:id="displayInformationView" HBox.hgrow="NEVER" minWidth="0" prefWidth="0"/>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <ListView fx:id="displayListView" HBox.hgrow="ALWAYS" styleClass = "pane-with-border"/>
+  <StackPane prefHeight="10.0" prefWidth="10.0" HBox.hgrow="NEVER" />
+  <VBox fx:id="displayInformationViewContainer" HBox.hgrow="NEVER">
+    <ListView fx:id="displayInformationView" prefWidth="0" minWidth="0" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS"/>
+  </VBox>
 </HBox>

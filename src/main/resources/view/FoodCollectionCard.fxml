@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" onMouseClicked="#handleMouthClicked" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_RIGHT" minHeight="0.0" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="0">
             <padding>
@@ -25,9 +25,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" prefHeight="17.0" prefWidth="80.0" styleClass="cell_big_label" text="\$first" />
-                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                <Label fx:id="amount" prefHeight="17.0" prefWidth="62.0" styleClass="cell_big_label" text="\$first" />
+                <Label fx:id="name" minHeight="17.0" prefWidth="300.0" styleClass="cell_big_label" text="\$first" HBox.hgrow="ALWAYS" maxHeight="Infinity" />
+                <Region prefHeight="200.0" prefWidth="10.0" HBox.hgrow="SOMETIMES" />
+                <Label fx:id="amount" prefHeight="17.0" prefWidth="90.0" styleClass="cell_big_label" text="\$first" HBox.hgrow="ALWAYS" />
             </HBox>
         </VBox>
       <rowConstraints>

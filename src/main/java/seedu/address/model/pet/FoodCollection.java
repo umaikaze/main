@@ -3,9 +3,10 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.HashMap;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
@@ -26,7 +27,9 @@ public class FoodCollection implements DisplayItem {
 
     private final String name;
     private int amount;
-    private HashMap<String, Integer> pets = new HashMap<>();
+    private ObservableList<FoodAmountAndPet> foodAmountAndPets = FXCollections.observableArrayList();
+    private final ObservableList<FoodAmountAndPet> unmodifiablePets =
+            FXCollections.unmodifiableObservableList(foodAmountAndPets);
 
     /**
      * Constructs a {@code Food}.
@@ -39,9 +42,9 @@ public class FoodCollection implements DisplayItem {
         requireNonNull(pet);
         checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
         this.name = food.foodName;
-        checkArgument(isValidFoodCollectionAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
+        checkArgument(isValidFoodCollectionAmount(food.foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.amount = food.foodAmount;
-        this.pets.put(pet.getName().fullName, amount);
+        this.foodAmountAndPets.add(new FoodAmountAndPet(food.foodAmount, pet));
     }
 
     /**
@@ -53,7 +56,7 @@ public class FoodCollection implements DisplayItem {
     public boolean addFoodToCollection(Food other, Pet pet) {
         if (isSameType(other)) {
             amount += other.foodAmount;
-            pets.put(pet.getName().fullName, amount);
+            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet));
             return true;
         } else {
             return false;
@@ -120,6 +123,10 @@ public class FoodCollection implements DisplayItem {
 
     public Integer getAmount() {
         return amount;
+    }
+
+    public ObservableList<FoodAmountAndPet> getUnmodifiablePets() {
+        return unmodifiablePets;
     }
 
     @Override
