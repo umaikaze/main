@@ -1,21 +1,25 @@
 package seedu.address.model.slot;
 
+import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
 
 
 /**
  * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches the given name exactly.
  */
 public class SlotPetNamePredicate implements Predicate<Slot> {
-    private final String petName;
+    private final List<String> petName;
 
-    public SlotPetNamePredicate(String petName) {
+    public SlotPetNamePredicate(List<String> petName) {
         this.petName = petName;
     }
 
     @Override
     public boolean test(Slot slot) {
-        return petName.equalsIgnoreCase(slot.getPet().getName().toString());
+        return petName.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(slot.getPet().getName().fullName, keyword));
     }
 
     @Override

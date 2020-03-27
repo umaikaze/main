@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -46,7 +47,8 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         List<Predicate<Slot>> predicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_NAME).get()));
+            predicates.add(new SlotPetNamePredicate(Arrays.asList(
+                    argMultimap.getValue(PREFIX_NAME).get().split("\\s+"))));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             predicates.add(new SlotDatePredicate(
