@@ -7,7 +7,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
@@ -16,11 +15,9 @@ import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 
 /**
- * Edits the details of an slot in the schedule.
+ * Edits the details of slots in the schedule that was occupied by the pet before edit.
  */
-public class MultiSlotEditCommand extends Command {
-
-    public static final String MESSAGE_USAGE = "Used internally for to replace obsolete slots after editing a pet";
+public class MultiSlotEdit {
 
     public static final String ALL_SLOTS_OCCUPIED_BY_PET_EDITED = "%1$s\n all slots occupied by pet edited";
 
@@ -29,11 +26,11 @@ public class MultiSlotEditCommand extends Command {
     private final EditSlotDescriptor[] editSlotDescriptors;
 
     /**
-     * @param slotsToEdit of the person in the filtered person list to edit
-     * @param editSlotDescriptors details to edit the person with
+     * @param slotsToEdit list of slots affected
+     * @param editSlotDescriptors details to edit the slots with
      */
-    public MultiSlotEditCommand(CommandResult editPetResult, Slot[] slotsToEdit,
-                                EditSlotDescriptor[] editSlotDescriptors) {
+    public MultiSlotEdit(CommandResult editPetResult, Slot[] slotsToEdit,
+                         EditSlotDescriptor[] editSlotDescriptors) {
         requireNonNull(editPetResult);
         requireNonNull(slotsToEdit);
         requireNonNull(editSlotDescriptors);
@@ -43,7 +40,6 @@ public class MultiSlotEditCommand extends Command {
         this.editSlotDescriptors = editSlotDescriptors;
     }
 
-    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
@@ -86,12 +82,12 @@ public class MultiSlotEditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MultiSlotEditCommand)) {
+        if (!(other instanceof MultiSlotEdit)) {
             return false;
         }
 
         // state check
-        MultiSlotEditCommand e = (MultiSlotEditCommand) other;
+        MultiSlotEdit e = (MultiSlotEdit) other;
         return slotsToEdit.equals(e.slotsToEdit)
                 && editSlotDescriptors.equals(e.editSlotDescriptors);
     }
