@@ -60,7 +60,7 @@ public class FindPetCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
-        asserFindtCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPetList());
     }
 
