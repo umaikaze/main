@@ -8,6 +8,8 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.swing.text.html.ListView;
+
 /**
  * A FoodCollectionList represents a list of unique Food Collections, where Food Collections are uniquely identified
  * through FoodCollection#name. FoodCollectionList wraps around an internal ObservableList of FoodCollection and it
@@ -24,7 +26,7 @@ public class FoodCollectionList {
      * @param pets The list of foods to be used to create the food collection list.
      */
     public FoodCollectionList(List<Pet> pets) {
-        addFoodList(pets);
+        addPetList(pets);
     }
 
     /**
@@ -68,7 +70,7 @@ public class FoodCollectionList {
      * Adds a list of food items into the food collection list.
      * @param pets The list of food to be added.
      */
-    public void addFoodList(List<Pet> pets) {
+    public void addPetList(List<Pet> pets) {
         for (Pet pet:pets) {
             Set<Food> foodList = pet.getFoodList();
             for (Food food:foodList) {
@@ -82,7 +84,9 @@ public class FoodCollectionList {
      * @param pets The list of pets used to replace the original list.
      */
     public void update(List<Pet> pets) {
-        internalList.setAll(new FoodCollectionList(pets).internalList);
+        FoodCollectionList temp = new FoodCollectionList(pets);
+        List<FoodCollection> replacement = temp.internalList;
+        internalList.setAll(replacement);
     }
 
     /**

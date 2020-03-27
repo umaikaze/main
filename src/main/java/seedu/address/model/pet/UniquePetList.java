@@ -183,6 +183,6 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     private void updateFoodCollectionList() {
-        foodCollectionList.update(internalList);
+        foodCollectionList.update(getPetList());
     }
 }

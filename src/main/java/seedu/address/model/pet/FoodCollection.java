@@ -3,9 +3,7 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import seedu.address.ui.DisplayItem;
@@ -28,7 +26,7 @@ public class FoodCollection implements DisplayItem {
 
     private final String name;
     private int amount;
-    private HashMap<Pet, Integer> pets = new HashMap<>();
+    private HashMap<String, Integer> pets = new HashMap<>();
 
     /**
      * Constructs a {@code Food}.
@@ -43,7 +41,7 @@ public class FoodCollection implements DisplayItem {
         this.name = food.foodName;
         checkArgument(isValidFoodCollectionAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.amount = food.foodAmount;
-        this.pets.put(pet, amount);
+        this.pets.put(pet.getName().fullName, amount);
     }
 
     /**
@@ -55,7 +53,7 @@ public class FoodCollection implements DisplayItem {
     public boolean addFoodToCollection(Food other, Pet pet) {
         if (isSameType(other)) {
             amount += other.foodAmount;
-            pets.put(pet, amount);
+            pets.put(pet.getName().fullName, amount);
             return true;
         } else {
             return false;
