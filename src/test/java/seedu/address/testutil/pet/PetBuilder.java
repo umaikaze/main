@@ -18,7 +18,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class PetBuilder {
 
     public static final String DEFAULT_NAME = "Kiruya Momochi";
-    public static final Gender DEFAULT_GENDER = Gender.FEMALE;
+    public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_DOB = "2/9/1998";
     public static final String DEFAULT_SPECIES = "Cat";
     private static final String DEFAULT_FOOD_NAME = "catfood";
@@ -33,7 +33,7 @@ public class PetBuilder {
 
     public PetBuilder() {
         name = new Name(DEFAULT_NAME);
-        gender = DEFAULT_GENDER;
+        gender = Gender.valueOf(DEFAULT_GENDER.toUpperCase());
         dob = new DateOfBirth(DEFAULT_DOB);
         species = new Species(DEFAULT_SPECIES);
         foodSet = new HashSet<>();
@@ -80,8 +80,8 @@ public class PetBuilder {
     /**
      * Sets the {@code Gender} of the {@code Pet} that we are building.
      */
-    public PetBuilder withGender(Gender gender) {
-        this.gender = gender;
+    public PetBuilder withGender(String gender) {
+        this.gender = Gender.valueOf(gender.toUpperCase());
         return this;
     }
 

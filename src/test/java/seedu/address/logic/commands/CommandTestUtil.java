@@ -24,7 +24,6 @@ import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
-import seedu.address.model.pet.Gender;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
@@ -41,8 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_COCO = "Coco";
     public static final String VALID_NAME_GARFIELD = "Garfield";
     public static final String VALID_NAME_DOG = "Dog";
-    public static final Gender VALID_GENDER_COCO = Gender.FEMALE;
-    public static final Gender VALID_GENDER_GARFIELD = Gender.MALE;
+    public static final String VALID_GENDER_COCO = "female";
+    public static final String VALID_GENDER_GARFIELD = "male";
     public static final String VALID_DOB_COCO = "2/2/2015";
     public static final String VALID_DOB_GARFIELD = "19/6/1978";
     public static final String VALID_SPECIES_COCO = "dog";
