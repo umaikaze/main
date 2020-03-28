@@ -3,6 +3,7 @@ package seedu.address.logic.commands.slot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertFindCommandSuccess;
@@ -11,7 +12,6 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -64,9 +64,12 @@ class FindSlotCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 3);
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
+        FindSlotCommand command = new FindSlotCommand(predicate);
         expectedModel.updateFilteredSlotList(predicate);
         TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());
     }
 }
