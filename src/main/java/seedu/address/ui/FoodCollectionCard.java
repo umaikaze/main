@@ -7,13 +7,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.pet.FoodAmountAndPet;
 import seedu.address.model.pet.FoodCollection;
 
-import java.util.List;
-
 /**
- * An UI component that displays information of a {@code Pet}.
+ * An UI component that displays information of a {@code FoodCollection}.
  */
 
 public class FoodCollectionCard extends UiPart<Region> {
@@ -66,8 +63,10 @@ public class FoodCollectionCard extends UiPart<Region> {
                 && foodCollection.equals(card.foodCollection);
     }
 
+    /**
+     * Handler of a mouth clicking event. Triggers the displaying of amount breakdown of this food collection.
+     */
     @FXML
-
     private void handleMouthClicked() {
         ObservableList<DisplayItem> displayItems = CollectionUtil.map(foodCollection.getUnmodifiablePets(), pet -> pet);
         mouseClickedHandler.handle(displayItems);

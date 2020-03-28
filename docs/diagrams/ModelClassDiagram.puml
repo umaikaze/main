@@ -25,6 +25,7 @@ Class Species
 Class UniquePetList
 Class FoodCollection
 Class FoodCollectionList
+Class PetAmountAndPet
 }
 
 Package Schedule {
@@ -52,7 +53,9 @@ PetTracker *--> "1" UniquePetList
 UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
-FoodCollection *--> "*" Pet
+FoodCollection *--> "*" PetAmountAndPet
+PetAmountAndPet o--> "1" Pet
+UniquePetList -[hidden]right> FoodCollectionList
 
 Pet *--> Name
 Pet *--> Species

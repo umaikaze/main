@@ -49,6 +49,7 @@ public class FoodCollection implements DisplayItem {
 
     /**
      * Adds food into the food collection.
+     * @param pet The owner of the food being added
      * @param other The food to be added.
      * @return true if it is successfully added, which means
      * the type of food has the same name as that of the food collection.
@@ -117,14 +118,24 @@ public class FoodCollection implements DisplayItem {
         }
     }
 
+    /**
+     * Returns the name of this food collection.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the amount of food in this collection.
+     */
     public Integer getAmount() {
         return amount;
     }
 
+    /**
+     * Returns a list of FoodAmountAndPet as an ObservableList so that it can be displayed in Ui when the user
+     * requires to view a breakdown of the composition of the amount of this food collection by the owners of food.
+     */
     public ObservableList<FoodAmountAndPet> getUnmodifiablePets() {
         return unmodifiablePets;
     }

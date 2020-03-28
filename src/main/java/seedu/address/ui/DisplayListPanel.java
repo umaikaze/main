@@ -41,6 +41,7 @@ public class DisplayListPanel extends UiPart<Region> {
 
     /**
      * Changes the backing list of display items to {@code newDisplayList}.
+     * Also update the settings of displayInformationView to match the corresponding system being displayed.
      */
     public final void updateWith(ObservableList<DisplayItem> newDisplayList, DisplaySystemType type) {
         displayListView.setItems(newDisplayList);
@@ -52,6 +53,9 @@ public class DisplayListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Collapses the displayInformationView so that the displayListView occupies the entire screen.
+     */
     private void adjustInformationViewToRest() {
         displayInformationViewContainer.setPrefWidth(0);
         displayInformationViewContainer.setMinWidth(0);
@@ -62,6 +66,9 @@ public class DisplayListPanel extends UiPart<Region> {
         displayInformationView.getStyleClass().clear();
     }
 
+    /**
+     * Expands the displayInformationView for the display of inventory system.
+     */
     private void adjustInformationViewToInventory() {
         displayInformationViewContainer.setPrefWidth(displayListView.getPrefWidth());
         displayInformationViewContainer.setMinWidth(displayListView.getPrefWidth());
@@ -72,6 +79,9 @@ public class DisplayListPanel extends UiPart<Region> {
         displayInformationView.getStyleClass().add("pane-with-border");
     }
 
+    /**
+     * Displays the amount breakdown of the food collection being clicked on through the list provided.
+     */
     public final void handleClickOnList(ObservableList<DisplayItem> foodAmountAndPets) {
         displayInformationView.setItems(foodAmountAndPets);
     }

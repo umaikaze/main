@@ -197,6 +197,11 @@ class AddSlotCommandTest {
         }
 
         @Override
+        public DisplaySystemType getCurrentDisplaySystemType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
             throw new AssertionError("This method should not be called.");
         }

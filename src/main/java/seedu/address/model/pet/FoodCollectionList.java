@@ -8,8 +8,6 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.swing.text.html.ListView;
-
 /**
  * A FoodCollectionList represents a list of unique Food Collections, where Food Collections are uniquely identified
  * through FoodCollection#name. FoodCollectionList wraps around an internal ObservableList of FoodCollection and it
