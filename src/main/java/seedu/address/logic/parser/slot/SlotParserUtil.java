@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.DateTimeUtil;
@@ -93,13 +95,23 @@ public class SlotParserUtil {
         try {
             parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
         } catch (DateTimeParseException e) {
-            try {
-                parsedDate = LocalDateTime.parse(trimmedDate, DateTimeUtil.DATETIME_FORMAT).toLocalDate();
-            } catch (DateTimeParseException ex) {
-                throw new ParseException(MESSAGE_INVALID_DATE);
-            }
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
+    }
+
+    /**
+     * Parse a {@code String dates} into a {@code List<LocalDate>}
+     * @throws ParseException if the dates is not in valid format.
+     */
+    public static List<LocalDate> parseDates(String dates) throws ParseException {
+        requireNonNull(dates);
+        String[] trimmedDates = dates.split("\\s+");
+        ArrayList<LocalDate> parsedDates = new ArrayList<>();
+        for (String date : trimmedDates) {
+            parsedDates.add(parseDate(date));
+        }
+        return parsedDates;
     }
 
     /**
