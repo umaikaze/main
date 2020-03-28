@@ -13,6 +13,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
+import seedu.address.model.slot.Schedule;
+import seedu.address.model.slot.Slot;
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.
@@ -31,8 +33,10 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private final FoodCollectionList foodCollectionList = new FoodCollectionList(getFoodList());
+    private final Schedule slots;
 
     public UniquePetList() {
+        slots = new Schedule();
         setInternalListListenerForFoodCollectionList();
     }
 
@@ -139,6 +143,35 @@ public class UniquePetList implements Iterable<Pet> {
         return foods;
     }
 
+    // Slots methods
+
+    /**
+     * Replaces the contents of the schedule with {@code slots}.
+     */
+    public void setSlots(List<Slot> slots) {
+        this.slots.setSlots(slots);
+    }
+
+    public void addSlot(Slot slot) {
+        slots.add(slot);
+    }
+
+    /**
+     * Removes {@code key} from this {@code PetTracker}.
+     * {@code key} must exist in the pet tracker.
+     */
+    public void removeSlot(Slot key) {
+        slots.remove(key);
+    }
+
+    /**
+     * Replaces the given slot {@code target} in the list with {@code editedSlot}.
+     * {@code target} must exist in the pet tracker.
+     */
+    public void setSlot(Slot target, Slot editedSlot) {
+        requireNonNull(editedSlot);
+        slots.setSlot(target, editedSlot);
+    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -149,6 +182,10 @@ public class UniquePetList implements Iterable<Pet> {
 
     public ObservableList<FoodCollection> acquireUnmodifiableFoodCollectionList() {
         return foodCollectionList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Slot> acquireUnmodifiableSlotsList() {
+        return slots.asUnmodifiableObservableList();
     }
 
     @Override
