@@ -24,6 +24,10 @@ public class FindSlotCommand extends Command {
             + "Parameters: [n/PETNAME] [t/DATE]...\n"
             + "Example: " + COMMAND_WORD + " n/garfield t/10/11/2020";
 
+    public static final String MESSAGE_EMPTY_NAME_FIELD = "n/ should not be followed by an empty entry!";
+
+    public static final String MESSAGE_EMPTY_DATETIME_FIELD = "t/ should not be followed by an empty entry!";
+
     private final Predicate<Slot> predicate;
 
     public FindSlotCommand(Predicate<Slot> predicate) {

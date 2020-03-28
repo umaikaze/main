@@ -3,10 +3,10 @@ package seedu.address.logic.commands.slot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertFindCommandSuccess;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
@@ -56,20 +56,15 @@ class FindSlotCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noSlotFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 0);
-        Predicate<Slot> predicate = FindSlotParser.getPredicates(" " + PREFIX_NAME);
-        FindSlotCommand command = new FindSlotCommand(predicate);
-        expectedModel.updateFilteredSlotList(predicate);
-        assertFindCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredSlotList());
+    public void execute_zeroKeywords_throwParseException() throws ParseException {
+        String expectedMessage = FindSlotCommand.MESSAGE_EMPTY_DATETIME_FIELD;
+        FindSlotParser parser = new FindSlotParser();
+        assertParseFailure(parser, " " + PREFIX_NAME, expectedMessage);
     }
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 3);
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
-        FindSlotCommand command = new FindSlotCommand(predicate);
         expectedModel.updateFilteredSlotList(predicate);
         TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
         assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());
