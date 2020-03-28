@@ -57,7 +57,7 @@ class FindSlotCommandTest {
 
     @Test
     public void execute_zeroKeywords_throwParseException() throws ParseException {
-        String expectedMessage = FindSlotCommand.MESSAGE_EMPTY_DATETIME_FIELD;
+        String expectedMessage = FindSlotCommand.MESSAGE_EMPTY_NAME_FIELD;
         FindSlotParser parser = new FindSlotParser();
         assertParseFailure(parser, " " + PREFIX_NAME, expectedMessage);
     }
