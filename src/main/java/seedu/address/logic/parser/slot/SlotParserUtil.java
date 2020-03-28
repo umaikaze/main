@@ -94,7 +94,7 @@ public class SlotParserUtil {
             parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
         } catch (DateTimeParseException e) {
             try {
-                parsedDate = SlotParserUtil.parseDateTime(date).toLocalDate();
+                parsedDate = LocalDateTime.parse(trimmedDate, DateTimeUtil.DATETIME_FORMAT).toLocalDate();
             } catch (DateTimeParseException ex) {
                 throw new ParseException(MESSAGE_INVALID_DATE);
             }
