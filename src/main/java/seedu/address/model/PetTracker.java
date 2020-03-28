@@ -155,8 +155,6 @@ public class PetTracker implements ReadOnlyPetTracker {
         return pets.asUnmodifiableObservableList();
     }
 
-
-
     @Override
     public ObservableList<Slot> getSlotList() {
         return slots.asUnmodifiableObservableList();

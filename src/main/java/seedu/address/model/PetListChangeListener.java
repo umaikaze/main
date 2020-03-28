@@ -25,7 +25,7 @@ public class PetListChangeListener implements ListChangeListener<Pet> {
 
     }
 
-    private void removeExcessSlot(Pet removed,) {
+    private void removeExcessSlot(Pet removed) {
 
     }
 }
