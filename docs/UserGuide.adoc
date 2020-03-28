@@ -80,8 +80,6 @@ e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
   e.g. `editslot 1 t/16/11/2020 1300 d/120` +
   e.g. `editslot 3 d/45` +
   e.g. `editslot 12 n/Brian Griffin`
-  - **Check slot**: `checkslot t/DATETIME` +
-  e.g. `checkslot 17/4/2020 1700`
   - **Delete slot**: `deleteslot i/INDEX` +
   e.g. `deleteslot 2`
   - **Show conflicts**: `conflicts`
@@ -279,23 +277,6 @@ Edits the duration of the 3rd slot to be `45` minutes.
 - `editslot 12 n/Brian Griffin` +
 Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
-==== Checking slot availability: `checkslot`
-
-Informs the user which pet(s), if any, is/are occupying the slot at the specified datetime.
-
-Format: `checkslot t/DATETIME`
-
-****
-- The datetime must be in `dd/M/yyyy` format.
-* The time must be in 24-hour format.
-****
-
-Example:
-
-- `checkslot 17/4/2020 1700` +
-If the slot is occupied by Coco, returns: `Coco is occupying the slot at 17/4/2020 1700.` +
-If the slot is occupied by both Coco and Garfield (conflict), returns: `Coco and Garfield are occupying the slot at 17/4/2020 1700.` +
-If the slot is unoccupied, returns: `Unoccupied slot at 17/4/2020 1700.`
 
 ==== Deleting a slot: `deleteslot`
 
