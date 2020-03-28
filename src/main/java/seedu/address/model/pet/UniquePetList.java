@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import seedu.address.model.PetListChangeListener;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
 import seedu.address.model.slot.Schedule;
@@ -33,11 +34,11 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private final FoodCollectionList foodCollectionList = new FoodCollectionList(getFoodList());
-    private final Schedule slots;
+    private final Schedule slots = new Schedule();
 
     public UniquePetList() {
-        slots = new Schedule();
         setInternalListListenerForFoodCollectionList();
+        setInternalListListenerForSchedule();
     }
 
     public void setInternalListListenerForFoodCollectionList() {
@@ -47,6 +48,20 @@ public class UniquePetList implements Iterable<Pet> {
                 if (change.next()) {
                     updateFoodCollectionList();
                 }
+            }
+        });
+    }
+
+    public void setInternalListListenerForSchedule() {
+        internalList.addListener(new PetListChangeListener() {
+            @Override
+            protected void updateSlotsDueToPetEdit(Pet removed, Pet added) {
+
+            }
+
+            @Override
+            protected void removeExcessSlot(Pet removed) {
+
             }
         });
     }

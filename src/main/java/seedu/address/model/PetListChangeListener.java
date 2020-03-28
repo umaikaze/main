@@ -8,7 +8,7 @@ import seedu.address.model.pet.Pet;
 /**
  * Listener class to look out for changes in the pet list and use to modify schedule correspondingly
  */
-public class PetListChangeListener implements ListChangeListener<Pet> {
+public abstract class PetListChangeListener implements ListChangeListener<Pet> {
 
     @Override
     public void onChanged (Change<? extends Pet> petChange) {
@@ -21,11 +21,7 @@ public class PetListChangeListener implements ListChangeListener<Pet> {
         removeExcessSlot(removed.get(0));
     }
 
-    private void updateSlotsDueToPetEdit(Pet removed, Pet added) {
+    protected abstract void updateSlotsDueToPetEdit(Pet removed, Pet added);
 
-    }
-
-    private void removeExcessSlot(Pet removed) {
-
-    }
+    protected abstract void removeExcessSlot(Pet removed);
 }
