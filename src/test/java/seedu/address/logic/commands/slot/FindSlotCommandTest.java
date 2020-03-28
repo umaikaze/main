@@ -69,7 +69,6 @@ class FindSlotCommandTest {
         FindSlotCommand command = new FindSlotCommand(predicate);
         expectedModel.updateFilteredSlotList(predicate);
         TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
-        assertFindCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());
     }
 }
