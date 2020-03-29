@@ -33,7 +33,7 @@ public class Species {
 
     /**
      * Transfer species string in to the format of "Xxx Xxx ...".
-     * @param species The species passed in by user, to be
+     * @param species The species passed in by user
      * @return The formatted species string
      */
     public String formatSpecies(String species) {

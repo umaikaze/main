@@ -33,7 +33,7 @@ public class Name implements Comparable<Name> {
 
     /**
      * Transfer name in to the format of "Xxx Xxx ...".
-     * @param name The name passed in by user, to be
+     * @param name The name passed in by user
      * @return The formatted name
      */
     public String formatName(String name) {
