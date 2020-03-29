@@ -52,7 +52,7 @@ public class EditPetDescriptorBuilder {
      * Sets the {@code Gender} of the {@code EditPetDescriptor} that we are building.
      */
     public EditPetDescriptorBuilder withGender(String gender) {
-        descriptor.setGender(Gender.valueOf(gender));
+        descriptor.setGender(Gender.valueOf(gender.toUpperCase()));
         return this;
     }
 
