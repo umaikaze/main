@@ -2,7 +2,6 @@ package seedu.address.logic.parser.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_GENDER;
@@ -15,6 +14,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.pet.EditPetCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
@@ -69,7 +69,21 @@ public class EditPetParser implements Parser<EditPetCommand> {
             throw new ParseException(EditPetCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditPetCommand(index, editPetDescriptor);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_GENDER).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_GENDER;
+        }
+        if (argMultimap.getAllValues(PREFIX_SPECIES).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_SPECIES;
+        }
+        if (argMultimap.getAllValues(PREFIX_DOB).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_DOB;
+        }
+
+        return new EditPetCommand(index, editPetDescriptor, warningMessage);
     }
 
     /**

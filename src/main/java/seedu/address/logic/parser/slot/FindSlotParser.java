@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
@@ -28,8 +29,18 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSlotCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
 
-        return new FindSlotCommand(getPredicates(args));
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_TIME;
+        }
+
+        return new FindSlotCommand(getPredicates(args), warningMessage);
     }
 
     public static Predicate<Slot> getPredicates(String args) throws ParseException {

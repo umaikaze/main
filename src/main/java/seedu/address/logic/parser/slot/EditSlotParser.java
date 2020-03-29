@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
@@ -63,6 +64,17 @@ public class EditSlotParser implements Parser<EditSlotCommand> {
             throw new ParseException(EditSlotCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditSlotCommand(index, editSlotDescriptor);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_TIME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+
+        return new EditSlotCommand(index, editSlotDescriptor, warningMessage);
     }
 }

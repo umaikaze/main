@@ -25,9 +25,15 @@ public class FindSlotCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/garfield t/10/11/2020";
 
     private final Predicate<Slot> predicate;
+    private String warningMessage;
 
     public FindSlotCommand(Predicate<Slot> predicate) {
         this.predicate = predicate;
+    }
+
+    public FindSlotCommand(Predicate<Slot> predicate, String warningMessage) {
+        this.predicate = predicate;
+        this.warningMessage = warningMessage;
     }
 
     @Override
@@ -35,7 +41,7 @@ public class FindSlotCommand extends Command {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()));
+                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()) + warningMessage);
     }
 
     @Override
