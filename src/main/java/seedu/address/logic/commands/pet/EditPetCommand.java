@@ -138,7 +138,8 @@ public class EditPetCommand extends Command {
         // state check
         EditPetCommand e = (EditPetCommand) other;
         return index.equals(e.index)
-                && editPetDescriptor.equals(e.editPetDescriptor);
+                && editPetDescriptor.equals(e.editPetDescriptor)
+                && warningMessage.equals(e.warningMessage);
     }
 
     /**

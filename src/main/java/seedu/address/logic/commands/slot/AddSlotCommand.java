@@ -59,6 +59,7 @@ public class AddSlotCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddSlotCommand // instanceof handles nulls
-                && slotToAdd.equals(((AddSlotCommand) other).slotToAdd));
+                && slotToAdd.equals(((AddSlotCommand) other).slotToAdd))
+                && warningMessage.equals(((AddSlotCommand) other).warningMessage);
     }
 }

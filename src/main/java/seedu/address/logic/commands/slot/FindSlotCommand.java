@@ -53,6 +53,7 @@ public class FindSlotCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindSlotCommand // instanceof handles nulls
-                && predicate.equals(((FindSlotCommand) other).predicate)); // state check
+                && predicate.equals(((FindSlotCommand) other).predicate))
+                && warningMessage.equals(((FindSlotCommand) other).warningMessage); // state check
     }
 }

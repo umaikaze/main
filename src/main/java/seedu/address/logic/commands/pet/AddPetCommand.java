@@ -79,6 +79,7 @@ public class AddPetCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPetCommand // instanceof handles nulls
-                && toAdd.equals(((AddPetCommand) other).toAdd));
+                && toAdd.equals(((AddPetCommand) other).toAdd))
+                && warningMessage.equals(((AddPetCommand) other).warningMessage);
     }
 }

@@ -118,7 +118,8 @@ public class EditSlotCommand extends Command {
         // state check
         EditSlotCommand e = (EditSlotCommand) other;
         return index.equals(e.index)
-                && editSlotDescriptor.equals(e.editSlotDescriptor);
+                && editSlotDescriptor.equals(e.editSlotDescriptor)
+                && warningMessage.equals(e.warningMessage);
     }
 
     /**
