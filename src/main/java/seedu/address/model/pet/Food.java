@@ -36,7 +36,7 @@ public class Food {
 
     /**
      * Transfer food name in to the format of "Xxx Xxx ...".
-     * @param foodName The food name passed in by user, to be
+     * @param foodName The food name passed in by user
      * @return The formatted food name
      */
     public String formatFoodName(String foodName) {
