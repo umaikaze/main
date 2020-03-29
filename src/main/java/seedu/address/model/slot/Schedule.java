@@ -1,9 +1,11 @@
 package seedu.address.model.slot;
 
 import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toList;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -95,6 +97,16 @@ public class Schedule {
      */
     public ObservableList<Slot> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the backing list for a specific pet.
+     */
+    public ObservableList<Slot> getInternalUnmodifiableListForPetName(String petName) {
+        ObservableList<Slot> val = null;
+        return internalUnmodifiableList.stream()
+                .filter(new SlotPetNamePredicate(petName))
+                .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
     }
 
     @Override

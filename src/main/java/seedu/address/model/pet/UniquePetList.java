@@ -56,12 +56,18 @@ public class UniquePetList implements Iterable<Pet> {
         internalList.addListener(new PetListChangeListener() {
             @Override
             protected void updateSlotsDueToPetEdit(Pet removed, Pet added) {
-
+                ObservableList<Slot> toEdit = slots.getInternalUnmodifiableListForPetName(removed.getName().fullName);
+                for (Slot slot : toEdit) {
+                    slots.setSlot(slot, petReplacedSlot(slot, added));
+                }
             }
 
             @Override
             protected void removeExcessSlot(Pet removed) {
-
+                ObservableList<Slot> toRemove = slots.getInternalUnmodifiableListForPetName(removed.getName().fullName);
+                for (Slot slot : toRemove) {
+                    slots.remove(slot);
+                }
             }
         });
     }
