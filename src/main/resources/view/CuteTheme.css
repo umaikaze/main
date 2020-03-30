@@ -126,20 +126,10 @@
     -fx-text-fill: #010504;
 }
 
-.outline.cell_big_label .text {
-    -fx-stroke: #685044;
-    -fx-stroke-width: 7px;
-}
-
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
-}
-
-.outline.cell_small_label .text {
-    -fx-stroke: #685044;
-    -fx-stroke-width: 5px;
 }
 
 .stack-pane {
@@ -333,10 +323,11 @@
     -fx-border-color: #3a405a;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-background-radius: 3;
+    -fx-border-radius: 20;
     -fx-font-family: "Comic Sans MS";
     -fx-font-size: 13pt;
     -fx-text-fill: #3a405a;
+    -fx-background-radius: 20;
 }
 
 #filterField, #petListPanel, #petWebpage {
@@ -345,7 +336,7 @@
 
 #resultDisplay .content {
     -fx-background-color: #e9afa3;
-    -fx-background-radius: 0;
+    -fx-background-radius: 20;
 }
 
 #tags {
