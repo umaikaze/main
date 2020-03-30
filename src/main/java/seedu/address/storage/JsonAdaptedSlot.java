@@ -1,7 +1,10 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
-import static seedu.address.logic.parser.slot.SlotParserUtil.*;
+import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DATETIME;
+import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DURATION;
+import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_PETNAME;
+import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_PET_DOES_NOT_EXIST;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -69,7 +72,8 @@ public class JsonAdaptedSlot {
         }
 
         if (dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
         }
         final LocalDateTime modelDateTime;
         try {
@@ -79,7 +83,8 @@ public class JsonAdaptedSlot {
         }
 
         if (duration == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Duration.class.getSimpleName()));
         }
         final Duration modelDuration;
         try {
