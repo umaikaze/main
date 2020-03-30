@@ -33,7 +33,7 @@ public class AddPetCommandTest {
 
     @Test
     public void constructor_nullPet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddPetCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddPetCommand(null, null));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class AddPetCommandTest {
                 new seedu.address.logic.commands.pet.AddPetCommandTest.ModelStubAcceptingPetAdded();
         Pet validPet = new PetBuilder().build();
 
-        CommandResult commandResult = new AddPetCommand(validPet).execute(modelStub);
+        CommandResult commandResult = new AddPetCommand(validPet, "").execute(modelStub);
 
         assertEquals(String.format(AddPetCommand.MESSAGE_SUCCESS, validPet), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPet), modelStub.petsAdded);
@@ -51,7 +51,7 @@ public class AddPetCommandTest {
     @Test
     public void execute_duplicatePet_throwsCommandException() {
         Pet validPet = new PetBuilder().build();
-        AddPetCommand addCommand = new AddPetCommand(validPet);
+        AddPetCommand addCommand = new AddPetCommand(validPet, "");
         ModelStub modelStub = new ModelStubWithPet(validPet);
 
         assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
@@ -61,14 +61,14 @@ public class AddPetCommandTest {
     public void equals() {
         Pet alice = new PetBuilder().withName("Alice").build();
         Pet bob = new PetBuilder().withName("Bob").build();
-        AddPetCommand addAliceCommand = new AddPetCommand(alice);
-        AddPetCommand addBobCommand = new AddPetCommand(bob);
+        AddPetCommand addAliceCommand = new AddPetCommand(alice, "");
+        AddPetCommand addBobCommand = new AddPetCommand(bob, "");
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddPetCommand addAliceCommandCopy = new AddPetCommand(alice);
+        AddPetCommand addAliceCommandCopy = new AddPetCommand(alice, "");
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

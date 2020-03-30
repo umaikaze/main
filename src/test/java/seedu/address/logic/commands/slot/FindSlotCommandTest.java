@@ -34,8 +34,8 @@ class FindSlotCommandTest {
         Predicate<Slot> secondPredicate =
                 new SlotPetNamePredicate(Arrays.asList("Garfield"));
 
-        FindSlotCommand findFirstCommand = new FindSlotCommand(firstPredicate);
-        FindSlotCommand findSecondCommand = new FindSlotCommand(secondPredicate);
+        FindSlotCommand findFirstCommand = new FindSlotCommand(firstPredicate, "");
+        FindSlotCommand findSecondCommand = new FindSlotCommand(secondPredicate, "");
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -44,7 +44,7 @@ class FindSlotCommandTest {
         assertFalse(findFirstCommand.equals(1));
 
         // same values -> returns true
-        FindSlotCommand findFirstCommandCopy = new FindSlotCommand(firstPredicate);
+        FindSlotCommand findFirstCommandCopy = new FindSlotCommand(firstPredicate, "");
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // null -> returns false
@@ -65,7 +65,7 @@ class FindSlotCommandTest {
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 3);
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
-        FindSlotCommand command = new FindSlotCommand(predicate);
+        FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
         TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
         assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());

@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
@@ -56,7 +57,18 @@ public class AddSlotParser implements Parser<AddSlotCommand> {
             throw new ParseException(MESSAGE_SLOT_NOT_IN_ONE_DAY);
         }
 
-        return new AddSlotCommand(slot);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_TIME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+
+        return new AddSlotCommand(slot, warningMessage);
     }
 
     /**
