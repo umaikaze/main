@@ -17,6 +17,7 @@ import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
+import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
@@ -27,7 +28,7 @@ import seedu.address.testutil.slot.SlotUtil;
 class ScheduleParserTest {
 
     private final Model model = getTypicalModelManager();
-    private final ScheduleParser parser = new ScheduleParser(model);
+    private final PetTrackerParser parser = new PetTrackerParser(model);
 
     @Test
     public void parseCommand_add() throws Exception {
