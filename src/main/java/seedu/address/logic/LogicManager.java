@@ -19,6 +19,7 @@ import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.storage.Storage;
 import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * The main LogicManager of Pet Store Helper.
@@ -65,6 +66,7 @@ public class LogicManager implements Logic {
         return model.getFilteredDisplayList();
     }
 
+
     @Override
     public ObservableList<Pet> getFilteredPetList() {
         return model.getFilteredPetList();
@@ -78,6 +80,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
         return model.getFilteredFoodCollectionList();
+    }
+
+    @Override
+    public DisplaySystemType getDisplaySystemType() {
+        return model.getCurrentDisplaySystemType();
     }
 
     @Override

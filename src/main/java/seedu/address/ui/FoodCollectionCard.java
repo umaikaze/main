@@ -1,13 +1,16 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.pet.FoodCollection;
 
 /**
- * An UI component that displays information of a {@code Pet}.
+ * An UI component that displays information of a {@code FoodCollection}.
  */
 
 public class FoodCollectionCard extends UiPart<Region> {
@@ -20,6 +23,7 @@ public class FoodCollectionCard extends UiPart<Region> {
      *
      */
     public final FoodCollection foodCollection;
+    public final MouseClickedHandler mouseClickedHandler;
 
     @FXML
     private HBox cardPane;
@@ -31,9 +35,11 @@ public class FoodCollectionCard extends UiPart<Region> {
     private Label amount;
 
 
-    public FoodCollectionCard(FoodCollection foodCollection, int displayedIndex) {
+    public FoodCollectionCard(FoodCollection foodCollection, int displayedIndex,
+                              MouseClickedHandler mouseClickedHandler) {
         super(FXML);
         this.foodCollection = foodCollection;
+        this.mouseClickedHandler = mouseClickedHandler;
         id.setText(displayedIndex + ". ");
         name.setText(foodCollection.getName());
         amount.setText(foodCollection.getAmount().toString());
@@ -55,5 +61,23 @@ public class FoodCollectionCard extends UiPart<Region> {
         FoodCollectionCard card = (FoodCollectionCard) other;
         return id.getText().equals(card.id.getText())
                 && foodCollection.equals(card.foodCollection);
+    }
+
+    /**
+     * Handler of a mouth clicking event. Triggers the displaying of amount breakdown of this food collection.
+     */
+    @FXML
+    private void handleMouthClicked() {
+        ObservableList<DisplayItem> displayItems = CollectionUtil.map(foodCollection.getUnmodifiablePets(), pet -> pet);
+        mouseClickedHandler.handle(displayItems);
+    }
+
+    /**
+     * Represents a function that can handle a mouth click.
+     */
+    @FunctionalInterface
+    public interface MouseClickedHandler {
+
+        void handle(ObservableList<DisplayItem> foodAmountAndPets);
     }
 }
