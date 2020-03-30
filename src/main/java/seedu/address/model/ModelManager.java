@@ -216,12 +216,22 @@ public class ModelManager implements Model {
         return currentDisplaySystemType;
     }
 
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findpets` command
+     * which allows users to execute `findpets` in a different system display.
+     */
     public void changeSystemToFilteredPets() {
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findslots` command
+     * which allows users to execute `findslots` in a different system display.
+     */
     public void changeSystemToFilteredSlots() {
         filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
     }
 
     @Override
