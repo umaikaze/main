@@ -159,6 +159,8 @@ public interface Model {
      */
     ObservableList<DisplayItem> getFilteredDisplayList();
 
+    DisplaySystemType getCurrentDisplaySystemType();
+
     /**
      * Changes the list to be displayed.
      */

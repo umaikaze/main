@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="displayListView" VBox.vgrow="ALWAYS" />
-</VBox>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <ListView fx:id="displayListView" HBox.hgrow="ALWAYS" styleClass = "pane-with-border"/>
+  <StackPane prefHeight="10.0" prefWidth="10.0" HBox.hgrow="NEVER" />
+  <VBox fx:id="displayInformationViewContainer" HBox.hgrow="NEVER">
+    <ListView fx:id="displayInformationView" prefWidth="0" minWidth="0" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS"/>
+  </VBox>
+</HBox>
