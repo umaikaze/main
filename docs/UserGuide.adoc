@@ -188,7 +188,7 @@ Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 - The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
 - The existing field(s) of the pet will be removed, i.e adding of list of food and tags is not cumulative.
 - You can remove all tags of a pet by typing `t/` without specifying any tags after it.
-- Similarly to `addpet` command, pet name, species, and gender will be stored in the format of "Xxx Xxx...".
+- Similarly to `addpet` command, pet name, species, gender, and name of food will be displayed in the format of "Xxx Xxx...".
 ****
 
 Example:
