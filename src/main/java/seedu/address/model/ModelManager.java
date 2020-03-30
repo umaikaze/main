@@ -204,6 +204,9 @@ public class ModelManager implements Model {
     public void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate) {
         requireNonNull(predicate);
         filteredFoodCollections.setPredicate(predicate);
+        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+        filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+        currentDisplaySystemType = DisplaySystemType.INVENTORY;
     }
 
     public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
@@ -246,7 +249,6 @@ public class ModelManager implements Model {
             filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
                 foodCollection -> foodCollection);
-            updateFilteredFoodCollectionList(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
