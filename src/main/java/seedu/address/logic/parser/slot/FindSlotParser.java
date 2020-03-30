@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -46,11 +47,18 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         List<Predicate<Slot>> predicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_NAME).get()));
+            if (argMultimap.getValue(PREFIX_NAME).get().trim().equals("")) {
+                throw new ParseException(FindSlotCommand.MESSAGE_EMPTY_NAME_FIELD);
+            }
+            predicates.add(new SlotPetNamePredicate(Arrays.asList(
+                    argMultimap.getValue(PREFIX_NAME).get().split("\\s+"))));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DATETIME).get().trim().equals("")) {
+                throw new ParseException(FindSlotCommand.MESSAGE_EMPTY_DATETIME_FIELD);
+            }
             predicates.add(new SlotDatePredicate(
-                    SlotParserUtil.parseDate(argMultimap.getValue(PREFIX_DATETIME).get())));
+                    SlotParserUtil.parseDates(argMultimap.getValue(PREFIX_DATETIME).get())));
         }
         assert !(predicates.isEmpty()) : "No predicates for finding slots!";
 
