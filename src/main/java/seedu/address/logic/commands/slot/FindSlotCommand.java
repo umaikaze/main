@@ -29,11 +29,7 @@ public class FindSlotCommand extends Command {
     public static final String MESSAGE_EMPTY_DATETIME_FIELD = "t/ should not be followed by an empty entry!";
 
     private final Predicate<Slot> predicate;
-    private String warningMessage = "";
-
-    public FindSlotCommand(Predicate<Slot> predicate) {
-        this.predicate = predicate;
-    }
+    private String warningMessage;
 
     public FindSlotCommand(Predicate<Slot> predicate, String warningMessage) {
         this.predicate = predicate;

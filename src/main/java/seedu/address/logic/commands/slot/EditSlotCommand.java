@@ -41,19 +41,7 @@ public class EditSlotCommand extends Command {
 
     private final Index index;
     private final EditSlotDescriptor editSlotDescriptor;
-    private String warningMessage = "";
-
-    /**
-     * @param index of the person in the filtered person list to edit
-     * @param editSlotDescriptor details to edit the person with
-     */
-    public EditSlotCommand(Index index, EditSlotDescriptor editSlotDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editSlotDescriptor);
-
-        this.index = index;
-        this.editSlotDescriptor = new EditSlotDescriptor(editSlotDescriptor);
-    }
+    private final String warningMessage;
 
     /**
      * @param index of the person in the filtered person list to edit

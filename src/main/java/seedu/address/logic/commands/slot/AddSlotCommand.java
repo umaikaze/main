@@ -30,16 +30,11 @@ public class AddSlotCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New slot added: %1$s\n";
 
     private final Slot slotToAdd;
-    private String warningMessage = "";
+    private final String warningMessage;
 
     /**
      * Creates an AddSlotCommand to add the specified {@code slot}
      */
-    public AddSlotCommand(Slot slot) {
-        requireNonNull(slot);
-        slotToAdd = slot;
-    }
-
     public AddSlotCommand(Slot slot, String warningMessage) {
         requireNonNull(slot);
         slotToAdd = slot;

@@ -60,7 +60,7 @@ public class EditPetCommand extends Command {
 
     private final Index index;
     private final EditPetDescriptor editPetDescriptor;
-    private String warningMessage = "";
+    private final String warningMessage;
 
     /**
      * @param index of the pet in the filtered pet list to edit
@@ -73,14 +73,6 @@ public class EditPetCommand extends Command {
         this.index = index;
         this.editPetDescriptor = new EditPetDescriptor(editPetDescriptor);
         this.warningMessage = warningMessage;
-    }
-
-    public EditPetCommand(Index index, EditPetDescriptor editPetDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPetDescriptor);
-
-        this.index = index;
-        this.editPetDescriptor = new EditPetDescriptor(editPetDescriptor);
     }
 
     @Override
