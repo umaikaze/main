@@ -12,7 +12,7 @@ import seedu.address.model.pet.Food;
 class JsonAdaptedFood {
 
     private final String foodName;
-    private final Integer foodAmount;
+    private final String foodAmount;
 
     /**
      * Constructs a {@code JsonAdaptedFood} with the given {@code foodName}.
@@ -21,7 +21,7 @@ class JsonAdaptedFood {
     public JsonAdaptedFood(String food) {
         String[] foodDetails = food.split(":");
         this.foodName = foodDetails[0];
-        this.foodAmount = Integer.valueOf(foodDetails[1]);
+        this.foodAmount = foodDetails[1];
     }
 
     /**
@@ -29,7 +29,7 @@ class JsonAdaptedFood {
      */
     public JsonAdaptedFood(Food source) {
         foodName = source.foodName;
-        foodAmount = source.foodAmount;
+        foodAmount = String.valueOf(source.foodAmount);
     }
 
     @JsonValue
@@ -46,10 +46,11 @@ class JsonAdaptedFood {
         if (!Food.isValidFoodName(foodName)) {
             throw new IllegalValueException(Food.MESSAGE_NAME_CONSTRAINTS);
         }
-        if (!Food.isValidFoodAmount(foodAmount)) {
+        final Integer modelFoodAmount = Integer.valueOf(foodAmount);
+        if (!Food.isValidFoodAmount(modelFoodAmount)) {
             throw new IllegalValueException(Food.MESSAGE_AMOUNT_CONSTRAINTS);
         }
-        return new Food(foodName, foodAmount);
+        return new Food(foodName, modelFoodAmount);
     }
 
 }
