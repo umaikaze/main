@@ -1,6 +1,9 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_DURATION;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_NAME;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
@@ -35,19 +38,19 @@ public class AddSlotParserTest {
 
         // Whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_COCO + DATETIME_DESC_COCO
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, ""));
 
         // Multiple pets - last pet accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + NAME_DESC_COCO + DATETIME_DESC_COCO
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, WARNING_MESSAGE_NAME));
 
         // Multiple dateTime - last dateTime accepted
         assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_GARFIELD + DATETIME_DESC_COCO
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, WARNING_MESSAGE_TIME));
 
         // Multiple durations - last duration accepted
         assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_COCO + DURATION_DESC_GARFIELD
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, WARNING_MESSAGE_DURATION));
     }
 
     @Test

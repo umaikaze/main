@@ -31,6 +31,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddPetParser implements Parser<AddPetCommand> {
 
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddPetCommand
      * and returns an AddPetCommand object for execution.
@@ -57,8 +58,22 @@ public class AddPetParser implements Parser<AddPetCommand> {
 
         Pet pet = new Pet(name, gender, dateOfBirth, species, foodList, tagList);
 
-        return new AddPetCommand(pet);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_GENDER).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_GENDER;
+        }
+        if (argMultimap.getAllValues(PREFIX_SPECIES).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_SPECIES;
+        }
+        if (argMultimap.getAllValues(PREFIX_DOB).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_DOB;
+        }
+        return new AddPetCommand(pet, warningMessage);
     }
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

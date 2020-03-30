@@ -40,7 +40,7 @@ public class EditPetCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Pet editedPet = new PetBuilder().build();
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder(editedPet).build();
-        EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET, descriptor);
+        EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET, descriptor, "");
 
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
@@ -61,7 +61,7 @@ public class EditPetCommandTest {
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_DOG)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withTags(VALID_TAG_LAZY).build();
-        EditPetCommand editCommand = new EditPetCommand(indexLastPet, descriptor);
+        EditPetCommand editCommand = new EditPetCommand(indexLastPet, descriptor, "");
 
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
@@ -73,7 +73,7 @@ public class EditPetCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET, new EditPetDescriptor());
+        EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET, new EditPetDescriptor(), "");
         Pet editedPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
 
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
@@ -90,7 +90,7 @@ public class EditPetCommandTest {
         Pet petInFilteredList = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet editedPet = new PetBuilder(petInFilteredList).withName(VALID_NAME_DOG).build();
         EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET,
-                new EditPetDescriptorBuilder().withName(VALID_NAME_DOG).build());
+                new EditPetDescriptorBuilder().withName(VALID_NAME_DOG).build(), "");
 
         String expectedMessage = String.format(EditPetCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
@@ -104,7 +104,7 @@ public class EditPetCommandTest {
     public void execute_duplicatePetUnfilteredList_failure() {
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder(firstPet).build();
-        EditPetCommand editCommand = new EditPetCommand(INDEX_SECOND_PET, descriptor);
+        EditPetCommand editCommand = new EditPetCommand(INDEX_SECOND_PET, descriptor, "");
 
         assertCommandFailure(editCommand, model, EditPetCommand.MESSAGE_DUPLICATE_PET);
     }
@@ -116,7 +116,7 @@ public class EditPetCommandTest {
         // edit pet in filtered list into a duplicate in address book
         Pet petInList = model.getPetTracker().getPetList().get(INDEX_SECOND_PET.getZeroBased());
         EditPetCommand editCommand = new EditPetCommand(INDEX_FIRST_PET,
-                new EditPetDescriptorBuilder(petInList).build());
+                new EditPetDescriptorBuilder(petInList).build(), "");
 
         assertCommandFailure(editCommand, model, EditPetCommand.MESSAGE_DUPLICATE_PET);
     }
@@ -125,7 +125,7 @@ public class EditPetCommandTest {
     public void execute_invalidPetIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD).build();
-        EditPetCommand editCommand = new EditPetCommand(outOfBoundIndex, descriptor);
+        EditPetCommand editCommand = new EditPetCommand(outOfBoundIndex, descriptor, "");
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
@@ -142,18 +142,18 @@ public class EditPetCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetTracker().getPetList().size());
 
         EditPetCommand editCommand = new EditPetCommand(outOfBoundIndex,
-                new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD).build());
+                new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD).build(), "");
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditPetCommand standardCommand = new EditPetCommand(INDEX_FIRST_PET, DESC_COCO);
+        final EditPetCommand standardCommand = new EditPetCommand(INDEX_FIRST_PET, DESC_COCO, "");
 
         // same values -> returns true
         EditPetDescriptor copyDescriptor = new EditPetDescriptor(DESC_COCO);
-        EditPetCommand commandWithSameValues = new EditPetCommand(INDEX_FIRST_PET, copyDescriptor);
+        EditPetCommand commandWithSameValues = new EditPetCommand(INDEX_FIRST_PET, copyDescriptor, "");
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -163,10 +163,10 @@ public class EditPetCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditPetCommand(INDEX_SECOND_PET, DESC_COCO)));
+        assertFalse(standardCommand.equals(new EditPetCommand(INDEX_SECOND_PET, DESC_COCO, "")));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditPetCommand(INDEX_FIRST_PET, DESC_GARFIELD)));
+        assertFalse(standardCommand.equals(new EditPetCommand(INDEX_FIRST_PET, DESC_GARFIELD, "")));
     }
 
 }

@@ -3,6 +3,7 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +11,11 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import seedu.address.model.PetListChangeListener;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
+import seedu.address.model.slot.Schedule;
+import seedu.address.model.slot.Slot;
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.
@@ -30,9 +34,11 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private final FoodCollectionList foodCollectionList = new FoodCollectionList(internalList);
+    private final Schedule slots = new Schedule();
 
     public UniquePetList() {
         setInternalListListenerForFoodCollectionList();
+        setInternalListListenerForSchedule();
     }
 
     /**
@@ -43,6 +49,26 @@ public class UniquePetList implements Iterable<Pet> {
         internalList.addListener((ListChangeListener<Pet>) change -> {
             if (change.next()) {
                 updateFoodCollectionList();
+            }
+        });
+    }
+
+    public void setInternalListListenerForSchedule() {
+        internalList.addListener(new PetListChangeListener() {
+            @Override
+            protected void updateSlotsDueToPetEdit(Pet removed, Pet added) {
+                ObservableList<Slot> toEdit = slots.getInternalUnmodifiableListForPetName(removed.getName().fullName);
+                for (Slot slot : toEdit) {
+                    slots.setSlot(slot, petReplacedSlot(slot, added));
+                }
+            }
+
+            @Override
+            protected void removeExcessSlot(Pet removed) {
+                ObservableList<Slot> toRemove = slots.getInternalUnmodifiableListForPetName(removed.getName().fullName);
+                for (Slot slot : toRemove) {
+                    slots.remove(slot);
+                }
             }
         });
     }
@@ -134,6 +160,44 @@ public class UniquePetList implements Iterable<Pet> {
         internalList.setAll(pets);
     }
 
+    public List<Food> getFoodList() {
+        List<Food> foods = new ArrayList<>();
+        for (Pet pet:internalList) {
+            foods.addAll(pet.getFoodList());
+        }
+        return foods;
+    }
+
+    // Slots methods
+
+    /**
+     * Replaces the contents of the schedule with {@code slots}.
+     */
+    public void setSlots(List<Slot> slots) {
+        this.slots.setSlots(slots);
+    }
+
+    public void addSlot(Slot slot) {
+        slots.add(slot);
+    }
+
+    /**
+     * Removes {@code key} from this {@code PetTracker}.
+     * {@code key} must exist in the pet tracker.
+     */
+    public void removeSlot(Slot key) {
+        slots.remove(key);
+    }
+
+    /**
+     * Replaces the given slot {@code target} in the list with {@code editedSlot}.
+     * {@code target} must exist in the pet tracker.
+     */
+    public void setSlot(Slot target, Slot editedSlot) {
+        requireNonNull(editedSlot);
+        slots.setSlot(target, editedSlot);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -146,6 +210,10 @@ public class UniquePetList implements Iterable<Pet> {
      */
     public ObservableList<FoodCollection> acquireUnmodifiableFoodCollectionList() {
         return foodCollectionList.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Slot> acquireUnmodifiableSlotsList() {
+        return slots.asUnmodifiableObservableList();
     }
 
     @Override

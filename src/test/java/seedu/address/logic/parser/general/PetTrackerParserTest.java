@@ -34,7 +34,7 @@ public class PetTrackerParserTest {
     public void parseCommand_add() throws Exception {
         Pet pet = new PetBuilder().build();
         AddPetCommand command = (AddPetCommand) parser.parseCommand(PetUtil.getAddPetCommand(pet));
-        assertEquals(new AddPetCommand(pet), command);
+        assertEquals(new AddPetCommand(pet, ""), command);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class PetTrackerParserTest {
         EditPetCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
         EditPetCommand command = (EditPetCommand) parser.parseCommand(EditPetCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PET.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
-        assertEquals(new EditPetCommand(INDEX_FIRST_PET, descriptor), command);
+        assertEquals(new EditPetCommand(INDEX_FIRST_PET, descriptor, ""), command);
     }
 
     @Test
