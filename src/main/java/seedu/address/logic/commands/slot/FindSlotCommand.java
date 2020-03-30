@@ -47,6 +47,7 @@ public class FindSlotCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size())
                         + warningMessage, false, false, true, false);
+
     }
 
     @Override
