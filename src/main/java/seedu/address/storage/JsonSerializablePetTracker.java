@@ -60,7 +60,7 @@ class JsonSerializablePetTracker {
             petTracker.addPet(pet);
         }
         for (JsonAdaptedSlot jsonAdaptedSlot: slots) {
-            Slot slot = jsonAdaptedSlot.toModelType();
+            Slot slot = jsonAdaptedSlot.toModelType(petTracker);
             petTracker.addSlot(slot);
         }
         return petTracker;
