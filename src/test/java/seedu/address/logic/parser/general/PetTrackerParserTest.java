@@ -50,7 +50,7 @@ public class PetTrackerParserTest {
         EditPetCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
         EditPetCommand command = (EditPetCommand) parser.parseCommand(EditPetCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PET.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
-        assertEquals(new EditPetCommand(INDEX_FIRST_PET, descriptor), command);
+        assertEquals(new EditPetCommand(INDEX_FIRST_PET, descriptor, ""), command);
     }
 
     @Test
