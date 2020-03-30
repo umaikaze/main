@@ -1,8 +1,7 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
-import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DATETIME;
-import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DURATION;
+import static seedu.address.logic.parser.slot.SlotParserUtil.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -15,6 +14,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Name;
+import seedu.address.model.pet.Pet;
+import seedu.address.model.pet.exceptions.PetNotFoundException;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -58,10 +59,18 @@ public class JsonAdaptedSlot {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_INVALID_PETNAME);
         }
-        final Name modelName = new Name(name);
+        final Pet modelPet;
+        try {
+            modelPet = petTracker.getPet(new Name(name));
+        } catch (PetNotFoundException e) {
+            throw new ParseException(MESSAGE_PET_DOES_NOT_EXIST);
+        }
 
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+        }
         final LocalDateTime modelDateTime;
         try {
             modelDateTime = LocalDateTime.parse(dateTime, DATETIME_FORMAT);
@@ -69,6 +78,9 @@ public class JsonAdaptedSlot {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
 
+        if (duration == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName()));
+        }
         final Duration modelDuration;
         try {
             modelDuration = Duration.ofMinutes(Long.parseLong(duration));
@@ -79,6 +91,6 @@ public class JsonAdaptedSlot {
             throw new ParseException(MESSAGE_INVALID_DURATION);
         }
 
-        return new Slot(petTracker.getPet(modelName), modelDateTime, modelDuration);
+        return new Slot(modelPet, modelDateTime, modelDuration);
     }
 }
