@@ -16,7 +16,7 @@ public abstract class PetListChangeListener implements ListChangeListener<Pet> {
         List<? extends Pet> removedPets;
         List<? extends Pet> addedPets;
 
-        while(petChange.next()) {
+        while (petChange.next()) {
             removedPets = petChange.getRemoved();
             addedPets = petChange.getAddedSubList();
 
