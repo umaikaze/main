@@ -15,7 +15,7 @@ import seedu.address.model.slot.Slot;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedSlot {
-    private final Pet pet;
+    private final JsonAdaptedPet pet;
     private final LocalDateTime dateTime;
     private final Duration duration;
 
@@ -26,7 +26,7 @@ public class JsonAdaptedSlot {
      * Constructs a {@code JsonAdaptedSlot} with the given {@code pet}, {@code dateTime} and {@code duration}.
      */
     @JsonCreator
-    public JsonAdaptedSlot(@JsonProperty("pet") Pet pet, @JsonProperty("dateTime")LocalDateTime dateTime,
+    public JsonAdaptedSlot(@JsonProperty("pet") JsonAdaptedPet pet, @JsonProperty("dateTime")LocalDateTime dateTime,
                            @JsonProperty("duration") Duration duration) {
         this.pet = pet;
         this.dateTime = dateTime;
@@ -37,7 +37,7 @@ public class JsonAdaptedSlot {
      * Converts a given {@code Slot} into this class for Jackson use.
      */
     public JsonAdaptedSlot(Slot source) {
-        pet = source.getPet();
+        pet = new JsonAdaptedPet(source.getPet());
         dateTime = source.getDateTime();
         duration = source.getDuration();
     }
@@ -48,6 +48,6 @@ public class JsonAdaptedSlot {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Slot toModelType() throws IllegalValueException {
-        return new Slot(pet, dateTime, duration);
+        return new Slot(pet.toModelType(), dateTime, duration);
     }
 }
