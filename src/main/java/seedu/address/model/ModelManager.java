@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Pet> filteredPets;
     private final FilteredList<Slot> filteredSlots;
     private final FilteredList<FoodCollection> filteredFoodCollections;
+    private DisplaySystemType currentDisplaySystemType;
     private ObservableList<DisplayItem> filteredDisplayItems;
 
     /**
@@ -50,6 +51,7 @@ public class ModelManager implements Model {
         filteredFoodCollections = new FilteredList<>(this.petTracker.getFoodCollectionList());
 
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet); // display list of pets initially
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
     public ModelManager() {
@@ -209,14 +211,28 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
+
+    public DisplaySystemType getCurrentDisplaySystemType() {
+        return currentDisplaySystemType;
+    }
+
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findpets` command
+     * which allows users to execute `findpets` in a different system display.
+     */
     public void changeSystemToFilteredPets() {
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findslots` command
+     * which allows users to execute `findslots` in a different system display.
+     */
     public void changeSystemToFilteredSlots() {
         filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
     }
-
 
     @Override
     /**
@@ -240,6 +256,7 @@ public class ModelManager implements Model {
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
         }
+        currentDisplaySystemType = newDisplayType;
     }
 
     @Override

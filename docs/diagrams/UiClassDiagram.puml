@@ -15,6 +15,7 @@ Class DisplayListPanel
 Class PetCard
 Class SlotCard
 Class FoodCollectionCard
+Class FoodAmountAndPetCard
 Class OverallStatistics
 Class StatusBarFooter
 Class CommandBox
@@ -43,6 +44,7 @@ MainWindow *-down--> OverallStatistics
 DisplayListPanel -down---> PetCard
 DisplayListPanel -down---> SlotCard
 DisplayListPanel -down---> FoodCollectionCard
+DisplayListPanel -down---> FoodAmountAndPetCard
 
 MainWindow --down--|> UiPart
 
@@ -52,6 +54,7 @@ DisplayListPanel -----|> UiPart
 PetCard --|> UiPart
 SlotCard --|> UiPart
 FoodCollectionCard --|> UiPart
+FoodAmountAndPetCard --|> UiPart
 OverallStatistics -----|> UiPart
 StatusBarFooter -----|> UiPart
 HelpWindow --down--|> UiPart
@@ -59,6 +62,7 @@ HelpWindow --down--|> UiPart
 PetCard .right.> Model
 SlotCard .right.> Model
 FoodCollectionCard .right.> Model
+FoodAmountAndPetCard .right.>Model
 OverallStatistics .down.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic

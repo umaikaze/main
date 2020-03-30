@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.hasDisplayChanged()) {
-                displayListPanel.updateWith(logic.getFilteredDisplayList());
+                displayListPanel.updateWith(logic.getFilteredDisplayList(), logic.getDisplaySystemType());
             }
 
             if (commandResult.isShowHelp()) {
