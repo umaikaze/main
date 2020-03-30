@@ -41,7 +41,7 @@ public class EditSlotCommand extends Command {
 
     private final Index index;
     private final EditSlotDescriptor editSlotDescriptor;
-    private String warningMessage;
+    private String warningMessage = "";
 
     /**
      * @param index of the person in the filtered person list to edit

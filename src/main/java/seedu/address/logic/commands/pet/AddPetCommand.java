@@ -45,7 +45,7 @@ public class AddPetCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper";
 
     private final Pet toAdd;
-    private String warningMessage;
+    private String warningMessage = "";
 
     /**
      * Creates an AddPetCommand to add the specified {@code Pet}
@@ -62,7 +62,6 @@ public class AddPetCommand extends Command {
     public AddPetCommand(Pet pet) {
         requireNonNull(pet);
         toAdd = pet;
-        this.warningMessage = "";
     }
 
     @Override

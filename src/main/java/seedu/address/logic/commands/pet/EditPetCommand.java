@@ -81,7 +81,6 @@ public class EditPetCommand extends Command {
 
         this.index = index;
         this.editPetDescriptor = new EditPetDescriptor(editPetDescriptor);
-        this.warningMessage = "";
     }
 
     @Override
