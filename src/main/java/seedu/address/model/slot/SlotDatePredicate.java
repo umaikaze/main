@@ -1,6 +1,7 @@
 package seedu.address.model.slot;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -8,21 +9,26 @@ import java.util.function.Predicate;
  */
 
 public class SlotDatePredicate implements Predicate<Slot> {
-    private final LocalDate date;
+    private final List<LocalDate> dates;
 
-    public SlotDatePredicate(LocalDate date) {
-        this.date = date;
+    public SlotDatePredicate(List<LocalDate> dates) {
+        this.dates = dates;
     }
 
     @Override
     public boolean test(Slot slot) {
-        return date.isEqual(slot.getDate());
+        for (LocalDate date : dates) {
+            if (date.isEqual(slot.getDate())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SlotDatePredicate // instanceof handles nulls
-                && date.equals(((SlotDatePredicate) other).date)); // state check
+                && dates.equals(((SlotDatePredicate) other).dates)); // state check
     }
 }

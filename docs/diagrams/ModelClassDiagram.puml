@@ -23,16 +23,14 @@ Class Gender
 Class Name
 Class Species
 Class UniquePetList
+Class FoodCollection
+Class FoodCollectionList
+Class PetAmountAndPet
 }
 
 Package Schedule {
 Class Schedule
 Class Slot
-}
-
-Package FoodCollection {
-Class FoodCollection
-Class FoodCollectionList
 }
 
 Package Tag {
@@ -55,6 +53,10 @@ PetTracker *--> "1" UniquePetList
 UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
+FoodCollection *--> "*" PetAmountAndPet
+PetAmountAndPet o--> "1" Pet
+UniquePetList -[hidden]right> FoodCollectionList
+
 Pet *--> Name
 Pet *--> Species
 Pet *--> DateOfBirth

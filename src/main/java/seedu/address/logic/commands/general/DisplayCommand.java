@@ -19,7 +19,9 @@ public class DisplayCommand extends Command {
             + "Parameter: SYSTEM (must be p (pets) or s (schedule) or i (inventory)).\n"
             + "Example: display p";
 
-    public static final String MESSAGE_SUCCESS = "Display changed to %s; showing all.";
+    public static final String MESSAGE_SUCCESS = "Display changed to %s. \nShowing all.";
+
+    public static final String ADDITIONAL_MESSAGE_INVENTORY = "Click on each item to view list breakdown.";
 
     public static final String MESSAGE_INVALID_SYSTEM_TYPE = "Invalid system type specified.";
 
@@ -37,7 +39,15 @@ public class DisplayCommand extends Command {
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
-        String message = String.format(MESSAGE_SUCCESS, type);
+        String message = String.format(getMessageSuccess(), type);
         return new CommandResult(message, false, false, true, false);
+    }
+
+    public String getMessageSuccess() {
+        if (type.equals(DisplaySystemType.INVENTORY)) {
+            return MESSAGE_SUCCESS + "\n" + ADDITIONAL_MESSAGE_INVENTORY;
+        } else {
+            return MESSAGE_SUCCESS;
+        }
     }
 }

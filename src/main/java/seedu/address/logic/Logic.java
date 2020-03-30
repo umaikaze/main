@@ -12,6 +12,7 @@ import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.ui.DisplayItem;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * API of the Logic component for Pet Store Helper
@@ -41,6 +42,8 @@ public interface Logic {
     ObservableList<Slot> getFilteredSlotList();
 
     ObservableList<FoodCollection> getFilteredFoodCollectionList();
+
+    DisplaySystemType getDisplaySystemType();
 
     /**
      * Returns the user prefs' pet tracker file path.
