@@ -33,7 +33,7 @@ class ScheduleParserTest {
     public void parseCommand_add() throws Exception {
         Slot slot = new SlotBuilder(model).build();
         AddSlotCommand command = (AddSlotCommand) parser.parseCommand(SlotUtil.getAddSlotCommand(slot));
-        assertEquals(new AddSlotCommand(slot), command);
+        assertEquals(new AddSlotCommand(slot, ""), command);
     }
 
     @Test
@@ -49,7 +49,7 @@ class ScheduleParserTest {
         EditSlotCommand.EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(slot).build();
         EditSlotCommand command = (EditSlotCommand) parser.parseCommand(EditSlotCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));
-        assertEquals(new EditSlotCommand(INDEX_FIRST_SLOT, descriptor), command);
+        assertEquals(new EditSlotCommand(INDEX_FIRST_SLOT, descriptor, ""), command);
     }
 
     @Test

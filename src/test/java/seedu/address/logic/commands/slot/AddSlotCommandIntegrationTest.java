@@ -31,7 +31,7 @@ public class AddSlotCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getPetTracker(), new UserPrefs());
         expectedModel.addSlot(validSlot);
 
-        assertCommandSuccess(new AddSlotCommand(validSlot), model,
+        assertCommandSuccess(new AddSlotCommand(validSlot, ""), model,
                 String.format(AddSlotCommand.MESSAGE_SUCCESS, validSlot), expectedModel);
     }
 

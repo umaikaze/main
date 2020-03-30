@@ -122,7 +122,7 @@ public class EditPetCommandParserTest {
                 .withGender(VALID_GENDER_GARFIELD).withDateOfBirth(VALID_DOB_COCO)
                 .withSpecies(VALID_SPECIES_COCO)
                 .withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -134,7 +134,7 @@ public class EditPetCommandParserTest {
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -145,31 +145,31 @@ public class EditPetCommandParserTest {
         Index targetIndex = INDEX_THIRD_PET;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
         userInput = targetIndex.getOneBased() + GENDER_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_COCO.toString()).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + DOB_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + SPECIES_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withSpecies(VALID_SPECIES_COCO).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FAT;
         descriptor = new EditPetDescriptorBuilder().withTags(VALID_TAG_FAT).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -217,7 +217,7 @@ public class EditPetCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withTags().build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -38,7 +38,7 @@ public class AddSlotParserTest {
 
         // Whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_COCO + DATETIME_DESC_COCO
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, ""));
 
         // Multiple pets - last pet accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + NAME_DESC_COCO + DATETIME_DESC_COCO

@@ -63,7 +63,7 @@ class EditSlotParserTest {
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
                 .withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -75,7 +75,7 @@ class EditSlotParserTest {
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_COCO).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -88,19 +88,19 @@ class EditSlotParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
                 .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // dateTime
         userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_COCO).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + DURATION_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDuration(VALID_DURATION_COCO).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
