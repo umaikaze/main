@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
+
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -37,10 +39,11 @@ public class SlotCard extends UiPart<Region> {
     public SlotCard(Slot slot, int displayedIndex, List<Slot> allSlots) {
         super(FXML);
         this.slot = slot;
-        id.setText(displayedIndex + ". ");
+        id.setText(String.format("Slot %s:", displayedIndex));
         //TODO: make the layout nicer
         // this is just a quick a dirty way of displaying a slot
-        String dateTimeString = String.format("%s - %s", slot.getDateTime(), slot.getEndDateTime());
+        String dateTimeString = String.format("%s to %s", slot.getDateTime().format(DATETIME_FORMAT),
+                slot.getEndDateTime().format(DATETIME_FORMAT));
         String conflict = slot.hasConflict(allSlots) ? "[CONFLICT]" : "";
         dateTime.setText(dateTimeString + " " + conflict);
         petName.setText(slot.getPet().getName().toString());
