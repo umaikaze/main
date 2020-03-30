@@ -30,9 +30,9 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSlotCommand parse(String args) throws ParseException {
+        Predicate<Slot> predicates = getPredicates(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
-
         String warningMessage = "";
         if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
@@ -41,7 +41,7 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
             warningMessage += Messages.WARNING_MESSAGE_TIME;
         }
 
-        return new FindSlotCommand(getPredicates(args), warningMessage);
+        return new FindSlotCommand(predicates, warningMessage);
     }
 
     public static Predicate<Slot> getPredicates(String args) throws ParseException {
