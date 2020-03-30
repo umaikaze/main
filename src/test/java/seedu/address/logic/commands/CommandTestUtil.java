@@ -133,6 +133,17 @@ public class CommandTestUtil {
     }
 
     /**
+     * [Specifically for find and display commands] Convenience wrapper to
+     * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertFindCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
@@ -172,7 +183,7 @@ public class CommandTestUtil {
 
         Slot slot = model.getFilteredSlotList().get(targetIndex.getZeroBased());
         final String name = slot.getPet().getName().fullName;
-        model.updateFilteredSlotList(new SlotPetNamePredicate(name));
+        model.updateFilteredSlotList(new SlotPetNamePredicate(Arrays.asList(name.split("\\s+"))));
 
         assertEquals(1, model.getFilteredSlotList().size());
     }

@@ -189,8 +189,6 @@ class AddSlotCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
-
         @Override
         public ObservableList<DisplayItem> getFilteredDisplayList() {
             throw new AssertionError("This method should not be called.");
