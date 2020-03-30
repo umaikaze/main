@@ -34,7 +34,7 @@ public class AddPetCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Teddy "
             + PREFIX_GENDER + "male "
-            + PREFIX_DOB + "01-01-2019 "
+            + PREFIX_DOB + "01/01/2019 "
             + PREFIX_SPECIES + "dog "
             + PREFIX_FOODLIST + "brand A: 15 "
             + PREFIX_FOODLIST + "brand B: 20 "
