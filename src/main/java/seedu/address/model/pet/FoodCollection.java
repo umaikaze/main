@@ -11,7 +11,7 @@ import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
 /**
- * Represents a Food Collection object in Pet Shop Helper. It is used to model a collection of the same type
+ * Represents a Food Collection object in Pet Store Helper. It is used to model a collection of the same type
  * of food that could exist in a pet list. (If there are 3 pets in a list, each requiring 10 units of cat food,
  * a food collection of the cat food in the list will have name as catfood and amount as 30.)
  * Guarantees: immutable; name is valid as declared in {@link #isValidFoodCollectionName(String)}

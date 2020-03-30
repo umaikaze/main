@@ -19,7 +19,7 @@ By: `AY1920S2-CS2103-W15-4`      Since: `Feb 2020`      Licence: `MIT`
 
 == Introduction
 
-Pet Store Helper (PSH) is for owners of pet shops who **prefer to use a desktop app for managing their store**. More importantly, PSH is **optimized for those who prefer to work with a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PSH can help you get your work done faster than traditional GUI apps.
+Pet Store Helper (PSH) is for owners of pet stores who **prefer to use a desktop app for managing their store**. More importantly, PSH is **optimized for those who prefer to work with a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PSH can help you get your work done faster than traditional GUI apps.
 
 It is based on 2 main systems, one that manages pets, and another one that organises showering schedules.
 
@@ -27,62 +27,26 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
-_Coming Soon!&trade;_
-
-////
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `petStoreHelper.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Pet Shop Helper.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-- **`list`** : lists all contacts
-- ***`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-- **`delete`**`3` : deletes the 3rd contact shown in the current list
-- **`exit`** : exits the app
+* *`display p`* : displays the list of all pets.
+* **`addpet`** : addpet n/Teddy g/male b/01/01/2019 s/dog f/brand A:15 f/brand B:20 t/small t/lazy
+* **`deletepet 3`** : deletes the 3rd pet shown in the current pet list
+* **`display s`** : displays teh schedule system
+* **`addslot n/Teddy t/16/11/2020 1300 d/90`** : creates a showering schedule for Teddy at the given input time and duration.
+* *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
-////
 
-== Command Summary
-
-. Common / general features
-  - **Help**: `help`
-  - **Exit**: `exit`
-  - **Display**: `display SYSTEM` +
-  e.g. `display p` +
-  e.g. `display s` +
-  e.g. `display i`
-  - **Statistics**: `stats`+
-. Pet Tracker System
-  - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
-  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
-  - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
-  e.g. `findpets n/garfield n/odie t/jon`
-  - **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
-  e.g. `editpet 2 n/garfield t/cuddly`
-  - **Delete pet**: `deletepet i/INDEX` +
-  e.g. `deletepet 2`
-. Schedule System
-  - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
-  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
-  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
-  - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
-  e.g. `findslots n/Brian Griffin` +
-  e.g. `findslots t/20/2/2020` +
-  e.g. `findslots n/Coco t/16/11/2020`
-  - **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
-  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
-  e.g. `editslot 3 d/45` +
-  e.g. `editslot 12 n/Brian Griffin`
-  - **Delete slot**: `deleteslot i/INDEX` +
-  e.g. `deleteslot 2`
-  - **Show conflicts**: `conflicts`
 
 [[Features]]
 == Features
@@ -126,7 +90,7 @@ Displays all pets in the pet tracker system.
 - `display s` +
 Displays all slots in the schedule system.
 - `display i` +
-Displays a list of all pet food (inventory) and the needed amount per week.
+Displays a list of all pet food (inventory) and the needed amount per week. You can double click on the food items to view the breakdown.
 
 ==== Saving the data
 
@@ -303,12 +267,44 @@ Displays the slots that have a conflict, i.e., an overlap in time with another o
 
 Format: `conflicts`
 
+== Command Summary
+
+. Common / general features
+- **Help**: `help`
+- **Exit**: `exit`
+- **Display**: `display SYSTEM` +
+  e.g. `display p` +
+  e.g. `display s` +
+  e.g. `display i`
+- **Statistics**: `stats`+
+. Pet Tracker System
+- **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
+  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
+- **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
+  e.g. `findpets n/garfield n/odie t/jon`
+- **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
+  e.g. `editpet 2 n/garfield t/cuddly`
+- **Delete pet**: `deletepet i/INDEX` +
+  e.g. `deletepet 2`
+. Schedule System
+- **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
+  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
+  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
+- **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
+  e.g. `findslots n/Brian Griffin` +
+  e.g. `findslots t/20/2/2020` +
+  e.g. `findslots n/Coco t/16/11/2020`
+- **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
+  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
+  e.g. `editslot 3 d/45` +
+  e.g. `editslot 12 n/Brian Griffin`
+- **Delete slot**: `deleteslot i/INDEX` +
+  e.g. `deleteslot 2`
+- **Show conflicts**: `conflicts`
+
+
 == FAQ
 
-_Coming Soon!&trade;_
-
-////
-**Q**: How do I transfer my data to another Computer? +
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-////
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Shop Helper folder.
 

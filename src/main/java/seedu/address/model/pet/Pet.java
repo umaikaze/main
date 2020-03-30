@@ -12,7 +12,7 @@ import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
 /**
- * Represents a Pet in the pet shop helper.
+ * Represents a Pet in the pet store helper.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Pet implements DisplayItem {
