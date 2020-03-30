@@ -20,12 +20,14 @@ public abstract class PetListChangeListener implements ListChangeListener<Pet> {
             removedPets = petChange.getRemoved();
             addedPets = petChange.getAddedSubList();
 
-            assert (removedPets.size() < 2 && addedPets.size() < 2);
-
             if (removedPets.size() > 0 && addedPets.size() > 0) {
-                updateSlotsDueToPetEdit(removedPets.get(0), addedPets.get(0));
+                for (int i = 0; i < removedPets.size(); i++) {
+                    updateSlotsDueToPetEdit(removedPets.get(i), addedPets.get(i));
+                }
             } else if (removedPets.size() > 0) {
-                removeExcessSlot(removedPets.get(0));
+                for (Pet removedPet : removedPets) {
+                    removeExcessSlot(removedPet);
+                }
             }
         }
     }
