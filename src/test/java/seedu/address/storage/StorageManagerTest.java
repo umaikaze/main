@@ -15,7 +15,7 @@ import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.UserPrefs;
 
-public class PshStorageManagerTest {
+public class StorageManagerTest {
 
     @TempDir
     public Path testFolder;
