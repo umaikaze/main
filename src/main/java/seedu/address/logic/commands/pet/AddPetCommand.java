@@ -41,17 +41,19 @@ public class AddPetCommand extends Command {
             + PREFIX_TAG + "small "
             + PREFIX_TAG + "lazy ";
 
-    public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New pet added: %1$s\n";
     public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper";
 
     private final Pet toAdd;
+    private final String warningMessage;
 
     /**
      * Creates an AddPetCommand to add the specified {@code Pet}
      */
-    public AddPetCommand(Pet pet) {
+    public AddPetCommand(Pet pet, String warningMessage) {
         requireNonNull(pet);
         toAdd = pet;
+        this.warningMessage = warningMessage;
     }
 
     @Override
@@ -61,13 +63,14 @@ public class AddPetCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PET);
         }
         model.addPet(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + warningMessage);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPetCommand // instanceof handles nulls
-                && toAdd.equals(((AddPetCommand) other).toAdd));
+                && toAdd.equals(((AddPetCommand) other).toAdd))
+                && warningMessage.equals(((AddPetCommand) other).warningMessage);
     }
 }

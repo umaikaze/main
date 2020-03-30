@@ -36,7 +36,7 @@ class EditSlotCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Slot editedSlot = new SlotBuilder(model).build();
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(editedSlot).build();
-        EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, descriptor);
+        EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, descriptor, "");
 
         String expectedMessage = String.format(EditSlotCommand.MESSAGE_EDIT_SLOT_SUCCESS, editedSlot);
 
@@ -58,7 +58,7 @@ class EditSlotCommandTest {
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(
                 model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
-        EditSlotCommand editCommand = new EditSlotCommand(indexLastSlot, descriptor);
+        EditSlotCommand editCommand = new EditSlotCommand(indexLastSlot, descriptor, "");
 
         String expectedMessage = String.format(EditSlotCommand.MESSAGE_EDIT_SLOT_SUCCESS, editedSlot);
 
@@ -70,7 +70,7 @@ class EditSlotCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, new EditSlotDescriptor());
+        EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, new EditSlotDescriptor(), "");
         Slot editedSlot = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());
 
         String expectedMessage = String.format(EditSlotCommand.MESSAGE_EDIT_SLOT_SUCCESS, editedSlot);
@@ -87,7 +87,7 @@ class EditSlotCommandTest {
         Slot slotInFilteredList = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());
         Slot editedSlot = new SlotBuilder(slotInFilteredList).withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
         EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT,
-                new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build());
+                new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build(), "");
 
         String expectedMessage = String.format(EditSlotCommand.MESSAGE_EDIT_SLOT_SUCCESS, editedSlot);
 
@@ -102,7 +102,7 @@ class EditSlotCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSlotList().size() + 1);
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
                 .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
-        EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex, descriptor);
+        EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex, descriptor, "");
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
     }
@@ -120,18 +120,18 @@ class EditSlotCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetTracker().getSlotList().size());
 
         EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex,
-                new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build());
+                new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build(), "");
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditSlotCommand standardCommand = new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescCoco(model));
+        final EditSlotCommand standardCommand = new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescCoco(model), "");
 
         // same values -> returns true
         EditSlotDescriptor copyDescriptor = new EditSlotDescriptor(getSlotDescCoco(model));
-        EditSlotCommand commandWithSameValues = new EditSlotCommand(INDEX_FIRST_SLOT, copyDescriptor);
+        EditSlotCommand commandWithSameValues = new EditSlotCommand(INDEX_FIRST_SLOT, copyDescriptor, "");
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -141,9 +141,9 @@ class EditSlotCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, getSlotDescCoco(model))));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, getSlotDescCoco(model), "")));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescGarfield(model))));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, getSlotDescGarfield(model), "")));
     }
 }

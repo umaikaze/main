@@ -29,9 +29,11 @@ public class FindSlotCommand extends Command {
     public static final String MESSAGE_EMPTY_DATETIME_FIELD = "t/ should not be followed by an empty entry!";
 
     private final Predicate<Slot> predicate;
+    private String warningMessage;
 
-    public FindSlotCommand(Predicate<Slot> predicate) {
+    public FindSlotCommand(Predicate<Slot> predicate, String warningMessage) {
         this.predicate = predicate;
+        this.warningMessage = warningMessage;
     }
 
     @Override
@@ -39,14 +41,16 @@ public class FindSlotCommand extends Command {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()), false,
-                false, true, false);
+                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size())
+                        + warningMessage, false, false, true, false);
+
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindSlotCommand // instanceof handles nulls
-                && predicate.equals(((FindSlotCommand) other).predicate)); // state check
+                && predicate.equals(((FindSlotCommand) other).predicate))
+                && warningMessage.equals(((FindSlotCommand) other).warningMessage); // state check
     }
 }

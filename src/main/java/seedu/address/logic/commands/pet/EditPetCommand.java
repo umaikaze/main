@@ -53,24 +53,26 @@ public class EditPetCommand extends Command {
             + PREFIX_GENDER + "female "
             + PREFIX_DOB + "01/02/2013";
 
-    public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s";
+    public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the pet store helper.";
     public static final String MESSAGE_EMPTY_FOODLIST = "The list of food should not be empty.";
 
     private final Index index;
     private final EditPetDescriptor editPetDescriptor;
+    private final String warningMessage;
 
     /**
      * @param index of the pet in the filtered pet list to edit
      * @param editPetDescriptor details to edit the pet with
      */
-    public EditPetCommand(Index index, EditPetDescriptor editPetDescriptor) {
+    public EditPetCommand(Index index, EditPetDescriptor editPetDescriptor, String warningMessage) {
         requireNonNull(index);
         requireNonNull(editPetDescriptor);
 
         this.index = index;
         this.editPetDescriptor = new EditPetDescriptor(editPetDescriptor);
+        this.warningMessage = warningMessage;
     }
 
     @Override
@@ -91,7 +93,7 @@ public class EditPetCommand extends Command {
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet));
+        return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet) + warningMessage);
 
     }
 
@@ -127,7 +129,8 @@ public class EditPetCommand extends Command {
         // state check
         EditPetCommand e = (EditPetCommand) other;
         return index.equals(e.index)
-                && editPetDescriptor.equals(e.editPetDescriptor);
+                && editPetDescriptor.equals(e.editPetDescriptor)
+                && warningMessage.equals(e.warningMessage);
     }
 
     /**

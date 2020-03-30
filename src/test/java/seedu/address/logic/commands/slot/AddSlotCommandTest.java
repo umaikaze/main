@@ -36,7 +36,7 @@ class AddSlotCommandTest {
 
     @Test
     public void constructor_nullSlot_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddSlotCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddSlotCommand(null, null));
     }
 
     @Test
@@ -44,7 +44,7 @@ class AddSlotCommandTest {
         ModelStubAcceptingSlotAdded modelStub = new ModelStubAcceptingSlotAdded();
         Slot validSlot = new SlotBuilder(typicalModel).build();
 
-        CommandResult commandResult = new AddSlotCommand(validSlot).execute(modelStub);
+        CommandResult commandResult = new AddSlotCommand(validSlot, "").execute(modelStub);
 
         assertEquals(String.format(AddSlotCommand.MESSAGE_SUCCESS, validSlot), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validSlot), modelStub.slotsAdded);
@@ -54,14 +54,14 @@ class AddSlotCommandTest {
     public void equals() {
         Slot alice = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Coco"))).build();
         Slot bob = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Garfield"))).build();
-        AddSlotCommand addAliceCommand = new AddSlotCommand(alice);
-        AddSlotCommand addBobCommand = new AddSlotCommand(bob);
+        AddSlotCommand addAliceCommand = new AddSlotCommand(alice, "");
+        AddSlotCommand addBobCommand = new AddSlotCommand(bob, "");
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddSlotCommand addAliceCommandCopy = new AddSlotCommand(alice);
+        AddSlotCommand addAliceCommandCopy = new AddSlotCommand(alice, "");
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
