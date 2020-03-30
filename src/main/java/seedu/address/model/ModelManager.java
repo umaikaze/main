@@ -149,6 +149,7 @@ public class ModelManager implements Model {
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
+        changeSystemToFilteredPets();
     }
 
     //=========== Slot  ================================================================================
@@ -185,6 +186,7 @@ public class ModelManager implements Model {
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
         requireNonNull(predicate);
         filteredSlots.setPredicate(predicate);
+        changeSystemToFilteredSlots();
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -209,11 +211,23 @@ public class ModelManager implements Model {
         return filteredDisplayItems;
     }
 
+
     public DisplaySystemType getCurrentDisplaySystemType() {
         return currentDisplaySystemType;
     }
 
+    public void changeSystemToFilteredPets() {
+        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+    }
+
+    public void changeSystemToFilteredSlots() {
+        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+    }
+
     @Override
+    /**
+     * Used for display all pets/slots/inventory in display command.
+     */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
         case PETS:

@@ -21,8 +21,12 @@ public class FindSlotCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots where pet name matches exactly "
             + "(case-insensitive) or slots that is within the date specified (ignoring timing) and displays them as a "
             + "list with index numbers.\n"
-            + "Parameters: [n/PETNAME] [t/DATE]...\n"
-            + "Example: " + COMMAND_WORD + " n/garfield t/10/11/2020";
+            + "Parameters: [n/PET NAME] [t/DATE [MORE DATES]...]\n"
+            + "Example: " + COMMAND_WORD + " n/garfield t/10/11/2020 5/12/2020";
+
+    public static final String MESSAGE_EMPTY_NAME_FIELD = "n/ should not be followed by an empty entry!";
+
+    public static final String MESSAGE_EMPTY_DATETIME_FIELD = "t/ should not be followed by an empty entry!";
 
     private final Predicate<Slot> predicate;
 
@@ -35,7 +39,8 @@ public class FindSlotCommand extends Command {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()));
+                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()), false,
+                false, true, false);
     }
 
     @Override
