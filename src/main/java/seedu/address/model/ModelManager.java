@@ -149,7 +149,10 @@ public class ModelManager implements Model {
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
-        changeSystemToFilteredPets();
+        filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+        filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
     //=========== Slot  ================================================================================
@@ -186,7 +189,10 @@ public class ModelManager implements Model {
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
         requireNonNull(predicate);
         filteredSlots.setPredicate(predicate);
-        changeSystemToFilteredSlots();
+        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+        filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -216,24 +222,6 @@ public class ModelManager implements Model {
         return currentDisplaySystemType;
     }
 
-    /**
-     * Changes the display system to pets system. Note this is specifically written to accommodate `findpets` command
-     * which allows users to execute `findpets` in a different system display.
-     */
-    public void changeSystemToFilteredPets() {
-        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
-        currentDisplaySystemType = DisplaySystemType.PETS;
-    }
-
-    /**
-     * Changes the display system to pets system. Note this is specifically written to accommodate `findslots` command
-     * which allows users to execute `findslots` in a different system display.
-     */
-    public void changeSystemToFilteredSlots() {
-        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
-        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
-    }
-
     @Override
     /**
      * Used for display all pets/slots/inventory in display command.
@@ -241,14 +229,21 @@ public class ModelManager implements Model {
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
         case PETS:
+            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
-            updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
             break;
         case SCHEDULE:
+            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
-            updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
             break;
         case INVENTORY:
+            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
                 foodCollection -> foodCollection);
             updateFilteredFoodCollectionList(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
