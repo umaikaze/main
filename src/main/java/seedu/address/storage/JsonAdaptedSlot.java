@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DATETIME;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DURATION;
 
@@ -11,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Name;
@@ -44,14 +44,14 @@ public class JsonAdaptedSlot {
      */
     public JsonAdaptedSlot(Slot source) {
         name = source.getPet().getName().fullName;
-        dateTime = source.getDateTime().format(DateTimeUtil.DATETIME_FORMAT);
+        dateTime = source.getDateTime().format(DATETIME_FORMAT);
         duration = String.valueOf(source.getDuration().toMinutes());
     }
 
     /**
      * Converts this Jackson-friendly adapted slot object into the model's {@code Slot} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted slot.
      */
     public Slot toModelType(PetTracker petTracker) throws IllegalValueException {
         if (name == null) {
@@ -64,7 +64,7 @@ public class JsonAdaptedSlot {
 
         final LocalDateTime modelDateTime;
         try {
-            modelDateTime = LocalDateTime.parse(dateTime, DateTimeUtil.DATETIME_FORMAT);
+            modelDateTime = LocalDateTime.parse(dateTime, DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
