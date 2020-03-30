@@ -105,7 +105,7 @@ class EditSlotParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast_warning() {
+    public void parse_multipleRepeatedFields_acceptsLast() {
 
         Index targetIndex = INDEX_FIRST_SLOT;
         String userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO + DURATION_DESC_COCO + DURATION_DESC_COCO
