@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -30,12 +30,12 @@ class FindSlotCommandTest {
     @Test
     public void equals() {
         Predicate<Slot> firstPredicate =
-                new SlotPetNamePredicate("Coco");
+                new SlotPetNamePredicate(Arrays.asList("Coco"));
         Predicate<Slot> secondPredicate =
-                new SlotPetNamePredicate("Garfield");
+                new SlotPetNamePredicate(Arrays.asList("Garfield"));
 
-        FindSlotCommand findFirstCommand = new FindSlotCommand(firstPredicate);
-        FindSlotCommand findSecondCommand = new FindSlotCommand(secondPredicate);
+        FindSlotCommand findFirstCommand = new FindSlotCommand(firstPredicate, "");
+        FindSlotCommand findSecondCommand = new FindSlotCommand(secondPredicate, "");
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -44,7 +44,7 @@ class FindSlotCommandTest {
         assertFalse(findFirstCommand.equals(1));
 
         // same values -> returns true
-        FindSlotCommand findFirstCommandCopy = new FindSlotCommand(firstPredicate);
+        FindSlotCommand findFirstCommandCopy = new FindSlotCommand(firstPredicate, "");
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // null -> returns false
@@ -55,20 +55,17 @@ class FindSlotCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noSlotFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 0);
-        Predicate<Slot> predicate = FindSlotParser.getPredicates(" " + PREFIX_NAME);
-        FindSlotCommand command = new FindSlotCommand(predicate);
-        expectedModel.updateFilteredSlotList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredSlotList());
+    public void execute_zeroKeywords_throwParseException() throws ParseException {
+        String expectedMessage = FindSlotCommand.MESSAGE_EMPTY_NAME_FIELD;
+        FindSlotParser parser = new FindSlotParser();
+        assertParseFailure(parser, " " + PREFIX_NAME, expectedMessage);
     }
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 3);
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
-        FindSlotCommand command = new FindSlotCommand(predicate);
+        FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
         TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
         assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());

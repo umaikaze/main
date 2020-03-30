@@ -1,6 +1,9 @@
 package seedu.address.logic.parser.pet;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_DOB;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_GENDER;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_SPECIES;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_COCO;
@@ -15,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.SPECIES_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.SPECIES_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FAT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAZY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
@@ -115,10 +119,10 @@ public class EditPetCommandParserTest {
                 + NAME_DESC_COCO + TAG_DESC_FAT;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
-                .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(CommandTestUtil.VALID_DOB_COCO)
+                .withGender(VALID_GENDER_GARFIELD).withDateOfBirth(VALID_DOB_COCO)
                 .withSpecies(VALID_SPECIES_COCO)
                 .withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -128,9 +132,9 @@ public class EditPetCommandParserTest {
         Index targetIndex = INDEX_FIRST_PET;
         String userInput = targetIndex.getOneBased() + GENDER_DESC_GARFIELD + DOB_DESC_COCO;
 
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -141,31 +145,31 @@ public class EditPetCommandParserTest {
         Index targetIndex = INDEX_THIRD_PET;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // gender
         userInput = targetIndex.getOneBased() + GENDER_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_COCO.toString()).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + DOB_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + SPECIES_DESC_COCO;
         descriptor = new EditPetDescriptorBuilder().withSpecies(VALID_SPECIES_COCO).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FAT;
         descriptor = new EditPetDescriptorBuilder().withTags(VALID_TAG_FAT).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -178,10 +182,11 @@ public class EditPetCommandParserTest {
                 + DOB_DESC_COCO + TAG_DESC_FAT + GENDER_DESC_GARFIELD + SPECIES_DESC_GARFIELD
                 + DOB_DESC_GARFIELD + TAG_DESC_LAZY;
 
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD)
                 .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        String warningMessage = WARNING_MESSAGE_GENDER + WARNING_MESSAGE_SPECIES + WARNING_MESSAGE_DOB;
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, warningMessage);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -191,18 +196,18 @@ public class EditPetCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PET;
         String userInput = targetIndex.getOneBased() + INVALID_GENDER_DESC + GENDER_DESC_GARFIELD;
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, WARNING_MESSAGE_GENDER);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + DOB_DESC_GARFIELD + INVALID_GENDER_DESC + SPECIES_DESC_GARFIELD
                 + GENDER_DESC_GARFIELD;
-        descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD.toString())
+        descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, WARNING_MESSAGE_GENDER);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -212,7 +217,7 @@ public class EditPetCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withTags().build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

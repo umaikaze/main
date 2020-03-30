@@ -28,7 +28,22 @@ public class Name implements Comparable<Name> {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = formatName(name);
+    }
+
+    /**
+     * Transfer name in to the format of "Xxx Xxx ...".
+     * @param name The name passed in by user
+     * @return The formatted name
+     */
+    public String formatName(String name) {
+        String[] nameSubStrings = name.split(" ");
+        String formattedName = "";
+        for (String n : nameSubStrings) {
+            n = n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase();
+            formattedName += (n + " ");
+        }
+        return formattedName.trim();
     }
 
     /**

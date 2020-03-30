@@ -27,30 +27,34 @@ public class AddSlotCommand extends Command {
             + PREFIX_DATETIME + "16/11/2020 1300 "
             + PREFIX_DURATION + "90 ";
 
-    public static final String MESSAGE_SUCCESS = "New slot added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New slot added: %1$s\n";
 
     private final Slot slotToAdd;
+    private final String warningMessage;
 
     /**
      * Creates an AddSlotCommand to add the specified {@code slot}
      */
-    public AddSlotCommand(Slot slot) {
+    public AddSlotCommand(Slot slot, String warningMessage) {
         requireNonNull(slot);
         slotToAdd = slot;
+        this.warningMessage = warningMessage;
     }
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
         model.addSlot(slotToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, slotToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, slotToAdd) + warningMessage);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddSlotCommand // instanceof handles nulls
-                && slotToAdd.equals(((AddSlotCommand) other).slotToAdd));
+                && slotToAdd.equals(((AddSlotCommand) other).slotToAdd))
+                && warningMessage.equals(((AddSlotCommand) other).warningMessage);
     }
 }

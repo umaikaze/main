@@ -1,6 +1,10 @@
 package seedu.address.logic.parser.pet;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_DOB;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_GENDER;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_NAME;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_SPECIES;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.FOOD_DESC_COCO;
@@ -51,29 +55,33 @@ public class AddPetCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
-                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet));
+                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet, ""));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_COCO + NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
-                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet));
+                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_NAME));
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_COCO + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
-                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet));
+                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_GENDER));
 
         // multiple dates of birth - last date of birth accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_COCO + DOB_DESC_GARFIELD
-                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet));
+                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_DOB));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD + SPECIES_DESC_GARFIELD
-                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT, new AddPetCommand(expectedPet));
+                + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_SPECIES));
 
         // multiple tags - all accepted
         Pet expectedPetMultipleTags = new PetBuilder(GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT)
                 .build();
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD + SPECIES_DESC_GARFIELD
-                + FOOD_DESC_GARFIELD + TAG_DESC_LAZY + TAG_DESC_FAT, new AddPetCommand(expectedPetMultipleTags));
+                + FOOD_DESC_GARFIELD + TAG_DESC_LAZY + TAG_DESC_FAT, new AddPetCommand(expectedPetMultipleTags, ""));
     }
 
     @Test
@@ -81,7 +89,7 @@ public class AddPetCommandParserTest {
         // zero tags
         Pet expectedPet = new PetBuilder(COCO).withTags().build();
         assertParseSuccess(parser, NAME_DESC_COCO + GENDER_DESC_COCO + DOB_DESC_COCO + SPECIES_DESC_COCO
-                + FOOD_DESC_COCO, new AddPetCommand(expectedPet));
+                + FOOD_DESC_COCO, new AddPetCommand(expectedPet, ""));
     }
 
     @Test

@@ -277,6 +277,11 @@ The following shows a typical usage scenario that involves the Display Inventory
 * Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model$getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
 * Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList$internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList$updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
 
+The sequence diagram below is an illustration of the flow of events that happen in the logical component when `Step 2` above occurs.
+
+.Interactions Inside the Logic Component for the `display i` Command
+image::DisplayInventorySequenceDiagram.png[]
+
 ==== Design Considerations
 ===== Aspect: Maintaining the collection of food in a pet tracker
 * Alternative 1(current choice): Maintains the list as an attribute of `UniquePetList`.

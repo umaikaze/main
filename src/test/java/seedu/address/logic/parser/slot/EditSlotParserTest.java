@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.slot;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_DURATION;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
@@ -61,7 +63,7 @@ class EditSlotParserTest {
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
                 .withPet(model.getPet(new Name(VALID_NAME_COCO)))
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -73,7 +75,7 @@ class EditSlotParserTest {
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_COCO).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -86,19 +88,19 @@ class EditSlotParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
                 .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // dateTime
         userInput = targetIndex.getOneBased() + DATETIME_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_COCO).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + DURATION_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDuration(VALID_DURATION_COCO).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -112,7 +114,8 @@ class EditSlotParserTest {
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor,
+                WARNING_MESSAGE_TIME + WARNING_MESSAGE_DURATION);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -124,7 +127,7 @@ class EditSlotParserTest {
         Index targetIndex = INDEX_FIRST_SLOT;
         String userInput = targetIndex.getOneBased() + INVALID_DATETIME_DESC + DATETIME_DESC_GARFIELD;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, WARNING_MESSAGE_TIME);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
@@ -132,7 +135,7 @@ class EditSlotParserTest {
                 + DATETIME_DESC_GARFIELD;
         descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor, WARNING_MESSAGE_TIME + WARNING_MESSAGE_DURATION);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

@@ -33,7 +33,7 @@ public class UniquePetList implements Iterable<Pet> {
     private final ObservableList<Pet> internalList = FXCollections.observableArrayList();
     private final ObservableList<Pet> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    private final FoodCollectionList foodCollectionList = new FoodCollectionList(getFoodList());
+    private final FoodCollectionList foodCollectionList = new FoodCollectionList(internalList);
     private final Schedule slots = new Schedule();
 
     public UniquePetList() {
@@ -41,13 +41,14 @@ public class UniquePetList implements Iterable<Pet> {
         setInternalListListenerForSchedule();
     }
 
+    /**
+     * Sets a Listener on {@code internalList} so that whenever the {@code internalList} changes, the
+     * foodCollectionList is updated according to the change of internalList.
+     */
     public void setInternalListListenerForFoodCollectionList() {
-        internalList.addListener(new ListChangeListener<Pet>() {
-            @Override
-            public void onChanged(Change<? extends Pet> change) {
-                if (change.next()) {
-                    updateFoodCollectionList();
-                }
+        internalList.addListener((ListChangeListener<Pet>) change -> {
+            if (change.next()) {
+                updateFoodCollectionList();
             }
         });
     }
@@ -138,6 +139,9 @@ public class UniquePetList implements Iterable<Pet> {
         }
     }
 
+    /**
+     * Replace the contents of the list entire with the contents of {@code replacement}
+     */
     public void setPets(UniquePetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -201,6 +205,9 @@ public class UniquePetList implements Iterable<Pet> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the list of food collections as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<FoodCollection> acquireUnmodifiableFoodCollectionList() {
         return foodCollectionList.asUnmodifiableObservableList();
     }
@@ -241,7 +248,6 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     private void updateFoodCollectionList() {
-        List<Food> foods = getFoodList();
-        foodCollectionList.update(foods);
+        foodCollectionList.update(internalList);
     }
 }
