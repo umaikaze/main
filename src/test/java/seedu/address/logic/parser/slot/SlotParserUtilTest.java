@@ -5,7 +5,7 @@ import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.pet.TypicalPets.COCO;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -33,7 +33,7 @@ class SlotParserUtilTest {
 
     private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE, DATETIME_FORMAT);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
-    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
     void parseIndex_invalidInput_throwsParseException() {

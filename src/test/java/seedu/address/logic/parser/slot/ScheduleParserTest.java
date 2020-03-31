@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.WARNING_MESSAGE_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ import seedu.address.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
 
-    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
     private final PetTrackerParser parser = new PetTrackerParser(model);
 
     @Test

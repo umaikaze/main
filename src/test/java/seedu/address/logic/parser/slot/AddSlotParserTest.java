@@ -16,7 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ import seedu.address.testutil.slot.SlotBuilder;
 
 public class AddSlotParserTest {
 
-    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
     private AddSlotParser parser = new AddSlotParser(model);
 
     @Test
