@@ -18,6 +18,8 @@ import seedu.address.model.slot.Slot;
  */
 public class CalendarConflict extends UiPart<Region> {
 
+    public static final double WIDTH_SCALING_FACTOR = 2;
+
     private static final String FXML = "CalendarConflict.fxml";
 
     /**
@@ -27,8 +29,6 @@ public class CalendarConflict extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public static final double WIDTH_SCALING_FACTOR = 2;
 
     @FXML
     private HBox slotPane;
@@ -46,7 +46,11 @@ public class CalendarConflict extends UiPart<Region> {
         super(FXML);
         LocalTime start = conflictSlots.get(0).getTime();
         //TODO: this way of getting end is really hacky....
-        LocalTime end = conflictSlots.stream().map(slot -> slot.getEndTime()).sorted().reduce((a, b) -> b).orElseThrow();
+        LocalTime end = conflictSlots.stream()
+                .map(slot -> slot.getEndTime())
+                .sorted()
+                .reduce((a, b) -> b)
+                .orElseThrow();
         int totalDuration = Math.toIntExact(Duration.between(start, end).toMinutes());
         slotPane.setPrefWidth(totalDuration * WIDTH_SCALING_FACTOR);
         //TODO: all the info displayed below are wrong (based on latest slot only)
@@ -55,7 +59,9 @@ public class CalendarConflict extends UiPart<Region> {
                 .reduce((a, b) -> a + ", " + b).orElseThrow();
         ids.setText(idsString + ". " + conflictSlots.get(0).getDateTime().toLocalDate());
         dateTime.setText(start + " - " + end);
-        Set<String> petNames = conflictSlots.stream().map(slot -> slot.getPet().getName().toString()).collect(Collectors.toSet());
+        Set<String> petNames = conflictSlots.stream()
+                .map(slot -> slot.getPet().getName().toString())
+                .collect(Collectors.toSet());
         petName.setText(petNames.toString());
     }
 }

@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
  */
 public class CalendarBuffer extends UiPart<Region> {
 
+    public static final double WIDTH_SCALING_FACTOR = 2;
+
     private static final String FXML = "CalendarBuffer.fxml";
 
     /**
@@ -20,8 +22,6 @@ public class CalendarBuffer extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public static final double WIDTH_SCALING_FACTOR = 2;
 
     @FXML
     private HBox slotPane;

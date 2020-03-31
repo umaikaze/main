@@ -11,6 +11,8 @@ import seedu.address.model.slot.Slot;
  */
 public class CalendarSlot extends UiPart<Region> {
 
+    public static final double WIDTH_SCALING_FACTOR = 2;
+
     private static final String FXML = "CalendarSlot.fxml";
 
     /**
@@ -20,8 +22,6 @@ public class CalendarSlot extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public static final double WIDTH_SCALING_FACTOR = 2;
 
     @FXML
     private HBox slotPane;

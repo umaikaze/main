@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener.Change;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +20,8 @@ import seedu.address.model.slot.Slot;
  */
 public class CalendarPanel extends UiPart<Region> {
 
+    public static final double WIDTH_SCALING_FACTOR = 2;
+
     private static final String FXML = "CalendarPanel.fxml";
 
     /**
@@ -29,8 +31,6 @@ public class CalendarPanel extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public static final double WIDTH_SCALING_FACTOR = 2;
 
     private final ObservableList<Slot> allSlots;
     private LocalTime earliestTime;
@@ -58,12 +58,15 @@ public class CalendarPanel extends UiPart<Region> {
         allSlots.addListener(reconstructOnChange);
     }
 
+    /**
+     * Initialize key variables needed for constructing the calendar.
+     */
     private void init() {
         earliestTime = allSlots.stream()
                 .map(slot -> slot.getTime())
                 .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
                 .get();
-        latestTime= allSlots.stream()
+        latestTime = allSlots.stream()
                 .map(slot -> slot.getTime())
                 .reduce((time1, time2) -> (time1.isAfter(time2) ? time1 : time2))
                 .get();
@@ -109,12 +112,18 @@ public class CalendarPanel extends UiPart<Region> {
         flushOutHolding(h, allSlots.size());
     }
 
+    /**
+     * Clears the previously constructed calendar.
+     */
     private void clearAll() {
         gridPane.getChildren().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getColumnConstraints().clear();
     }
 
+    /**
+     * Flushes out and renders a {@code CalendaBuffer}.
+     */
     private void flushOutBuffer(LocalTime bufferStartTime, LocalTime bufferEndTime) {
         Duration duration = Duration.between(bufferStartTime, bufferEndTime);
         int colIndex = getColIndex(bufferStartTime);
@@ -122,6 +131,10 @@ public class CalendarPanel extends UiPart<Region> {
         CalendarBuffer calendarBuffer = new CalendarBuffer(duration);
         gridPane.add(calendarBuffer.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
+
+    /**
+     * Flushes out and renders all slots in holding.
+     */
 
     private void flushOutHolding(Holding h, int lastDisplayedIndex) {
         if (h.size() == 1) {
@@ -131,6 +144,9 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Flushes out and renders a {@code CalendarSlot}.
+     */
     private void flushOutHoldingSingle(Slot slot, int lastDisplayedIndex) {
         Slot slotToDisplayAlone = slot;
         int colIndex = getColIndex(slotToDisplayAlone.getTime());
@@ -138,6 +154,10 @@ public class CalendarPanel extends UiPart<Region> {
         CalendarSlot calendarSlot = new CalendarSlot(slotToDisplayAlone, lastDisplayedIndex);
         gridPane.add(calendarSlot.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
+
+    /**
+     * Flushes out and renders a {@code CalendarConflict}.
+     */
 
     private void flushOutHoldingMultiple(Holding h, int lastDisplayedIndex) {
         int colIndex = getColIndex(h.start());
@@ -163,10 +183,13 @@ public class CalendarPanel extends UiPart<Region> {
         return getColSpan(Duration.between(startTime, endTime));
     }
 
+    /**
+     * Encapsulates the list of all currently conflicted slots in holding.
+     */
     private class Holding {
-        List<Slot> slots = new ArrayList<>();
-        LocalTime holdingStartTime = LocalTime.MAX;
-        LocalTime holdingEndTime = LocalTime.MIN;
+        private List<Slot> slots = new ArrayList<>();
+        private LocalTime holdingStartTime = LocalTime.MAX;
+        private LocalTime holdingEndTime = LocalTime.MIN;
         Holding() {}
         void add(Slot slot) {
             slots.add(slot);
