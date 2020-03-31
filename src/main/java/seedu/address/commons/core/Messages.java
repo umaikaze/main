@@ -15,15 +15,15 @@ public class Messages {
 
     public static final String WARNING_MESSAGE_END = "Only the last one will be accepted.\n";
     public static final String WARNING_MESSAGE_NAME = "Warning: You have entered more than 1 entries for "
-            + "name field n/." + WARNING_MESSAGE_END;
+            + "name field n/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_GENDER = "Warning: You have entered more than 1 entries for "
-            + "gender field g/." + WARNING_MESSAGE_END;
+            + "gender field g/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_SPECIES = "Warning: You have entered more than 1 entries for "
-            + "species field s/." + WARNING_MESSAGE_END;
+            + "species field s/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_DOB = "Warning: You have entered more than 1 entries for "
-            + "date of birth field b/." + WARNING_MESSAGE_END;
+            + "date of birth field b/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_TIME = "Warning: You have entered more than 1 entries for "
-            + "time field t/." + WARNING_MESSAGE_END;
+            + "time field t/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_DURATION = "Warning: You have entered more than 1 entries for "
-            + "duration field d/." + WARNING_MESSAGE_END;
+            + "duration field d/." + " " + WARNING_MESSAGE_END;
 }
