@@ -36,13 +36,6 @@ class JsonAdaptedPet {
      * Constructs a {@code JsonAdaptedPet} with the given pet details.
      */
     @JsonCreator
-    /* ignore reading in food from json for now
-    public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
-                          @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("species") String species,
-                          @JsonProperty("foodList") List<JsonAdaptedFood> foodList,
-                          @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        */
-
     public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
                 @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("species") String species,
                 @JsonProperty("foodList") List<JsonAdaptedFood> foodList,

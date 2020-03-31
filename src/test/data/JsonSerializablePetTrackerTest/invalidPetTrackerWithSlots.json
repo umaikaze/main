@@ -1,0 +1,15 @@
+{
+  "pets" : [ {
+    "name" : "Coco",
+    "gender" : "Male",
+    "dateOfBirth" : "1/1/2019",
+    "species" : "Dog",
+    "foodList" : [ "Brand A:15", "Brand B:20" ],
+    "tagged" : [ "small", "lazy" ]
+  } ],
+  "slots" : [ {
+    "name" : "Coco",
+    "dateTime" : "This is invalid",
+    "duration" : "90"
+  } ]
+}

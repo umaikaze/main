@@ -16,24 +16,25 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.model.Model;
-import seedu.address.model.pet.Name;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.slot.SlotBuilder;
 
 public class AddSlotParserTest {
 
-    private static final Model model = getTypicalModelManager();
-    private static final AddSlotParser parser = new AddSlotParser(model);
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private AddSlotParser parser = new AddSlotParser(model);
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Slot expectedSlot = new SlotBuilder(model).withPet(model.getPet(new Name(VALID_NAME_COCO)))
+        Slot expectedSlot = new SlotBuilder().withPet(VALID_NAME_COCO)
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
 
         // Whitespace only preamble
