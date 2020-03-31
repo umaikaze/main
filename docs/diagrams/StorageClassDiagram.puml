@@ -19,7 +19,8 @@ StorageManager o--> PetTrackerStorage
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 JsonPetTrackerStorage .left.|> PetTrackerStorage
 JsonPetTrackerStorage .down.> JsonSerializablePetTrackerStorage
-JsonSerializablePetTrackerStorage .right.> JsonSerializablePet
-JsonSerializablePet .right.> JsonAdaptedTag
-JsonSerializablePet .right.> JsonAdaptedFood
+JsonSerializablePetTrackerStorage .right.> JsonAdaptedPet
+JsonSerializablePetTrackerStorage .down.> JsonAdaptedSlot
+JsonAdaptedPet .down.> JsonAdaptedTag
+JsonAdaptedPet .down.> JsonAdaptedFood
 @enduml

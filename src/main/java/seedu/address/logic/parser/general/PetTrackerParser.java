@@ -85,6 +85,9 @@ public class PetTrackerParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
+
         // pet tracker
         case AddPetCommand.COMMAND_WORD:
             return new AddPetParser().parse(arguments);
@@ -113,9 +116,6 @@ public class PetTrackerParser {
 
         case ConflictCommand.COMMAND_WORD:
             return new ConflictCommand();
-
-        case StatsCommand.COMMAND_WORD:
-            return new StatsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
