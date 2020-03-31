@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private DisplayListPanel displayListPanel;
-    private ResultDisplay resultDisplay;
+    private FeedbackDisplay feedbackDisplay;
     private HelpWindow helpWindow;
     private OverallStats overallStats;
 
@@ -46,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane displayListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane feedbackDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -96,8 +96,8 @@ public class MainWindow extends UiPart<Stage> {
         displayListPanel = new DisplayListPanel(logic.getFilteredDisplayList());
         displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        feedbackDisplay = new FeedbackDisplay();
+        feedbackDisplayPlaceholder.getChildren().add(feedbackDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPetTrackerFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -169,7 +169,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             displayListPanelPlaceholder.getChildren().clear();
             displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
             if (commandResult.isShowStats()) {
@@ -191,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            feedbackDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
