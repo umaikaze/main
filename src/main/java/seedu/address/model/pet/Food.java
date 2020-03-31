@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 /**
- * Represents a Food object in Pet Shop Helper.
+ * Represents a Food object in Pet Store Helper.
  * Guarantees: immutable; name is valid as declared in {@link #isValidFoodName(String)}
  */
 public class Food {
