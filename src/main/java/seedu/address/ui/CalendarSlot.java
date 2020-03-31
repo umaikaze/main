@@ -1,17 +1,17 @@
 package seedu.address.ui;
 
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.control.Tooltip;
 import seedu.address.model.slot.Slot;
 
 /**
- * A UI Component that displays information about a {@code Slot} in a calendar view.
+ * A region of a calendar view that represents a single slot.
  */
-public class CalendarSlot extends UiPart<Region> {
-
-    public static final double WIDTH_SCALING_FACTOR = 2;
+public class CalendarSlot extends CalendarRegion {
 
     private static final String FXML = "CalendarSlot.fxml";
 
@@ -24,22 +24,43 @@ public class CalendarSlot extends UiPart<Region> {
      */
 
     @FXML
-    private HBox slotPane;
-
-    @FXML
     private Label id;
 
     @FXML
-    private Label dateTime;
+    private Label date;
+
+    @FXML
+    private Label time;
 
     @FXML
     private Label petName;
 
     public CalendarSlot(Slot slot, int displayedIndex) {
-        super(FXML);
-        slotPane.setPrefWidth(slot.getDuration().toMinutes() * WIDTH_SCALING_FACTOR);
-        id.setText(displayedIndex + ". " + slot.getDate().getDayOfMonth() + "/" + slot.getDate().getMonthValue());
-        dateTime.setText(slot.getTime() + " (+" + slot.getDuration().toMinutes() + ")");
-        petName.setText(slot.getPet().getName().toString());
+        super(FXML, slot.getDuration().toMinutes());
+
+        String idText = String.format("%d.", displayedIndex);
+        String dateText = String.format("%s, %s/%s/%s",
+                slot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
+                slot.getDate().getDayOfMonth(), slot.getDate().getMonthValue(), slot.getDate().getYear());
+        String timeText = String.format("%s - %s", slot.getTime(), slot.getEndTime());
+        String petText = slot.getPet().getName().toString();
+
+        id.setText(idText);
+        date.setText(dateText);
+        time.setText(timeText);
+        petName.setText(petText);
+    }
+
+    public Tooltip createTooltip() {
+        String pattern = "%s\n"
+                + "Date: %s\n"
+                + "Time: %s\n"
+                + "Pet: %s";
+        String tooltipText = String.format(pattern,
+                id.getText(), date.getText(), time.getText(), petName.getText());
+        Tooltip tooltip = new Tooltip(tooltipText);
+        tooltip.getStyleClass().add("tooltip-slot");
+        tooltip.setShowDuration(javafx.util.Duration.seconds(30));
+        return tooltip;
     }
 }

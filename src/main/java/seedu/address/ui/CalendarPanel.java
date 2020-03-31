@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.slot.Slot;
@@ -20,7 +21,7 @@ import seedu.address.model.slot.Slot;
  */
 public class CalendarPanel extends UiPart<Region> {
 
-    public static final double WIDTH_SCALING_FACTOR = 2;
+    public static final String NO_SLOTS = "No slots!";
 
     private static final String FXML = "CalendarPanel.fxml";
 
@@ -34,7 +35,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     private final ObservableList<Slot> allSlots;
     private LocalTime earliestTime;
-    private LocalTime latestTime;
     private int smallestTimeInterval;
     private int rowIndex;
 
@@ -49,13 +49,16 @@ public class CalendarPanel extends UiPart<Region> {
         this.allSlots = allSlots;
         ListChangeListener<Slot> reconstructOnChange = (Change<? extends Slot> c) -> {
             while (c.next()) {
-                if (c.wasPermutated()) {
+                if (!c.getList().isEmpty()) {
                     init();
-                    construct();
                 }
+                construct();
             }
         };
         allSlots.addListener(reconstructOnChange);
+        if (!allSlots.isEmpty()) {
+            init();
+        }
     }
 
     /**
@@ -65,10 +68,6 @@ public class CalendarPanel extends UiPart<Region> {
         earliestTime = allSlots.stream()
                 .map(slot -> slot.getTime())
                 .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
-                .get();
-        latestTime = allSlots.stream()
-                .map(slot -> slot.getTime())
-                .reduce((time1, time2) -> (time1.isAfter(time2) ? time1 : time2))
                 .get();
         smallestTimeInterval = Math.toIntExact(allSlots.stream()
                 .map(slot -> slot.getDuration().toMinutes())
@@ -80,14 +79,13 @@ public class CalendarPanel extends UiPart<Region> {
      * Fills the grid pane with the slots.
      */
     public void construct() {
+        clearAll();
         if (allSlots.isEmpty()) {
-            //TODO: show something nicer
-            gridPane.add(new Label("no slots!"), 0, 0);
+            Label label = new Label(NO_SLOTS);
+            label.getStyleClass().add("calendar_big_label");
+            gridPane.add(label, 0, 0);
             return;
         }
-        scrollPane.setMinWidth(Duration.between(earliestTime, latestTime).toMinutes() * WIDTH_SCALING_FACTOR);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        clearAll();
         Holding h = new Holding();
         for (int slotIndex = 0; slotIndex < allSlots.size(); slotIndex++) {
             Slot currSlot = allSlots.get(slotIndex);
@@ -125,10 +123,12 @@ public class CalendarPanel extends UiPart<Region> {
      * Flushes out and renders a {@code CalendaBuffer}.
      */
     private void flushOutBuffer(LocalTime bufferStartTime, LocalTime bufferEndTime) {
-        Duration duration = Duration.between(bufferStartTime, bufferEndTime);
+        if (!bufferEndTime.isAfter(bufferStartTime)) {
+            return;
+        }
         int colIndex = getColIndex(bufferStartTime);
-        int colSpan = getColSpan(duration);
-        CalendarBuffer calendarBuffer = new CalendarBuffer(duration);
+        int colSpan = getColSpan(Duration.between(bufferStartTime, bufferEndTime));
+        CalendarBuffer calendarBuffer = new CalendarBuffer(bufferStartTime, bufferEndTime);
         gridPane.add(calendarBuffer.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
@@ -152,6 +152,7 @@ public class CalendarPanel extends UiPart<Region> {
         int colIndex = getColIndex(slotToDisplayAlone.getTime());
         int colSpan = getColSpan(slotToDisplayAlone.getDuration());
         CalendarSlot calendarSlot = new CalendarSlot(slotToDisplayAlone, lastDisplayedIndex);
+        Tooltip.install(calendarSlot.getRoot(), calendarSlot.createTooltip());
         gridPane.add(calendarSlot.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
@@ -161,8 +162,9 @@ public class CalendarPanel extends UiPart<Region> {
 
     private void flushOutHoldingMultiple(Holding h, int lastDisplayedIndex) {
         int colIndex = getColIndex(h.start());
-        int colSpan = getColSpan(h.start(), h.end(), smallestTimeInterval);
-        CalendarConflict calendarConflict = new CalendarConflict(h.all(), lastDisplayedIndex);
+        int colSpan = getColSpan(h.start(), h.end());
+        CalendarConflict calendarConflict = new CalendarConflict(h.all(), h.start(), h.end(), lastDisplayedIndex);
+        Tooltip.install(calendarConflict.getRoot(), calendarConflict.createTooltip());
         gridPane.add(calendarConflict.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
@@ -179,7 +181,7 @@ public class CalendarPanel extends UiPart<Region> {
         return Math.toIntExact(duration.toMinutes()) / smallestTimeInterval;
     }
 
-    private int getColSpan(LocalTime startTime, LocalTime endTime, int timeInterval) {
+    private int getColSpan(LocalTime startTime, LocalTime endTime) {
         return getColSpan(Duration.between(startTime, endTime));
     }
 
@@ -188,37 +190,47 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private class Holding {
         private List<Slot> slots = new ArrayList<>();
-        private LocalTime holdingStartTime = LocalTime.MAX;
-        private LocalTime holdingEndTime = LocalTime.MIN;
+        private LocalTime startTime = LocalTime.MAX;
+        private LocalTime endTime = LocalTime.MIN;
+
         Holding() {}
+
         void add(Slot slot) {
             slots.add(slot);
-            holdingStartTime = holdingStartTime.isBefore(slot.getTime()) ? holdingStartTime : slot.getTime();
-            holdingEndTime = holdingEndTime.isAfter(slot.getEndTime()) ? holdingEndTime : slot.getEndTime();
+            startTime = startTime.isBefore(slot.getTime()) ? startTime : slot.getTime();
+            endTime = endTime.isAfter(slot.getEndTime()) ? endTime : slot.getEndTime();
         }
+
         void reset() {
             slots = new ArrayList<>();
-            holdingStartTime = LocalTime.MAX;
-            holdingEndTime = LocalTime.MIN;
+            startTime = LocalTime.MAX;
+            endTime = LocalTime.MIN;
         }
+
         boolean overlaps(Slot slot) {
             return slots.stream().anyMatch(s -> slot.isInConflictWith(s));
         }
+
         boolean sameDay(Slot slot) {
             return slots.get(0).isSameDate(slot);
         }
+
         int size() {
             return slots.size();
         }
+
         List<Slot> all() {
             return slots;
         }
+
         LocalTime start() {
-            return holdingStartTime;
+            return startTime;
         }
+
         LocalTime end() {
-            return holdingEndTime;
+            return endTime;
         }
+
         @Override
         public String toString() {
             return slots.toString();

@@ -14,10 +14,10 @@
         styleClass="calendar-grid-cell">
   <VBox alignment="TOP_LEFT" prefHeight="50" GridPane.columnIndex="0">
     <HBox spacing="5" alignment="CENTER_LEFT">
-      <Label fx:id="id" styleClass="cell_big_label" />
+      <Label fx:id="id" styleClass="calendar_big_label" />
     </HBox>
-    <!-- //TODO: make the layout nicer -->
-    <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
-    <Label fx:id="petName" styleClass="cell_small_label" text="\$petName" />
+    <Label fx:id="date" styleClass="calendar_small_label" text="\$date" />
+    <Label fx:id="time" styleClass="calendar_small_label" text="\$time" />
+    <Label fx:id="petName" styleClass="calendar_small_label" text="\$petName" />
   </VBox>
 </HBox>

@@ -13,14 +13,11 @@
 <HBox id="slotPane" fx:id="slotPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
         styleClass="calendar-grid-conflict">
   <VBox alignment="TOP_LEFT" prefHeight="50" GridPane.columnIndex="0">
-    <!-- <padding>
-      <Insets top="5" right="5" bottom="5" left="15" />
-    </padding> -->
     <HBox spacing="5" alignment="CENTER_LEFT">
-      <Label fx:id="ids" styleClass="cell_big_label" />
+      <Label fx:id="ids" styleClass="calendar_big_label" />
     </HBox>
-    <!-- //TODO: make the layout nicer -->
-    <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
-    <Label fx:id="petName" styleClass="cell_small_label" text="\$petName" />
+    <Label fx:id="date" styleClass="calendar_small_label" text="\$date" />
+    <Label fx:id="time" styleClass="calendar_small_label" text="\$time" />
+    <Label fx:id="petName" styleClass="calendar_small_label" text="\$petName" />
   </VBox>
 </HBox>

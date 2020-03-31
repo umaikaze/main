@@ -2,23 +2,24 @@ package seedu.address.ui;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.List;
-import java.util.Set;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.control.Tooltip;
 import seedu.address.model.slot.Slot;
 
 /**
- * A UI Component that displays information about a {@code Slot} in a calendar view.
+ * A region of a calendar view that represents a multiple conflicted slots.
  */
-public class CalendarConflict extends UiPart<Region> {
+public class CalendarConflict extends CalendarRegion {
 
-    public static final double WIDTH_SCALING_FACTOR = 2;
+    public static final String CONFLICT_MESSAGE =
+                "Do `conflicts` to view details about each individual conflicted slots";
 
     private static final String FXML = "CalendarConflict.fxml";
 
@@ -31,37 +32,51 @@ public class CalendarConflict extends UiPart<Region> {
      */
 
     @FXML
-    private HBox slotPane;
-
-    @FXML
     private Label ids;
 
     @FXML
-    private Label dateTime;
+    private Label date;
+
+    @FXML
+    private Label time;
 
     @FXML
     private Label petName;
 
-    public CalendarConflict(List<Slot> conflictSlots, int lastDisplayedIndex) {
-        super(FXML);
-        LocalTime start = conflictSlots.get(0).getTime();
-        //TODO: this way of getting end is really hacky....
-        LocalTime end = conflictSlots.stream()
-                .map(slot -> slot.getEndTime())
-                .sorted()
-                .reduce((a, b) -> b)
-                .orElseThrow();
-        int totalDuration = Math.toIntExact(Duration.between(start, end).toMinutes());
-        slotPane.setPrefWidth(totalDuration * WIDTH_SCALING_FACTOR);
-        //TODO: all the info displayed below are wrong (based on latest slot only)
+    public CalendarConflict(List<Slot> conflictSlots, LocalTime start, LocalTime end, int lastDisplayedIndex) {
+        super(FXML, Duration.between(start, end).toMinutes());
+        Slot lastSlot = conflictSlots.get(conflictSlots.size() - 1);
+
         String idsString = IntStream.rangeClosed(lastDisplayedIndex - conflictSlots.size() + 1, lastDisplayedIndex)
                 .mapToObj(i -> Integer.toString(i))
                 .reduce((a, b) -> a + ", " + b).orElseThrow();
-        ids.setText(idsString + ". " + conflictSlots.get(0).getDateTime().toLocalDate());
-        dateTime.setText(start + " - " + end);
-        Set<String> petNames = conflictSlots.stream()
+        String idText = String.format("%s.", idsString);
+        String dateText = String.format("%s, %s/%s/%s",
+                lastSlot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
+                lastSlot.getDate().getDayOfMonth(), lastSlot.getDate().getMonthValue(), lastSlot.getDate().getYear());
+        String timeText = String.format("%s - %s", start, end);
+        String petText = conflictSlots.stream()
                 .map(slot -> slot.getPet().getName().toString())
-                .collect(Collectors.toSet());
-        petName.setText(petNames.toString());
+                .collect(Collectors.toSet())
+                .toString();
+
+        ids.setText(idText);
+        date.setText(dateText);
+        time.setText(timeText);
+        petName.setText(petText);
+    }
+
+    public Tooltip createTooltip() {
+        String pattern = "%s\n"
+                + "Date: %s\n"
+                + "Time period affected: %s\n"
+                + "Affected pets: %s\n"
+                + "%s";
+        String tooltipText = String.format(pattern,
+                ids.getText(), date.getText(), time.getText(), petName.getText(), CONFLICT_MESSAGE);
+        Tooltip tooltip = new Tooltip(tooltipText);
+        tooltip.getStyleClass().add("tooltip-conflict");
+        tooltip.setShowDuration(javafx.util.Duration.seconds(30));
+        return tooltip;
     }
 }
