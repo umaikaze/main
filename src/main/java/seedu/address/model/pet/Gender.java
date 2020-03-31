@@ -3,7 +3,7 @@ package seedu.address.model.pet;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's gender in the pet shop helper.
+ * Represents a Pet's gender in the pet store helper.
  * Guarantees: Only two valid constants: FEMALE and MALE.
  */
 public enum Gender {
