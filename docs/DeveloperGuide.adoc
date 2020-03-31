@@ -432,9 +432,9 @@ Use case resumes at step 2.
 
 *MSS*
 
-1. User requests to show bathing schedule
-2. PSH shows bathing schedule of that day
-3. User requests of delete a bathing slot at a specified timing
+1. User requests to show schedule
+2. PSH shows  schedule of that day
+3. User requests of delete a slot at a specified timing
 4. PSH deletes the slot
 +
 Use case ends.
