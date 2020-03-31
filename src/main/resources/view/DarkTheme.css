@@ -147,14 +147,14 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
-.result-display {
+.feedback-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
 
-.result-display .label {
+.feedback-display .label {
     -fx-text-fill: black !important;
 }
 
@@ -333,7 +333,7 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
+#feedbackDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
@@ -350,4 +350,33 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.calendar-scroll {
+    -fx-fit-to-height: true;
+}
+
+.calendar-grid {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 10;
+}
+
+.calendar-grid-cell {
+    -fx-background-color: black, derive(#1d1d1d, 30%);
+    -fx-background-insets: 0, 3;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}
+
+.calendar-grid-conflict {
+    -fx-background-color: black, #d06651;
+    -fx-background-insets: 0, 3;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}
+
+.calendar-grid-buffer {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 3;
+    -fx-padding: 10;
 }

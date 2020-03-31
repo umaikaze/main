@@ -9,6 +9,7 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Finds and lists all slots in the schedule whose contents contains any of the argument keywords.
@@ -42,7 +43,7 @@ public class FindSlotCommand extends Command {
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size())
-                        + warningMessage, false, false, true, false);
+                        + warningMessage, false, false, DisplaySystemType.SCHEDULE, false);
 
     }
 

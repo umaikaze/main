@@ -8,6 +8,7 @@ import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Finds and lists all pets in pet tracker whose name contains any of the argument keywords.
@@ -34,7 +35,7 @@ public class FindPetCommand extends Command {
         model.updateFilteredPetList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()),
-                false, false, true, false);
+                false, false, DisplaySystemType.PETS, false);
     }
 
     @Override
