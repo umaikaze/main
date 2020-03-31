@@ -10,7 +10,6 @@ import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.UniquePetList;
-import seedu.address.model.slot.Schedule;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -19,7 +18,6 @@ import seedu.address.model.slot.Slot;
  */
 public class PetTracker implements ReadOnlyPetTracker {
     private final UniquePetList pets;
-    private final Schedule slots;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,7 +28,6 @@ public class PetTracker implements ReadOnlyPetTracker {
      */
     {
         pets = new UniquePetList();
-        slots = new Schedule();
     }
 
     public PetTracker() {}
@@ -57,7 +54,7 @@ public class PetTracker implements ReadOnlyPetTracker {
      * Replaces the contents of the schedule with {@code slots}.
      */
     public void setSlots(List<Slot> slots) {
-        this.slots.setSlots(slots);
+        this.pets.setSlots(slots);
     }
 
     /**
@@ -121,7 +118,7 @@ public class PetTracker implements ReadOnlyPetTracker {
      * Adds a slot to the schedule.
      */
     public void addSlot(Slot p) {
-        slots.add(p);
+        pets.addSlot(p);
     }
 
     /**
@@ -130,7 +127,7 @@ public class PetTracker implements ReadOnlyPetTracker {
      */
     public void setSlot(Slot target, Slot editedSlot) {
         requireNonNull(editedSlot);
-        slots.setSlot(target, editedSlot);
+        pets.setSlot(target, editedSlot);
     }
 
     /**
@@ -138,7 +135,7 @@ public class PetTracker implements ReadOnlyPetTracker {
      * {@code key} must exist in the pet tracker.
      */
     public void removeSlot(Slot key) {
-        slots.remove(key);
+        pets.removeSlot(key);
     }
 
     //// util methods
@@ -146,7 +143,7 @@ public class PetTracker implements ReadOnlyPetTracker {
     @Override
     public String toString() {
         int numPets = pets.asUnmodifiableObservableList().size();
-        int numSlots = slots.asUnmodifiableObservableList().size();
+        int numSlots = pets.acquireUnmodifiableSlotsList().size();
         return String.format("%d pets, %d slots", numPets, numSlots);
     }
 
@@ -155,11 +152,9 @@ public class PetTracker implements ReadOnlyPetTracker {
         return pets.asUnmodifiableObservableList();
     }
 
-
-
     @Override
     public ObservableList<Slot> getSlotList() {
-        return slots.asUnmodifiableObservableList();
+        return pets.acquireUnmodifiableSlotsList();
     }
 
     @Override
@@ -171,12 +166,11 @@ public class PetTracker implements ReadOnlyPetTracker {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PetTracker // instanceof handles nulls
-                && pets.equals(((PetTracker) other).pets)
-                && slots.equals(((PetTracker) other).slots));
+                && pets.equals(((PetTracker) other).pets));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pets, slots);
+        return Objects.hash(pets);
     }
 }

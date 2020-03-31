@@ -5,9 +5,11 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.ArgumentMultimap;
 import seedu.address.logic.parser.general.ArgumentTokenizer;
@@ -28,8 +30,18 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSlotCommand parse(String args) throws ParseException {
+        Predicate<Slot> predicates = getPredicates(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_TIME;
+        }
 
-        return new FindSlotCommand(getPredicates(args));
+        return new FindSlotCommand(predicates, warningMessage);
     }
 
     public static Predicate<Slot> getPredicates(String args) throws ParseException {
@@ -46,11 +58,18 @@ public class FindSlotParser implements Parser<FindSlotCommand> {
         List<Predicate<Slot>> predicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            predicates.add(new SlotPetNamePredicate(argMultimap.getValue(PREFIX_NAME).get()));
+            if (argMultimap.getValue(PREFIX_NAME).get().trim().equals("")) {
+                throw new ParseException(FindSlotCommand.MESSAGE_EMPTY_NAME_FIELD);
+            }
+            predicates.add(new SlotPetNamePredicate(Arrays.asList(
+                    argMultimap.getValue(PREFIX_NAME).get().split("\\s+"))));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DATETIME).get().trim().equals("")) {
+                throw new ParseException(FindSlotCommand.MESSAGE_EMPTY_DATETIME_FIELD);
+            }
             predicates.add(new SlotDatePredicate(
-                    SlotParserUtil.parseDate(argMultimap.getValue(PREFIX_DATETIME).get())));
+                    SlotParserUtil.parseDates(argMultimap.getValue(PREFIX_DATETIME).get())));
         }
         assert !(predicates.isEmpty()) : "No predicates for finding slots!";
 

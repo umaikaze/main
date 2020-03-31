@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Pet> filteredPets;
     private final FilteredList<Slot> filteredSlots;
     private final FilteredList<FoodCollection> filteredFoodCollections;
+    private DisplaySystemType currentDisplaySystemType;
     private ObservableList<DisplayItem> filteredDisplayItems;
 
     /**
@@ -50,6 +51,7 @@ public class ModelManager implements Model {
         filteredFoodCollections = new FilteredList<>(this.petTracker.getFoodCollectionList());
 
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet); // display list of pets initially
+        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
     public ModelManager() {
@@ -147,6 +149,7 @@ public class ModelManager implements Model {
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
+        changeSystemToFilteredPets();
     }
 
     //=========== Slot  ================================================================================
@@ -183,6 +186,7 @@ public class ModelManager implements Model {
     public void updateFilteredSlotList(Predicate<Slot> predicate) {
         requireNonNull(predicate);
         filteredSlots.setPredicate(predicate);
+        changeSystemToFilteredSlots();
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -208,7 +212,32 @@ public class ModelManager implements Model {
     }
 
 
+    public DisplaySystemType getCurrentDisplaySystemType() {
+        return currentDisplaySystemType;
+    }
+
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findpets` command
+     * which allows users to execute `findpets` in a different system display.
+     */
+    public void changeSystemToFilteredPets() {
+        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
+        currentDisplaySystemType = DisplaySystemType.PETS;
+    }
+
+    /**
+     * Changes the display system to pets system. Note this is specifically written to accommodate `findslots` command
+     * which allows users to execute `findslots` in a different system display.
+     */
+    public void changeSystemToFilteredSlots() {
+        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
+        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
+    }
+
     @Override
+    /**
+     * Used for display all pets/slots/inventory in display command.
+     */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
         switch (newDisplayType) {
         case PETS:
@@ -227,6 +256,7 @@ public class ModelManager implements Model {
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
         }
+        currentDisplaySystemType = newDisplayType;
     }
 
     @Override
