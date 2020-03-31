@@ -127,7 +127,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplayPlaceholder.getChildren().set(0, displayListPanel.getRoot());
             break;
         case CALENDAR:
-            calendarPanel.updateWith(logic.getPetTracker().getSlotList());
             calendarPanel.construct();
             resultDisplayPlaceholder.getChildren().set(0, calendarPanel.getRoot());
             break;
@@ -204,8 +203,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            resultDisplayPlaceholder.getChildren().clear();
-            resultDisplayPlaceholder.getChildren().add(displayListPanel.getRoot());
 
             if (commandResult.isShowStats()) {
                 handleStats();
