@@ -1,12 +1,14 @@
 package seedu.address.testutil.slot;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
-import seedu.address.model.pet.Pet;
+import seedu.address.model.PetTracker;
+import seedu.address.model.pet.Name;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -14,6 +16,7 @@ import seedu.address.model.slot.Slot;
  */
 public class EditSlotDescriptorBuilder {
 
+    private PetTracker typicalPetTracker = getTypicalPetTracker();
     private EditSlotDescriptor descriptor;
 
     public EditSlotDescriptorBuilder() {
@@ -37,8 +40,8 @@ public class EditSlotDescriptorBuilder {
     /**
      * Sets the {@code Pet} of the {@code EditSlotDescriptor} that we are building.
      */
-    public EditSlotDescriptorBuilder withPet(Pet pet) {
-        descriptor.setPet(pet);
+    public EditSlotDescriptorBuilder withPet(String name) {
+        descriptor.setPet(typicalPetTracker.getPet(new Name(name)));
         return this;
     }
 

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -32,8 +31,6 @@ import seedu.address.ui.DisplaySystemType;
 
 class AddSlotCommandTest {
 
-    private Model typicalModel = getTypicalModelManager();
-
     @Test
     public void constructor_nullSlot_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddSlotCommand(null, null));
@@ -42,7 +39,7 @@ class AddSlotCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() {
         ModelStubAcceptingSlotAdded modelStub = new ModelStubAcceptingSlotAdded();
-        Slot validSlot = new SlotBuilder(typicalModel).build();
+        Slot validSlot = new SlotBuilder().build();
 
         CommandResult commandResult = new AddSlotCommand(validSlot, "").execute(modelStub);
 
@@ -52,8 +49,8 @@ class AddSlotCommandTest {
 
     @Test
     public void equals() {
-        Slot alice = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Coco"))).build();
-        Slot bob = new SlotBuilder(typicalModel).withPet(typicalModel.getPet(new Name("Garfield"))).build();
+        Slot alice = new SlotBuilder().withPet("Coco").build();
+        Slot bob = new SlotBuilder().withPet("Garfield").build();
         AddSlotCommand addAliceCommand = new AddSlotCommand(alice, "");
         AddSlotCommand addBobCommand = new AddSlotCommand(bob, "");
 

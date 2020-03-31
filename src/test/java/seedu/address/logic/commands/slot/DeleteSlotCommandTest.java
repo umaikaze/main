@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.address.model.slot.Slot;
  */
 class DeleteSlotCommandTest {
 
-    private Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
