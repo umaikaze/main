@@ -63,3 +63,4 @@ deactivate StatsCommand
 deactivate LogicManager
 
 @enduml
+
