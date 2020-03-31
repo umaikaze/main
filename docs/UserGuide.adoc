@@ -149,7 +149,7 @@ Edits any field of an existing pet in the system.
 Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 
 ****
-- The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
+- If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
 - The existing field(s) of the pet will be removed, i.e adding of list of food and tags is not cumulative.
 - You can remove all tags of a pet by typing `t/` without specifying any tags after it.
 - Similarly to `addpet` command, pet name, species, gender, and name of food will be displayed in the format of "Xxx Xxx...".
@@ -165,6 +165,10 @@ Overwrites information of the 2nd pet in the system with name "Coco", date of bi
   `editpet 2 n/Coco` +
 Overwrites the name of the 2nd pet in the results of `findpets garfield` to "Coco"
 
+- `display s` +
+`editpet 1 n/garfield`
+Overwrites name of the 1st pet in the whole pet list to be "Garfield".
+
 ==== Deleting a pet: `deletepet`
 
 Deletes the specified pet from the system.
@@ -172,7 +176,7 @@ Deletes the specified pet from the system.
 Format: `deletepet i/INDEX`
 
 ****
-- The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
+- If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
 ****
 
 Examples:
@@ -183,6 +187,9 @@ Deletes the 2nd pet in the system.
 - `findpets n/garfield` +
   `deletepet 2` +
 Deletes the 2nd pet in the results of the `findpets garfield` command.
+- `display i` +
+`deletepet 2`
+Deletes 2nd pet in the whole pet list.
 
 === Schedule System
 
@@ -232,7 +239,7 @@ Edits an existing occupied slot in the schedule.
 Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
 ****
-- The index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ...
+- If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - Formats for the datetime and/or duration passed in are the same as those specified in <<Adding a slot: `addslot`>>
@@ -240,12 +247,14 @@ Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
 Examples:
 
-- `editslot 1 t/16/11/2020 1300 d/120` +
+- `display s` +
+`editslot 1 t/16/11/2020 1300 d/120` +
 Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
 - `findslots t/1/1/2020 +
    editslot 3 d/45` +
 Edits the duration of the 3rd slot in the search result to be `45` minutes.
-- `editslot 12 n/Brian Griffin` +
+- `display p` +
+`editslot 12 n/Brian Griffin` +
 Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
 
@@ -256,7 +265,7 @@ Deletes the specified slot from the schedule.
 Format: `deleteslot i/INDEX`
 
 ****
-- The index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, …​
+- If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
 ****
 
 Examples:
@@ -267,6 +276,9 @@ Deletes the 2nd slot in the schedule.
 - `findslots n/Coco` +
 `deleteslot 2` +
 Deletes the 2nd slot occupied by `Coco`.
+- `display i` +
+`deleteslot 2` +
+Deletes the 2nd slot in the schedule.
 
 ==== Showing all conflicts: `conflicts`
 
