@@ -31,6 +31,7 @@ import seedu.address.model.slot.Slot;
 import seedu.address.model.slot.SlotPetNamePredicate;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Contains helper methods for testing commands.
@@ -133,13 +134,14 @@ public class CommandTestUtil {
     }
 
     /**
-     * [Specifically for find and display commands] Convenience wrapper to
+     * [Specifically for FindPetCommand] Convenience wrapper to
      * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertFindCommandSuccess(Command command, Model actualModel, String expectedMessage,
+    public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false);
+        CommandResult expectedCommandResult =
+                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

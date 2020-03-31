@@ -249,9 +249,11 @@ public class ModelManager implements Model {
             updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
             break;
         case INVENTORY:
-            filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
-                foodCollection -> foodCollection);
+            filteredDisplayItems =
+                    CollectionUtil.map(petTracker.getFoodCollectionList(), foodCollection -> foodCollection);
             updateFilteredFoodCollectionList(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+            break;
+        case CALENDAR:
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);

@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.general.CommandResult;
+import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private DisplayListPanel displayListPanel;
+    private CalendarPanel calendarPanel;
     private FeedbackDisplay feedbackDisplay;
     private HelpWindow helpWindow;
     private OverallStats overallStats;
@@ -43,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane displayListPanelPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane feedbackDisplayPlaceholder;
@@ -94,7 +96,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         displayListPanel = new DisplayListPanel(logic.getFilteredDisplayList());
-        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+        calendarPanel = new CalendarPanel(logic.getPetTracker().getSlotList());
+
+        resultDisplayPlaceholder.getChildren().add(displayListPanel.getRoot());
 
         feedbackDisplay = new FeedbackDisplay();
         feedbackDisplayPlaceholder.getChildren().add(feedbackDisplay.getRoot());
@@ -104,6 +108,35 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Changes the system being displayed.
+     */
+    private void handleChangeDisplay(DisplaySystemType type) throws CommandException {
+        switch (type) {
+        case PETS: // fallthrough
+        case SCHEDULE:
+            displayListPanel.updateWith(logic.getFilteredDisplayList());
+            displayListPanel.collapseInformationView();
+            resultDisplayPlaceholder.getChildren().set(0, displayListPanel.getRoot());
+            break;
+        case INVENTORY:
+            displayListPanel.updateWith(logic.getFilteredDisplayList());
+            displayListPanel.expandInformationView();
+            resultDisplayPlaceholder.getChildren().set(0, displayListPanel.getRoot());
+            break;
+        case CALENDAR:
+            calendarPanel.updateWith(logic.getPetTracker().getSlotList());
+            calendarPanel.construct();
+            resultDisplayPlaceholder.getChildren().set(0, calendarPanel.getRoot());
+            break;
+        case NO_CHANGE:
+            // do nothing since system does not change
+            break;
+        default:
+            throw new CommandException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
+        }
     }
 
     /**
@@ -122,10 +155,11 @@ public class MainWindow extends UiPart<Stage> {
      *  Display overall statistics
      */
     public void handleStats() {
-        displayListPanelPlaceholder.getChildren().clear();
+        //TODO: move this under the display switching
+        resultDisplayPlaceholder.getChildren().clear();
         overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
                 logic.getFilteredFoodCollectionList());
-        displayListPanelPlaceholder.getChildren().add(overallStats.getRoot());
+        resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
     }
 
     /**
@@ -170,15 +204,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            displayListPanelPlaceholder.getChildren().clear();
-            displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+            resultDisplayPlaceholder.getChildren().clear();
+            resultDisplayPlaceholder.getChildren().add(displayListPanel.getRoot());
+
             if (commandResult.isShowStats()) {
                 handleStats();
             }
 
-            if (commandResult.hasDisplayChanged()) {
-                displayListPanel.updateWith(logic.getFilteredDisplayList(), logic.getDisplaySystemType());
-            }
+            handleChangeDisplay(commandResult.getDisplaySystemType());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

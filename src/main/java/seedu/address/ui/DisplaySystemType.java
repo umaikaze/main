@@ -7,10 +7,14 @@ public enum DisplaySystemType {
     PETS("p"),
     SCHEDULE("s"),
     INVENTORY("i"),
-    FOOD_AMOUNT_AND_PET("fp");
+    CALENDAR("c"),
+    FOOD_AMOUNT_AND_PET("fp"),
+    NO_CHANGE(DisplaySystemType.UNUSED_CLI_ARG);
 
     public static final String MESSAGE_CONSTRAINTS =
-            "System type must be p (pets) or s (schedule) or i(inventory).";
+            "System type must be p (pets), s (schedule), c (calendar) or i(inventory).";
+
+    private static final String UNUSED_CLI_ARG = "unused";
 
     private final String cliArg;
 
@@ -18,12 +22,16 @@ public enum DisplaySystemType {
         this.cliArg = cliArg;
     }
 
+    private boolean isAvailableToUser() {
+        return !cliArg.equals(UNUSED_CLI_ARG);
+    }
+
     /**
      * Returns the corresponding {@code DisplaySystemType} based on the {@code cliArg} passed in.
      */
     public static DisplaySystemType fromCliArg(String cliArg) throws IllegalArgumentException {
         for (DisplaySystemType type : DisplaySystemType.values()) {
-            if (type.cliArg.equals(cliArg)) {
+            if (type.isAvailableToUser() && type.cliArg.equals(cliArg)) {
                 return type;
             }
         }
