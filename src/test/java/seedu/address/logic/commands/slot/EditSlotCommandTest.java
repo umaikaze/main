@@ -12,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.getSlotDescGarfield;
 import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;

@@ -18,17 +18,15 @@ import seedu.address.model.slot.Slot;
  */
 public class TypicalSlots {
 
-    public static Slot cocoSlot;
-    public static Slot garfieldSlot;
+    public static final Slot COCO_SLOT = new SlotBuilder().withPet(VALID_NAME_COCO)
+            .withDateTime(VALID_DATETIME_COCO)
+            .withDuration(VALID_DURATION_COCO).build();
+    public static final Slot GARFIELD_SLOT = new SlotBuilder().withPet(VALID_NAME_GARFIELD)
+            .withDateTime(VALID_DATETIME_GARFIELD)
+            .withDuration(VALID_DURATION_GARFIELD).build();
 
 
     public static List<Slot> getTypicalSlots() {
-        cocoSlot = new SlotBuilder().withPet(VALID_NAME_COCO)
-                .withDateTime(VALID_DATETIME_COCO)
-                .withDuration(VALID_DURATION_COCO).build();
-        garfieldSlot = new SlotBuilder().withPet(VALID_NAME_GARFIELD)
-                .withDateTime(VALID_DATETIME_GARFIELD)
-                .withDuration(VALID_DURATION_GARFIELD).build();
-        return new ArrayList<>(Arrays.asList(cocoSlot, garfieldSlot));
+        return new ArrayList<>(Arrays.asList(COCO_SLOT, GARFIELD_SLOT));
     }
 }

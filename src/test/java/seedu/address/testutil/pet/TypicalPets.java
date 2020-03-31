@@ -13,8 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIEL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
 
-import seedu.address.testutil.slot.TypicalSlots;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +20,7 @@ import java.util.List;
 import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.testutil.slot.TypicalSlots;
 
 //TODO the package it belongs to does not fit its usage (potentially used for slots too, make it outside or split up)
 /**

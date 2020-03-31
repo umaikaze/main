@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static seedu.address.testutil.slot.TypicalSlots.getTypicalSlots;
 
