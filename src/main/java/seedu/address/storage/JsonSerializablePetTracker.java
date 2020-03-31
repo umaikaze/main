@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.pet.Pet;
+import seedu.address.model.slot.Slot;
 
 /**
  * An Immutable PetTracker that is serializable to JSON format.
@@ -22,13 +23,16 @@ class JsonSerializablePetTracker {
     public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
     private final List<JsonAdaptedPet> pets = new ArrayList<>();
+    private final List<JsonAdaptedSlot> slots = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializablePetTracker} with the given pets.
      */
     @JsonCreator
-    public JsonSerializablePetTracker(@JsonProperty("pets") List<JsonAdaptedPet> pets) {
+    public JsonSerializablePetTracker(@JsonProperty("pets") List<JsonAdaptedPet> pets,
+                                      @JsonProperty("slots") List<JsonAdaptedSlot> slots) {
         this.pets.addAll(pets);
+        this.slots.addAll(slots);
     }
 
     /**
@@ -38,6 +42,7 @@ class JsonSerializablePetTracker {
      */
     public JsonSerializablePetTracker(ReadOnlyPetTracker source) {
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
+        slots.addAll(source.getSlotList().stream().map(JsonAdaptedSlot::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,7 +59,10 @@ class JsonSerializablePetTracker {
             }
             petTracker.addPet(pet);
         }
+        for (JsonAdaptedSlot jsonAdaptedSlot: slots) {
+            Slot slot = jsonAdaptedSlot.toModelType(petTracker);
+            petTracker.addSlot(slot);
+        }
         return petTracker;
     }
-
 }

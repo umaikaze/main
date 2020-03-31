@@ -17,13 +17,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.PetTracker;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
-import seedu.address.testutil.slot.TypicalSlotsGenerator;
+import seedu.address.testutil.slot.TypicalSlots;
 
 //TODO the package it belongs to does not fit its usage (potentially used for slots too, make it outside or split up)
 /**
@@ -74,20 +71,19 @@ public class TypicalPets {
         for (Pet pet : getTypicalPets()) {
             pt.addPet(pet);
         }
-
         return pt;
     }
 
-    /**
-     * Returns a {@code ModelManager} with all the typical pets.
-     */
-    public static Model getTypicalModelManager() {
-        ModelManager modelManager = new ModelManager(getTypicalPetTracker(), new UserPrefs());
-        TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(modelManager);
-        for (Slot slot : slotsGen.getTypicalSlots()) {
-            modelManager.addSlot(slot);
+    public static PetTracker getTypicalPetTrackerWithSlots() {
+        PetTracker pt = new PetTracker();
+        for (Pet pet : getTypicalPets()) {
+            pt.addPet(pet);
         }
-        return modelManager;
+        for (Slot slot : TypicalSlots.getTypicalSlots()) {
+            pt.addSlot(slot);
+        }
+
+        return pt;
     }
 
     public static List<Pet> getTypicalPets() {

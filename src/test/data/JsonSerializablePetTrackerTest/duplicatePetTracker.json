@@ -12,5 +12,6 @@
     "dateOfBirth": "01/01/2019",
     "species": "cat",
     "foodList": [ "Brand A:5" ]
-  } ]
+  } ],
+  "slots" : [ ]
 }
