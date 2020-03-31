@@ -336,6 +336,9 @@ How we implemented overall statistic on UI:
 * The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
 * The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
 
+Following is the sequential diagram of the command `stats`
+image:StatsSequenceDiagram.png[]
+
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
