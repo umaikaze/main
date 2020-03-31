@@ -2,13 +2,7 @@ package seedu.address.logic.commands.slot;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.SLOT_DESC_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
@@ -141,6 +135,6 @@ class EditSlotCommandTest {
         assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, SLOT_DESC_COCO, "")));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, SLOT_DESC_COCO, "")));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, SLOT_DESC_GARFIELD, "")));
     }
 }
