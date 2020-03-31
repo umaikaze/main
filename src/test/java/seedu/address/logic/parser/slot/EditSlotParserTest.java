@@ -30,7 +30,6 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.pet.Name;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotParserTest {
@@ -63,7 +62,7 @@ class EditSlotParserTest {
                 + DURATION_DESC_COCO + NAME_DESC_COCO;
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
-                .withPet(model.getPet(new Name(VALID_NAME_COCO)))
+                .withPet(VALID_NAME_COCO)
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
@@ -89,7 +88,7 @@ class EditSlotParserTest {
         Index targetIndex = INDEX_THIRD_SLOT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
-                .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
+                .withPet(VALID_NAME_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -99,7 +98,7 @@ class EditSlotParserTest {
         expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
+        // duration
         userInput = targetIndex.getOneBased() + DURATION_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDuration(VALID_DURATION_COCO).build();
         expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");

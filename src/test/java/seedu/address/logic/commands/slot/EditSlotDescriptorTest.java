@@ -2,11 +2,11 @@ package seedu.address.logic.commands.slot;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.SLOT_DESC_COCO;
+import static seedu.address.logic.commands.CommandTestUtil.SLOT_DESC_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_GARFIELD;
-import static seedu.address.logic.commands.CommandTestUtil.getSlotDescCoco;
-import static seedu.address.logic.commands.CommandTestUtil.getSlotDescGarfield;
-import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.Test;
@@ -24,34 +24,34 @@ class EditSlotDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditSlotDescriptor descriptorWithSameValues = new EditSlotDescriptor(getSlotDescCoco(model));
-        assertTrue(getSlotDescCoco(model).equals(descriptorWithSameValues));
+        EditSlotDescriptor descriptorWithSameValues = new EditSlotDescriptor(SLOT_DESC_COCO);
+        assertTrue(SLOT_DESC_COCO.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(getSlotDescCoco(model).equals(getSlotDescCoco(model)));
+        assertTrue(SLOT_DESC_COCO.equals(SLOT_DESC_COCO));
 
         // null -> returns false
-        assertFalse(getSlotDescCoco(model).equals(null));
+        assertFalse(SLOT_DESC_COCO.equals(null));
 
         // different types -> returns false
-        assertFalse(getSlotDescCoco(model).equals(5));
+        assertFalse(SLOT_DESC_COCO.equals(5));
 
         // different values -> returns false
-        assertFalse(getSlotDescCoco(model).equals(getSlotDescGarfield(model)));
+        assertFalse(SLOT_DESC_COCO.equals(SLOT_DESC_GARFIELD));
 
         // different pet -> returns false
-        EditSlotDescriptor editedCocoSlot = new EditSlotDescriptorBuilder(getSlotDescCoco(model))
-                .withPet(GARFIELD).build();
-        assertFalse(getSlotDescCoco(model).equals(editedCocoSlot));
+        EditSlotDescriptor editedCocoSlot = new EditSlotDescriptorBuilder(SLOT_DESC_COCO)
+                .withPet(VALID_NAME_GARFIELD).build();
+        assertFalse(SLOT_DESC_COCO.equals(editedCocoSlot));
 
         // different datetime -> returns false
-        editedCocoSlot = new EditSlotDescriptorBuilder(getSlotDescCoco(model))
+        editedCocoSlot = new EditSlotDescriptorBuilder(SLOT_DESC_COCO)
                 .withDateTime(VALID_DATETIME_GARFIELD).build();
-        assertFalse(getSlotDescCoco(model).equals(editedCocoSlot));
+        assertFalse(SLOT_DESC_COCO.equals(editedCocoSlot));
 
         // different duration -> returns false
-        editedCocoSlot = new EditSlotDescriptorBuilder(getSlotDescCoco(model))
+        editedCocoSlot = new EditSlotDescriptorBuilder(SLOT_DESC_COCO)
                 .withDuration(VALID_DURATION_GARFIELD).build();
-        assertFalse(getSlotDescCoco(model).equals(editedCocoSlot));
+        assertFalse(SLOT_DESC_COCO.equals(editedCocoSlot));
     }
 }
