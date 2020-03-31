@@ -27,25 +27,28 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Pet[] getSamplePets() {
         return new Pet[]{
-                new Pet(new Name("Alex"), Gender.MALE, new DateOfBirth("1/12/2005"), new Species("cat"),
+            new Pet(new Name("Alex"), Gender.MALE, new DateOfBirth("1/12/2005"), new Species("cat"),
                         getFoodSet("cat food:10"), getTagSet("dumb")),
-                new Pet(new Name("Bob"), Gender.FEMALE, new DateOfBirth("10/12/2001"), new Species("cat"),
+            new Pet(new Name("Bob"), Gender.FEMALE, new DateOfBirth("10/12/2001"), new Species("cat"),
                         getFoodSet("cat food:10"), getTagSet("tall")),
-                new Pet(new Name("Cindy"), Gender.MALE, new DateOfBirth("2/10/2019"), new Species("cat"),
+            new Pet(new Name("Cindy"), Gender.MALE, new DateOfBirth("2/10/2019"), new Species("cat"),
                         getFoodSet("cat food:10"), getTagSet("small")),
-                new Pet(new Name("David"), Gender.FEMALE, new DateOfBirth("4/12/2017"), new Species("dog"),
+            new Pet(new Name("David"), Gender.FEMALE, new DateOfBirth("4/12/2017"), new Species("dog"),
                         getFoodSet("dog food:10"), getTagSet("angry")),
-                new Pet(new Name("Elsa"), Gender.FEMALE, new DateOfBirth("6/6/2019"), new Species("dog"),
+            new Pet(new Name("Elsa"), Gender.FEMALE, new DateOfBirth("6/6/2019"), new Species("dog"),
                         getFoodSet("dog food:10"), getTagSet("lazy")),
-                new Pet(new Name("Foo"), Gender.MALE, new DateOfBirth("1/1/2011"), new Species("dog"),
+            new Pet(new Name("Foo"), Gender.MALE, new DateOfBirth("1/1/2011"), new Species("dog"),
                         getFoodSet("dog food:10"), getTagSet("new"))};
     }
 
     public static Slot[] getSampleSlots(PetTracker samplePt) {
         return new Slot[]{
-                new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("4/1/2030 1200", DATETIME_FORMAT), Duration.ofMinutes(Long.parseLong("75"))),
-                new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("7/7/2030 1200", DATETIME_FORMAT), Duration.ofMinutes(Long.parseLong("88"))),
-                new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("4/2/2030 1200", DATETIME_FORMAT), Duration.ofMinutes(Long.parseLong("100")))};
+            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("4/1/2030 1200", DATETIME_FORMAT),
+                    Duration.ofMinutes(Long.parseLong("75"))),
+            new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("7/7/2030 1200", DATETIME_FORMAT),
+                    Duration.ofMinutes(Long.parseLong("88"))),
+            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("4/2/2030 1200", DATETIME_FORMAT),
+                    Duration.ofMinutes(Long.parseLong("100")))};
     }
 
 
