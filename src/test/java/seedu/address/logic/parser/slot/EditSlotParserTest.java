@@ -19,7 +19,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,8 @@ import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.pet.Name;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotParserTest {
@@ -36,7 +37,7 @@ class EditSlotParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
-    private static final Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
     private EditSlotParser parser = new EditSlotParser(model);
 
     @Test
@@ -61,7 +62,7 @@ class EditSlotParserTest {
                 + DURATION_DESC_COCO + NAME_DESC_COCO;
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
-                .withPet(model.getPet(new Name(VALID_NAME_COCO)))
+                .withPet(VALID_NAME_COCO)
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
 
@@ -87,7 +88,7 @@ class EditSlotParserTest {
         Index targetIndex = INDEX_THIRD_SLOT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_COCO;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder()
-                .withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
+                .withPet(VALID_NAME_COCO).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -97,7 +98,7 @@ class EditSlotParserTest {
         expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
+        // duration
         userInput = targetIndex.getOneBased() + DURATION_DESC_COCO;
         descriptor = new EditSlotDescriptorBuilder().withDuration(VALID_DURATION_COCO).build();
         expectedCommand = new EditSlotCommand(targetIndex, descriptor, "");
