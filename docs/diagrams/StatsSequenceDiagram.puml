@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetTrackerParser" as PetTrackerParser LOGIC_COLOR
+participant "s:StatsCommand" as StatsCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("stats")
+activate LogicManager
+
+LogicManager -> PetTrackerParser : parseCommand("stats")
+activate PetTrackerParser
+
+create StatsCommand
+PetTrackerParser -> StatsCommand
+activate StatsCommand
+
+StatsCommand --> PetTrackerParser : s
+deactivate StatsCommand
+
+PetTrackerParser --> LogicManager : s
+deactivate PetTrackerParser
+
+LogicManager -> StatsCommand : execute()
+activate StatsCommand
+
+StatsCommand -> Model : updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS)
+activate Model
+
+Model --> StatsCommand
+deactivate Model
+
+StatsCommand -> Model : updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS)
+activate Model
+
+Model --> StatsCommand
+deactivate Model
+
+StatsCommand -> Model : updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS)
+activate Model
+
+Model --> StatsCommand
+deactivate Model
+
+create CommandResult
+StatsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> StatsCommand : cr
+deactivate CommandResult
+
+StatsCommand --> LogicManager : cr
+deactivate StatsCommand
+
+[<--LogicManager : cr
+deactivate LogicManager
+
+@enduml
+
