@@ -43,11 +43,11 @@ public class SampleDataUtil {
 
     public static Slot[] getSampleSlots(PetTracker samplePt) {
         return new Slot[]{
-            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("4/1/2030 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("1/4/2020 1200", DATETIME_FORMAT),
                     Duration.ofMinutes(Long.parseLong("75"))),
-            new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("7/7/2030 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("7/7/2020 1200", DATETIME_FORMAT),
                     Duration.ofMinutes(Long.parseLong("88"))),
-            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("4/2/2030 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("2/4/2020 1200", DATETIME_FORMAT),
                     Duration.ofMinutes(Long.parseLong("100")))};
     }
 

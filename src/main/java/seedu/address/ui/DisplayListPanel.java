@@ -41,22 +41,16 @@ public class DisplayListPanel extends UiPart<Region> {
 
     /**
      * Changes the backing list of display items to {@code newDisplayList}.
-     * Also update the settings of displayInformationView to match the corresponding system being displayed.
      */
-    public final void updateWith(ObservableList<DisplayItem> newDisplayList, DisplaySystemType type) {
+    public final void updateWith(ObservableList<DisplayItem> newDisplayList) {
         displayListView.setItems(newDisplayList);
         displayInformationView.setItems(EMPTY_DISPLAY_ITEM_LIST);
-        if (type.equals(DisplaySystemType.INVENTORY)) {
-            adjustInformationViewToInventory();
-        } else {
-            adjustInformationViewToRest();
-        }
     }
 
     /**
      * Collapses the displayInformationView so that the displayListView occupies the entire screen.
      */
-    private void adjustInformationViewToRest() {
+    public void collapseInformationView() {
         displayInformationViewContainer.setPrefWidth(0);
         displayInformationViewContainer.setMinWidth(0);
         HBox.setHgrow(displayInformationViewContainer, Priority.NEVER);
@@ -69,7 +63,7 @@ public class DisplayListPanel extends UiPart<Region> {
     /**
      * Expands the displayInformationView for the display of inventory system.
      */
-    private void adjustInformationViewToInventory() {
+    public void expandInformationView() {
         displayInformationViewContainer.setPrefWidth(displayListView.getPrefWidth());
         displayInformationViewContainer.setMinWidth(displayListView.getPrefWidth());
         HBox.setHgrow(displayInformationViewContainer, Priority.ALWAYS);

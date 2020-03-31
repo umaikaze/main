@@ -247,8 +247,10 @@ public class ModelManager implements Model {
             filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
             filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
             filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
-            filteredDisplayItems = CollectionUtil.map(petTracker.getFoodCollectionList(),
-                foodCollection -> foodCollection);
+            filteredDisplayItems =
+                    CollectionUtil.map(petTracker.getFoodCollectionList(), foodCollection -> foodCollection);
+            break;
+        case CALENDAR:
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
