@@ -493,14 +493,14 @@ _{ more test cases ... }_
 
 === Deleting a pet
 
-. Deleting a pet while all pets are listed
+. Deleting a pet while all pets are displayed
 
-.. Prerequisites: List all pets using the `list` command. Multiple pets in the list.
-.. Test case: `delete 1` +
+.. Prerequisites: Display all pets using the `display p` command. Multiple pets in the display.
+.. Test case: `deletepet 1` +
    Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Test case: `deletepet 0` +
    Expected: No pet is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
