@@ -16,7 +16,7 @@
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
-    <Scene fill="#aec5eb">
+    <Scene>
       <stylesheets>
         <URL value="@CuteTheme.css" />
         <URL value="@Extensions.css" />
