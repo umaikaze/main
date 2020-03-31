@@ -7,17 +7,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DURATION_GARFIE
 import static seedu.address.logic.commands.CommandTestUtil.getSlotDescCoco;
 import static seedu.address.logic.commands.CommandTestUtil.getSlotDescGarfield;
 import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotDescriptorTest {
 
-    private Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
 
     @Test
     public void equals() {

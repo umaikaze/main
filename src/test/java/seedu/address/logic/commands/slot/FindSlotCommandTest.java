@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
+import static seedu.address.testutil.slot.TypicalSlots.getTypicalSlots;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -18,14 +20,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.logic.parser.slot.FindSlotParser;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
 import seedu.address.model.slot.SlotPetNamePredicate;
-import seedu.address.testutil.slot.TypicalSlotsGenerator;
 
 class FindSlotCommandTest {
 
-    private Model model = getTypicalModelManager();
-    private Model expectedModel = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -67,7 +70,6 @@ class FindSlotCommandTest {
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
-        TypicalSlotsGenerator slotsGen = new TypicalSlotsGenerator(model);
-        assertEquals(slotsGen.getTypicalSlots(), model.getFilteredSlotList());
+        assertEquals(getTypicalSlots(), model.getFilteredSlotList());
     }
 }

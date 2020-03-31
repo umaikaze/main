@@ -1,21 +1,25 @@
 package seedu.address.testutil.slot;
 
 import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_COCO;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import seedu.address.model.Model;
+import seedu.address.model.PetTracker;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.testutil.pet.TypicalPets;
 
 /**
  * A utility class to help with building Slot objects.
  */
 public class SlotBuilder {
+    private PetTracker typicalPetTracker = getTypicalPetTracker();
 
-    public static final String DEFAULT_NAME = "Coco";
+    public static final String DEFAULT_NAME = VALID_NAME_COCO;
     public static final String DEFAULT_DATETIME = "1/3/2020 1200";
     public static final String DEFAULT_DURATION = "20";
 
@@ -23,8 +27,8 @@ public class SlotBuilder {
     private LocalDateTime dateTime;
     private Duration duration;
 
-    public SlotBuilder(Model model) {
-        pet = model.getPet(new Name(DEFAULT_NAME));
+    public SlotBuilder() {
+        pet = typicalPetTracker.getPet(new Name(DEFAULT_NAME));
         dateTime = LocalDateTime.parse(DEFAULT_DATETIME, DATETIME_FORMAT);
         duration = Duration.ofMinutes(Long.parseLong(DEFAULT_DURATION));
     }
@@ -38,12 +42,11 @@ public class SlotBuilder {
         duration = slotToCopy.getDuration();
     }
 
-    // TODO Make use of the model passed in
     /**
      * Sets the {@code Pet} of the {@code Slot} that we are building.
      */
-    public SlotBuilder withPet(Pet pet) {
-        this.pet = pet;
+    public SlotBuilder withPet(String name) {
+        this.pet = typicalPetTracker.getPet(new Name(name));;
         return this;
     }
 

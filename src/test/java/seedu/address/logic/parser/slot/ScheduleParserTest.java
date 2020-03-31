@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.WARNING_MESSAGE_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +20,8 @@ import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
@@ -27,12 +29,12 @@ import seedu.address.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
 
-    private final Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
     private final PetTrackerParser parser = new PetTrackerParser(model);
 
     @Test
     public void parseCommand_add() throws Exception {
-        Slot slot = new SlotBuilder(model).build();
+        Slot slot = new SlotBuilder().build();
         AddSlotCommand command = (AddSlotCommand) parser.parseCommand(SlotUtil.getAddSlotCommand(slot));
         assertEquals(new AddSlotCommand(slot, ""), command);
     }
@@ -46,7 +48,7 @@ class ScheduleParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Slot slot = new SlotBuilder(model).build();
+        Slot slot = new SlotBuilder().build();
         EditSlotCommand.EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(slot).build();
         EditSlotCommand command = (EditSlotCommand) parser.parseCommand(EditSlotCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));

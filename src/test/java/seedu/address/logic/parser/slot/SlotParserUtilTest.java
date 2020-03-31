@@ -5,7 +5,7 @@ import static seedu.address.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static seedu.address.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.pet.TypicalPets.COCO;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 class SlotParserUtilTest {
 
@@ -31,7 +33,7 @@ class SlotParserUtilTest {
 
     private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE, DATETIME_FORMAT);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
-    private static final Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
 
     @Test
     void parseIndex_invalidInput_throwsParseException() {

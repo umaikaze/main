@@ -12,7 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.getSlotDescGarfield;
 import static seedu.address.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,11 +31,11 @@ import seedu.address.testutil.slot.SlotBuilder;
 
 class EditSlotCommandTest {
 
-    private Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Slot editedSlot = new SlotBuilder(model).build();
+        Slot editedSlot = new SlotBuilder().build();
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(editedSlot).build();
         EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT, descriptor, "");
 
@@ -52,7 +53,7 @@ class EditSlotCommandTest {
         Slot lastSlot = model.getFilteredSlotList().get(indexLastSlot.getZeroBased());
 
         SlotBuilder slotInList = new SlotBuilder(lastSlot);
-        Slot editedSlot = slotInList.withPet(model.getPet(new Name(VALID_NAME_COCO))).withDateTime(VALID_DATETIME_COCO)
+        Slot editedSlot = slotInList.withPet(VALID_NAME_COCO).withDateTime(VALID_DATETIME_COCO)
                 .withDuration(VALID_DURATION_COCO).build();
 
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withPet(
@@ -85,7 +86,7 @@ class EditSlotCommandTest {
         showSlotAtIndex(model, INDEX_FIRST_SLOT);
 
         Slot slotInFilteredList = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());
-        Slot editedSlot = new SlotBuilder(slotInFilteredList).withPet(model.getPet(new Name(VALID_NAME_COCO))).build();
+        Slot editedSlot = new SlotBuilder(slotInFilteredList).withPet(VALID_NAME_COCO).build();
         EditSlotCommand editCommand = new EditSlotCommand(INDEX_FIRST_SLOT,
                 new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO))).build(), "");
 

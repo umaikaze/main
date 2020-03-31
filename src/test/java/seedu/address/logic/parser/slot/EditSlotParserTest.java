@@ -19,7 +19,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SLOT;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +28,8 @@ import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.Name;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
@@ -36,7 +38,7 @@ class EditSlotParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
-    private static final Model model = getTypicalModelManager();
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
     private EditSlotParser parser = new EditSlotParser(model);
 
     @Test

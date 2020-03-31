@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.slot;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.pet.TypicalPets.getTypicalModelManager;
+import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +21,12 @@ public class AddSlotCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = getTypicalModelManager();
+        model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
     }
 
     @Test
     public void execute_newSlot_success() {
-        Slot validSlot = new SlotBuilder(model).build();
+        Slot validSlot = new SlotBuilder().build();
 
         Model expectedModel = new ModelManager(model.getPetTracker(), new UserPrefs());
         expectedModel.addSlot(validSlot);
