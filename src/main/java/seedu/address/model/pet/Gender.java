@@ -3,14 +3,14 @@ package seedu.address.model.pet;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's gender in the pet shop helper.
+ * Represents a Pet's gender in the pet store helper.
  * Guarantees: Only two valid constants: FEMALE and MALE.
  */
 public enum Gender {
     FEMALE ("FEMALE"),
     MALE ("MALE");
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender should be either MALE or FEMALE";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should be either male or female";
 
     private String value;
 
@@ -25,12 +25,12 @@ public enum Gender {
     }
 
     public static boolean isValidGender(String test) {
-        return (test.equals("MALE")) || (test.equals("FEMALE"));
+        return (test.equalsIgnoreCase("MALE")) || (test.equalsIgnoreCase("FEMALE"));
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.substring(0, 1) + value.substring(1).toLowerCase();
     }
 
 }

@@ -19,7 +19,7 @@ By: `AY1920S2-CS2103-W15-4`      Since: `Feb 2020`      Licence: `MIT`
 
 == Introduction
 
-Pet Store Helper (PSH) is for owners of pet shops who **prefer to use a desktop app for managing their store**. More importantly, PSH is **optimized for those who prefer to work with a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PSH can help you get your work done faster than traditional GUI apps.
+Pet Store Helper (PSH) is for owners of pet stores who **prefer to use a desktop app for managing their store**. More importantly, PSH is **optimized for those who prefer to work with a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PSH can help you get your work done faster than traditional GUI apps.
 
 It is based on 2 main systems, one that manages pets, and another one that organises showering schedules.
 
@@ -27,64 +27,26 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
-_Coming Soon!&trade;_
-
-////
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `petStoreHelper.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Pet Shop Helper.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing **`help`** and pressing kbd:[Enter] will open the help window.
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-- **`list`** : lists all contacts
-- ***`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-- **`delete`**`3` : deletes the 3rd contact shown in the current list
-- **`exit`** : exits the app
+* *`display p`* : displays the list of all pets.
+* **`addpet`** : addpet n/Teddy g/male b/01/01/2019 s/dog f/brand A:15 f/brand B:20 t/small t/lazy
+* **`deletepet 3`** : deletes the 3rd pet shown in the current pet list
+* **`display s`** : displays teh schedule system
+* **`addslot n/Teddy t/16/11/2020 1300 d/90`** : creates a showering schedule for Teddy at the given input time and duration.
+* *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
-////
 
-== Command Summary
-
-. Common / general features
-  - **Help**: `help`
-  - **Exit**: `exit`
-  - **Navigate**: `pp` / `np`
-  - **Display**: `display SYSTEM` +
-  e.g. `display p` +
-  e.g. `display s` +
-  e.g. `display i`
-. Pet Tracker System
-  - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
-  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
-  - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
-  e.g. `findpets n/garfield n/odie t/jon`
-  - **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
-  e.g. `editpet 2 n/garfield t/cuddly`
-  - **Delete pet**: `deletepet i/INDEX` +
-  e.g. `deletepet 2`
-. Schedule System
-  - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
-  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
-  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
-  - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
-  e.g. `findslots n/Brian Griffin` +
-  e.g. `findslots t/20/2/2020` +
-  e.g. `findslots n/Coco t/16/11/2020`
-  - **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
-  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
-  e.g. `editslot 3 d/45` +
-  e.g. `editslot 12 n/Brian Griffin`
-  - **Check slot**: `checkslot t/DATETIME` +
-  e.g. `checkslot 17/4/2020 1700`
-  - **Delete slot**: `deleteslot i/INDEX` +
-  e.g. `deleteslot 2`
-  - **Show conflicts**: `conflict`
 
 [[Features]]
 == Features
@@ -110,12 +72,6 @@ Exits the program.
 
 Format: `exit`
 
-==== Navigating to previous / next page: `pp` / `np`
-
-Goes to the previous / next page of list of results of a command, when the list returned is too large and has to split across multiple pages.
-
-Format: `pp`: Goes to the previous page of the list +
-Format: `np`: Goes to the next page of the list
 
 ==== Changing the system to display: `display SYSTEM`
 
@@ -134,16 +90,21 @@ Displays all pets in the pet tracker system.
 - `display s` +
 Displays all slots in the schedule system.
 - `display i` +
-Displays a list of all pet food (inventory) and the needed amount per week.
+Displays a list of all pet food (inventory) and the needed amount per week. You can double click on the food items to view the breakdown.
 
 ==== Saving the data
 
 All data is saved to the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-==== Statistics `[coming in v2.0]`
+==== Statistics: `stats`
 
-Provides statistics about the pet tracker and schedule system, such as total number of pets, how many time slots are in conflict, etc.
+Provides statistics about the pet tracker, schedule system, and inventory. +
+====
+- There is a pie chart representing the ratio of different pet species. +
+- A timetable that shows an overall schedule for recent 3 days. +
+- A bar chart that shows the weekly consumption of different pet food.
+====
 
 === Pet Tracker System
 
@@ -154,10 +115,11 @@ Adds a pet to the pet tracker system.
 Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG]...`
 
 ****
-- The date of birth must be in the format of d/M/YYYY, e.g. 01/01/2019, 1/7/2018
+- The date of birth must be in the format of d/M/yyyy, e.g. 01/01/2019, 1/7/2018
 - The gender must be either `female` or `male`.
 - Food is specified as a type of food complied with quantity of weekly consumption in an arbitrary unit. The food name and amount should be separated by a colon ":". There can be more than 1 types of food for one pet.
 - A pet can have any number of tags (including 0). Each tag must be restricted to one word .
+- The application ignores letter case of user input. The name, species, gender of pets, and name of food will be displayed in the format of  "Xxx Xxx ...".
 ****
 
 Example:
@@ -166,9 +128,9 @@ Example:
 
 ==== Finding pets by names or tags: `findpets`
 
-Finds pets whose name contains any of the given keywords.
+Finds pets whose name contains any of the given keywords. The application will automatically change to the pet display system.
 
-Format: `findpets [n/NAME]... [t/TAG]...`
+Format: `findpets PETNAME [MORE PETNAMES]...`
 
 ****
 - At least one argument must be supplied.
@@ -177,8 +139,8 @@ Format: `findpets [n/NAME]... [t/TAG]...`
 
 Example:
 
-- `findpets n/garfield n/odie t/jon` +
-Returns a list of pets, whose names either contain `garfield` or `odie`, or have a tag labelled `jon`.
+- `findpets garfield odie` +
+Returns a list of pets, whose names either contain `garfield` or `odie` or both.
 
 ==== Editing a pet: `editpet`
 
@@ -190,13 +152,18 @@ Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 - The index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ...
 - The existing field(s) of the pet will be removed, i.e adding of list of food and tags is not cumulative.
 - You can remove all tags of a pet by typing `t/` without specifying any tags after it.
+- Similarly to `addpet` command, pet name, species, gender, and name of food will be displayed in the format of "Xxx Xxx...".
 ****
 
 Example:
 
 - `display p` +
-  `tagpet 2 n/Coco b/02/01/2020 t/cuddly t/grey` +
+  `editpet 2 n/Coco b/02/01/2020 t/cuddly t/grey` +
 Overwrites information of the 2nd pet in the system with name "Coco", date of birth "2 Jan 2020, and 2 tags of “cuddly”, “grey”.
+
+- `findpets garfield` +
+  `editpet 2 n/Coco` +
+Overwrites the name of the 2nd pet in the results of `findpets garfield` to "Coco"
 
 ==== Deleting a pet: `deletepet`
 
@@ -215,7 +182,7 @@ Examples:
 Deletes the 2nd pet in the system.
 - `findpets n/garfield` +
   `deletepet 2` +
-Deletes the 2nd pet in the results of the `find garfield` command.
+Deletes the 2nd pet in the results of the `findpets garfield` command.
 
 === Schedule System
 
@@ -226,7 +193,7 @@ Adds a new occupied slot to the schedule.
 Format: `addslot n/PETNAME t/DATETIME d/DURATION`
 
 ****
-- The datetime must be in `dd/M/yyyy HHmm` format.
+- The datetime must be in `d/M/yyyy HHmm` format.
 * The time must be in 24-hour format.
 - The duration is to be specified in minutes as a positive integer.
 ****
@@ -238,25 +205,24 @@ Examples:
 
 ==== Finding slots: `findslots`
 
-Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both.
+Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. The application will automatically change to the schedule system to display matched results.
 
-Format: `findslots [n/PETNAME] [t/DATE]`
+Format: `findslots [n/PETNAME [MORE PETNAMES]...] [t/DATE [MORE DATES]...]`
 
 ****
 - The name of the pet must match exactly.
 - At least one of the optional fields must be provided.
-- The date must be in `dd/M/yyyy HHmm` format.
-* Any time specified in the date will be ignored, e.g. `20/2/2020 1400` will be parsed as `20/2/2020`.
+- The date must be in `d/M/yyyy` format.
 
 ****
 
 Example:
 
-- `findpets n/Brian Griffin` +
+- `findslots n/Brian Griffin` +
 Displays the slots occupied by `Brian Griffin`. Note that slots occupied by `Griffin` or `brian griffin` will not be returned.
-- `findslots t/20/2/2020` +
-Displays the occupied slots on `20/2/2020`.
-- `findpets n/Coco t/16/11/2020` +
+- `findslots t/20/2/2020 1/3/2021` +
+Displays the occupied slots on `20/2/2020` and `1/3/2021`.
+- `findslots n/Coco t/16/11/2020` +
 Displays the slots occupied by `Coco` on `16/11/2020`.
 
 ==== Edting a slot: `editslot`
@@ -276,28 +242,12 @@ Examples:
 
 - `editslot 1 t/16/11/2020 1300 d/120` +
 Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
-- `editslot 3 d/45` +
-Edits the duration of the 3rd slot to be `45` minutes.
+- `findslots t/1/1/2020 +
+   editslot 3 d/45` +
+Edits the duration of the 3rd slot in the search result to be `45` minutes.
 - `editslot 12 n/Brian Griffin` +
 Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
-==== Checking slot availability: `checkslot`
-
-Informs the user which pet(s), if any, is/are occupying the slot at the specified datetime.
-
-Format: `checkslot t/DATETIME`
-
-****
-- The datetime must be in `dd/M/yyyy` format.
-* The time must be in 24-hour format.
-****
-
-Example:
-
-- `checkslot 17/4/2020 1700` +
-If the slot is occupied by Coco, returns: `Coco is occupying the slot at 17/4/2020 1700.` +
-If the slot is occupied by both Coco and Garfield (conflict), returns: `Coco and Garfield are occupying the slot at 17/4/2020 1700.` +
-If the slot is unoccupied, returns: `Unoccupied slot at 17/4/2020 1700.`
 
 ==== Deleting a slot: `deleteslot`
 
@@ -314,22 +264,54 @@ Examples:
 - `display s` +
 `deleteslot 2` +
 Deletes the 2nd slot in the schedule.
-- `findpets n/Coco` +
+- `findslots n/Coco` +
 `deleteslot 2` +
 Deletes the 2nd slot occupied by `Coco`.
 
-==== Showing all conflicts: `conflict`
+==== Showing all conflicts: `conflicts`
 
 Displays the slots that have a conflict, i.e., an overlap in time with another occupied slot.
 
-Format: `conflict`
+Format: `conflicts`
+
+== Command Summary
+
+. Common / general features
+- **Help**: `help`
+- **Exit**: `exit`
+- **Display**: `display SYSTEM` +
+  e.g. `display p` +
+  e.g. `display s` +
+  e.g. `display i`
+- **Statistics**: `stats`+
+. Pet Tracker System
+- **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
+  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
+- **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
+  e.g. `findpets n/garfield n/odie t/jon`
+- **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
+  e.g. `editpet 2 n/garfield t/cuddly`
+- **Delete pet**: `deletepet i/INDEX` +
+  e.g. `deletepet 2`
+. Schedule System
+- **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
+  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
+  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
+- **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
+  e.g. `findslots n/Brian Griffin` +
+  e.g. `findslots t/20/2/2020` +
+  e.g. `findslots n/Coco t/16/11/2020`
+- **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
+  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
+  e.g. `editslot 3 d/45` +
+  e.g. `editslot 12 n/Brian Griffin`
+- **Delete slot**: `deleteslot i/INDEX` +
+  e.g. `deleteslot 2`
+- **Show conflicts**: `conflicts`
+
 
 == FAQ
 
-_Coming Soon!&trade;_
-
-////
-**Q**: How do I transfer my data to another Computer? +
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-////
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Shop Helper folder.
 

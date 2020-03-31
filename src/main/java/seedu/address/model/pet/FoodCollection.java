@@ -5,11 +5,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
 /**
- * Represents a Food Collection object in Pet Shop Helper. It is used to model a collection of the same type
+ * Represents a Food Collection object in Pet Store Helper. It is used to model a collection of the same type
  * of food that could exist in a pet list. (If there are 3 pets in a list, each requiring 10 units of cat food,
  * a food collection of the cat food in the list will have name as catfood and amount as 30.)
  * Guarantees: immutable; name is valid as declared in {@link #isValidFoodCollectionName(String)}
@@ -25,29 +27,37 @@ public class FoodCollection implements DisplayItem {
 
     private final String name;
     private int amount;
+    private ObservableList<FoodAmountAndPet> foodAmountAndPets = FXCollections.observableArrayList();
+    private final ObservableList<FoodAmountAndPet> unmodifiablePets =
+            FXCollections.unmodifiableObservableList(foodAmountAndPets);
 
     /**
      * Constructs a {@code Food}.
      *
-     * @param name A valid food collection name.
+     * @param food A valid food to generate Food Collection from.
+     * @param pet The owner of the food being added.
      */
-    private FoodCollection(String name, int amount) {
-        requireNonNull(name);
-        checkArgument(isValidFoodCollectionName(name), MESSAGE_NAME_CONSTRAINTS);
-        this.name = name;
-        checkArgument(isValidFoodCollectionAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
-        this.amount = amount;
+    private FoodCollection(Food food, Pet pet) {
+        requireNonNull(food);
+        requireNonNull(pet);
+        checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
+        this.name = food.foodName;
+        checkArgument(isValidFoodCollectionAmount(food.foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
+        this.amount = food.foodAmount;
+        this.foodAmountAndPets.add(new FoodAmountAndPet(food.foodAmount, pet));
     }
 
     /**
      * Adds food into the food collection.
+     * @param pet The owner of the food being added
      * @param other The food to be added.
      * @return true if it is successfully added, which means
      * the type of food has the same name as that of the food collection.
      */
-    public boolean addFoodToCollection(Food other) {
+    public boolean addFoodToCollection(Food other, Pet pet) {
         if (isSameType(other)) {
             amount += other.foodAmount;
+            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet));
             return true;
         } else {
             return false;
@@ -57,8 +67,8 @@ public class FoodCollection implements DisplayItem {
     /**
      * Generates a food collection from a given food object.
      */
-    public static FoodCollection generateFoodCollection(Food food) {
-        return new FoodCollection(food.foodName, food.foodAmount);
+    public static FoodCollection generateFoodCollection(Food food, Pet pet) {
+        return new FoodCollection(food, pet);
     }
 
     /**
@@ -108,12 +118,26 @@ public class FoodCollection implements DisplayItem {
         }
     }
 
+    /**
+     * Returns the name of this food collection.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the amount of food in this collection.
+     */
     public Integer getAmount() {
         return amount;
+    }
+
+    /**
+     * Returns a list of FoodAmountAndPet as an ObservableList so that it can be displayed in Ui when the user
+     * requires to view a breakdown of the composition of the amount of this food collection by the owners of food.
+     */
+    public ObservableList<FoodAmountAndPet> getUnmodifiablePets() {
+        return unmodifiablePets;
     }
 
     @Override

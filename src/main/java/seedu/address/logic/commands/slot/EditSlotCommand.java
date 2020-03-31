@@ -36,22 +36,24 @@ public class EditSlotCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DURATION + "360";
 
-    public static final String MESSAGE_EDIT_SLOT_SUCCESS = "Edited slot: %1$s";
+    public static final String MESSAGE_EDIT_SLOT_SUCCESS = "Edited slot: %1$s\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditSlotDescriptor editSlotDescriptor;
+    private final String warningMessage;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editSlotDescriptor details to edit the person with
      */
-    public EditSlotCommand(Index index, EditSlotDescriptor editSlotDescriptor) {
+    public EditSlotCommand(Index index, EditSlotDescriptor editSlotDescriptor, String warningMessage) {
         requireNonNull(index);
         requireNonNull(editSlotDescriptor);
 
         this.index = index;
         this.editSlotDescriptor = new EditSlotDescriptor(editSlotDescriptor);
+        this.warningMessage = warningMessage;
     }
 
     @Override
@@ -72,7 +74,7 @@ public class EditSlotCommand extends Command {
 
         model.setSlot(slotToEdit, editedSlot);
         model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot));
+        return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot) + warningMessage);
     }
 
     /**
@@ -104,7 +106,8 @@ public class EditSlotCommand extends Command {
         // state check
         EditSlotCommand e = (EditSlotCommand) other;
         return index.equals(e.index)
-                && editSlotDescriptor.equals(e.editSlotDescriptor);
+                && editSlotDescriptor.equals(e.editSlotDescriptor)
+                && warningMessage.equals(e.warningMessage);
     }
 
     /**

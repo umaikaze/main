@@ -13,7 +13,7 @@ import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
 
 /**
- * Represents a Slot in the pet shop helper schedule system.
+ * Represents a Slot in the pet store helper schedule system.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Slot implements Comparable<Slot>, DisplayItem {

@@ -6,7 +6,8 @@ package seedu.address.ui;
 public enum DisplaySystemType {
     PETS("p"),
     SCHEDULE("s"),
-    INVENTORY("i");
+    INVENTORY("i"),
+    FOOD_AMOUNT_AND_PET("fp");
 
     public static final String MESSAGE_CONSTRAINTS =
             "System type must be p (pets) or s (schedule) or i(inventory).";

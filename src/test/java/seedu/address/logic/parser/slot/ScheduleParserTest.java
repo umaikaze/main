@@ -2,6 +2,7 @@ package seedu.address.logic.parser.slot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.WARNING_MESSAGE_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
+import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.slot.Slot;
@@ -26,13 +28,13 @@ import seedu.address.testutil.slot.SlotUtil;
 class ScheduleParserTest {
 
     private final Model model = getTypicalModelManager();
-    private final ScheduleParser parser = new ScheduleParser(model);
+    private final PetTrackerParser parser = new PetTrackerParser(model);
 
     @Test
     public void parseCommand_add() throws Exception {
         Slot slot = new SlotBuilder(model).build();
         AddSlotCommand command = (AddSlotCommand) parser.parseCommand(SlotUtil.getAddSlotCommand(slot));
-        assertEquals(new AddSlotCommand(slot), command);
+        assertEquals(new AddSlotCommand(slot, ""), command);
     }
 
     @Test
@@ -48,7 +50,7 @@ class ScheduleParserTest {
         EditSlotCommand.EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(slot).build();
         EditSlotCommand command = (EditSlotCommand) parser.parseCommand(EditSlotCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));
-        assertEquals(new EditSlotCommand(INDEX_FIRST_SLOT, descriptor), command);
+        assertEquals(new EditSlotCommand(INDEX_FIRST_SLOT, descriptor, ""), command);
     }
 
     @Test
@@ -58,7 +60,7 @@ class ScheduleParserTest {
         keywords.forEach(x -> sb.append(PREFIX_NAME).append(x).append(" "));
         FindSlotCommand command = (FindSlotCommand) parser.parseCommand(
                 FindSlotCommand.COMMAND_WORD + " " + sb.toString());
-        assertEquals(new FindSlotCommand(FindSlotParser.getPredicates(sb.toString())), command);
+        assertEquals(new FindSlotCommand(FindSlotParser.getPredicates(sb.toString()), WARNING_MESSAGE_NAME), command);
     }
 
     // Test for help already done in PetTrackerParserTest

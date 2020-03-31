@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 /**
- * Represents a Food object in Pet Shop Helper.
+ * Represents a Food object in Pet Store Helper.
  * Guarantees: immutable; name is valid as declared in {@link #isValidFoodName(String)}
  */
 public class Food {
@@ -29,9 +29,24 @@ public class Food {
     public Food(String foodName, int foodAmount) {
         requireNonNull(foodName);
         checkArgument(isValidFoodName(foodName), MESSAGE_NAME_CONSTRAINTS);
-        this.foodName = foodName;
+        this.foodName = formatFoodName(foodName);
         checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.foodAmount = foodAmount;
+    }
+
+    /**
+     * Transfer food name in to the format of "Xxx Xxx ...".
+     * @param foodName The food name passed in by user
+     * @return The formatted food name
+     */
+    public String formatFoodName(String foodName) {
+        String[] foodNameSubStrings = foodName.split(" ");
+        String formattedFoodName = "";
+        for (String n : foodNameSubStrings) {
+            n = n.substring(0, 1).toUpperCase() + n.substring(1).toLowerCase();
+            formattedFoodName += (n + " ");
+        }
+        return formattedFoodName.trim();
     }
 
     /**
