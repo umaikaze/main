@@ -82,7 +82,7 @@ public class MainApp extends Application {
             if (!petTrackerOptional.isPresent()) {
                 logger.info("Data file not found. Starting with a sample pet store helper");
             }
-            initialData = petTrackerOptional.orElseGet(SampleDataUtil::getSamplePetTracker);
+            initialData = petTrackerOptional.orElseGet(SampleDataUtil::getSamplePetTrackerWithSlots);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Starting with an empty pet store helper");
             initialData = new PetTracker();

@@ -64,9 +64,9 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deletepet 1`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `deletepet 1` command
 image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
@@ -104,12 +104,12 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deletepet 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
+.Interactions Inside the Logic Component for the `deletepet 1` Command
 image::DeleteSequenceDiagram.png[]
 
-NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [[Design-Model]]
 === Model component
@@ -178,26 +178,6 @@ Step 4. The user executes `display p` to view the list of **p**ets. The `display
 The following \____ diagram shows how the display operation works: (WIP)
 
 image::displayDiagram2.png[]
-
-==== Design Considerations (WIP)
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire pet tracker.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Have seperate .
-** Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of pet tracker states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedPetTracker`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 
 // end::display[]
 
@@ -432,9 +412,9 @@ Use case resumes at step 2.
 
 *MSS*
 
-1. User requests to show bathing schedule
-2. PSH shows bathing schedule of that day
-3. User requests of delete a bathing slot at a specified timing
+1. User requests to show schedule
+2. PSH shows  schedule of that day
+3. User requests of delete a slot at a specified timing
 4. PSH deletes the slot
 +
 Use case ends.
@@ -481,7 +461,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample pets. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample pets and slots. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -493,14 +473,14 @@ _{ more test cases ... }_
 
 === Deleting a pet
 
-. Deleting a pet while all pets are listed
+. Deleting a pet while all pets are displayed
 
-.. Prerequisites: List all pets using the `list` command. Multiple pets in the list.
-.. Test case: `delete 1` +
+.. Prerequisites: Display all pets using the `display p` command. Multiple pets in the display.
+.. Test case: `deletepet 1` +
    Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
+.. Test case: `deletepet 0` +
    Expected: No pet is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
 _{ more test cases ... }_
