@@ -1,4 +1,4 @@
-= PetTracker Level 3 - Setting Up
+= PetTracker - Setting Up
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
