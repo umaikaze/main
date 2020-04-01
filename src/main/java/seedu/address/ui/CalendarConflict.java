@@ -32,11 +32,13 @@ public class CalendarConflict extends CalendarRegion {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    @FXML
-    private Label ids;
+    private String idText;
+    private String dateText;
+    private String timeText;
+    private String petText;
 
     @FXML
-    private Label date;
+    private Label ids;
 
     @FXML
     private Label time;
@@ -51,22 +53,28 @@ public class CalendarConflict extends CalendarRegion {
         String idsString = IntStream.rangeClosed(lastDisplayedIndex - conflictSlots.size() + 1, lastDisplayedIndex)
                 .mapToObj(i -> Integer.toString(i))
                 .reduce((a, b) -> a + ", " + b).orElseThrow();
-        String idText = String.format("%s.", idsString);
-        String dateText = String.format("%s, %s",
+        this.idText = String.format("%s.", idsString);
+        this.dateText = String.format("%s, %s",
                 lastSlot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
                 lastSlot.getDate().format(DateTimeUtil.DATE_FORMAT));
-        String timeText = String.format("%s - %s", start, end);
-        String petText = conflictSlots.stream()
+        this.timeText = String.format("%s - %s", start, end);
+        this.petText = conflictSlots.stream()
                 .map(slot -> slot.getPet().getName().toString())
                 .collect(Collectors.toSet())
                 .toString();
 
+        setText();
+    }
+
+    private void setText() {
         ids.setText(idText);
-        date.setText(dateText);
         time.setText(timeText);
         petName.setText(petText);
     }
 
+    /**
+     * Creates a tooltip containing information about the conflicted slots.
+     */
     public Tooltip createTooltip() {
         String pattern = "%s\n"
                 + "Date: %s\n"
@@ -74,7 +82,7 @@ public class CalendarConflict extends CalendarRegion {
                 + "Affected pets: %s\n"
                 + "%s";
         String tooltipText = String.format(pattern,
-                ids.getText(), date.getText(), time.getText(), petName.getText(), CONFLICT_MESSAGE);
+                idText, dateText, timeText, petText, CONFLICT_MESSAGE);
         Tooltip tooltip = new Tooltip(tooltipText);
         tooltip.getStyleClass().add("tooltip-conflict");
         tooltip.setShowDuration(javafx.util.Duration.seconds(30));

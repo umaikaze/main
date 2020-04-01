@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,8 @@ public class CalendarPanel extends UiPart<Region> {
                 .get();
         smallestTimeInterval = Math.toIntExact(allSlots.stream()
                 .map(slot -> slot.getDuration().toMinutes())
-                .reduce(1L, (a, b) -> gcd(a, b)));
+                .reduce((a, b) -> gcd(a, b))
+                .orElse(1L));
         rowIndex = 0;
     }
 
@@ -87,6 +89,9 @@ public class CalendarPanel extends UiPart<Region> {
             return;
         }
         Holding h = new Holding();
+        Slot firstSlot = allSlots.get(0);
+        flushOutDate(firstSlot.getDate());
+        flushOutBuffer(earliestTime, firstSlot.getTime());
         for (int slotIndex = 0; slotIndex < allSlots.size(); slotIndex++) {
             Slot currSlot = allSlots.get(slotIndex);
             if (h.size() == 0 || h.overlaps(currSlot)) {
@@ -102,6 +107,7 @@ public class CalendarPanel extends UiPart<Region> {
             }
             h.reset();
             rowIndex++;
+            flushOutDate(currSlot.getDate());
             if (currSlot.getTime().isAfter(earliestTime)) {
                 flushOutBuffer(earliestTime, currSlot.getTime());
             }
@@ -130,6 +136,16 @@ public class CalendarPanel extends UiPart<Region> {
         int colSpan = getColSpan(Duration.between(bufferStartTime, bufferEndTime));
         CalendarBuffer calendarBuffer = new CalendarBuffer(bufferStartTime, bufferEndTime);
         gridPane.add(calendarBuffer.getRoot(), colIndex, rowIndex, colSpan, 1);
+    }
+
+    /**
+     * Flushes out and renders a {@code CalendaDate}.
+     */
+    private void flushOutDate(LocalDate date) {
+        int colIndex = 0;
+        int colSpan = getColSpan(CalendarDate.DURATION);
+        CalendarDate calendarDate = new CalendarDate(date);
+        gridPane.add(calendarDate.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
     /**
@@ -173,7 +189,8 @@ public class CalendarPanel extends UiPart<Region> {
 
     private int getColIndex(LocalTime slotTime) {
         assert slotTime.isBefore(earliestTime) : "Given slot time is earlier than the earliest time!";
-        return Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes()) / smallestTimeInterval;
+        return CalendarDate.getWidth()
+                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes()) / smallestTimeInterval;
     }
 
     private int getColSpan(Duration duration) {

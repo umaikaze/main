@@ -381,6 +381,10 @@
     -fx-padding: 10;
 }
 
+.calendar-grid-date {
+    -fx-background-color: transparent;
+}
+
 .calendar_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;

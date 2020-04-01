@@ -20,10 +20,10 @@ public abstract class CalendarRegion extends UiPart<Region> {
      */
 
     @FXML
-    private HBox slotPane;
+    protected HBox slotPane;
 
-    public CalendarRegion(String FXML, long minutes) {
-        super(FXML);
+    public CalendarRegion(String fxml, long minutes) {
+        super(fxml);
         slotPane.setPrefWidth(minutes * WIDTH_SCALING_FACTOR);
     }
 }

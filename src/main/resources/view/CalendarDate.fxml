@@ -11,12 +11,9 @@
 <?import javafx.scene.text.Text?>
 
 <HBox id="slotPane" fx:id="slotPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-        styleClass="calendar-grid-conflict">
-  <VBox alignment="TOP_LEFT" prefHeight="50" GridPane.columnIndex="0">
-    <HBox spacing="5" alignment="CENTER_LEFT">
-      <Label fx:id="ids" styleClass="calendar_big_label" />
-    </HBox>
-    <Label fx:id="time" styleClass="calendar_small_label" text="\$time" />
-    <Label fx:id="petName" styleClass="calendar_small_label" text="\$petName" />
+        styleClass="calendar-grid-date">
+  <VBox alignment="CENTER_RIGHT">
+    <Label fx:id="day" styleClass="calendar_big_label" text="\$day" />
+    <Label fx:id="date" styleClass="calendar_big_label" text="\$date" />
   </VBox>
 </HBox>

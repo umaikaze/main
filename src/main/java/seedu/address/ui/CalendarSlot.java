@@ -24,11 +24,13 @@ public class CalendarSlot extends CalendarRegion {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    @FXML
-    private Label id;
+    private String idText;
+    private String dateText;
+    private String timeText;
+    private String petText;
 
     @FXML
-    private Label date;
+    private Label id;
 
     @FXML
     private Label time;
@@ -39,26 +41,32 @@ public class CalendarSlot extends CalendarRegion {
     public CalendarSlot(Slot slot, int displayedIndex) {
         super(FXML, slot.getDuration().toMinutes());
 
-        String idText = String.format("%d.", displayedIndex);
-        String dateText = String.format("%s, %s",
+        this.idText = String.format("%d.", displayedIndex);
+        this.dateText = String.format("%s, %s",
                 slot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
                 slot.getDate().format(DateTimeUtil.DATE_FORMAT));
-        String timeText = String.format("%s - %s", slot.getTime(), slot.getEndTime());
-        String petText = slot.getPet().getName().toString();
+        this.timeText = String.format("%s - %s", slot.getTime(), slot.getEndTime());
+        this.petText = slot.getPet().getName().toString();
 
+        setText();
+    }
+
+    private void setText() {
         id.setText(idText);
-        date.setText(dateText);
         time.setText(timeText);
         petName.setText(petText);
     }
 
+    /**
+     * Creates a tooltip containing information about this slot.
+     */
     public Tooltip createTooltip() {
         String pattern = "%s\n"
                 + "Date: %s\n"
                 + "Time: %s\n"
                 + "Pet: %s";
         String tooltipText = String.format(pattern,
-                id.getText(), date.getText(), time.getText(), petName.getText());
+                idText, dateText, timeText, petText);
         Tooltip tooltip = new Tooltip(tooltipText);
         tooltip.getStyleClass().add("tooltip-slot");
         tooltip.setShowDuration(javafx.util.Duration.seconds(30));
