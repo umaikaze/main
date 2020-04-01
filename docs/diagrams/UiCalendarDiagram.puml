@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package Calendar <<Rectangle>>{
+Class CalendarPanel
+Class CalendarDate
+Class CalendarSlot
+Class CalendarBuffer
+Class CalendarConflict
+Class CalendarRegion
+}
+
+Class MainWindow
+Class "{abstract}\nUiPart" as UiPart
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+MainWindow *--> CalendarPanel
+CalendarPanel ..> Model
+
+CalendarPanel --> CalendarBuffer
+CalendarPanel --> CalendarConflict
+CalendarPanel --> CalendarDate
+CalendarPanel --> CalendarSlot
+
+CalendarBuffer --|> CalendarRegion
+CalendarConflict --|> CalendarRegion
+CalendarDate --|> CalendarRegion
+CalendarSlot --|> CalendarRegion
+
+CalendarRegion -right-|> UiPart
+CalendarPanel --|> UiPart
+@enduml
