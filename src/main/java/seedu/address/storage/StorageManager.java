@@ -1,12 +1,10 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.util.DateTimeUtil.BACK_UP_FORMAT;
-import static seedu.address.commons.util.DateTimeUtil.BACK_UP_PATTERN;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -75,7 +73,8 @@ public class StorageManager implements Storage {
 
     @Override
     public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
-        savePetTracker(petTracker, petTrackerStorage.getPetTrackerFilePath().resolveSibling(timestamp.format(BACK_UP_FORMAT) + ".json"));
+        savePetTracker(petTracker,
+                petTrackerStorage.getPetTrackerFilePath().resolveSibling(timestamp.format(BACK_UP_FORMAT) + ".json"));
     }
 
     @Override

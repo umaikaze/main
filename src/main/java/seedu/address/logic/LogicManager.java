@@ -49,7 +49,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.savePetTracker(model.getPetTracker());
-            if(commandResult.isBackUp()) {
+            if (commandResult.isBackUp()) {
                 storage.savePetTracker(model.getPetTracker(), java.time.LocalDateTime.now());
             }
         } catch (IOException ioe) {

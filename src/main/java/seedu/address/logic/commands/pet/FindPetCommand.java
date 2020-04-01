@@ -35,7 +35,7 @@ public class FindPetCommand extends Command {
         model.updateFilteredPetList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()),
-                false, false, DisplaySystemType.PETS, false,false);
+                false, false, DisplaySystemType.PETS, false, false);
     }
 
     @Override

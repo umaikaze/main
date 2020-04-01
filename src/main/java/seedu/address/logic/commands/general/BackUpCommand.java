@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 import seedu.address.ui.DisplaySystemType;
 
@@ -11,7 +12,7 @@ public class BackUpCommand extends Command {
 
     public static final String COMMAND_WORD = "backup";
 
-    public static final String MESSAGE_SUCCESS  = "Current Pet Tracker information has been backed up.";
+    public static final String MESSAGE_SUCCESS = "Current Pet Tracker information has been backed up.";
 
     @Override
     public CommandResult execute(Model model) {
