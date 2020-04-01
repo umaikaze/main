@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -6,13 +6,14 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.pet.Pet;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Pet}.
  */
 public class PetCard extends UiPart<Region> {
 
-    private static final String FXML = "PetCard.fxml";
+    private static final String FXML = "list/PetCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

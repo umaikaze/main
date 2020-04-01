@@ -3,7 +3,6 @@ package seedu.address.logic.commands.slot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -65,9 +64,7 @@ class FindSlotCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 3);
         Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
-        FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
         assertEquals(getTypicalSlots(), model.getFilteredSlotList());
     }
