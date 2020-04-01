@@ -353,6 +353,8 @@
 }
 
 .calendar-scroll {
+    -fx-background-color: derive(#1d1d1d, 10%);
+    -fx-background: derive(#1d1d1d, 20%);
     -fx-fit-to-height: true;
 }
 
@@ -362,21 +364,48 @@
 }
 
 .calendar-grid-cell {
-    -fx-background-color: black, derive(#1d1d1d, 30%);
-    -fx-background-insets: 0, 3;
-    -fx-text-fill: white;
+    -fx-background-color: black, derive(#1d1d1d, 50%);
+    -fx-background-insets: 0, 2;
     -fx-padding: 10;
 }
 
 .calendar-grid-conflict {
     -fx-background-color: black, #d06651;
-    -fx-background-insets: 0, 3;
-    -fx-text-fill: white;
+    -fx-background-insets: 0, 2;
     -fx-padding: 10;
 }
 
 .calendar-grid-buffer {
     -fx-background-color: transparent;
-    -fx-background-insets: 0, 3;
+    -fx-background-insets: 0, 2;
     -fx-padding: 10;
+}
+
+.calendar-grid-date {
+    -fx-background-color: transparent;
+}
+
+.calendar_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+.calendar_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.tooltip {
+    -fx-font-size: 13px;
+}
+
+.tooltip-slot {
+    -fx-border-color: black;
+}
+
+.tooltip-conflict {
+    -fx-text-fill: #d06651;
+    -fx-border-color: #d06651;
 }

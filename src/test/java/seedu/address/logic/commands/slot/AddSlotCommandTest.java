@@ -26,8 +26,8 @@ import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.slot.SlotBuilder;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 class AddSlotCommandTest {
 

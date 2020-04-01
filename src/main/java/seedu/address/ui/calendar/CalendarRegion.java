@@ -1,19 +1,16 @@
-package seedu.address.ui;
-
-import java.time.Duration;
+package seedu.address.ui.calendar;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.ui.UiPart;
 
 /**
- * A UI Component that displays information about a {@code Slot} in a calendar view.
+ * A UI Component that that constitutes a region of a calendar view.
  */
-public class CalendarBuffer extends UiPart<Region> {
+public abstract class CalendarRegion extends UiPart<Region> {
 
     public static final double WIDTH_SCALING_FACTOR = 2;
-
-    private static final String FXML = "CalendarBuffer.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,10 +21,10 @@ public class CalendarBuffer extends UiPart<Region> {
      */
 
     @FXML
-    private HBox slotPane;
+    protected HBox slotPane;
 
-    public CalendarBuffer(Duration duration) {
-        super(FXML);
-        slotPane.setPrefWidth(duration.toMinutes() * WIDTH_SCALING_FACTOR);
+    public CalendarRegion(String fxml, long minutes) {
+        super(fxml);
+        slotPane.setPrefWidth(minutes * WIDTH_SCALING_FACTOR);
     }
 }
