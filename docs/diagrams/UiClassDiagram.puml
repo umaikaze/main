@@ -17,12 +17,6 @@ Class HelpWindow
 
 Class OverallStatistics
 
-' Class DisplayListPanel
-' Class PetCard
-' Class SlotCard
-' Class FoodCollectionCard
-' Class FoodAmountAndPetCard
-
 package Calendar <<Rectangle>> {
 Class HiddenCalendar #FFFFFF
 }
@@ -68,22 +62,6 @@ OverallStatistics -up-|> UiPart
 
 MainWindow *--> DisplayList
 DisplayList ..> Model
-' MainWindow *--> DisplayListPanel
-
-' DisplayListPanel --> PetCard
-' DisplayListPanel --> SlotCard
-' DisplayListPanel --> FoodCollectionCard
-' DisplayListPanel --> FoodAmountAndPetCard
-
-' PetCard --|> UiPart2
-' SlotCard --|> UiPart2
-' FoodCollectionCard --|> UiPart2
-' FoodAmountAndPetCard --|> UiPart2
-
-' PetCard ...> Model
-' SlotCard ...> Model
-' FoodCollectionCard ...> Model
-' FoodAmountAndPetCard ...> Model
 
 MainWindow *--> Calendar
 Calendar ..> Model
