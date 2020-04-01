@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +17,13 @@ import seedu.address.model.pet.FoodAmountAndPet;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of display items.
  */
 public class DisplayListPanel extends UiPart<Region> {
-    private static final String FXML = "DisplayListPanel.fxml";
+    private static final String FXML = "list/DisplayListPanel.fxml";
     private static final ObservableList<DisplayItem> EMPTY_DISPLAY_ITEM_LIST = FXCollections.observableArrayList();
 
     @FXML

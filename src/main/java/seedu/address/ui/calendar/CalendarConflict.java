@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.calendar;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -22,7 +22,7 @@ public class CalendarConflict extends CalendarRegion {
     public static final String CONFLICT_MESSAGE =
                 "Do `conflicts` to view details about each individual conflicted slots";
 
-    private static final String FXML = "CalendarConflict.fxml";
+    private static final String FXML = "calendar/CalendarConflict.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

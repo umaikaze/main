@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.calendar;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ public class CalendarDate extends CalendarRegion {
      */
     public static final Duration DURATION = Duration.ofMinutes(50);
 
-    private static final String FXML = "CalendarDate.fxml";
+    private static final String FXML = "calendar/CalendarDate.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

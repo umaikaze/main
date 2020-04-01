@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.calendar;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,6 +16,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing a calendar view of the schedule.
@@ -24,7 +25,7 @@ public class CalendarPanel extends UiPart<Region> {
 
     public static final String NO_SLOTS = "No slots!";
 
-    private static final String FXML = "CalendarPanel.fxml";
+    private static final String FXML = "calendar/CalendarPanel.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

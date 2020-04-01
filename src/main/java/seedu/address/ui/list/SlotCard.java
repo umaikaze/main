@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import java.time.format.TextStyle;
 import java.util.List;
@@ -10,13 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Slot}.
  */
 public class SlotCard extends UiPart<Region> {
 
-    private static final String FXML = "SlotCard.fxml";
+    private static final String FXML = "list/SlotCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

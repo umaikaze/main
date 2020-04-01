@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.calendar;
 
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -14,7 +14,7 @@ import seedu.address.model.slot.Slot;
  */
 public class CalendarSlot extends CalendarRegion {
 
-    private static final String FXML = "CalendarSlot.fxml";
+    private static final String FXML = "calendar/CalendarSlot.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

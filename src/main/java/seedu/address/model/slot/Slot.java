@@ -11,8 +11,8 @@ import java.util.Objects;
 
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.Pet;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * Represents a Slot in the pet store helper schedule system.
