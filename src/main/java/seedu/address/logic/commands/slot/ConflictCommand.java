@@ -26,6 +26,6 @@ public class ConflictCommand extends Command {
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),
-                false, false, DisplaySystemType.SCHEDULE, false);
+                false, false, DisplaySystemType.SCHEDULE, false, false);
     }
 }
