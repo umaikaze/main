@@ -148,10 +148,9 @@ public class CalendarPanel extends UiPart<Region> {
      * Flushes out and renders a {@code CalendarSlot}.
      */
     private void flushOutHoldingSingle(Slot slot, int lastDisplayedIndex) {
-        Slot slotToDisplayAlone = slot;
-        int colIndex = getColIndex(slotToDisplayAlone.getTime());
-        int colSpan = getColSpan(slotToDisplayAlone.getDuration());
-        CalendarSlot calendarSlot = new CalendarSlot(slotToDisplayAlone, lastDisplayedIndex);
+        int colIndex = getColIndex(slot.getTime());
+        int colSpan = getColSpan(slot.getDuration());
+        CalendarSlot calendarSlot = new CalendarSlot(slot, lastDisplayedIndex);
         Tooltip.install(calendarSlot.getRoot(), calendarSlot.createTooltip());
         gridPane.add(calendarSlot.getRoot(), colIndex, rowIndex, colSpan, 1);
     }

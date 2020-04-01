@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -51,9 +52,9 @@ public class CalendarConflict extends CalendarRegion {
                 .mapToObj(i -> Integer.toString(i))
                 .reduce((a, b) -> a + ", " + b).orElseThrow();
         String idText = String.format("%s.", idsString);
-        String dateText = String.format("%s, %s/%s/%s",
+        String dateText = String.format("%s, %s",
                 lastSlot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
-                lastSlot.getDate().getDayOfMonth(), lastSlot.getDate().getMonthValue(), lastSlot.getDate().getYear());
+                lastSlot.getDate().format(DateTimeUtil.DATE_FORMAT));
         String timeText = String.format("%s - %s", start, end);
         String petText = conflictSlots.stream()
                 .map(slot -> slot.getPet().getName().toString())

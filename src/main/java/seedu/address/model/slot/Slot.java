@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.Pet;
 import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
@@ -166,12 +167,8 @@ public class Slot implements Comparable<Slot>, DisplayItem {
 
     @Override
     public String toString() {
-        if (isWithinOneDay()) {
-            return String.format("%s %s - %s (%s)",
-                    getDate(), getTime(), getEndTime(),
-                    getPet().getName());
-        }
-        return String.format("%s - %s (%s)",
-                getDateTime(), getEndTime(), getPet().getName());
+        return String.format("%s %s - %s (%s)",
+                getDate().format(DateTimeUtil.DATE_FORMAT),
+                getTime(), getEndTime(), getPet().getName());
     }
 }

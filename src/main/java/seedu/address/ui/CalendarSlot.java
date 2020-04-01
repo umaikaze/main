@@ -6,6 +6,7 @@ import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -39,9 +40,9 @@ public class CalendarSlot extends CalendarRegion {
         super(FXML, slot.getDuration().toMinutes());
 
         String idText = String.format("%d.", displayedIndex);
-        String dateText = String.format("%s, %s/%s/%s",
+        String dateText = String.format("%s, %s",
                 slot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
-                slot.getDate().getDayOfMonth(), slot.getDate().getMonthValue(), slot.getDate().getYear());
+                slot.getDate().format(DateTimeUtil.DATE_FORMAT));
         String timeText = String.format("%s - %s", slot.getTime(), slot.getEndTime());
         String petText = slot.getPet().getName().toString();
 

@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.slot.Slot;
 
 /**
@@ -37,13 +40,17 @@ public class SlotCard extends UiPart<Region> {
     public SlotCard(Slot slot, int displayedIndex, List<Slot> allSlots) {
         super(FXML);
         this.slot = slot;
-        id.setText(displayedIndex + ". ");
-        //TODO: make the layout nicer
-        // this is just a quick a dirty way of displaying a slot
-        String dateTimeString = String.format("%s - %s", slot.getDateTime(), slot.getEndDateTime());
-        String conflict = slot.hasConflict(allSlots) ? "[CONFLICT]" : "";
-        dateTime.setText(dateTimeString + " " + conflict);
-        petName.setText(slot.getPet().getName().toString());
+
+        String idText = String.format("%d. %s", displayedIndex, slot.hasConflict(allSlots) ? "[CONFLICT]" : "");
+        String dateTimeText = String.format("%s, %s, %s - %s",
+                slot.getDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US),
+                slot.getDate().format(DateTimeUtil.DATE_FORMAT),
+                slot.getTime(), slot.getEndTime());
+        String petText = slot.getPet().getName().toString();
+
+        id.setText(idText);
+        dateTime.setText(dateTimeText);
+        petName.setText(petText);
     }
 
     @Override
