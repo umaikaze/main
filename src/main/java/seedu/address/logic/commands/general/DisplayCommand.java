@@ -16,7 +16,7 @@ public class DisplayCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Changes the display board to show the specified system.\n"
-            + "Parameter: SYSTEM (must be p (pets) or s (schedule) or i (inventory)).\n"
+            + "Parameter: SYSTEM (must be p (pets), s (schedule), c (calendar) or i (inventory)).\n"
             + "Example: display p";
 
     public static final String MESSAGE_SUCCESS = "Display changed to %s. \nShowing all.";
@@ -40,7 +40,7 @@ public class DisplayCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
         String message = String.format(getMessageSuccess(), type);
-        return new CommandResult(message, false, false, true, false);
+        return new CommandResult(message, false, false, type, false);
     }
 
     public String getMessageSuccess() {

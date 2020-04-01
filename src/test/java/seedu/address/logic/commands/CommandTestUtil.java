@@ -21,16 +21,16 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.commands.pet.EditPetCommand;
-import seedu.address.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
+import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.model.Model;
 import seedu.address.model.PetTracker;
-import seedu.address.model.pet.Name;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
 import seedu.address.model.slot.SlotPetNamePredicate;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Contains helper methods for testing commands.
@@ -87,6 +87,8 @@ public class CommandTestUtil {
 
     public static final EditPetCommand.EditPetDescriptor DESC_COCO;
     public static final EditPetCommand.EditPetDescriptor DESC_GARFIELD;
+    public static final EditSlotCommand.EditSlotDescriptor SLOT_DESC_COCO;
+    public static final EditSlotCommand.EditSlotDescriptor SLOT_DESC_GARFIELD;
 
     static {
         DESC_COCO = new EditPetDescriptorBuilder().withName(VALID_NAME_COCO)
@@ -95,14 +97,10 @@ public class CommandTestUtil {
         DESC_GARFIELD = new EditPetDescriptorBuilder().withName(VALID_NAME_GARFIELD)
                 .withGender(VALID_GENDER_GARFIELD.toString()).withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT).build();
-    }
 
-    public static EditSlotDescriptor getSlotDescCoco(Model model) {
-        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_COCO)))
+        SLOT_DESC_COCO = new EditSlotDescriptorBuilder().withPet(VALID_NAME_COCO)
                 .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
-    }
-    public static EditSlotDescriptor getSlotDescGarfield(Model model) {
-        return new EditSlotDescriptorBuilder().withPet(model.getPet(new Name(VALID_NAME_GARFIELD)))
+        SLOT_DESC_GARFIELD = new EditSlotDescriptorBuilder().withPet(VALID_NAME_GARFIELD)
                 .withDateTime(VALID_DATETIME_GARFIELD).withDuration(VALID_DURATION_GARFIELD).build();
     }
 
@@ -133,13 +131,14 @@ public class CommandTestUtil {
     }
 
     /**
-     * [Specifically for find and display commands] Convenience wrapper to
+     * [Specifically for FindPetCommand] Convenience wrapper to
      * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertFindCommandSuccess(Command command, Model actualModel, String expectedMessage,
+    public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false);
+        CommandResult expectedCommandResult =
+                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
