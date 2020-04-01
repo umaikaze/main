@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -63,6 +65,11 @@ public class JsonPetTrackerStorage implements PetTrackerStorage {
     public void savePetTracker(ReadOnlyPetTracker petTracker) throws IOException {
         savePetTracker(petTracker, filePath);
     }
+
+    @Override
+    public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
+    savePetTracker(petTracker, filePath.resolveSibling(timestamp.format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm")) + ".json"));
+}
 
     /**
      * Similar to {@link #savePetTracker(ReadOnlyPetTracker)}.

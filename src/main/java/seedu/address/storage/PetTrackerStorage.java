@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
@@ -36,6 +37,14 @@ public interface PetTrackerStorage {
      * @throws IOException if there was any problem writing to the file.
      */
     void savePetTracker(ReadOnlyPetTracker petTracker) throws IOException;
+
+    /**
+     * Saves the given {@link ReadOnlyPetTracker} to the storage in a separate file with timestamp.
+     * @param petTracker cannot be null.
+     * @param timestamp cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException;
 
     /**
      * @see #savePetTracker(ReadOnlyPetTracker)

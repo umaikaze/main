@@ -25,6 +25,8 @@ public class CommandResult {
 
     private final boolean showStats;
 
+    private final boolean backUp;
+
     /**
      * The system to be displayed.
      */
@@ -34,12 +36,13 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         DisplaySystemType type, boolean showStats) {
+                         DisplaySystemType type, boolean showStats, boolean backUp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.type = type;
         this.showStats = showStats;
+        this.backUp = backUp;
     }
 
     /**
@@ -47,7 +50,7 @@ public class CommandResult {
      * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false);
+        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false, false);
     }
 
     /**
@@ -55,7 +58,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false);
+        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -64,6 +67,10 @@ public class CommandResult {
 
     public boolean isShowStats() {
         return showStats;
+    }
+
+    public boolean isBackUp() {
+        return backUp;
     }
 
     public boolean isShowHelp() {

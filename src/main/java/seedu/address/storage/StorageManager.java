@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -66,6 +68,11 @@ public class StorageManager implements Storage {
     @Override
     public void savePetTracker(ReadOnlyPetTracker petTracker) throws IOException {
         savePetTracker(petTracker, petTrackerStorage.getPetTrackerFilePath());
+    }
+
+    @Override
+    public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
+        savePetTracker(petTracker, petTrackerStorage.getPetTrackerFilePath().resolveSibling(timestamp.format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm")) + ".json"));
     }
 
     @Override

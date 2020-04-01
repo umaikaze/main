@@ -10,6 +10,7 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.BackUpCommand;
 import seedu.address.logic.commands.general.StatsCommand;
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
@@ -87,6 +88,9 @@ public class PetTrackerParser {
 
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
+
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand();
 
         // pet tracker
         case AddPetCommand.COMMAND_WORD:
