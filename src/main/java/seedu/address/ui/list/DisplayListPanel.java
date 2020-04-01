@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +17,13 @@ import seedu.address.model.pet.FoodAmountAndPet;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of display items.
  */
 public class DisplayListPanel extends UiPart<Region> {
-    private static final String FXML = "DisplayListPanel.fxml";
+    private static final String FXML = "list/DisplayListPanel.fxml";
     private static final ObservableList<DisplayItem> EMPTY_DISPLAY_ITEM_LIST = FXCollections.observableArrayList();
 
     @FXML
@@ -41,22 +42,16 @@ public class DisplayListPanel extends UiPart<Region> {
 
     /**
      * Changes the backing list of display items to {@code newDisplayList}.
-     * Also update the settings of displayInformationView to match the corresponding system being displayed.
      */
-    public final void updateWith(ObservableList<DisplayItem> newDisplayList, DisplaySystemType type) {
+    public final void updateWith(ObservableList<DisplayItem> newDisplayList) {
         displayListView.setItems(newDisplayList);
         displayInformationView.setItems(EMPTY_DISPLAY_ITEM_LIST);
-        if (type.equals(DisplaySystemType.INVENTORY)) {
-            adjustInformationViewToInventory();
-        } else {
-            adjustInformationViewToRest();
-        }
     }
 
     /**
      * Collapses the displayInformationView so that the displayListView occupies the entire screen.
      */
-    private void adjustInformationViewToRest() {
+    public void collapseInformationView() {
         displayInformationViewContainer.setPrefWidth(0);
         displayInformationViewContainer.setMinWidth(0);
         HBox.setHgrow(displayInformationViewContainer, Priority.NEVER);
@@ -69,7 +64,7 @@ public class DisplayListPanel extends UiPart<Region> {
     /**
      * Expands the displayInformationView for the display of inventory system.
      */
-    private void adjustInformationViewToInventory() {
+    public void expandInformationView() {
         displayInformationViewContainer.setPrefWidth(displayListView.getPrefWidth());
         displayInformationViewContainer.setMinWidth(displayListView.getPrefWidth());
         HBox.setHgrow(displayInformationViewContainer, Priority.ALWAYS);

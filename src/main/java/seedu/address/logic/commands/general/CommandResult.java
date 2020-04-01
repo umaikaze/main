@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.ui.DisplaySystemType;
+
 /**
  * Represents the result of a command execution.
  */
@@ -22,21 +24,21 @@ public class CommandResult {
     private final boolean exit;
 
     private final boolean showStats;
+
     /**
-     * Whether or not the system to be displayed has changed.
+     * The system to be displayed.
      */
-    private final boolean displayChanged;
+    private final DisplaySystemType type;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean displayChanged, boolean showStats) {
+                         DisplaySystemType type, boolean showStats) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.displayChanged = displayChanged;
+        this.type = type;
         this.showStats = showStats;
     }
 
@@ -45,7 +47,7 @@ public class CommandResult {
      * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, false, false);
+        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false);
     }
 
     /**
@@ -53,7 +55,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false);
     }
 
     public String getFeedbackToUser() {
@@ -72,8 +74,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean hasDisplayChanged() {
-        return displayChanged;
+    public DisplaySystemType getDisplaySystemType() {
+        return type;
     }
 
     @Override
@@ -92,12 +94,12 @@ public class CommandResult {
                 && showStats == otherCommandResult.showStats
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && displayChanged == otherCommandResult.displayChanged;
+                && type == otherCommandResult.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, displayChanged, showStats);
+        return Objects.hash(feedbackToUser, showHelp, exit, type, showStats);
     }
 
 }

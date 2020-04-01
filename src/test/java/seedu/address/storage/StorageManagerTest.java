@@ -15,7 +15,7 @@ import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.UserPrefs;
 
-public class PshStorageManagerTest {
+public class StorageManagerTest {
 
     @TempDir
     public Path testFolder;
@@ -24,7 +24,7 @@ public class PshStorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonPetTrackerStorage petTrackerStorage = new JsonPetTrackerStorage(getTempFilePath("ab"));
+        JsonPetTrackerStorage petTrackerStorage = new JsonPetTrackerStorage(getTempFilePath("pt"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(petTrackerStorage, userPrefsStorage);
     }

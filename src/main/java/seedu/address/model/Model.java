@@ -10,8 +10,8 @@ import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * The API of the Pet Store Helper Model component.

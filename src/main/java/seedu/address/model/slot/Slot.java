@@ -5,12 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.pet.Pet;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * Represents a Slot in the pet store helper schedule system.
@@ -45,6 +47,13 @@ public class Slot implements Comparable<Slot>, DisplayItem {
     }
 
     /**
+     * Returns the starting time of the slot, regardless of its date.
+     */
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
+
+    /**
      * Returns the date on which the slot falls on, regardless of time of day.
      */
     public LocalDate getDate() {
@@ -57,6 +66,13 @@ public class Slot implements Comparable<Slot>, DisplayItem {
 
     public LocalDateTime getEndDateTime() {
         return getDateTime().plus(duration);
+    }
+
+    /**
+     * Returns the ending time of the slot, based on its starting time and duration.
+     */
+    public LocalTime getEndTime() {
+        return getTime().plus(duration);
     }
 
     /**
@@ -151,12 +167,8 @@ public class Slot implements Comparable<Slot>, DisplayItem {
 
     @Override
     public String toString() {
-        if (isWithinOneDay()) {
-            return String.format("%s %s - %s (%s)",
-                    getDate(), getDateTime().toLocalTime(), getEndDateTime().toLocalTime(),
-                    getPet().getName());
-        }
-        return String.format("%s - %s (%s)",
-                getDateTime(), getEndDateTime(), getPet().getName());
+        return String.format("%s %s - %s (%s)",
+                getDate().format(DateTimeUtil.DATE_FORMAT),
+                getTime(), getEndTime(), getPet().getName());
     }
 }

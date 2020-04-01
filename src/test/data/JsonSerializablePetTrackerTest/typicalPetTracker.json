@@ -63,5 +63,6 @@
     "species" : "cat",
     "foodList": [ "catfood:10" ],
     "tagged" : [ "fat","lazy" ]
-  } ]
+  } ],
+  "slots" : [ ]
 }
