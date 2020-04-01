@@ -18,7 +18,7 @@ public class DateTimeUtil {
             DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     // back up-related
-    public static final String BACK_UP_PATTERN = "yyyy_MM_dd_HH_mm";
+    public static final String BACK_UP_PATTERN = "yyyyMMdd_HH_mm_ss";
     public static final DateTimeFormatter BACK_UP_FORMAT =
             DateTimeFormatter.ofPattern(BACK_UP_PATTERN);
 }
