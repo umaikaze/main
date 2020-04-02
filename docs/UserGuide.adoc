@@ -164,7 +164,7 @@ Returns a list of pets, whose names either contain `garfield` or `odie` or both.
 
 Edits any field of an existing pet in the system.
 
-Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
+Format: `editpet INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 
 ****
 - If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
@@ -191,7 +191,7 @@ Overwrites name of the 1st pet in the whole pet list to be "Garfield".
 
 Deletes the specified pet from the system.
 
-Format: `deletepet i/INDEX`
+Format: `deletepet INDEX`
 
 ****
 - If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
@@ -254,7 +254,7 @@ Displays the slots occupied by `Coco` on `16/11/2020`.
 
 Edits an existing occupied slot in the schedule.
 
-Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
+Format: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
 ****
 - If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
@@ -280,7 +280,7 @@ Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
 Deletes the specified slot from the schedule.
 
-Format: `deleteslot i/INDEX`
+Format: `deleteslot INDEX`
 
 ****
 - If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
@@ -323,9 +323,9 @@ Format: `conflicts`
   e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
 - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
   e.g. `findpets n/garfield n/odie t/jon`
-- **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
+- **Edit pet**: `editpet INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
   e.g. `editpet 2 n/garfield t/cuddly`
-- **Delete pet**: `deletepet i/INDEX` +
+- **Delete pet**: `deletepet INDEX` +
   e.g. `deletepet 2`
 . Schedule System
 - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
@@ -335,11 +335,11 @@ Format: `conflicts`
   e.g. `findslots n/Brian Griffin` +
   e.g. `findslots t/20/2/2020` +
   e.g. `findslots n/Coco t/16/11/2020`
-- **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
+- **Edit slot**: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
   e.g. `editslot 1 t/16/11/2020 1300 d/120` +
   e.g. `editslot 3 d/45` +
   e.g. `editslot 12 n/Brian Griffin`
-- **Delete slot**: `deleteslot i/INDEX` +
+- **Delete slot**: `deleteslot INDEX` +
   e.g. `deleteslot 2`
 - **Show conflicts**: `conflicts`
 
