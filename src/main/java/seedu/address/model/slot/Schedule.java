@@ -104,8 +104,8 @@ public class Schedule {
     /**
      * Returns the backing list for a specific pet.
      */
-    public ObservableList<Slot> getInternalUnmodifiableListForPetName(String... petName) {
-        List<String> petNames = new ArrayList<>(Arrays.asList(petName));
+    public ObservableList<Slot> getInternalUnmodifiableListForPetName(String petName) {
+        List<String> petNames = new ArrayList<>(Arrays.asList(petName.split("\\s")));
         return internalUnmodifiableList.stream()
                 .filter(new SlotPetNamePredicate(petNames))
                 .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));
