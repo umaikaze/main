@@ -54,7 +54,8 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_FILE_OPS_ERROR);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()), false, false, DisplaySystemType.PETS, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()),
+                false, false, DisplaySystemType.PETS, false);
     }
 
     @Override

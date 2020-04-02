@@ -36,6 +36,7 @@ public class BackUpCommand extends Command {
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(BACK_UP_FORMAT) + ".json"), false, false, DisplaySystemType.NO_CHANGE, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(BACK_UP_FORMAT) + ".json"),
+                false, false, DisplaySystemType.NO_CHANGE, false);
     }
 }
