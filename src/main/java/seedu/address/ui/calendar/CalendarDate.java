@@ -16,7 +16,7 @@ public class CalendarDate extends CalendarRegion {
     /**
      * Used to determine the width of this component.
      */
-    public static final Duration DURATION = Duration.ofMinutes(50);
+    public static final Duration DURATION = Duration.ofMinutes(60);
 
     private static final String FXML = "calendar/CalendarDate.fxml";
 

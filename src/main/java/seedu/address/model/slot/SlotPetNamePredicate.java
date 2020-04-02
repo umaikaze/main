@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
-
 /**
  * Tests that a {@code Slot}'s {@code Pet}'s {@code Name} matches the given name exactly.
  */
