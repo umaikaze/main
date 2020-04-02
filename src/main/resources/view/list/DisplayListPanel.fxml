@@ -8,7 +8,7 @@
 <HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <ListView fx:id="displayListView" styleClass="pane-transparent" HBox.hgrow="ALWAYS" />
   <StackPane prefHeight="10.0" prefWidth="10.0" HBox.hgrow="NEVER" />
-  <VBox fx:id="displayInformationViewContainer" HBox.hgrow="NEVER">
+  <VBox fx:id="displayInformationViewContainer" styleClass="pane-transparent" HBox.hgrow="NEVER">
     <ListView fx:id="displayInformationView" minWidth="0" prefWidth="0" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS" />
   </VBox>
 </HBox>
