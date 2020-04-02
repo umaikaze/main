@@ -55,7 +55,7 @@ public class LoadCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()),
-                false, false, DisplaySystemType.PETS, false);
+                false, false, model.getCurrentDisplaySystemType(), false);
     }
 
     @Override
