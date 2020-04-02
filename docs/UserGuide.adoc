@@ -38,18 +38,51 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`display p`* : displays the list of all pets.
-* **`addpet`** : addpet n/Teddy g/male b/01/01/2019 s/dog f/brand A:15 f/brand B:20 t/small t/lazy
-* **`deletepet 3`** : deletes the 3rd pet shown in the current pet list
-* **`display s`** : displays teh schedule system
-* **`addslot n/Teddy t/16/11/2020 1300 d/90`** : creates a showering schedule for Teddy at the given input time and duration.
-* *`exit`* : exits the app
+* `display p` : Displays the list of all pets.
+* `addpet n/Teddy g/male b/01/01/2019 s/dog f/brand A:15 f/brand B:20 t/small t/lazy`: Adds a new pet with name `Teddy` and other details as given.
+* `display s` : Displays the current schedule as a list of slots.
+* `addslot n/Teddy t/16/11/2020 1300 d/90`: Adds a new showering slot for Teddy with details as given.
+* `exit` : Exits the program.
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Commands>> for details of each command.
 
 
 [[Features]]
 == Features
+
+=== Pet Tracker System
+
+Details about each pet kept track of are its name, gender, species, date of birth and dietary requirements. In addition, tags for each pet may also be added.
+
+==== Pet Food Inventory
+
+This shows the a list of all pet food (inventory) and the needed amount per week. Double-click on each food item to view the breakdown for each pet individually.
+
+=== Schedule System
+
+There are 2 ways of displaying the slots tracked by the schedule system: either sequentially as a list of slots, or in the form of a calendar view.
+
+==== Slots list view
+
+Slots displayed here are arranged in chronological order, with the earliest slot displayed first. In the case where multiple slots start at the same time, the slot with the shortest duration is shown first.
+
+==== Calendar view
+
+Slots that fall on the same day are displayed on the same row. They are then positioned horizontally according to the time they start. The width taken up by each slot in this view is proportional to its duration.
+
+If there are conflicted slots, then the time period in which these conflicted slot lie in is simply rendered as single "conflicted" slot.
+
+=== Statistics
+
+The statistics of the pet store shown are:
+
+- The proportion of species of pets,
+- The planned schedule for the next 3 days, and
+- A breakdown of how many of each type of pet food is needed in a week.
+
+
+[[Commands]]
+== Commands
 
 ====
 **Command Format**
@@ -60,9 +93,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 - Parameters can be in any order e.g. if the command specifies `n/NAME g/GENDER`, `G/GENDER n/NAME` is also acceptable.
 ====
 
-=== Command  / general features
+=== Common / general commands
 
 ==== Viewing help: `help`
+
+Shows the help window.
 
 Format: `help`
 
@@ -73,29 +108,43 @@ Exits the program.
 Format: `exit`
 
 
-==== Changing the system to display: `display SYSTEM`
+==== Changing the display: `display`
 
 Changes the display board to show the specified system.
 
 Format: `display SYSTEM`
 
 ****
-- `SYSTEM` must be `p`, `s`, or `i`. No other values are allowed.
+* `SYSTEM` must be `p` (pets), `s` (slots list view), `c` (calendar view) or `i` (inventory). No other values are allowed.
+
 ****
 
 Examples:
 
 - `display p` +
-Displays all pets in the pet tracker system.
+Displays all **_p_**ets.
 - `display s` +
-Displays all slots in the schedule system.
+Displays all **_s_**lots as a list.
+- `display c` +
+Displays all slots in **_c_**alendar view.
 - `display i` +
-Displays a list of all pet food (inventory) and the needed amount per week. You can double click on the food items to view the breakdown.
+Displays a list of all pet food (**_i_**nventory) and the needed amount per week.
 
-==== Saving the data
+==== Backing up data: `backup`
 
-All data is saved to the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+Saves the current state of the pet tracker in a separate file as back up.
+
+Format: `backup`
+
+==== Loading backup data: `load`
+
+Loads a state of a pet tracker from a file.
+
+Format: `load FILE_NAME`
+
+Example:
+
+- `load 20200402_21_54_52`
 
 ==== Statistics: `stats`
 
@@ -106,7 +155,7 @@ Provides statistics about the pet tracker, schedule system, and inventory. +
 - A bar chart that shows the weekly consumption of different pet food.
 ====
 
-=== Pet Tracker System
+=== Pet-related commands
 
 ==== Adding a pet: `addpet`
 
@@ -146,7 +195,7 @@ Returns a list of pets, whose names either contain `garfield` or `odie` or both.
 
 Edits any field of an existing pet in the system.
 
-Format: `editpet i/INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
+Format: `editpet INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 
 ****
 - If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
@@ -173,7 +222,7 @@ Overwrites name of the 1st pet in the whole pet list to be "Garfield".
 
 Deletes the specified pet from the system.
 
-Format: `deletepet i/INDEX`
+Format: `deletepet INDEX`
 
 ****
 - If the app is displaying pets, the index refers to the index number shown in the displayed pets list, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole pet list.
@@ -191,7 +240,7 @@ Deletes the 2nd pet in the results of the `findpets garfield` command.
 `deletepet 2`
 Deletes 2nd pet in the whole pet list.
 
-=== Schedule System
+=== Schedule-related commands
 
 ==== Adding a slot: `addslot`
 
@@ -200,25 +249,28 @@ Adds a new occupied slot to the schedule.
 Format: `addslot n/PETNAME t/DATETIME d/DURATION`
 
 ****
+- The pet must already exist in the pet tracker system.
 - The datetime must be in `d/M/yyyy HHmm` format.
 * The time must be in 24-hour format.
-- The duration is to be specified in minutes as a positive integer.
+- The duration is to be specified in minutes as a non-zero, positive integer.
+- The slot must start and end on the same day.
 ****
 
 Examples:
 
 - `addslot n/Coco t/16/11/2020 1300 d/90`
-- `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
+- `addslot n/Brian Griffin t/17/11/2020 1500 d/45`
 
 ==== Finding slots: `findslots`
 
-Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. The application will automatically change to the schedule system to display matched results.
+Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. Slots that matched the query will be returned and displayed sequentially as a list.
 
-Format: `findslots [n/PETNAME [MORE PETNAMES]...] [t/DATE [MORE DATES]...]`
+Format: `findslots [n/PETNAME] [t/DATE]`
 
 ****
-- The name of the pet must match exactly.
-- At least one of the optional fields must be provided.
+- This command can take one pet name, one date, or one pet name and one date.
+- Slots with pets matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+
 - The date must be in `d/M/yyyy` format.
 
 ****
@@ -226,9 +278,7 @@ Format: `findslots [n/PETNAME [MORE PETNAMES]...] [t/DATE [MORE DATES]...]`
 Example:
 
 - `findslots n/Brian Griffin` +
-Displays the slots occupied by `Brian Griffin`. Note that slots occupied by `Griffin` or `brian griffin` will not be returned.
-- `findslots t/20/2/2020 1/3/2021` +
-Displays the occupied slots on `20/2/2020` and `1/3/2021`.
+Displays the slots occupied by `Brian Griffin`, `Brian Griffin Jr`, `Griffin` or `Brian Smith`.
 - `findslots n/Coco t/16/11/2020` +
 Displays the slots occupied by `Coco` on `16/11/2020`.
 
@@ -236,13 +286,15 @@ Displays the slots occupied by `Coco` on `16/11/2020`.
 
 Edits an existing occupied slot in the schedule.
 
-Format: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
+Format: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
 ****
-- If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
+- If the app is displaying slots (`display s` or `display c`), then the index refers to the index number shown in the current display. Otherwise, the index refers to the index number of the slot in the entire list of slots.
+- The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- Formats for the datetime and/or duration passed in are the same as those specified in <<Adding a slot: `addslot`>>
+- Specifications for the pet, datetime and/or duration passed in are the same as those specified in <<Adding a slot: `addslot`>>.
+- The new slot must start and end on the same day.
 ****
 
 Examples:
@@ -252,7 +304,7 @@ Examples:
 Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
 - `findslots t/1/1/2020 +
    editslot 3 d/45` +
-Edits the duration of the 3rd slot in the search result to be `45` minutes.
+Edits the duration of the 3rd slot in the search results of `findslots` to be `45` minutes.
 - `display p` +
 `editslot 12 n/Brian Griffin` +
 Edits the pet occupying the 12th slot to be `Brian Griffin`.
@@ -262,10 +314,11 @@ Edits the pet occupying the 12th slot to be `Brian Griffin`.
 
 Deletes the specified slot from the schedule.
 
-Format: `deleteslot i/INDEX`
+Format: `deleteslot INDEX`
 
 ****
-- If the app is displaying schedule, the index refers to the index number shown in the displayed schedule, and must be a positive integer, e.g. 1, 2, 3, ... Otherwise, the index refers to the number in the whole slots list.
+- If the app is displaying slots (`display s` or `display c`), then the index refers to the index number shown in the current display. Otherwise, the index refers to the index number of the slot in the entire list of slots.
+- The index must be a positive integer 1, 2, 3, …​
 ****
 
 Examples:
@@ -275,49 +328,53 @@ Examples:
 Deletes the 2nd slot in the schedule.
 - `findslots n/Coco` +
 `deleteslot 2` +
-Deletes the 2nd slot occupied by `Coco`.
+Deletes the 2nd slot in the search results of `findslots`.
 - `display i` +
 `deleteslot 2` +
 Deletes the 2nd slot in the schedule.
 
 ==== Showing all conflicts: `conflicts`
 
-Displays the slots that have a conflict, i.e., an overlap in time with another occupied slot.
+Displays the slots that have a conflict, i.e., an overlap in time with another occupied slot. The conflicted slots are displayed sequentially as a list.
 
 Format: `conflicts`
 
 == Command Summary
 
-. Common / general features
+. Common / general commands
 - **Help**: `help`
 - **Exit**: `exit`
 - **Display**: `display SYSTEM` +
   e.g. `display p` +
   e.g. `display s` +
+  e.g. `display c` +
   e.g. `display i`
-- **Statistics**: `stats`+
-. Pet Tracker System
+- **Statistics**: `stats`
+- **Back up**: `backup`
+- **Load backup**: `load FILE_NAME` +
+  e.g. `load 20200402_21_54_52`
+. Pet-related commands
 - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
-  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
+  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/lasagna`
 - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
   e.g. `findpets n/garfield n/odie t/jon`
-- **Edit pet**: `editpet i/INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
+- **Edit pet**: `editpet INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
   e.g. `editpet 2 n/garfield t/cuddly`
-- **Delete pet**: `deletepet i/INDEX` +
+- **Delete pet**: `deletepet INDEX` +
   e.g. `deletepet 2`
-. Schedule System
+. Schedule-related commands
 - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
   e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
-  e.g. `addslot n/Brian Griffin t/9/2/2020 0307 d/5`
+  e.g. `addslot n/Brian Griffin t/17/11/2020 1500 d/45`
 - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
   e.g. `findslots n/Brian Griffin` +
   e.g. `findslots t/20/2/2020` +
   e.g. `findslots n/Coco t/16/11/2020`
-- **Edit slot**: `editslot i/INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
+- **Edit slot**: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
   e.g. `editslot 1 t/16/11/2020 1300 d/120` +
   e.g. `editslot 3 d/45` +
   e.g. `editslot 12 n/Brian Griffin`
-- **Delete slot**: `deleteslot i/INDEX` +
+- **Delete slot**: `deleteslot INDEX` +
   e.g. `deleteslot 2`
 - **Show conflicts**: `conflicts`
 
