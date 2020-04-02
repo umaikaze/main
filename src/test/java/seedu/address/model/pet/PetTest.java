@@ -11,6 +11,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.pet.TypicalPets.COCO;
 import static seedu.address.testutil.pet.TypicalPets.GARFIELD;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
@@ -20,8 +23,8 @@ public class PetTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Pet person = new PetBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(new Tag("unused")));
+        Pet pet = new PetBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> pet.getTags().remove(new Tag("unused")));
     }
 
     @Test
@@ -73,7 +76,7 @@ public class PetTest {
         // different type -> returns false
         assertFalse(COCO.equals(5));
 
-        // different person -> returns false
+        // different pet -> returns false
         assertFalse(COCO.equals(GARFIELD));
 
         // different name -> returns false
@@ -95,5 +98,19 @@ public class PetTest {
         // different tags -> returns false
         editedCoco = new PetBuilder(COCO).withTags(VALID_TAG_FAT).build();
         assertFalse(COCO.equals(editedCoco));
+    }
+
+    @Test
+    public void initializeFoodList() {
+        Food typeA10 = new Food("type A", 10);
+        Food typeA20 = new Food("type A", 20);
+        Food typeA30 = new Food("type A", 30);
+        Set<Food> setWithRepeatingTypes = new HashSet<>();
+        setWithRepeatingTypes.add(typeA10);
+        setWithRepeatingTypes.add(typeA20);
+
+        Pet cocoCopy = new PetBuilder(COCO).build();
+        cocoCopy.initializeFoodList(setWithRepeatingTypes);
+        assertTrue(cocoCopy.getFoodList().contains(typeA30));
     }
 }

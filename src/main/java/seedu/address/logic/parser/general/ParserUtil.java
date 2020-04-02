@@ -132,7 +132,15 @@ public class ParserUtil {
         requireNonNull(foodList);
         final Set<Food> foodSet = new HashSet<>();
         for (String food : foodList) {
-            foodSet.add(parseFood(food));
+            Food toBeAdded = parseFood(food);
+            for (Food f:foodSet) {
+                if (f.isSameType(toBeAdded)) {
+                    toBeAdded = new Food(f.foodName, f.foodAmount + toBeAdded.foodAmount);
+                    foodSet.remove(f);
+                    break;
+                }
+            }
+            foodSet.add(toBeAdded);
         }
         return foodSet;
     }

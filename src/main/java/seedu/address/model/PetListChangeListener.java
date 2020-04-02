@@ -38,8 +38,8 @@ public abstract class PetListChangeListener implements ListChangeListener<Pet> {
 
     /**
      * To be filled up with methods accessible from UniquePetList to update the slots list
-     * @param removed the pet that was removed on pet list change. We assert that only 1 pet may be deleted at a time.
-     * @param added the pet that was added on pet list change. We assert that only 1 pet may be added at a time.
+     * @param removed the pet that was removed on pet list change. We assume that only 1 pet is deleted at a time.
+     * @param added the pet that was added on pet list change. We assume that only 1 pet is added at a time.
      */
     protected abstract void updateSlotsDueToPetEdit(Pet removed, Pet added);
 

@@ -36,7 +36,8 @@ public class Pet implements DisplayItem {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.species = species;
-        this.foodList.addAll(foodList);
+
+        initializeFoodList(foodList);
         this.tags.addAll(tags);
     }
 
@@ -106,6 +107,31 @@ public class Pet implements DisplayItem {
                 && otherPet.getSpecies().equals(getSpecies())
                 && otherPet.getFoodList().equals(getFoodList())
                 && otherPet.getTags().equals(getTags());
+    }
+
+    /**
+     * Adding an input set of food into the foodList attribute of this pet. Note that items with repeating types are
+     * combined to become one item.
+     * @param input The input set to food to be added.
+     */
+    public void initializeFoodList(Set<Food> input) {
+        for (Food toBeAdded:input) {
+            accumulateSameType(toBeAdded);
+        }
+    }
+
+    /**
+     * Add a food into the food list of the pet without creating items of duplicate names.
+     */
+    public void accumulateSameType(Food toBeAdded) {
+        for (Food food:foodList) {
+            if (food.isSameType(toBeAdded)) {
+                toBeAdded = new Food(toBeAdded.foodName, toBeAdded.foodAmount + food.foodAmount);
+                foodList.remove(food);
+                break;
+            }
+        }
+        foodList.add(toBeAdded);
     }
 
     @Override

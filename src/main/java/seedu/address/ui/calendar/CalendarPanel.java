@@ -36,9 +36,6 @@ public class CalendarPanel extends UiPart<Region> {
      */
 
     private final ObservableList<Slot> allSlots;
-    private LocalTime earliestTime;
-    private int smallestTimeInterval;
-    private int rowIndex;
 
     @FXML
     private ScrollPane scrollPane;
@@ -51,31 +48,10 @@ public class CalendarPanel extends UiPart<Region> {
         this.allSlots = allSlots;
         ListChangeListener<Slot> reconstructOnChange = (Change<? extends Slot> c) -> {
             while (c.next()) {
-                if (!c.getList().isEmpty()) {
-                    init();
-                }
                 construct();
             }
         };
         allSlots.addListener(reconstructOnChange);
-        if (!allSlots.isEmpty()) {
-            init();
-        }
-    }
-
-    /**
-     * Initialize key variables needed for constructing the calendar.
-     */
-    private void init() {
-        earliestTime = allSlots.stream()
-                .map(slot -> slot.getTime())
-                .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
-                .get();
-        smallestTimeInterval = Math.toIntExact(allSlots.stream()
-                .map(slot -> slot.getDuration().toMinutes())
-                .reduce((a, b) -> gcd(a, b))
-                .orElse(1L));
-        rowIndex = 0;
     }
 
     /**
@@ -89,32 +65,42 @@ public class CalendarPanel extends UiPart<Region> {
             gridPane.add(label, 0, 0);
             return;
         }
+        LocalTime earliestTime = allSlots.stream()
+                .map(slot -> slot.getTime())
+                .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
+                .get();
+        construct(earliestTime);
+    }
+
+    /**
+     * Fills the grid pane with the slots, given the earliest time of all slots.
+     */
+    private void construct(LocalTime earliestTime) {
+        int rowIndex = 0;
         Holding h = new Holding();
         Slot firstSlot = allSlots.get(0);
-        flushOutDate(firstSlot.getDate());
-        flushOutBuffer(earliestTime, firstSlot.getTime());
+        flushOutDate(rowIndex, firstSlot.getDate());
+        flushOutBuffer(earliestTime, rowIndex, earliestTime, firstSlot.getTime());
         for (int slotIndex = 0; slotIndex < allSlots.size(); slotIndex++) {
             Slot currSlot = allSlots.get(slotIndex);
             if (h.size() == 0 || h.overlaps(currSlot)) {
                 h.add(currSlot);
                 continue;
             }
-            flushOutHolding(h, slotIndex);
+            flushOutHolding(earliestTime, rowIndex, h, slotIndex);
             if (h.sameDay(currSlot)) {
-                flushOutBuffer(h.end(), currSlot.getTime());
+                flushOutBuffer(earliestTime, rowIndex, h.end(), currSlot.getTime());
                 h.reset();
                 h.add(currSlot);
                 continue;
             }
             h.reset();
             rowIndex++;
-            flushOutDate(currSlot.getDate());
-            if (currSlot.getTime().isAfter(earliestTime)) {
-                flushOutBuffer(earliestTime, currSlot.getTime());
-            }
+            flushOutDate(rowIndex, currSlot.getDate());
+            flushOutBuffer(earliestTime, rowIndex, earliestTime, currSlot.getTime());
             h.add(currSlot);
         }
-        flushOutHolding(h, allSlots.size());
+        flushOutHolding(earliestTime, rowIndex, h, allSlots.size());
     }
 
     /**
@@ -127,22 +113,23 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Flushes out and renders a {@code CalendaBuffer}.
+     * Flushes out and renders a {@code CalendarBuffer}.
      */
-    private void flushOutBuffer(LocalTime bufferStartTime, LocalTime bufferEndTime) {
+    private void flushOutBuffer(LocalTime earliestTime, int rowIndex,
+            LocalTime bufferStartTime, LocalTime bufferEndTime) {
         if (!bufferEndTime.isAfter(bufferStartTime)) {
             return;
         }
-        int colIndex = getColIndex(bufferStartTime);
-        int colSpan = getColSpan(Duration.between(bufferStartTime, bufferEndTime));
+        int colIndex = getColIndex(earliestTime, bufferStartTime);
+        int colSpan = getColSpan(bufferStartTime, bufferEndTime);
         CalendarBuffer calendarBuffer = new CalendarBuffer(bufferStartTime, bufferEndTime);
         gridPane.add(calendarBuffer.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
     /**
-     * Flushes out and renders a {@code CalendaDate}.
+     * Flushes out and renders a {@code CalendarDate}.
      */
-    private void flushOutDate(LocalDate date) {
+    private void flushOutDate(int rowIndex, LocalDate date) {
         int colIndex = 0;
         int colSpan = getColSpan(CalendarDate.DURATION);
         CalendarDate calendarDate = new CalendarDate(date);
@@ -152,20 +139,19 @@ public class CalendarPanel extends UiPart<Region> {
     /**
      * Flushes out and renders all slots in holding.
      */
-
-    private void flushOutHolding(Holding h, int lastDisplayedIndex) {
+    private void flushOutHolding(LocalTime earliestTime, int rowIndex, Holding h, int lastDisplayedIndex) {
         if (h.size() == 1) {
-            flushOutHoldingSingle(h.slots.get(0), lastDisplayedIndex);
+            flushOutHoldingSingle(earliestTime, rowIndex, h.slots.get(0), lastDisplayedIndex);
         } else {
-            flushOutHoldingMultiple(h, lastDisplayedIndex);
+            flushOutHoldingMultiple(earliestTime, rowIndex, h, lastDisplayedIndex);
         }
     }
 
     /**
      * Flushes out and renders a {@code CalendarSlot}.
      */
-    private void flushOutHoldingSingle(Slot slot, int lastDisplayedIndex) {
-        int colIndex = getColIndex(slot.getTime());
+    private void flushOutHoldingSingle(LocalTime earliestTime, int rowIndex, Slot slot, int lastDisplayedIndex) {
+        int colIndex = getColIndex(earliestTime, slot.getTime());
         int colSpan = getColSpan(slot.getDuration());
         CalendarSlot calendarSlot = new CalendarSlot(slot, lastDisplayedIndex);
         Tooltip.install(calendarSlot.getRoot(), calendarSlot.createTooltip());
@@ -175,27 +161,22 @@ public class CalendarPanel extends UiPart<Region> {
     /**
      * Flushes out and renders a {@code CalendarConflict}.
      */
-
-    private void flushOutHoldingMultiple(Holding h, int lastDisplayedIndex) {
-        int colIndex = getColIndex(h.start());
+    private void flushOutHoldingMultiple(LocalTime earliestTime, int rowIndex, Holding h, int lastDisplayedIndex) {
+        int colIndex = getColIndex(earliestTime, h.start());
         int colSpan = getColSpan(h.start(), h.end());
         CalendarConflict calendarConflict = new CalendarConflict(h.all(), h.start(), h.end(), lastDisplayedIndex);
         Tooltip.install(calendarConflict.getRoot(), calendarConflict.createTooltip());
         gridPane.add(calendarConflict.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
-    private long gcd(long a, long b) {
-        return b == 0 ? a : gcd(b, a % b);
-    }
-
-    private int getColIndex(LocalTime slotTime) {
+    private int getColIndex(LocalTime earliestTime, LocalTime slotTime) {
         assert slotTime.isBefore(earliestTime) : "Given slot time is earlier than the earliest time!";
         return CalendarDate.getWidth()
-                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes()) / smallestTimeInterval;
+                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes());
     }
 
     private int getColSpan(Duration duration) {
-        return Math.toIntExact(duration.toMinutes()) / smallestTimeInterval;
+        return Math.toIntExact(duration.toMinutes());
     }
 
     private int getColSpan(LocalTime startTime, LocalTime endTime) {
