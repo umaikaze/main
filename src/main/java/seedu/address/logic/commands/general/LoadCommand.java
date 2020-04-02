@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -53,8 +55,11 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_FILE_OPS_ERROR);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()),
-                false, false, model.getCurrentDisplaySystemType(), false);
+
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()));
     }
 
     @Override
