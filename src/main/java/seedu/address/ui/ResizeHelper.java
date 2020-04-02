@@ -23,7 +23,8 @@ import javafx.stage.Stage;
  */
 public class ResizeHelper {
 
-    private static final int CORNERDADIUS = 10;
+    private static final int CORNERDADIUS = 20;
+    private static final int BORDERTHICKNESS = 2;
 
     private static boolean doNotMoveWindow = false;
 
@@ -261,13 +262,13 @@ public class ResizeHelper {
             } else if (mouseEventX > sceneWidth - border - CORNERDADIUS
                     && mouseEventY > sceneHeight - border - CORNERDADIUS) {
                 return Cursor.SE_RESIZE;
-            } else if (mouseEventX < border) {
+            } else if (mouseEventX < border + BORDERTHICKNESS) {
                 return Cursor.W_RESIZE;
-            } else if (mouseEventX > sceneWidth - border) {
+            } else if (mouseEventX > sceneWidth - border - BORDERTHICKNESS) {
                 return Cursor.E_RESIZE;
-            } else if (mouseEventY < border) {
+            } else if (mouseEventY < border + BORDERTHICKNESS) {
                 return Cursor.N_RESIZE;
-            } else if (mouseEventY > sceneHeight - border) {
+            } else if (mouseEventY > sceneHeight - border - BORDERTHICKNESS) {
                 return Cursor.S_RESIZE;
             } else {
                 return Cursor.DEFAULT;
