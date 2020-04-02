@@ -8,6 +8,7 @@ import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.slot.SlotConflictPredicate;
+import seedu.address.ui.DisplaySystemType;
 
 /**
  * Finds and lists all slots in the schedule which have conflicts.
@@ -24,6 +25,7 @@ public class ConflictCommand extends Command {
         model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
         return new CommandResult(
-                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()));
+                String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),
+                false, false, DisplaySystemType.SCHEDULE, false);
     }
 }
