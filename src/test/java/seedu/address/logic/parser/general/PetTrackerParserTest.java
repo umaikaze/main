@@ -6,11 +6,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTracker;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
@@ -22,15 +24,24 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
+import seedu.address.storage.JsonPetTrackerStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 import seedu.address.testutil.pet.PetBuilder;
 import seedu.address.testutil.pet.PetUtil;
 
 
 public class PetTrackerParserTest {
+    @TempDir
+    public Path testFolder;
 
     private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
-    private final PetTrackerParser parser = new PetTrackerParser(model);
+    private JsonPetTrackerStorage petTrackerStorage = new JsonPetTrackerStorage(getTempFilePath("pt"));
+    private JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
+    private Storage storageManager = new StorageManager(petTrackerStorage, userPrefsStorage);
+    private final PetTrackerParser parser = new PetTrackerParser(model, storageManager);
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -66,5 +77,9 @@ public class PetTrackerParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    public Path getTempFilePath(String fileName) {
+        return testFolder.resolve(fileName);
     }
 }

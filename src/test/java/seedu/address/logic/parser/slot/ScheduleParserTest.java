@@ -8,10 +8,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
@@ -23,14 +25,23 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
+import seedu.address.storage.JsonPetTrackerStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
+    @TempDir
+    public Path testFolder;
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private final PetTrackerParser parser = new PetTrackerParser(model);
+    private JsonPetTrackerStorage petTrackerStorage = new JsonPetTrackerStorage(getTempFilePath("pt"));
+    private JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
+    private Storage storageManager = new StorageManager(petTrackerStorage, userPrefsStorage);
+    private final PetTrackerParser parser = new PetTrackerParser(model, storageManager);
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -70,5 +81,9 @@ class ScheduleParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    public Path getTempFilePath(String fileName) {
+        return testFolder.resolve(fileName);
     }
 }
