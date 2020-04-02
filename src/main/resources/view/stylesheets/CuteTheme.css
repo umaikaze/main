@@ -1,7 +1,6 @@
 .background {
+    background-color: transparent; /* Used in the default.html file */
     -fx-background-color: transparent;
-    background-color: #383838; /* Used in the default.html file */
-    -fx-background-radius: 5;
 }
 
 .label {
@@ -130,7 +129,7 @@
  * Main background color
  */
 .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .pane-transparent {
@@ -157,14 +156,13 @@
 
 .status-bar {
     -fx-background-color: #ff7f69;
+    -fx-background-radius: 0 0 20 20;
 }
 
 .feedback-display {
-    -fx-background-color: #ff7f69;
     -fx-font-family: "Consolas";
     -fx-font-size: 13pt;
     -fx-text-fill: #38141d;
-    -fx-background-radius: 5;
 }
 
 .feedback-display .label {
@@ -174,7 +172,7 @@
 .status-bar .label {
     -fx-font-family: "Consolas";
     -fx-text-fill: white;
-    -fx-padding: 4px;
+    -fx-padding: 4 4 4 10;
     -fx-pref-height: 30px;
 }
 
@@ -195,7 +193,7 @@
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
 }
 
 .context-menu {
@@ -208,6 +206,7 @@
 
 .menu-bar {
     -fx-background-color: #ff7f69;
+    -fx-background-radius: 20 20 0 0;
 }
 
 .menu-bar .label {
@@ -230,7 +229,7 @@
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
@@ -240,11 +239,13 @@
 
 .button:hover {
     -fx-background-color: #3a3a3a;
+    -fx-background-radius: 10;
 }
 
 .button:pressed, .button:default:hover:pressed {
     -fx-background-color: white;
     -fx-text-fill: #1d1d1d;
+    -fx-background-radius: 10;
 }
 
 .button:focused {
@@ -253,25 +254,29 @@
     -fx-border-style: solid, segments(1, 1);
     -fx-border-radius: 0, 0;
     -fx-border-insets: 1 1 1 1, 0;
+    -fx-background-radius: 10;
 }
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: #1d1d1d;
+    -fx-background-radius: 10;
     -fx-text-fill: white;
 }
 
 .button:default {
     -fx-background-color: -fx-focus-color;
+    -fx-background-radius: 10;
     -fx-text-fill: #ffffff;
 }
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-background-radius: 10;
 }
 
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: derive(white, -10%);
 }
 
 .dialog-pane > *.button-bar > *.container {
@@ -285,7 +290,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(white, -10%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -340,6 +345,7 @@
     -fx-font-family: "Consolas";
     -fx-font-size: 13pt;
     -fx-text-fill: #38141d;
+    -fx-background-radius: 10;
 }
 
 #filterField, #petListPanel, #petWebpage {
@@ -351,7 +357,6 @@
  */
 #feedbackDisplay .content {
     -fx-background-color: white;
-    -fx-background-radius: 5;
 }
 
 #tags {
