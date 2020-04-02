@@ -27,7 +27,6 @@ import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
 import seedu.address.storage.JsonPetTrackerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.pet.EditPetDescriptorBuilder;
 import seedu.address.testutil.pet.PetBuilder;
