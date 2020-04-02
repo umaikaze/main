@@ -109,6 +109,11 @@ public class Pet implements DisplayItem {
                 && otherPet.getTags().equals(getTags());
     }
 
+    /**
+     * Adding an input set of food into the foodList attribute of this pet. Note that items with repeating types are
+     * combined to become one item.
+     * @param input The input set to food to be added.
+     */
     private void initializeFoodList(Set<Food> input) {
         for (Food toBeAdded:input) {
             for (Food food:foodList) {
