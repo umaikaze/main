@@ -95,7 +95,7 @@ public class PetTrackerParser {
             return new StatsCommand();
 
         case BackUpCommand.COMMAND_WORD:
-            return new BackUpCommand();
+            return new BackUpCommand(storage);
 
         case LoadCommand.COMMAND_WORD:
             return new LoadParser(storage).parse(arguments);

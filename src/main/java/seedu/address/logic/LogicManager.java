@@ -55,9 +55,6 @@ public class LogicManager implements Logic {
 
         try {
             storage.savePetTracker(model.getPetTracker());
-            if (commandResult.isBackUp()) {
-                storage.savePetTracker(model.getPetTracker(), java.time.LocalDateTime.now());
-            }
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
