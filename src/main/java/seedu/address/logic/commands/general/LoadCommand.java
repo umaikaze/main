@@ -4,20 +4,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 import seedu.address.ui.DisplaySystemType;
 
+/**
+ * Loads a pet tracker from a file.
+ */
 public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
@@ -26,9 +24,15 @@ public class LoadCommand extends Command {
             + "Parameters: FILE_NAME (must be a valid file name)\n"
             + "Example: " + COMMAND_WORD + " 20200402_21_54_52";
     public static final String MESSAGE_SUCCESS = "Pet tracker loaded from %s.";
-    Path filePath;
-    Storage storage;
+    public static final String MESSAGE_FILE_NOT_FOUND = "Data file not found";
+    public static final String MESSAGE_WRONG_FORMAT = "Data file not in the correct format";
+    public static final String MESSAGE_FILE_OPS_ERROR = "Problem while reading from the file";
+    private final Path filePath;
+    private final Storage storage;
 
+    /**
+     * Creates a LoadCommand to load the specified {@code Path}
+     */
     public LoadCommand(Storage storage, Path filePath) {
         this.storage = storage;
         this.filePath = filePath;
@@ -41,15 +45,22 @@ public class LoadCommand extends Command {
         try {
             petTrackerOptional = storage.readPetTracker(filePath);
             if (!petTrackerOptional.isPresent()) {
-                throw new CommandException("Data file not found. Starting with a sample pet store helper");
+                throw new CommandException(MESSAGE_FILE_NOT_FOUND);
             }
             model.setPetTracker(petTrackerOptional.get());
         } catch (DataConversionException e) {
-            throw new CommandException("Data file not in the correct format. Starting with an empty pet store helper");
+            throw new CommandException(MESSAGE_WRONG_FORMAT);
         } catch (IOException e) {
-            throw new CommandException("Problem while reading from the file. Starting with an empty pet store helper");
+            throw new CommandException(MESSAGE_FILE_OPS_ERROR);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath), false, false, DisplaySystemType.PETS, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LoadCommand // instanceof handles nulls
+                && filePath.equals(((LoadCommand) other).filePath)); // state check
     }
 }

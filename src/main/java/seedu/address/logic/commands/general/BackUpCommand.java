@@ -4,8 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -19,21 +18,23 @@ public class BackUpCommand extends Command {
 
     public static final String COMMAND_WORD = "backup";
 
-    public static final String MESSAGE_SUCCESS = "Current Pet Tracker information has been backed up.";
-    Storage storage;
+    public static final String MESSAGE_SUCCESS = "Current Pet Tracker information has been backed up to %s";
+    private final Storage storage;
+    private final LocalDateTime now;
 
     public BackUpCommand(Storage storage) {
         this.storage = storage;
+        now = java.time.LocalDateTime.now();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
-            storage.savePetTracker(model.getPetTracker(), java.time.LocalDateTime.now());
+            storage.savePetTracker(model.getPetTracker(), now);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, now), false, false, DisplaySystemType.NO_CHANGE, false);
     }
 }

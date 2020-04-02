@@ -1,12 +1,8 @@
 package seedu.address.logic.parser.general;
 
-import java.util.Arrays;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.LoadCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.storage.Storage;
 
 /**

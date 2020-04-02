@@ -1,28 +1,22 @@
 package seedu.address.logic;
 
-import static seedu.address.commons.util.DateTimeUtil.BACK_UP_FORMAT;
-
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.parser.general.PetTrackerParser;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.PetTracker;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.model.pet.FoodCollection;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.slot.Slot;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 import seedu.address.ui.DisplaySystemType;
 import seedu.address.ui.list.DisplayItem;
