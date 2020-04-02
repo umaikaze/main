@@ -22,7 +22,7 @@ public class PetBuilder {
     public static final String DEFAULT_DOB = "2/9/1998";
     public static final String DEFAULT_SPECIES = "Cat";
     private static final String DEFAULT_FOOD_NAME = "catfood";
-    private static final Integer DEFAULT_FOOD_AMOUT = 30;
+    private static final Integer DEFAULT_FOOD_AMOUNT = 30;
 
     private Name name;
     private Gender gender;
@@ -37,7 +37,7 @@ public class PetBuilder {
         dob = new DateOfBirth(DEFAULT_DOB);
         species = new Species(DEFAULT_SPECIES);
         foodSet = new HashSet<>();
-        foodSet.add(new Food(DEFAULT_FOOD_NAME, DEFAULT_FOOD_AMOUT));
+        foodSet.add(new Food(DEFAULT_FOOD_NAME, DEFAULT_FOOD_AMOUNT));
         tags = new HashSet<>();
     }
 

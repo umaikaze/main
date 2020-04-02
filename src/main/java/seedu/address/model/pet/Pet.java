@@ -36,7 +36,8 @@ public class Pet implements DisplayItem {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.species = species;
-        this.foodList.addAll(foodList);
+
+        initializeFoodList(foodList);
         this.tags.addAll(tags);
     }
 
@@ -106,6 +107,19 @@ public class Pet implements DisplayItem {
                 && otherPet.getSpecies().equals(getSpecies())
                 && otherPet.getFoodList().equals(getFoodList())
                 && otherPet.getTags().equals(getTags());
+    }
+
+    private void initializeFoodList(Set<Food> input) {
+        for (Food toBeAdded:input) {
+            for (Food food:foodList) {
+                if (food.isSameType(toBeAdded)) {
+                    toBeAdded = new Food(toBeAdded.foodName, toBeAdded.foodAmount + food.foodAmount);
+                    foodList.remove(food);
+                    break;
+                }
+            }
+            foodList.add(toBeAdded);
+        }
     }
 
     @Override

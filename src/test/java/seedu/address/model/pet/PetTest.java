@@ -20,8 +20,8 @@ public class PetTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Pet person = new PetBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(new Tag("unused")));
+        Pet pet = new PetBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> pet.getTags().remove(new Tag("unused")));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class PetTest {
         // different type -> returns false
         assertFalse(COCO.equals(5));
 
-        // different person -> returns false
+        // different pet -> returns false
         assertFalse(COCO.equals(GARFIELD));
 
         // different name -> returns false
