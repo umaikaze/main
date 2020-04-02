@@ -2,6 +2,8 @@ package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Paths;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -40,7 +42,7 @@ public class DisplayCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
         String message = String.format(getMessageSuccess(), type);
-        return new CommandResult(message, false, false, type, false, false);
+        return new CommandResult(message, false, false, type, false, false, false, Paths.get(""));
     }
 
     public String getMessageSuccess() {

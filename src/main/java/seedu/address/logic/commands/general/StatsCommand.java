@@ -2,6 +2,8 @@ package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Paths;
+
 import seedu.address.model.Model;
 import seedu.address.ui.DisplaySystemType;
 
@@ -21,7 +23,7 @@ public class StatsCommand extends Command {
         model.updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
         //TODO: change stats to make use of the display switching feature
         // current code below does not make use of it.
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, true, false, false, Paths.get(""));
     }
 
 }

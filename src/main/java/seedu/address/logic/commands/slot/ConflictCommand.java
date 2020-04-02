@@ -3,6 +3,8 @@ package seedu.address.logic.commands.slot;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 
+import java.nio.file.Paths;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
@@ -26,6 +28,6 @@ public class ConflictCommand extends Command {
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),
-                false, false, DisplaySystemType.SCHEDULE, false, false);
+                false, false, DisplaySystemType.SCHEDULE, false, false, false, Paths.get(""));
     }
 }

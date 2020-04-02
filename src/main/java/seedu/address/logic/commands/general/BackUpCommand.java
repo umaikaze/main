@@ -2,6 +2,8 @@ package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Paths;
+
 import seedu.address.model.Model;
 import seedu.address.ui.DisplaySystemType;
 
@@ -17,6 +19,6 @@ public class BackUpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false, true, false, Paths.get(""));
     }
 }

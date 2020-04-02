@@ -2,6 +2,8 @@ package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.ui.DisplaySystemType;
@@ -27,6 +29,10 @@ public class CommandResult {
 
     private final boolean backUp;
 
+    private final boolean load;
+
+    private final Path filePath;
+
     /**
      * The system to be displayed.
      */
@@ -36,13 +42,15 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         DisplaySystemType type, boolean showStats, boolean backUp) {
+                         DisplaySystemType type, boolean showStats, boolean backUp, boolean load, Path filePath) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.type = type;
         this.showStats = showStats;
         this.backUp = backUp;
+        this.load = load;
+        this.filePath = filePath;
     }
 
     /**
@@ -50,7 +58,7 @@ public class CommandResult {
      * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false, false);
+        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false, false, false, Paths.get(""));
     }
 
     /**
@@ -58,7 +66,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false, false);
+        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false, false, false, Paths.get(""));
     }
 
     public String getFeedbackToUser() {
@@ -73,6 +81,10 @@ public class CommandResult {
         return backUp;
     }
 
+    public boolean isLoad() {
+        return load;
+    }
+
     public boolean isShowHelp() {
         return showHelp;
     }
@@ -83,6 +95,10 @@ public class CommandResult {
 
     public DisplaySystemType getDisplaySystemType() {
         return type;
+    }
+
+    public Path getFilePath() {
+        return filePath;
     }
 
     @Override
