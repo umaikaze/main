@@ -230,27 +230,21 @@ public class ModelManager implements Model {
      * Used for display all pets/slots/inventory in display command.
      */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
+        filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+        filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
         switch (newDisplayType) {
         case PETS:
-            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
-            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
-            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
             break;
         case SCHEDULE:
-            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
-            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
-            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
             break;
         case INVENTORY:
-            filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
-            filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
-            filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
             filteredDisplayItems =
                     CollectionUtil.map(petTracker.getFoodCollectionList(), foodCollection -> foodCollection);
             break;
-        case CALENDAR:
+        case CALENDAR: // do nothing since calendar does not depend on filteredDisplayItems
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
