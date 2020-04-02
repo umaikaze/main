@@ -64,7 +64,7 @@ There are 2 ways of displaying the slots tracked by the schedule system: either 
 
 ==== Slots list view
 
-Slots displayed here are arranged in chronological order, with the earliest slot displayed first. In the case where multiple slots start at the same time, the slot with the shortest duration is shown first. 
+Slots displayed here are arranged in chronological order, with the earliest slot displayed first. In the case where multiple slots start at the same time, the slot with the shortest duration is shown first.
 
 ==== Calendar view
 
