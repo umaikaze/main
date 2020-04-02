@@ -92,6 +92,15 @@ Displays all slots in the schedule system.
 - `display i` +
 Displays a list of all pet food (inventory) and the needed amount per week. You can double click on the food items to view the breakdown.
 
+==== Statistics: `stats`
+
+Provides statistics about the pet tracker, schedule system, and inventory. +
+====
+- There is a pie chart representing the ratio of different pet species. +
+- A timetable that shows an overall schedule for recent 3 days. +
+- A bar chart that shows the weekly consumption of different pet food.
+====
+
 ==== Saving the data: `backup`
 
 All data is saved to the hard disk automatically after any command that changes the data. +
@@ -114,15 +123,6 @@ Examples:
 Loads the file 20200402_21_54_52.json from the hard disk.
 * `load pettracker` +
 Loads the file pettracker.json from the hard disk.
-
-==== Statistics: `stats`
-
-Provides statistics about the pet tracker, schedule system, and inventory. +
-====
-- There is a pie chart representing the ratio of different pet species. +
-- A timetable that shows an overall schedule for recent 3 days. +
-- A bar chart that shows the weekly consumption of different pet food.
-====
 
 === Pet Tracker System
 
@@ -314,7 +314,7 @@ Format: `conflicts`
   e.g. `display s` +
   e.g. `display i`
 - **Statistics**: `stats` +
-- **Load**: `load`
+- **Load**: `load` +
   e.g. `load 20200402_21_54_52`
 - **Back up**: `backup`
 
