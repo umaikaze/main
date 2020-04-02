@@ -92,10 +92,28 @@ Displays all slots in the schedule system.
 - `display i` +
 Displays a list of all pet food (inventory) and the needed amount per week. You can double click on the food items to view the breakdown.
 
-==== Saving the data
+==== Saving the data: `backup`
 
 All data is saved to the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+There is no need to save manually. +
+However, it is possible to save a separate backup file through the `backup` command. +
+The file name is a timestamp in the format "yyyyMMdd_HH_mm_ss".
+
+==== Retrieving data: `load`
+Loads the specified file from the hard disk. +
+Format: `load FILE_NAME`
+
+****
+* Loads the file with the specified `FILE_NAME`.
+* The file name *must be a valid file name under the OS*.
+****
+
+Examples:
+
+* `load 20200402_21_54_52` +
+Loads the file 20200402_21_54_52.json from the hard disk.
+* `load pettracker` +
+Loads the file pettracker.json from the hard disk.
 
 ==== Statistics: `stats`
 
@@ -295,7 +313,11 @@ Format: `conflicts`
   e.g. `display p` +
   e.g. `display s` +
   e.g. `display i`
-- **Statistics**: `stats`+
+- **Statistics**: `stats` +
+- **Load**: `load`
+  e.g. `load 20200402_21_54_52`
+- **Back up**: `backup`
+
 . Pet Tracker System
 - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
   e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/good for nothing t/lasagna`
