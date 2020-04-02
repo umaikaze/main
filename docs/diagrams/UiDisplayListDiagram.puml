@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package DisplayList <<Rectangle>>{
+Class DisplayListPanel
+Class PetCard
+Class SlotCard
+Class FoodCollectionCard
+Class FoodAmountAndPetCard
+}
+
+Class MainWindow
+Class "{abstract}\nUiPart" as UiPart
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+MainWindow *--> DisplayListPanel
+
+DisplayListPanel --> PetCard
+DisplayListPanel --> SlotCard
+DisplayListPanel --> FoodCollectionCard
+DisplayListPanel --> FoodAmountAndPetCard
+
+PetCard ---|> UiPart
+SlotCard --|> UiPart
+FoodCollectionCard --|> UiPart
+FoodAmountAndPetCard --|> UiPart
+DisplayListPanel --|> UiPart
+
+PetCard ..> Model
+SlotCard ..> Model
+FoodCollectionCard ...> Model
+FoodAmountAndPetCard ...> Model
+@enduml
