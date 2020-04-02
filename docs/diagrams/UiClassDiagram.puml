@@ -9,16 +9,22 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class DisplayListPanel
-Class PetCard
-Class SlotCard
-Class FoodCollectionCard
-Class FoodAmountAndPetCard
-Class OverallStatistics
+
 Class StatusBarFooter
+Class FeedbackDisplay
 Class CommandBox
+Class HelpWindow
+
+Class OverallStatistics
+
+package Calendar <<Rectangle>> {
+Class HiddenCalendar #FFFFFF
+}
+
+package DisplayList <<Rectangle>> {
+Class HiddenDisplayList #FFFFFF
+}
+
 }
 
 package Model <<Rectangle>> {
@@ -32,45 +38,31 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
-UiManager -right-> MainWindow
-MainWindow --> HelpWindow
-MainWindow *-down--> CommandBox
-MainWindow *-down--> ResultDisplay
-MainWindow *-down--> DisplayListPanel
-MainWindow *-down--> StatusBarFooter
-MainWindow *-down--> OverallStatistics
+UiManager .up.|> Ui
+UiManager -down-> MainWindow
 
-DisplayListPanel -down---> PetCard
-DisplayListPanel -down---> SlotCard
-DisplayListPanel -down---> FoodCollectionCard
-DisplayListPanel -down---> FoodAmountAndPetCard
+UiManager --> Logic
+MainWindow -down-> Logic
 
-MainWindow --down--|> UiPart
+MainWindow *-up-> StatusBarFooter
+MainWindow *-up-> FeedbackDisplay
+MainWindow *-up-> CommandBox
+MainWindow *-up-> HelpWindow
 
-ResultDisplay -----|> UiPart
-CommandBox -----|> UiPart
-DisplayListPanel -----|> UiPart
-PetCard --|> UiPart
-SlotCard --|> UiPart
-FoodCollectionCard --|> UiPart
-FoodAmountAndPetCard --|> UiPart
-OverallStatistics -----|> UiPart
-StatusBarFooter -----|> UiPart
-HelpWindow --down--|> UiPart
+MainWindow -up-|> UiPart
+StatusBarFooter -up-|> UiPart
+FeedbackDisplay -up-|> UiPart
+CommandBox -up-|> UiPart
+HelpWindow -up-|> UiPart
 
-PetCard .right.> Model
-SlotCard .right.> Model
-FoodCollectionCard .right.> Model
-FoodAmountAndPetCard .right.>Model
+
+MainWindow *--> OverallStatistics
 OverallStatistics .down.> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+OverallStatistics -up-|> UiPart
 
-DisplayListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+MainWindow *--> DisplayList
+DisplayList ..> Model
 
-MainWindow -[hidden]-|> UiPart
+MainWindow *--> Calendar
+Calendar ..> Model
 @enduml

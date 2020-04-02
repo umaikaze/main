@@ -377,8 +377,6 @@
 
 .calendar-grid-buffer {
     -fx-background-color: transparent;
-    -fx-background-insets: 0, 2;
-    -fx-padding: 10;
 }
 
 .calendar-grid-date {

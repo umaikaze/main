@@ -77,16 +77,30 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[]
 
+.Structure of the Calendar Component in UI
+image::UiCalendarDiagram.png[]
+
+.Structure of the DisplayList Component in UI
+image::UiDisplayListDiagram.png[]
+
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DisplayListPanel`,`OverallStatistics`,  `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` class that is made up of parts which can be classified broadly into 2 groups:
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+* (Group 1) Parts that are always displayed at all times, which include `CommandBox`, `FeedbackDisplay`, `StatusBarFooter`, etc. These parts appear above `MainWindow` in the class diagram for UI.
+* (Group 2) Parts that are selectively displayed, depending on the command entered by the user. Only some of these parts will be shown at any one instance. These include the `Calendar` and `DisplayList` components, and `OverallStatistics`. These parts appear beneath `MainWindow` in the class diagram for UI.
 
-The `UI` component,
+All the UI classes, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`].
+
+In addition, each UI part has been styled using CSS. The custom CSS styling rules are defined in multiple CSS stylesheets, which can be found in the `src/main/resources/view/stylesheets` folder.
+
+The `UI` component does the following:
 
 * Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Listens for changes to `Model` data to update the UI with the modified data.
+* Handles a returned `CommandResult` to perform additional actions, e.g. show the help window, exit the program, display the appropriate part or component from Group 2, etc.
 
 [[Design-Logic]]
 === Logic component
