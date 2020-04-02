@@ -71,10 +71,10 @@ public class CalendarPanel extends UiPart<Region> {
                 .map(slot -> slot.getTime())
                 .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
                 .get();
-        smallestTimeInterval = Math.toIntExact(allSlots.stream()
-                .map(slot -> slot.getDuration().toMinutes())
+        smallestTimeInterval = gcd(allSlots.stream()
+                .map(slot -> Math.toIntExact((slot.getDuration().toMinutes())))
                 .reduce((a, b) -> gcd(a, b))
-                .orElse(1L));
+                .orElse(1), Math.toIntExact(CalendarDate.DURATION.toMinutes()));
         rowIndex = 0;
     }
 
@@ -184,7 +184,7 @@ public class CalendarPanel extends UiPart<Region> {
         gridPane.add(calendarConflict.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
-    private long gcd(long a, long b) {
+    private int gcd(int a, int b) {
         return b == 0 ? a : gcd(b, a % b);
     }
 
