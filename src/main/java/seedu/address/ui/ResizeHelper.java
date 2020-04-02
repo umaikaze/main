@@ -27,11 +27,21 @@ public class ResizeHelper {
 
     private static boolean doNotMoveWindow = false;
 
+    /**
+     * Adds resize listener that allows resize even if stage style is set to TRANSPARENT
+     * allows the user to drag the window at any part that is not a menu button, text field or scrollbar
+     * @param stage must be already displayed
+     */
     public static void addResizeListener(Stage stage) {
         addResizeListener(stage, 1, 1, Double.MAX_VALUE, Double.MAX_VALUE);
     }
 
-    public static void addResizeListener(Stage stage, double minWidth, double minHeight, double maxWidth, double maxHeight) {
+    /**
+     * Adds resize listener with specified maximum and minimum sizes
+     * @param stage must be already displayed
+     */
+    public static void addResizeListener(Stage stage, double minWidth, double minHeight, double maxWidth,
+                                         double maxHeight) {
         ResizeListener resizeListener = new ResizeListener(stage);
         stage.getScene().addEventHandler(MouseEvent.MOUSE_MOVED, resizeListener);
         stage.getScene().addEventHandler(MouseEvent.MOUSE_PRESSED, resizeListener);
@@ -46,10 +56,14 @@ public class ResizeHelper {
 
         ObservableList<Node> children = stage.getScene().getRoot().getChildrenUnmodifiable();
         for (Node child : children) {
-            doNotMoveWindow = shouldNotMove(resizeListener, child);
+            doNotMoveWindow = isUndraggable(resizeListener, child);
         }
     }
 
+    /**
+     * Allows the listener to detect if it is on an undraggable node even if the user is dragging the child of the
+     * undraggable node
+     */
     private static void addListenerDeeply(Node node, EventHandler<MouseEvent> listener) {
         node.addEventHandler(MouseEvent.MOUSE_MOVED, listener);
         node.addEventHandler(MouseEvent.MOUSE_PRESSED, listener);
@@ -60,12 +74,15 @@ public class ResizeHelper {
             Parent parent = (Parent) node;
             ObservableList<Node> children = parent.getChildrenUnmodifiable();
             for (Node child : children) {
-                doNotMoveWindow = shouldNotMove(listener, child);
+                doNotMoveWindow = isUndraggable(listener, child);
             }
         }
     }
 
-    private static boolean shouldNotMove(EventHandler<MouseEvent> listener, Node child) {
+    /**
+     * Determines if the current node should not be dragged
+     */
+    private static boolean isUndraggable(EventHandler<MouseEvent> listener, Node child) {
         if (child instanceof ScrollBar || child instanceof MenuButton || child instanceof TextField) {
             return true;
         } else {
@@ -74,8 +91,12 @@ public class ResizeHelper {
         }
     }
 
+    /**
+     * ResierListener class that handles both resize and dragging actions on given stage
+     */
     static class ResizeListener implements EventHandler<MouseEvent> {
-        private Stage stage;
+        private final Stage stage;
+
         private Cursor cursorEvent = Cursor.DEFAULT;
         private boolean resizing = true;
         private int border = 4;
@@ -90,22 +111,38 @@ public class ResizeHelper {
         private double minHeight;
         private double maxHeight;
 
+        /**
+         * Initialize the ResizeLister to given stage
+         * @param stage must be already displayed, else NullPointerException will be thrown
+         */
         public ResizeListener(Stage stage) {
             this.stage = stage;
         }
 
+        /**
+         * @param minWidth minimum width
+         */
         public void setMinWidth(double minWidth) {
             this.minWidth = minWidth;
         }
 
+        /**
+         * @param maxWidth maximum width
+         */
         public void setMaxWidth(double maxWidth) {
             this.maxWidth = maxWidth;
         }
 
+        /**
+         * @param minHeight minimum height
+         */
         public void setMinHeight(double minHeight) {
             this.minHeight = minHeight;
         }
 
+        /**
+         * @param maxHeight maximum height
+         */
         public void setMaxHeight(double maxHeight) {
             this.maxHeight = maxHeight;
         }
@@ -115,14 +152,15 @@ public class ResizeHelper {
             EventType<? extends MouseEvent> mouseEventType = mouseEvent.getEventType();
             Scene scene = stage.getScene();
 
-            double mouseEventX = mouseEvent.getSceneX(),
-                    mouseEventY = mouseEvent.getSceneY(),
-                    sceneWidth = scene.getWidth(),
-                    sceneHeight = scene.getHeight();
+            double mouseEventX = mouseEvent.getSceneX();
+            double mouseEventY = mouseEvent.getSceneY();
+            double sceneWidth = scene.getWidth();
+            double sceneHeight = scene.getHeight();
 
             if (MouseEvent.MOUSE_MOVED.equals(mouseEventType) && !stage.isMaximized()) {
                 handleMouseMovement(scene, mouseEventX, mouseEventY, sceneWidth, sceneHeight);
-            } else if (MouseEvent.MOUSE_EXITED.equals(mouseEventType) || MouseEvent.MOUSE_EXITED_TARGET.equals(mouseEventType)) {
+            } else if (MouseEvent.MOUSE_EXITED.equals(mouseEventType)
+                    || MouseEvent.MOUSE_EXITED_TARGET.equals(mouseEventType)) {
                 scene.setCursor(Cursor.DEFAULT);
             } else if (MouseEvent.MOUSE_PRESSED.equals(mouseEventType)) {
                 handleMouseExit(mouseEventX, mouseEventY);
@@ -130,7 +168,7 @@ public class ResizeHelper {
                 handleResize(mouseEvent, mouseEventX, mouseEventY);
             }
 
-            if (MouseEvent.MOUSE_PRESSED.equals(mouseEventType) && Cursor.DEFAULT.equals(cursorEvent) ) {
+            if (MouseEvent.MOUSE_PRESSED.equals(mouseEventType) && Cursor.DEFAULT.equals(cursorEvent)) {
                 setScreenOffset(mouseEvent);
             }
 
@@ -150,7 +188,8 @@ public class ResizeHelper {
             stage.setY(mouseEvent.getScreenY() + screenOffsetY);
         }
 
-        private void handleMouseMovement(Scene scene, double mouseEventX, double mouseEventY, double sceneWidth, double sceneHeight) {
+        private void handleMouseMovement(Scene scene, double mouseEventX, double mouseEventY, double sceneWidth,
+                                         double sceneHeight) {
             cursorEvent = getCursorEventType(mouseEventX, mouseEventY, sceneWidth, sceneHeight);
             scene.setCursor(cursorEvent);
         }
@@ -160,6 +199,9 @@ public class ResizeHelper {
             startY = stage.getHeight() - mouseEventY;
         }
 
+        /**
+         * Resizes the windows based on the current mouse event type and mouse position
+         */
         private void handleResize(MouseEvent mouseEvent, double mouseEventX, double mouseEventY) {
             resizing = true;
             if (!Cursor.W_RESIZE.equals(cursorEvent) && !Cursor.E_RESIZE.equals(cursorEvent)) {
@@ -172,6 +214,9 @@ public class ResizeHelper {
             resizing = false;
         }
 
+        /**
+         * Used when mouse event is on the left or right
+         */
         private void handleHorizontalResize(MouseEvent mouseEvent, double mouseEventX) {
             double minWidth = stage.getMinWidth() > (border * 2) ? stage.getMinWidth() : (border * 2);
             if (Cursor.NW_RESIZE.equals(cursorEvent) || Cursor.W_RESIZE.equals(cursorEvent)
@@ -187,13 +232,16 @@ public class ResizeHelper {
             }
         }
 
+        /**
+         * Used when mouse event is on the top or bottom
+         */
         private void handleVerticalResize(MouseEvent mouseEvent, double mouseEventY) {
             double minHeight = stage.getMinHeight() > (border * 2) ? stage.getMinHeight() : (border * 2);
             if (Cursor.NW_RESIZE.equals(cursorEvent) || Cursor.N_RESIZE.equals(cursorEvent)
                     || Cursor.NE_RESIZE.equals(cursorEvent)) {
                 if (stage.getHeight() > minHeight || mouseEventY < 0) {
                     setStageHeight(stage.getY() - mouseEvent.getScreenY() + stage.getHeight());
-                    stage.setY(mouseEvent.getScreenY() );
+                    stage.setY(mouseEvent.getScreenY());
                 }
             } else {
                 if (stage.getHeight() > minHeight || mouseEventY + startY - stage.getHeight() > 0) {
@@ -202,7 +250,8 @@ public class ResizeHelper {
             }
         }
 
-        private Cursor getCursorEventType(double mouseEventX, double mouseEventY, double sceneWidth, double sceneHeight) {
+        private Cursor getCursorEventType(double mouseEventX, double mouseEventY, double sceneWidth,
+                                          double sceneHeight) {
             if (mouseEventX < border + CORNERDADIUS && mouseEventY < border + CORNERDADIUS) {
                 return Cursor.NW_RESIZE;
             } else if (mouseEventX < border + CORNERDADIUS && mouseEventY > sceneHeight - border - CORNERDADIUS) {
@@ -238,5 +287,4 @@ public class ResizeHelper {
         }
 
     }
-
 }
