@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.BACK_UP_FORMAT;
 import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
 
 import java.io.IOException;
@@ -35,6 +36,6 @@ public class BackUpCommand extends Command {
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, now), false, false, DisplaySystemType.NO_CHANGE, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(BACK_UP_FORMAT) + ".json"), false, false, DisplaySystemType.NO_CHANGE, false);
     }
 }
