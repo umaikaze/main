@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * Represents a Pet in the pet store helper.

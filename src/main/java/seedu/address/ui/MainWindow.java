@@ -17,6 +17,8 @@ import seedu.address.logic.commands.general.CommandResult;
 import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.logic.parser.general.exceptions.ParseException;
+import seedu.address.ui.calendar.CalendarPanel;
+import seedu.address.ui.list.DisplayListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing

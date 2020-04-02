@@ -106,7 +106,6 @@ public class Schedule {
      */
     public ObservableList<Slot> getInternalUnmodifiableListForPetName(String... petName) {
         List<String> petNames = new ArrayList<>(Arrays.asList(petName));
-        ObservableList<Slot> val = null;
         return internalUnmodifiableList.stream()
                 .filter(new SlotPetNamePredicate(petNames))
                 .collect(Collectors.collectingAndThen(toList(), FXCollections::observableArrayList));

@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * Represents a relationship between pet and an integer attribute amount, which indicates the amount of a certain

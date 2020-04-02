@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import seedu.address.model.pet.FoodAmountAndPet;
+import seedu.address.ui.UiPart;
 
 
 /**
@@ -15,7 +16,7 @@ import seedu.address.model.pet.FoodAmountAndPet;
  */
 public class FoodAmountAndPetCard extends UiPart<Region> {
 
-    private static final String FXML = "FoodAmountAndPetCard.fxml";
+    private static final String FXML = "list/FoodAmountAndPetCard.fxml";
 
     public final FoodAmountAndPet foodAmountAndPet;
 

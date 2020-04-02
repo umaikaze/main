@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.list;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,13 +8,14 @@ import javafx.scene.layout.Region;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.pet.FoodCollection;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code FoodCollection}.
  */
 
 public class FoodCollectionCard extends UiPart<Region> {
-    private static final String FXML = "FoodCollectionCard.fxml";
+    private static final String FXML = "list/FoodCollectionCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

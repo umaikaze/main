@@ -7,8 +7,8 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.ui.DisplayItem;
 import seedu.address.ui.DisplaySystemType;
+import seedu.address.ui.list.DisplayItem;
 
 /**
  * Represents a Food Collection object in Pet Store Helper. It is used to model a collection of the same type
