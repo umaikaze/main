@@ -18,8 +18,8 @@ class FoodTest {
         String invalidName = "";
         String validName = "kibbles";
         int invalidAmount = -1;
-        int validAmout = 1;
-        assertThrows(IllegalArgumentException.class, () -> new Food(invalidName, validAmout));
+        int validAmount = 1;
+        assertThrows(IllegalArgumentException.class, () -> new Food(invalidName, validAmount));
         assertThrows(IllegalArgumentException.class, () -> new Food(validName, invalidAmount));
     }
 
