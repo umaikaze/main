@@ -6,6 +6,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import seedu.address.commons.util.DateTimeUtil;
 
@@ -16,7 +17,7 @@ public class CalendarDate extends CalendarRegion {
     /**
      * Used to determine the width of this component.
      */
-    public static final Duration DURATION = Duration.ofMinutes(50);
+    public static final Duration DURATION = Duration.ofMinutes(60);
 
     private static final String FXML = "calendar/CalendarDate.fxml";
 

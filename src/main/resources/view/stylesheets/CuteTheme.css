@@ -405,14 +405,13 @@
     -fx-background-color: #ff7f69;
     -fx-background-insets: 5 0 5 0;
     -fx-background-radius: 10;
-    -fx-border-radius: 10;
-    -fx-border-width: 3;
     -fx-padding: 10;
 }
 
 .calendar-grid-conflict {
-    -fx-background-color: black, #d06651;
-    -fx-background-insets: 0, 2;
+    -fx-background-color: #b72239;
+    -fx-background-insets: 5 0 5 0;
+    -fx-background-radius: 10;
     -fx-padding: 10;
 }
 
@@ -430,6 +429,7 @@
     -fx-font-family: "Ink Free";
     -fx-font-size: 16px;
     -fx-text-fill: #38141d;
+    -fx-label-padding: 0 10 0 0;
 }
 
 .calendar_small_label {
@@ -443,10 +443,14 @@
 }
 
 .tooltip-slot {
+    -fx-background-radius: 10;
     -fx-border-color: black;
+    -fx-border-radius: 10;
 }
 
 .tooltip-conflict {
     -fx-text-fill: #d06651;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
     -fx-border-color: #d06651;
 }
