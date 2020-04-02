@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -35,13 +36,20 @@ import seedu.address.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
     @TempDir
-    public Path testFolder;
+    public Path temporaryFolder;
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private JsonPetTrackerStorage petTrackerStorage = new JsonPetTrackerStorage(getTempFilePath("pt"));
-    private JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-    private Storage storageManager = new StorageManager(petTrackerStorage, userPrefsStorage);
-    private final PetTrackerParser parser = new PetTrackerParser(model, storageManager);
+    private PetTrackerParser parser;
+
+    @BeforeEach
+    public void setUp() {
+        JsonPetTrackerStorage petTrackerStorage =
+                new JsonPetTrackerStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(petTrackerStorage, userPrefsStorage);
+        parser = new PetTrackerParser(model, storage);
+    }
+
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -81,9 +89,5 @@ class ScheduleParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
-    }
-
-    public Path getTempFilePath(String fileName) {
-        return testFolder.resolve(fileName);
     }
 }
