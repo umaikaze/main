@@ -6,7 +6,6 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import seedu.address.commons.util.DateTimeUtil;
 

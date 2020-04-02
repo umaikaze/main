@@ -1,6 +1,7 @@
 package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
@@ -13,16 +14,19 @@ import seedu.address.ui.list.DisplayItem;
  * requires is specified in FoodCollection.
  */
 public class FoodAmountAndPet implements DisplayItem {
+    public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food amount must be a positive integer number.";
+
     private final Integer foodAmount;
     private final Pet pet;
+
 
     /**
      * Instantiates a FoodAmountAndPet object which represents the relationship that the given pet requires
      * the given amount of a certain type of food.
      */
     public FoodAmountAndPet(int foodAmount, Pet pet) {
-        requireNonNull(foodAmount);
         requireNonNull(pet);
+        checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.foodAmount = foodAmount;
         this.pet = pet;
     }
@@ -44,6 +48,13 @@ public class FoodAmountAndPet implements DisplayItem {
      */
     public Pet getPet() {
         return pet;
+    }
+
+    /**
+     * Returns true if a given food amount is positive.
+     */
+    public static boolean isValidFoodAmount(Integer test) {
+        return test > 0;
     }
 
     @Override
