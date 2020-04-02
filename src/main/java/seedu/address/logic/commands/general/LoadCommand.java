@@ -11,7 +11,6 @@ import seedu.address.logic.commands.general.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPetTracker;
 import seedu.address.storage.Storage;
-import seedu.address.ui.DisplaySystemType;
 
 /**
  * Loads a pet tracker from a file.
