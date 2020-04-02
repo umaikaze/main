@@ -116,15 +116,22 @@ public class Pet implements DisplayItem {
      */
     public void initializeFoodList(Set<Food> input) {
         for (Food toBeAdded:input) {
-            for (Food food:foodList) {
-                if (food.isSameType(toBeAdded)) {
-                    toBeAdded = new Food(toBeAdded.foodName, toBeAdded.foodAmount + food.foodAmount);
-                    foodList.remove(food);
-                    break;
-                }
-            }
-            foodList.add(toBeAdded);
+            accumulateSameType(toBeAdded);
         }
+    }
+
+    /**
+     * Add a food into the food list of the pet without creating items of duplicate names.
+     */
+    public void accumulateSameType(Food toBeAdded) {
+        for (Food food:foodList) {
+            if (food.isSameType(toBeAdded)) {
+                toBeAdded = new Food(toBeAdded.foodName, toBeAdded.foodAmount + food.foodAmount);
+                foodList.remove(food);
+                break;
+            }
+        }
+        foodList.add(toBeAdded);
     }
 
     @Override
