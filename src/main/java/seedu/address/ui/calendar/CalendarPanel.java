@@ -37,7 +37,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     private final ObservableList<Slot> allSlots;
     private LocalTime earliestTime;
-    private int smallestTimeInterval;
     private int rowIndex;
 
     @FXML
@@ -71,10 +70,6 @@ public class CalendarPanel extends UiPart<Region> {
                 .map(slot -> slot.getTime())
                 .reduce((time1, time2) -> (time1.isBefore(time2) ? time1 : time2))
                 .get();
-        smallestTimeInterval = gcd(allSlots.stream()
-                .map(slot -> Math.toIntExact((slot.getDuration().toMinutes())))
-                .reduce((a, b) -> gcd(a, b))
-                .orElse(1), Math.toIntExact(CalendarDate.DURATION.toMinutes()));
         rowIndex = 0;
     }
 
@@ -134,7 +129,7 @@ public class CalendarPanel extends UiPart<Region> {
             return;
         }
         int colIndex = getColIndex(bufferStartTime);
-        int colSpan = getColSpan(Duration.between(bufferStartTime, bufferEndTime));
+        int colSpan = getColSpan(bufferStartTime, bufferEndTime);
         CalendarBuffer calendarBuffer = new CalendarBuffer(bufferStartTime, bufferEndTime);
         gridPane.add(calendarBuffer.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
@@ -184,18 +179,14 @@ public class CalendarPanel extends UiPart<Region> {
         gridPane.add(calendarConflict.getRoot(), colIndex, rowIndex, colSpan, 1);
     }
 
-    private int gcd(int a, int b) {
-        return b == 0 ? a : gcd(b, a % b);
-    }
-
     private int getColIndex(LocalTime slotTime) {
         assert slotTime.isBefore(earliestTime) : "Given slot time is earlier than the earliest time!";
         return CalendarDate.getWidth()
-                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes()) / smallestTimeInterval;
+                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes());
     }
 
     private int getColSpan(Duration duration) {
-        return Math.toIntExact(duration.toMinutes()) / smallestTimeInterval;
+        return Math.toIntExact(duration.toMinutes());
     }
 
     private int getColSpan(LocalTime startTime, LocalTime endTime) {
