@@ -2,8 +2,6 @@ package seedu.address.logic.commands.pet;
 
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Paths;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.CommandResult;
@@ -37,7 +35,7 @@ public class FindPetCommand extends Command {
         model.updateFilteredPetList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()),
-                false, false, DisplaySystemType.PETS, false, false, false, Paths.get(""));
+                false, false, DisplaySystemType.PETS, false);
     }
 
     @Override

@@ -50,6 +50,6 @@ public class LoadCommand extends Command {
             throw new CommandException("Problem while reading from the file. Starting with an empty pet store helper");
         }
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false, false, true, filePath);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, false);
     }
 }
