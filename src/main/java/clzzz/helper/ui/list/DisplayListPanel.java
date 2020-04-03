@@ -3,6 +3,10 @@ package clzzz.helper.ui.list;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import clzzz.helper.model.pet.FoodAmountAndPet;
+import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.slot.Slot;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.UiPart;
 import javafx.collections.FXCollections;
@@ -13,12 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-
 import javafx.scene.layout.VBox;
-import clzzz.helper.model.pet.FoodAmountAndPet;
-import clzzz.helper.model.pet.FoodCollection;
-import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * Panel containing the list of display items.
@@ -95,21 +94,21 @@ public class DisplayListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 switch (item.getDisplaySystemType()) {
-                case DisplaySystemType.PETS:
+                case PETS:
                     setGraphic(new PetCard((Pet) item, getIndex() + 1).getRoot());
                     break;
-                case DisplaySystemType.SCHEDULE:
+                case SCHEDULE:
                     List<Slot> allSlots = displayListView.getItems()
                             .stream()
                             .map(slot -> (Slot) slot)
                             .collect(Collectors.toList());
                     setGraphic(new SlotCard((Slot) item, getIndex() + 1, allSlots).getRoot());
                     break;
-                case DisplaySystemType.INVENTORY:
+                case INVENTORY:
                     setGraphic(new FoodCollectionCard((FoodCollection) item,
                             getIndex() + 1, DisplayListPanel.this::handleClickOnList).getRoot());
                     break;
-                case DisplaySystemType.FOOD_AMOUNT_AND_PET:
+                case FOOD_AMOUNT_AND_PET:
                     FoodAmountAndPet foodAmountAndPet = (FoodAmountAndPet) item;
                     setGraphic(new FoodAmountAndPetCard(foodAmountAndPet).getRoot());
                     break;
