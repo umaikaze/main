@@ -1,14 +1,15 @@
 package clzzz.helper.logic.parser.pet;
 
-import static clzzz.helper.logic.parser.general.ParserUtil.MESSAGE_INVALID_INDEX;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseDateOfBirth;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseGender;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseIndex;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseName;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseSpecies;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseTag;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseTags;
+import static clzzz.helper.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static clzzz.helper.logic.parser.ParserUtil.parseDateOfBirth;
+import static clzzz.helper.logic.parser.ParserUtil.parseGender;
+import static clzzz.helper.logic.parser.ParserUtil.parseIndex;
+import static clzzz.helper.logic.parser.ParserUtil.parseName;
+import static clzzz.helper.logic.parser.ParserUtil.parseSpecies;
+import static clzzz.helper.logic.parser.ParserUtil.parseTag;
+import static clzzz.helper.logic.parser.ParserUtil.parseTags;
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,14 +20,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -58,20 +57,20 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PET, parseIndex("1"));
+        assertEquals(INDEX_FIRST_PET, parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PET, parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PET, parseIndex("  1  "));
     }
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseName((String) null));
+        assertThrows(NullPointerException.class, () -> parseName((String) null));
     }
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> parseName(INVALID_NAME));
     }
 
     @Test
@@ -89,12 +88,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseGender_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseGender((String) null));
+        assertThrows(NullPointerException.class, () -> parseGender((String) null));
     }
 
     @Test
     public void parseGender_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseGender(INVALID_GENDER));
+        assertThrows(ParseException.class, () -> parseGender(INVALID_GENDER));
     }
 
     @Test
@@ -112,12 +111,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateOfBirth_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseDateOfBirth((String) null));
+        assertThrows(NullPointerException.class, () -> parseDateOfBirth((String) null));
     }
 
     @Test
     public void parseDateOfBirth_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseDateOfBirth(INVALID_DATEOFBIRTH));
+        assertThrows(ParseException.class, () -> parseDateOfBirth(INVALID_DATEOFBIRTH));
     }
 
     @Test
@@ -135,12 +134,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseSpecies_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseSpecies((String) null));
+        assertThrows(NullPointerException.class, () -> parseSpecies((String) null));
     }
 
     @Test
     public void parseSpecies_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseSpecies(INVALID_SPECIES));
+        assertThrows(ParseException.class, () -> parseSpecies(INVALID_SPECIES));
     }
 
     @Test
@@ -158,12 +157,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseTag(null));
+        assertThrows(NullPointerException.class, () -> parseTag(null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> parseTag(INVALID_TAG));
     }
 
     @Test
@@ -181,12 +180,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> parseTags(null));
+        assertThrows(NullPointerException.class, () -> parseTags(null));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
     }
 
     @Test

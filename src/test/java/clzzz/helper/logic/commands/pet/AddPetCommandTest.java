@@ -14,8 +14,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.commons.core.GuiSettings;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;

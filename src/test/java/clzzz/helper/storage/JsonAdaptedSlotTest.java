@@ -1,5 +1,6 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static clzzz.helper.storage.JsonAdaptedSlot.MISSING_FIELD_MESSAGE_FORMAT;
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
-import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.parser.slot.SlotParserUtil;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Name;
@@ -23,7 +23,7 @@ public class JsonAdaptedSlotTest {
     private static final String INVALID_DURATION = "0";
 
     private static final String VALID_NAME = GARFIELD_SLOT.getPet().getName().fullName;
-    private static final String VALID_DATE_TIME = GARFIELD_SLOT.getDateTime().format(DateTimeUtil.DATETIME_FORMAT);
+    private static final String VALID_DATE_TIME = GARFIELD_SLOT.getDateTime().format(DATETIME_FORMAT);
     private static final String VALID_DURATION = GARFIELD_SLOT.getDuration().toString();
 
     private PetTracker typicalPetTracker = getTypicalPetTrackerWithSlots();

@@ -1,8 +1,8 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.commands.general.LoadCommand;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.commands.LoadCommand;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.storage.Storage;
 
 /**

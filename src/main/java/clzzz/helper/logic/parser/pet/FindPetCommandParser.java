@@ -1,11 +1,12 @@
 package clzzz.helper.logic.parser.pet;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.pet.FindPetCommand;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.Parser;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
 
 /**
@@ -21,7 +22,7 @@ public class FindPetCommandParser implements Parser<FindPetCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindPetCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPetCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

@@ -1,20 +1,21 @@
 package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_TIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.slot.FindSlotCommand;
-import clzzz.helper.logic.parser.general.ArgumentMultimap;
-import clzzz.helper.logic.parser.general.ArgumentTokenizer;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.ArgumentMultimap;
+import clzzz.helper.logic.parser.ArgumentTokenizer;
+import clzzz.helper.logic.parser.Parser;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotDatePredicate;
 import clzzz.helper.model.slot.SlotPetNamePredicate;
@@ -69,10 +70,10 @@ public class FindSlotCommandParser implements Parser<FindSlotCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
         String warningMessage = "";
         if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_NAME;
+            warningMessage += WARNING_MESSAGE_NAME;
         }
         if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_TIME;
+            warningMessage += WARNING_MESSAGE_TIME;
         }
 
         return new FindSlotCommand(predicates, warningMessage);

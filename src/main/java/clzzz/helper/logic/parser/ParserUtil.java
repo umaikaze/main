@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.StringUtil;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;
 import clzzz.helper.model.pet.Gender;

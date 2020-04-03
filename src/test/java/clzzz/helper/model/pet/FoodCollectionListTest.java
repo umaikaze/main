@@ -1,15 +1,16 @@
 package clzzz.helper.model.pet;
 
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.AMY;
+import static clzzz.helper.testutil.pet.TypicalPets.ELLE;
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPets;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.pet.TypicalPets;
-
 public class FoodCollectionListTest {
-    private final FoodCollectionList foodCollectionList = new FoodCollectionList(TypicalPets.getTypicalPets());
+    private final FoodCollectionList foodCollectionList = new FoodCollectionList(getTypicalPets());
 
     @Test
     public void contains_nullFood_throwsNullPointerException() {
@@ -18,7 +19,7 @@ public class FoodCollectionListTest {
 
     @Test
     public void contains_foodInList_returnsTrue() {
-        Food food = (Food) TypicalPets.AMY.getFoodList().toArray()[0];
+        Food food = (Food) AMY.getFoodList().toArray()[0];
         assertTrue(foodCollectionList.contains(food));
     }
 
@@ -32,7 +33,7 @@ public class FoodCollectionListTest {
     @Test
     public void addFood_and_getFoodCollection() {
         Food food = new Food("unique food", 10);
-        Pet pet = TypicalPets.ELLE;
+        Pet pet = ELLE;
 
         foodCollectionList.addFood(food, pet);
         assertTrue(foodCollectionList.contains(food));

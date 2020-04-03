@@ -2,7 +2,7 @@ package clzzz.helper.logic.commands.slot;
 
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.logic.parser.CommandParserTestUtil;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.logic.parser.slot.FindSlotCommandParser;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;

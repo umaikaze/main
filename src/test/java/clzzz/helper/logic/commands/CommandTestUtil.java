@@ -1,13 +1,13 @@
 package clzzz.helper.logic.commands;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DOB;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_FOODLIST;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_GENDER;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,9 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import clzzz.helper.commons.core.index.Index;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.model.Model;

@@ -2,6 +2,7 @@ package clzzz.helper.storage;
 
 import static clzzz.helper.storage.JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT;
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.GARFIELD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -15,8 +16,6 @@ import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Species;
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class JsonAdaptedPetTest {
     private static final String INVALID_NAME = "R@chel";
@@ -28,21 +27,21 @@ public class JsonAdaptedPetTest {
     private static final String INVALID_FOOD = INVALID_FOOD_NAME + ":" + INVALID_FOOD_AMOUNT;
     private static final String INVALID_TAG = "#lazy";
 
-    private static final String VALID_NAME = TypicalPets.GARFIELD.getName().toString();
-    private static final String VALID_DOB = TypicalPets.GARFIELD.getDateOfBirth().toString();
-    private static final String VALID_GENDER = TypicalPets.GARFIELD.getGender().toString();
-    private static final String VALID_SPECIES = TypicalPets.GARFIELD.getSpecies().toString();
-    private static final List<JsonAdaptedFood> VALID_FOODLIST = TypicalPets.GARFIELD.getFoodList().stream()
+    private static final String VALID_NAME = GARFIELD.getName().toString();
+    private static final String VALID_DOB = GARFIELD.getDateOfBirth().toString();
+    private static final String VALID_GENDER = GARFIELD.getGender().toString();
+    private static final String VALID_SPECIES = GARFIELD.getSpecies().toString();
+    private static final List<JsonAdaptedFood> VALID_FOODLIST = GARFIELD.getFoodList().stream()
             .map(JsonAdaptedFood::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedTag> VALID_TAGS = TypicalPets.GARFIELD.getTags().stream()
+    private static final List<JsonAdaptedTag> VALID_TAGS = GARFIELD.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPetDetails_returnsPet() throws Exception {
-        JsonAdaptedPet pet = new JsonAdaptedPet(TypicalPets.GARFIELD);
-        assertEquals(TypicalPets.GARFIELD, pet.toModelType());
+        JsonAdaptedPet pet = new JsonAdaptedPet(GARFIELD);
+        assertEquals(GARFIELD, pet.toModelType());
     }
 
     @Test
@@ -106,7 +105,7 @@ public class JsonAdaptedPetTest {
         JsonAdaptedPet pet = new JsonAdaptedPet(
                 VALID_NAME, VALID_GENDER, VALID_DOB, null, VALID_FOODLIST, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Species.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
     @Test
@@ -115,7 +114,7 @@ public class JsonAdaptedPetTest {
         invalidFoodList.add(new JsonAdaptedFood(INVALID_FOOD));
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, VALID_GENDER, VALID_DOB, VALID_SPECIES, invalidFoodList, VALID_TAGS);
-        Assert.assertThrows(IllegalValueException.class, pet::toModelType);
+        assertThrows(IllegalValueException.class, pet::toModelType);
     }
 
     @Test
@@ -124,7 +123,7 @@ public class JsonAdaptedPetTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPet pet =
                 new JsonAdaptedPet(VALID_NAME, VALID_GENDER, VALID_DOB, VALID_SPECIES, VALID_FOODLIST, invalidTags);
-        Assert.assertThrows(IllegalValueException.class, pet::toModelType);
+        assertThrows(IllegalValueException.class, pet::toModelType);
     }
 
 }

@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general.exceptions;
+package clzzz.helper.logic.parser.exceptions;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
 

@@ -6,9 +6,9 @@ import java.util.List;
 
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
 

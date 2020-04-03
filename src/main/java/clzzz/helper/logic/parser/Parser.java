@@ -1,7 +1,7 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Parser that is able to parse user input into a {@code Command} of type {@code T}.

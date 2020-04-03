@@ -3,9 +3,9 @@ package clzzz.helper.logic.commands.pet;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
 import clzzz.helper.ui.DisplaySystemType;

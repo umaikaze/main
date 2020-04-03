@@ -1,8 +1,8 @@
 package clzzz.helper.testutil.slot;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
 import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;

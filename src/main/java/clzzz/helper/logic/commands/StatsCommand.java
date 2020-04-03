@@ -1,4 +1,4 @@
-package clzzz.helper.logic.commands.general;
+package clzzz.helper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 

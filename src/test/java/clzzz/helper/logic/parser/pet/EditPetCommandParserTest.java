@@ -1,6 +1,8 @@
 package clzzz.helper.logic.parser.pet;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DOB;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_GENDER;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_SPECIES;
 import static clzzz.helper.logic.commands.CommandTestUtil.DOB_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.DOB_DESC_GARFIELD;
@@ -25,16 +27,15 @@ import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_THIRD_PET;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
 import clzzz.helper.logic.commands.pet.EditPetCommand.EditPetDescriptor;
@@ -50,7 +51,7 @@ public class EditPetCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE);
 
     private EditPetCommandParser parser = new EditPetCommandParser();
 
@@ -183,7 +184,7 @@ public class EditPetCommandParserTest {
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD)
                 .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
-        String warningMessage = Messages.WARNING_MESSAGE_GENDER + WARNING_MESSAGE_SPECIES + WARNING_MESSAGE_DOB;
+        String warningMessage = WARNING_MESSAGE_GENDER + WARNING_MESSAGE_SPECIES + WARNING_MESSAGE_DOB;
         EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, warningMessage);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -196,7 +197,7 @@ public class EditPetCommandParserTest {
         String userInput = targetIndex.getOneBased() + INVALID_GENDER_DESC + GENDER_DESC_GARFIELD;
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .build();
-        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, Messages.WARNING_MESSAGE_GENDER);
+        EditPetCommand expectedCommand = new EditPetCommand(targetIndex, descriptor, WARNING_MESSAGE_GENDER);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
@@ -205,7 +206,7 @@ public class EditPetCommandParserTest {
         descriptor = new EditPetDescriptorBuilder().withGender(VALID_GENDER_GARFIELD)
                 .withDateOfBirth(VALID_DOB_GARFIELD)
                 .withSpecies(VALID_SPECIES_GARFIELD).build();
-        expectedCommand = new EditPetCommand(targetIndex, descriptor, Messages.WARNING_MESSAGE_GENDER);
+        expectedCommand = new EditPetCommand(targetIndex, descriptor, WARNING_MESSAGE_GENDER);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

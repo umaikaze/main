@@ -1,5 +1,6 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.commons.util.JsonUtil;
 import clzzz.helper.model.PetTracker;
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.TypicalPets;
 
 public class JsonSerializablePetTrackerTest {
@@ -35,14 +35,14 @@ public class JsonSerializablePetTrackerTest {
     public void toModelType_invalidPetFile_throwsIllegalValueException() throws Exception {
         JsonSerializablePetTracker dataFromFile = JsonUtil.readJsonFile(INVALID_PET_FILE,
                 JsonSerializablePetTracker.class).get();
-        Assert.assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicatePets_throwsIllegalValueException() throws Exception {
         JsonSerializablePetTracker dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PET_FILE,
                 JsonSerializablePetTracker.class).get();
-        Assert.assertThrows(IllegalValueException.class, JsonSerializablePetTracker.MESSAGE_DUPLICATE_PET,
+        assertThrows(IllegalValueException.class, JsonSerializablePetTracker.MESSAGE_DUPLICATE_PET,
                 dataFromFile::toModelType);
     }
 
@@ -59,7 +59,7 @@ public class JsonSerializablePetTrackerTest {
     public void toModelType_invalidSlotFile_throwsIllegalValueException() throws Exception {
         JsonSerializablePetTracker dataFromFile = JsonUtil.readJsonFile(INVALID_SLOT_FILE,
                 JsonSerializablePetTracker.class).get();
-        Assert.assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
 }

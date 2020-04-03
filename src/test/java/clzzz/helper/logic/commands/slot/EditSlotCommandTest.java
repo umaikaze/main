@@ -1,5 +1,6 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX;
 import static clzzz.helper.logic.commands.CommandTestUtil.SLOT_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.SLOT_DESC_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
@@ -9,13 +10,13 @@ import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static clzzz.helper.logic.commands.CommandTestUtil.showSlotAtIndex;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import clzzz.helper.model.Model;
@@ -23,7 +24,6 @@ import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.testutil.TypicalIndexes;
 import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
 import clzzz.helper.testutil.slot.SlotBuilder;
 
@@ -102,7 +102,7 @@ class EditSlotCommandTest {
                 .withPet(VALID_NAME_COCO).build();
         EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex, descriptor, "");
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
     }
 
     /**
@@ -112,7 +112,7 @@ class EditSlotCommandTest {
     @Test
     public void execute_invalidSlotIndexFilteredList_failure() {
         showSlotAtIndex(model, INDEX_FIRST_SLOT);
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_SLOT;
+        Index outOfBoundIndex = INDEX_SECOND_SLOT;
 
         // ensures that outOfBoundIndex is still in bounds of pet tracker list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetTracker().getSlotList().size());
@@ -120,7 +120,7 @@ class EditSlotCommandTest {
         EditSlotCommand editCommand = new EditSlotCommand(outOfBoundIndex,
                 new EditSlotDescriptorBuilder().withPet(VALID_NAME_COCO).build(), "");
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, MESSAGE_INVALID_SLOT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -139,7 +139,7 @@ class EditSlotCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditSlotCommand(TypicalIndexes.INDEX_SECOND_SLOT, SLOT_DESC_COCO, "")));
+        assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_SECOND_SLOT, SLOT_DESC_COCO, "")));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditSlotCommand(INDEX_FIRST_SLOT, SLOT_DESC_GARFIELD, "")));

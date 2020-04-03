@@ -3,9 +3,9 @@ package clzzz.helper.logic.parser.pet;
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.pet.DeletePetCommand;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.ParserUtil;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.Parser;
+import clzzz.helper.logic.parser.ParserUtil;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeletePetCommand object
