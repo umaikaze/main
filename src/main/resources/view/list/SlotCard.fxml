@@ -3,22 +3,23 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -27,8 +28,17 @@
         </Label>
       </HBox>
       <!-- //TODO: make the layout nicer -->
-      <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
-      <Label fx:id="petName" styleClass="cell_small_label" text="\$petName" />
+      <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime">
+            <font>
+               <Font name="Comic Sans MS" size="12.0" />
+            </font></Label>
+      <Label fx:id="petName" styleClass="cell_small_label" text="\$petName">
+            <font>
+               <Font name="Comic Sans MS" size="12.0" />
+            </font></Label>
     </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
   </GridPane>
 </HBox>

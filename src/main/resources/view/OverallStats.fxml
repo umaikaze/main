@@ -16,27 +16,27 @@
     <children>
          <HBox minHeight="1.0" minWidth="1.0">
              <children>
-                 <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0">
+                 <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0" style="-fx-background-color: white;">
                      <children>
                          <PieChart fx:id="petStats" minHeight="1.0" minWidth="1.0" VBox.vgrow="ALWAYS">
                              <padding>
                                  <Insets bottom="0.1" left="0.1" right="0.1" top="0.001" />
                              </padding>
                          </PieChart>
-                         <Text fx:id="petTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets" textAlignment="CENTER" textOrigin="CENTER" VBox.vgrow="ALWAYS">
+                         <Text fx:id="petTitle" fill="#38141d" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets" textAlignment="CENTER" textOrigin="CENTER" VBox.vgrow="ALWAYS">
                              <font>
                                  <Font size="24.0" />
                              </font>
                          </Text>
                      </children>
                  </VBox>
-                 <VBox alignment="CENTER" minHeight="1.0" minWidth="140.0">
+                 <VBox alignment="CENTER" minHeight="1.0" minWidth="140.0" style="-fx-background-color: derive(white, -5%);">
                      <children>
                          <HBox fx:id="hbox" alignment="CENTER" minHeight="1.0" minWidth="1.0" VBox.vgrow="NEVER">
                              <children>
                                  <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
                                      <children>
-                                         <Text fx:id="firstDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                         <Text fx:id="firstDay" fill="#38141d" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
                                                  <Font size="14.0" />
                                              </font>
@@ -45,7 +45,7 @@
                                  </HBox>
                                  <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
                            <children>
-                                          <Text fx:id="secondDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                          <Text fx:id="secondDay" fill="#38141d" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -54,7 +54,7 @@
                               </HBox>
                               <HBox alignment="CENTER" minHeight="1.0" minWidth="1.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                         <Text fx:id="thirdDay" fill="#ff8000" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                         <Text fx:id="thirdDay" fill="#38141d" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -63,15 +63,15 @@
                               </HBox>
                            </children>
                         </HBox>
-                              <Pane fx:id="timeTablePlaceHolder" minHeight="1.0" minWidth="1.0" VBox.vgrow="ALWAYS" />
-                              <Text fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                              <Pane fx:id="timeTablePlaceHolder" minHeight="1.0" minWidth="1.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS" />
+                              <Text fill="#38141d" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Text>
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0">
+                        <VBox alignment="CENTER" minHeight="1.0" minWidth="1.0" style="-fx-background-color: white;">
                            <children>
                               <BarChart fx:id="foodStats" alternativeRowFillVisible="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" minHeight="1.0" minWidth="1.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false" VBox.vgrow="ALWAYS">
                                 <xAxis>
@@ -81,7 +81,7 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </BarChart>
-                              <Text fx:id="foodTitle" fill="WHITE" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                              <Text fx:id="foodTitle" fill="#38141d" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

@@ -23,8 +23,8 @@ public class PetTrackerBuilder {
     /**
      * Adds a new {@code Pet} to the {@code PetTracker} that we are building.
      */
-    public PetTrackerBuilder withPet(Pet person) {
-        petTracker.addPet(person);
+    public PetTrackerBuilder withPet(Pet pet) {
+        petTracker.addPet(pet);
         return this;
     }
 
