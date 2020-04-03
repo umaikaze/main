@@ -3,7 +3,9 @@ package clzzz.helper.logic.parser.slot;
 import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
@@ -27,8 +29,6 @@ import clzzz.helper.model.slot.Slot;
 import clzzz.helper.storage.JsonPetTrackerStorage;
 import clzzz.helper.storage.JsonUserPrefsStorage;
 import clzzz.helper.storage.StorageManager;
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.TypicalPets;
 import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
 import clzzz.helper.testutil.slot.SlotBuilder;
 import clzzz.helper.testutil.slot.SlotUtil;
@@ -37,7 +37,7 @@ class ScheduleParserTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager(TypicalPets.getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
     private PetTrackerParser parser;
 
     @BeforeEach
@@ -88,6 +88,6 @@ class ScheduleParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;

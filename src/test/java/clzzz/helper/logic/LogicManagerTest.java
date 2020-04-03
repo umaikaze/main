@@ -8,6 +8,7 @@ import static clzzz.helper.logic.commands.CommandTestUtil.GENDER_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.SPECIES_DESC_COCO;
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.COCO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -31,7 +32,6 @@ import clzzz.helper.storage.JsonPetTrackerStorage;
 import clzzz.helper.storage.JsonUserPrefsStorage;
 import clzzz.helper.storage.StorageManager;
 import clzzz.helper.testutil.pet.PetBuilder;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -83,7 +83,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddPetCommand.COMMAND_WORD + NAME_DESC_COCO + GENDER_DESC_COCO + DOB_DESC_COCO
                 + SPECIES_DESC_COCO + FOOD_DESC_COCO;
-        Pet expectedPet = new PetBuilder(TypicalPets.COCO).withTags().build();
+        Pet expectedPet = new PetBuilder(COCO).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPet(expectedPet);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

@@ -1,13 +1,12 @@
 package clzzz.helper.model.pet;
 
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.COCO;
+import static clzzz.helper.testutil.pet.TypicalPets.GARFIELD;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class FoodCollectionTest {
 
@@ -15,13 +14,13 @@ public class FoodCollectionTest {
     private Food foodA2 = new Food("first food", 2);
     private Food foodB1 = new Food("second food", 1);
     private Food foodB2 = new Food("second food", 2);
-    private Pet pet1 = TypicalPets.COCO;
-    private Pet pet2 = TypicalPets.GARFIELD;
+    private Pet pet1 = COCO;
+    private Pet pet2 = GARFIELD;
 
     @Test
     void isValidFoodCollectionName() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> FoodCollection.isValidFoodCollectionName(null));
+        assertThrows(NullPointerException.class, () -> FoodCollection.isValidFoodCollectionName(null));
 
         // invalid name
         assertFalse(FoodCollection.isValidFoodCollectionName("")); // empty string

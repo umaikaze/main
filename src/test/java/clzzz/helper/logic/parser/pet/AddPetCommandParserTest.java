@@ -1,5 +1,10 @@
 package clzzz.helper.logic.parser.pet;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DOB;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_GENDER;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_SPECIES;
 import static clzzz.helper.logic.commands.CommandTestUtil.DOB_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.DOB_DESC_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.FOOD_DESC_COCO;
@@ -32,7 +37,6 @@ import static clzzz.helper.testutil.pet.TypicalPets.GARFIELD;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.pet.AddPetCommand;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
@@ -56,22 +60,22 @@ public class AddPetCommandParserTest {
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_COCO + NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
                 + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
-                new AddPetCommand(expectedPet, Messages.WARNING_MESSAGE_NAME));
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_NAME));
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_COCO + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
                 + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
-                new AddPetCommand(expectedPet, Messages.WARNING_MESSAGE_GENDER));
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_GENDER));
 
         // multiple dates of birth - last date of birth accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_COCO + DOB_DESC_GARFIELD
                 + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
-                new AddPetCommand(expectedPet, Messages.WARNING_MESSAGE_DOB));
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_DOB));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD + SPECIES_DESC_GARFIELD
                 + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_FAT,
-                new AddPetCommand(expectedPet, Messages.WARNING_MESSAGE_SPECIES));
+                new AddPetCommand(expectedPet, WARNING_MESSAGE_SPECIES));
 
         // multiple tags - all accepted
         Pet expectedPetMultipleTags = new PetBuilder(GARFIELD).withTags(VALID_TAG_LAZY, VALID_TAG_FAT)
@@ -90,7 +94,7 @@ public class AddPetCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
@@ -145,6 +149,6 @@ public class AddPetCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_GARFIELD + GENDER_DESC_GARFIELD + DOB_DESC_GARFIELD
                         + SPECIES_DESC_GARFIELD + FOOD_DESC_GARFIELD + TAG_DESC_LAZY + TAG_DESC_FAT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPetCommand.MESSAGE_USAGE));
     }
 }

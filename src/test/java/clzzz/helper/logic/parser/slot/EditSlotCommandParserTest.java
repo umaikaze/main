@@ -19,6 +19,7 @@ import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseSuccess
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_THIRD_SLOT;
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,6 @@ import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
-import clzzz.helper.testutil.pet.TypicalPets;
 import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotCommandParserTest {
@@ -37,7 +37,7 @@ class EditSlotCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
-    private Model model = new ModelManager(TypicalPets.getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
     private EditSlotCommandParser parser = new EditSlotCommandParser(model);
 
     @Test
