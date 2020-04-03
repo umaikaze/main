@@ -130,21 +130,28 @@ Displays all slots in **_c_**alendar view.
 - `display i` +
 Displays a list of all pet food (**_i_**nventory) and the needed amount per week.
 
-==== Backing up data: `backup`
+==== Saving the data: `backup`
 
-Saves the current state of the pet tracker in a separate file as back up.
+All data is saved to the hard disk automatically after any command that changes the data. +
+There is no need to save manually. +
+However, it is possible to save a separate backup file through the `backup` command. +
+The file name is a timestamp in the format "yyyyMMdd_HH_mm_ss".
 
-Format: `backup`
-
-==== Loading backup data: `load`
-
-Loads a state of a pet tracker from a file.
-
+==== Retrieving data: `load`
+Loads the specified file from the hard disk. +
 Format: `load FILE_NAME`
 
-Example:
+****
+* Loads the file with the specified `FILE_NAME`.
+* The file name *must be a valid file name under the OS*.
+****
 
-- `load 20200402_21_54_52`
+Examples:
+
+* `load 20200402_21_54_52` +
+Loads the file 20200402_21_54_52.json from the hard disk.
+* `load pettracker` +
+Loads the file pettracker.json from the hard disk.
 
 ==== Statistics: `stats`
 
