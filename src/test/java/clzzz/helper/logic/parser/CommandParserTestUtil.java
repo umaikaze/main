@@ -2,9 +2,8 @@ package clzzz.helper.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 
 /**
  * Contains helper methods for testing command parsers.

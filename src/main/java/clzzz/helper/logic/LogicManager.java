@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
-import clzzz.helper.logic.parser.general.PetTrackerParser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
+import clzzz.helper.logic.parser.PetTrackerParser;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.pet.FoodCollection;

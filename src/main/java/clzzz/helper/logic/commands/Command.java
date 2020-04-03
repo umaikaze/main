@@ -1,6 +1,6 @@
-package clzzz.helper.logic.commands.general;
+package clzzz.helper.logic.commands;
 
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 
 /**

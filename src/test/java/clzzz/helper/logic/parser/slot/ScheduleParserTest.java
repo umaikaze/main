@@ -2,7 +2,7 @@ package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,8 +18,8 @@ import clzzz.helper.logic.commands.slot.AddSlotCommand;
 import clzzz.helper.logic.commands.slot.DeleteSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.logic.commands.slot.FindSlotCommand;
-import clzzz.helper.logic.parser.general.PetTrackerParser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.PetTrackerParser;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;

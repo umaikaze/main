@@ -1,12 +1,12 @@
 package clzzz.helper.logic.commands.slot;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.slot.Slot;
 

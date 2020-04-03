@@ -27,7 +27,7 @@ import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_FAT;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
 import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_THIRD_PET;

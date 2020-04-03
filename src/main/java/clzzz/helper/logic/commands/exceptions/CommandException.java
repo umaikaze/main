@@ -1,6 +1,6 @@
-package clzzz.helper.logic.commands.general.exceptions;
+package clzzz.helper.logic.commands.exceptions;
 
-import clzzz.helper.logic.commands.general.Command;
+import clzzz.helper.logic.commands.Command;
 
 /**
  * Represents an error which occurs during execution of a {@link Command}.

@@ -1,11 +1,11 @@
 package clzzz.helper.testutil.pet;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DOB;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_FOODLIST;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_GENDER;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 

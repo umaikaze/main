@@ -1,9 +1,9 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import clzzz.helper.logic.commands.general.DisplayCommand;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.commands.DisplayCommand;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DisplayCommand Object.

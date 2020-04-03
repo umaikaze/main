@@ -1,9 +1,9 @@
-package clzzz.helper.logic.commands.general;
+package clzzz.helper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.ui.DisplaySystemType;
 

@@ -4,8 +4,8 @@ import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.slot.SlotConflictPredicate;
 import clzzz.helper.ui.DisplaySystemType;

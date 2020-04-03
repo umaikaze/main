@@ -17,11 +17,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.StatsCommand;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.StatsCommand;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.commands.pet.AddPetCommand;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.ReadOnlyPetTracker;

@@ -1,4 +1,4 @@
-package clzzz.helper.logic.commands.general;
+package clzzz.helper.logic.commands;
 
 import static clzzz.helper.commons.util.DateTimeUtil.BACK_UP_FORMAT;
 import static clzzz.helper.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.storage.Storage;
 import clzzz.helper.ui.DisplaySystemType;

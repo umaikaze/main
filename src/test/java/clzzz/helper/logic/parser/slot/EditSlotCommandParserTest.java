@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;

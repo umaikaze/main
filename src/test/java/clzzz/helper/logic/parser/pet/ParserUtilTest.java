@@ -1,13 +1,13 @@
 package clzzz.helper.logic.parser.pet;
 
-import static clzzz.helper.logic.parser.general.ParserUtil.MESSAGE_INVALID_INDEX;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseDateOfBirth;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseGender;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseIndex;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseName;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseSpecies;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseTag;
-import static clzzz.helper.logic.parser.general.ParserUtil.parseTags;
+import static clzzz.helper.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static clzzz.helper.logic.parser.ParserUtil.parseDateOfBirth;
+import static clzzz.helper.logic.parser.ParserUtil.parseGender;
+import static clzzz.helper.logic.parser.ParserUtil.parseIndex;
+import static clzzz.helper.logic.parser.ParserUtil.parseName;
+import static clzzz.helper.logic.parser.ParserUtil.parseSpecies;
+import static clzzz.helper.logic.parser.ParserUtil.parseTag;
+import static clzzz.helper.logic.parser.ParserUtil.parseTags;
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,7 +19,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;

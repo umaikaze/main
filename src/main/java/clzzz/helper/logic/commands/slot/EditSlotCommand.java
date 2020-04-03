@@ -1,7 +1,7 @@
 package clzzz.helper.logic.commands.slot;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
@@ -13,9 +13,9 @@ import java.util.Optional;
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.CollectionUtil;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;

@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands

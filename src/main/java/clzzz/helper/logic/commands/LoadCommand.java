@@ -1,4 +1,4 @@
-package clzzz.helper.logic.commands.general;
+package clzzz.helper.logic.commands;
 
 import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_PETS;
 import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import clzzz.helper.commons.exceptions.DataConversionException;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.storage.Storage;

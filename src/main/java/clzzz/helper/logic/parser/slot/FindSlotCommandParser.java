@@ -1,8 +1,8 @@
 package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +11,10 @@ import java.util.function.Predicate;
 
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.slot.FindSlotCommand;
-import clzzz.helper.logic.parser.general.ArgumentMultimap;
-import clzzz.helper.logic.parser.general.ArgumentTokenizer;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.ArgumentMultimap;
+import clzzz.helper.logic.parser.ArgumentTokenizer;
+import clzzz.helper.logic.parser.Parser;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotDatePredicate;
 import clzzz.helper.model.slot.SlotPetNamePredicate;

@@ -1,11 +1,11 @@
 package clzzz.helper.logic.commands.pet;
 
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DOB;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_FOODLIST;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_GENDER;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_PETS;
 import static java.util.Objects.requireNonNull;
 
@@ -18,9 +18,9 @@ import java.util.Set;
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.CollectionUtil;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.CommandResult;
+import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;

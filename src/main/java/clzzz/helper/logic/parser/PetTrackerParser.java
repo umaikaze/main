@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -6,13 +6,13 @@ import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import clzzz.helper.logic.commands.general.BackUpCommand;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.DisplayCommand;
-import clzzz.helper.logic.commands.general.ExitCommand;
-import clzzz.helper.logic.commands.general.HelpCommand;
-import clzzz.helper.logic.commands.general.LoadCommand;
-import clzzz.helper.logic.commands.general.StatsCommand;
+import clzzz.helper.logic.commands.BackUpCommand;
+import clzzz.helper.logic.commands.Command;
+import clzzz.helper.logic.commands.DisplayCommand;
+import clzzz.helper.logic.commands.ExitCommand;
+import clzzz.helper.logic.commands.HelpCommand;
+import clzzz.helper.logic.commands.LoadCommand;
+import clzzz.helper.logic.commands.StatsCommand;
 import clzzz.helper.logic.commands.pet.AddPetCommand;
 import clzzz.helper.logic.commands.pet.DeletePetCommand;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
@@ -22,7 +22,7 @@ import clzzz.helper.logic.commands.slot.ConflictCommand;
 import clzzz.helper.logic.commands.slot.DeleteSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.logic.commands.slot.FindSlotCommand;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.logic.parser.pet.AddPetCommandParser;
 import clzzz.helper.logic.parser.pet.DeletePetCommandParser;
 import clzzz.helper.logic.parser.pet.EditPetCommandParser;

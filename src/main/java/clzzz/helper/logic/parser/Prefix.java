@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 /**
  * A prefix that marks the beginning of an argument in an arguments string.

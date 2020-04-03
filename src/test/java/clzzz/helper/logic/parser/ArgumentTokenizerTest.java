@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.parser.general.ArgumentMultimap;
-import clzzz.helper.logic.parser.general.ArgumentTokenizer;
-import clzzz.helper.logic.parser.general.Prefix;
-
 public class ArgumentTokenizerTest {
 
     private final Prefix unknownPrefix = new Prefix("--u");

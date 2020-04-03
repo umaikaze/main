@@ -2,10 +2,10 @@ package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.commons.core.Messages.MESSAGE_SLOT_NOT_IN_ONE_DAY;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_INDEX;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
+import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;
-import clzzz.helper.logic.parser.general.ArgumentMultimap;
-import clzzz.helper.logic.parser.general.ArgumentTokenizer;
-import clzzz.helper.logic.parser.general.Parser;
-import clzzz.helper.logic.parser.general.Prefix;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.ArgumentMultimap;
+import clzzz.helper.logic.parser.ArgumentTokenizer;
+import clzzz.helper.logic.parser.Parser;
+import clzzz.helper.logic.parser.Prefix;
+import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;

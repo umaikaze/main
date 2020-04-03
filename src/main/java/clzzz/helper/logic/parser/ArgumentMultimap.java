@@ -1,4 +1,4 @@
-package clzzz.helper.logic.parser.general;
+package clzzz.helper.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
