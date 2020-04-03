@@ -173,9 +173,9 @@ Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG
 
 Example:
 
-- `addpet n/Garfield g/male b/01/01/2019 f/Brand A: 30 t/lazy t/lasagna`
+- `addpet n/Garfield g/male b/01/01/2019 s/cat f/Brand A: 30 t/lazy t/lasagna`
 
-==== Finding pets by names or tags: `findpets`
+==== Finding pets by names: `findpets`
 
 Finds pets whose name contains any of the given keywords. The application will automatically change to the pet display system.
 

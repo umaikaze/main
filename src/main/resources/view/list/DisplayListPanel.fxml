@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <ListView fx:id="displayListView" styleClass="pane-transparent" HBox.hgrow="ALWAYS" />
   <StackPane prefHeight="10.0" prefWidth="10.0" HBox.hgrow="NEVER" />
   <VBox fx:id="displayInformationViewContainer" styleClass="pane-transparent" HBox.hgrow="NEVER">
