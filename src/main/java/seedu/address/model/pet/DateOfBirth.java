@@ -15,7 +15,7 @@ import seedu.address.commons.util.DateTimeUtil;
 public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of Birth must follow the format of " + DateTimeUtil.DATE_PATTERN + ".";
+            "Date of birth must follow the format of " + DateTimeUtil.DATE_PATTERN + ".";
 
     public final LocalDate value;
 
@@ -36,9 +36,6 @@ public class DateOfBirth {
     public static boolean isValidDateOfBirth(String test) {
         try {
             LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
-            if (mightBeValid.isBefore(LocalDate.EPOCH)) {
-                return false;
-            }
             return true;
         } catch (DateTimeParseException p) {
             return false;

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -49,26 +50,6 @@ public class EditPetParser implements Parser<EditPetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE), pe);
         }
 
-        EditPetCommand.EditPetDescriptor editPetDescriptor = new EditPetCommand.EditPetDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPetDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
-            editPetDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DOB).isPresent()) {
-            editPetDescriptor.setDateOfBirth(ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()));
-        }
-        if (argMultimap.getValue(PREFIX_SPECIES).isPresent()) {
-            editPetDescriptor.setSpecies(ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get()));
-        }
-        parseFoodListForEdit(argMultimap.getAllValues(PREFIX_FOODLIST)).ifPresent(editPetDescriptor::setFoodList);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPetDescriptor::setTags);
-
-        if (!editPetDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditPetCommand.MESSAGE_NOT_EDITED);
-        }
-
         String warningMessage = "";
         if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
@@ -81,6 +62,29 @@ public class EditPetParser implements Parser<EditPetCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DOB).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DOB;
+        }
+
+        EditPetCommand.EditPetDescriptor editPetDescriptor = new EditPetCommand.EditPetDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPetDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            editPetDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DOB).isPresent()) {
+            editPetDescriptor.setDateOfBirth(ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()));
+            if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()).value.isBefore(LocalDate.EPOCH)) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+            }
+        }
+        if (argMultimap.getValue(PREFIX_SPECIES).isPresent()) {
+            editPetDescriptor.setSpecies(ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get()));
+        }
+        parseFoodListForEdit(argMultimap.getAllValues(PREFIX_FOODLIST)).ifPresent(editPetDescriptor::setFoodList);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPetDescriptor::setTags);
+
+        if (!editPetDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditPetCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditPetCommand(index, editPetDescriptor, warningMessage);

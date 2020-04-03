@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.general.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
@@ -66,6 +67,9 @@ public class AddSlotParser implements Parser<AddSlotCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+        if (dateTime.toLocalDate().isBefore(LocalDate.EPOCH)) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
         }
 
         return new AddSlotCommand(slot, warningMessage);
