@@ -47,7 +47,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.pet.PetBuilder;
 
 public class AddPetCommandParserTest {
-    private AddPetParser parser = new AddPetParser();
+    private AddPetCommandParser parser = new AddPetCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

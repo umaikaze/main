@@ -28,7 +28,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new EditPetCommand object
  */
-public class EditPetParser implements Parser<EditPetCommand> {
+public class EditPetCommandParser implements Parser<EditPetCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPetCommand

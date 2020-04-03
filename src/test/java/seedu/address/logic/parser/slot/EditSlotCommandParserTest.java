@@ -32,13 +32,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 
-class EditSlotParserTest {
+class EditSlotCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE);
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private EditSlotParser parser = new EditSlotParser(model);
+    private EditSlotCommandParser parser = new EditSlotCommandParser(model);
 
     @Test
     public void parse_missingParts_failure() {

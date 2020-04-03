@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddPetCommand object.
  */
-public class AddPetParser implements Parser<AddPetCommand> {
+public class AddPetCommandParser implements Parser<AddPetCommand> {
 
 
     /**

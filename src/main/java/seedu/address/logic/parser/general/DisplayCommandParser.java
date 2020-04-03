@@ -8,7 +8,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DisplayCommand Object.
  */
-public class DisplayParser {
+public class DisplayCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the DisplayCommand
      * and returns an DisplayCommand object for execution.

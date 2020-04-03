@@ -23,14 +23,14 @@ import seedu.address.logic.commands.slot.DeleteSlotCommand;
 import seedu.address.logic.commands.slot.EditSlotCommand;
 import seedu.address.logic.commands.slot.FindSlotCommand;
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.logic.parser.pet.AddPetParser;
-import seedu.address.logic.parser.pet.DeletePetParser;
-import seedu.address.logic.parser.pet.EditPetParser;
-import seedu.address.logic.parser.pet.FindPetParser;
-import seedu.address.logic.parser.slot.AddSlotParser;
-import seedu.address.logic.parser.slot.DeleteSlotParser;
-import seedu.address.logic.parser.slot.EditSlotParser;
-import seedu.address.logic.parser.slot.FindSlotParser;
+import seedu.address.logic.parser.pet.AddPetCommandParser;
+import seedu.address.logic.parser.pet.DeletePetCommandParser;
+import seedu.address.logic.parser.pet.EditPetCommandParser;
+import seedu.address.logic.parser.pet.FindPetCommandParser;
+import seedu.address.logic.parser.slot.AddSlotCommandParser;
+import seedu.address.logic.parser.slot.DeleteSlotCommandParser;
+import seedu.address.logic.parser.slot.EditSlotCommandParser;
+import seedu.address.logic.parser.slot.FindSlotCommandParser;
 import seedu.address.model.Model;
 import seedu.address.storage.Storage;
 
@@ -83,7 +83,7 @@ public class PetTrackerParser {
 
         // general
         case DisplayCommand.COMMAND_WORD:
-            return new DisplayParser().parse(arguments);
+            return new DisplayCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -98,33 +98,33 @@ public class PetTrackerParser {
             return new BackUpCommand(storage);
 
         case LoadCommand.COMMAND_WORD:
-            return new LoadParser(storage).parse(arguments);
+            return new LoadCommandParser(storage).parse(arguments);
 
         // pet tracker
         case AddPetCommand.COMMAND_WORD:
-            return new AddPetParser().parse(arguments);
+            return new AddPetCommandParser().parse(arguments);
 
         case EditPetCommand.COMMAND_WORD:
-            return new EditPetParser().parse(arguments);
+            return new EditPetCommandParser().parse(arguments);
 
         case DeletePetCommand.COMMAND_WORD:
-            return new DeletePetParser().parse(arguments);
+            return new DeletePetCommandParser().parse(arguments);
 
         case FindPetCommand.COMMAND_WORD:
-            return new FindPetParser().parse(arguments);
+            return new FindPetCommandParser().parse(arguments);
 
         // schedule
         case AddSlotCommand.COMMAND_WORD:
-            return new AddSlotParser(model).parse(arguments);
+            return new AddSlotCommandParser(model).parse(arguments);
 
         case EditSlotCommand.COMMAND_WORD:
-            return new EditSlotParser(model).parse(arguments);
+            return new EditSlotCommandParser(model).parse(arguments);
 
         case DeleteSlotCommand.COMMAND_WORD:
-            return new DeleteSlotParser().parse(arguments);
+            return new DeleteSlotCommandParser().parse(arguments);
 
         case FindSlotCommand.COMMAND_WORD:
-            return new FindSlotParser().parse(arguments);
+            return new FindSlotCommandParser().parse(arguments);
 
         case ConflictCommand.COMMAND_WORD:
             return new ConflictCommand();

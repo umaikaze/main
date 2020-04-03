@@ -11,7 +11,7 @@ import seedu.address.model.pet.NameContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindPetCommand object
  */
-public class FindPetParser implements Parser<FindPetCommand> {
+public class FindPetCommandParser implements Parser<FindPetCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindPetCommand
      * and returns a FindPetCommand object for execution.

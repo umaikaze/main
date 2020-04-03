@@ -20,11 +20,11 @@ import seedu.address.model.Model;
 /**
  * Parses input arguments and creates a new EditSlotCommand object
  */
-public class EditSlotParser implements Parser<EditSlotCommand> {
+public class EditSlotCommandParser implements Parser<EditSlotCommand> {
 
     private Model model;
 
-    public EditSlotParser(Model model) {
+    public EditSlotCommandParser(Model model) {
         this.model = model;
     }
 

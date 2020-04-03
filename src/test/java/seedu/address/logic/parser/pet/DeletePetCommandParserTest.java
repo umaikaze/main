@@ -18,7 +18,7 @@ import seedu.address.logic.commands.pet.DeletePetCommand;
  */
 public class DeletePetCommandParserTest {
 
-    private DeletePetParser parser = new DeletePetParser();
+    private DeletePetCommandParser parser = new DeletePetCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeletePetCommand() {

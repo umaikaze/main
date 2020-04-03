@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
 
-class DeleteSlotParserTest {
+class DeleteSlotCommandParserTest {
 
-    private DeleteSlotParser parser = new DeleteSlotParser();
+    private DeleteSlotCommandParser parser = new DeleteSlotCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

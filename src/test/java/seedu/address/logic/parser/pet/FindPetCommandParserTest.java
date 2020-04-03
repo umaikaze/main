@@ -13,7 +13,7 @@ import seedu.address.model.pet.NameContainsKeywordsPredicate;
 
 public class FindPetCommandParserTest {
 
-    private FindPetParser parser = new FindPetParser();
+    private FindPetCommandParser parser = new FindPetCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

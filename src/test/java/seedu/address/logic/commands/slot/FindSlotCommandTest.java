@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.general.exceptions.ParseException;
-import seedu.address.logic.parser.slot.FindSlotParser;
+import seedu.address.logic.parser.slot.FindSlotCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -58,13 +58,13 @@ class FindSlotCommandTest {
     @Test
     public void execute_zeroKeywords_throwParseException() throws ParseException {
         String expectedMessage = FindSlotCommand.MESSAGE_EMPTY_NAME_FIELD;
-        FindSlotParser parser = new FindSlotParser();
+        FindSlotCommandParser parser = new FindSlotCommandParser();
         assertParseFailure(parser, " " + PREFIX_NAME, expectedMessage);
     }
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
-        Predicate<Slot> predicate = FindSlotParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
+        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
         expectedModel.updateFilteredSlotList(predicate);
         assertEquals(getTypicalSlots(), model.getFilteredSlotList());
     }

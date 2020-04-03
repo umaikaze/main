@@ -22,7 +22,7 @@ import seedu.address.model.slot.SlotPetNamePredicate;
 /**
  * Parses input arguments and creates a new FindSlotCommand object
  */
-public class FindSlotParser implements Parser<FindSlotCommand> {
+public class FindSlotCommandParser implements Parser<FindSlotCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindSlotCommand

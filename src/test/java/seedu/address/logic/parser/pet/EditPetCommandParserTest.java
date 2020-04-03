@@ -54,7 +54,7 @@ public class EditPetCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE);
 
-    private EditPetParser parser = new EditPetParser();
+    private EditPetCommandParser parser = new EditPetCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

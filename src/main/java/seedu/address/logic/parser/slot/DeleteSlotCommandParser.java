@@ -11,7 +11,7 @@ import seedu.address.logic.parser.general.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeleteSlotCommand object
  */
-public class DeleteSlotParser implements Parser<DeleteSlotCommand> {
+public class DeleteSlotCommandParser implements Parser<DeleteSlotCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

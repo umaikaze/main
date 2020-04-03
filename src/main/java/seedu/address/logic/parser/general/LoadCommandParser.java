@@ -8,10 +8,10 @@ import seedu.address.storage.Storage;
 /**
  * Parses input arguments and creates a new LoadCommand object
  */
-public class LoadParser implements Parser<LoadCommand> {
+public class LoadCommandParser implements Parser<LoadCommand> {
     private Storage storage;
 
-    public LoadParser(Storage storage) {
+    public LoadCommandParser(Storage storage) {
         this.storage = storage;
     }
     /**

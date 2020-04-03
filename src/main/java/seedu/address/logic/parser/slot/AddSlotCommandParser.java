@@ -25,11 +25,11 @@ import seedu.address.model.slot.Slot;
 /**
  * Parses input arguments and creates a new AddSlotCommand object
  */
-public class AddSlotParser implements Parser<AddSlotCommand> {
+public class AddSlotCommandParser implements Parser<AddSlotCommand> {
 
     private final Model model;
 
-    public AddSlotParser(Model model) {
+    public AddSlotCommandParser(Model model) {
         this.model = model;
     }
 

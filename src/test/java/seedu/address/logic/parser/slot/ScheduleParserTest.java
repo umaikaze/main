@@ -80,7 +80,7 @@ class ScheduleParserTest {
         keywords.forEach(x -> sb.append(PREFIX_NAME).append(x).append(" "));
         FindSlotCommand command = (FindSlotCommand) parser.parseCommand(
                 FindSlotCommand.COMMAND_WORD + " " + sb.toString());
-        assertEquals(new FindSlotCommand(FindSlotParser.getPredicates(sb.toString()), WARNING_MESSAGE_NAME), command);
+        assertEquals(new FindSlotCommand(FindSlotCommandParser.getPredicates(sb.toString()), WARNING_MESSAGE_NAME), command);
     }
 
     // Test for help already done in PetTrackerParserTest

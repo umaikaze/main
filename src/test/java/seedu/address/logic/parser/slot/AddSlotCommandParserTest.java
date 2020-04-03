@@ -27,10 +27,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
 import seedu.address.testutil.slot.SlotBuilder;
 
-public class AddSlotParserTest {
+public class AddSlotCommandParserTest {
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private AddSlotParser parser = new AddSlotParser(model);
+    private AddSlotCommandParser parser = new AddSlotCommandParser(model);
 
     @Test
     public void parse_allFieldsPresent_success() {

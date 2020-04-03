@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.slot.FindSlotCommand;
 
-class FindSlotParserTest {
+class FindSlotCommandParserTest {
 
-    private FindSlotParser parser = new FindSlotParser();
+    private FindSlotCommandParser parser = new FindSlotCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
