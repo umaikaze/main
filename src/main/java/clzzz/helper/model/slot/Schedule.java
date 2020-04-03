@@ -1,25 +1,24 @@
 package clzzz.helper.model.slot;
 
+import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
-import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import clzzz.helper.model.slot.exceptions.SlotNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
-import clzzz.helper.model.slot.exceptions.SlotNotFoundException;
-import clzzz.helper.commons.util.CollectionUtil;
 
 /**
  * A collection of slots that does not allow nulls.
  *
- * Unlike {@link package UniquePetList}, a schedule is allowed to contain duplicate slots.
+ * Unlike {@link package clzzz.helper.model.pet.UniquePetList}, a schedule is allowed to contain duplicate slots.
  *
  * Supports a minimal set of list operations.
  */
@@ -61,7 +60,7 @@ public class Schedule {
      * {@code target} must exist in the schedule.
      */
     public void setSlot(Slot target, Slot editedSlot) {
-        CollectionUtil.requireAllNonNull(target, editedSlot);
+        requireAllNonNull(target, editedSlot);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -91,7 +90,7 @@ public class Schedule {
      * Replaces the contents of this schedule with {@code slots}.
      */
     public void setSlots(List<Slot> slots) {
-        CollectionUtil.requireAllNonNull(slots);
+        requireAllNonNull(slots);
         internalList.setAll(slots);
     }
 

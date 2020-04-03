@@ -1,10 +1,10 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,9 +13,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.slot.SlotBuilder;
-import javafx.collections.ObservableList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.general.CommandResult;
@@ -27,14 +24,16 @@ import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.testutil.slot.SlotBuilder;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
 
 class AddSlotCommandTest {
 
     @Test
     public void constructor_nullSlot_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddSlotCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddSlotCommand(null, null));
     }
 
     @Test
@@ -78,12 +77,12 @@ class AddSlotCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -108,12 +107,12 @@ class AddSlotCommandTest {
         }
 
         @Override
-        public void setPetTracker(ReadOnlyPetTracker petTracker) {
+        public ReadOnlyPetTracker getPetTracker() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyPetTracker getPetTracker() {
+        public void setPetTracker(ReadOnlyPetTracker petTracker) {
             throw new AssertionError("This method should not be called.");
         }
 

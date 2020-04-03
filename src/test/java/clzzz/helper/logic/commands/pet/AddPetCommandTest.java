@@ -1,22 +1,18 @@
 package clzzz.helper.logic.commands.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.PetBuilder;
-import javafx.collections.ObservableList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
@@ -28,14 +24,16 @@ import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.testutil.pet.PetBuilder;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
 
 public class AddPetCommandTest {
 
     @Test
     public void constructor_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddPetCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddPetCommand(null, null));
     }
 
     @Test
@@ -47,7 +45,7 @@ public class AddPetCommandTest {
         CommandResult commandResult = new AddPetCommand(validPet, "").execute(modelStub);
 
         assertEquals(String.format(AddPetCommand.MESSAGE_SUCCESS, validPet), commandResult.getFeedbackToUser());
-        Assertions.assertEquals(Arrays.asList(validPet), modelStub.petsAdded);
+        assertEquals(Arrays.asList(validPet), modelStub.petsAdded);
     }
 
     @Test
@@ -56,7 +54,7 @@ public class AddPetCommandTest {
         AddPetCommand addCommand = new AddPetCommand(validPet, "");
         ModelStub modelStub = new ModelStubWithPet(validPet);
 
-        Assert.assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPetCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
     }
 
     @Test

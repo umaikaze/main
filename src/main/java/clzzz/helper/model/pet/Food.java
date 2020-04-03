@@ -1,11 +1,9 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-
-import clzzz.helper.commons.util.AppUtil;
 
 /**
  * Represents a Food object in Pet Store Helper.
@@ -30,10 +28,24 @@ public class Food {
      */
     public Food(String foodName, int foodAmount) {
         requireNonNull(foodName);
-        AppUtil.checkArgument(isValidFoodName(foodName), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isValidFoodName(foodName), MESSAGE_NAME_CONSTRAINTS);
         this.foodName = formatFoodName(foodName);
-        AppUtil.checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
+        checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.foodAmount = foodAmount;
+    }
+
+    /**
+     * Returns true if a given string is a valid food name.
+     */
+    public static boolean isValidFoodName(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given food amount is positive.
+     */
+    public static boolean isValidFoodAmount(Integer test) {
+        return test > 0;
     }
 
     /**
@@ -49,20 +61,6 @@ public class Food {
             formattedFoodName += (n + " ");
         }
         return formattedFoodName.trim();
-    }
-
-    /**
-     * Returns true if a given string is a valid food name.
-     */
-    public static boolean isValidFoodName(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Returns true if a given food amount is positive.
-     */
-    public static boolean isValidFoodAmount(Integer test) {
-        return test > 0;
     }
 
     /**

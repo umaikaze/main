@@ -3,11 +3,11 @@ package clzzz.helper.ui.calendar;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.slot.Slot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * A region of a calendar view that represents a single slot.

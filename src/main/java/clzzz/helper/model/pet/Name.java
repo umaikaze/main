@@ -1,9 +1,7 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
-
-import clzzz.helper.commons.util.AppUtil;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Pet's name in the pet store helper.
@@ -29,8 +27,15 @@ public class Name implements Comparable<Name> {
      */
     public Name(String name) {
         requireNonNull(name);
-        AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = formatName(name);
+    }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -46,13 +51,6 @@ public class Name implements Comparable<Name> {
             formattedName += (n + " ");
         }
         return formattedName.trim();
-    }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -2,8 +2,6 @@ package clzzz.helper.model.pet;
 
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
 
-import clzzz.helper.commons.util.AppUtil;
-
 /**
  * Represents a Pet's gender in the pet store helper.
  * Guarantees: Only two valid constants: FEMALE and MALE.
@@ -22,7 +20,7 @@ public enum Gender {
      * @param gender A valid gender.
      */
     Gender(String gender) {
-        AppUtil.checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
         this.value = gender;
     }
 

@@ -1,17 +1,27 @@
 package clzzz.helper.logic.parser.slot;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.DURATION_DESC_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
-import clzzz.helper.logic.parser.CommandParserTestUtil;
-import clzzz.helper.testutil.pet.TypicalPets;
-import clzzz.helper.testutil.slot.SlotBuilder;
+import clzzz.helper.commons.core.Messages;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;
+import clzzz.helper.logic.parser.CommandParserTestUtil;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.commons.core.Messages;
+import clzzz.helper.testutil.pet.TypicalPets;
+import clzzz.helper.testutil.slot.SlotBuilder;
 
 public class AddSlotCommandParserTest {
 
@@ -20,24 +30,24 @@ public class AddSlotCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Slot expectedSlot = new SlotBuilder().withPet(CommandTestUtil.VALID_NAME_COCO)
-                .withDateTime(CommandTestUtil.VALID_DATETIME_COCO).withDuration(CommandTestUtil.VALID_DURATION_COCO).build();
+        Slot expectedSlot = new SlotBuilder().withPet(VALID_NAME_COCO)
+                .withDateTime(VALID_DATETIME_COCO).withDuration(VALID_DURATION_COCO).build();
 
         // Whitespace only preamble
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE + CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.DATETIME_DESC_COCO
-                + CommandTestUtil.DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, ""));
+        CommandParserTestUtil.assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_COCO + DATETIME_DESC_COCO
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, ""));
 
         // Multiple pets - last pet accepted
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_GARFIELD + CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.DATETIME_DESC_COCO
-                + CommandTestUtil.DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_NAME));
+        CommandParserTestUtil.assertParseSuccess(parser, NAME_DESC_GARFIELD + NAME_DESC_COCO + DATETIME_DESC_COCO
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_NAME));
 
         // Multiple dateTime - last dateTime accepted
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.DATETIME_DESC_GARFIELD + CommandTestUtil.DATETIME_DESC_COCO
-                + CommandTestUtil.DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_TIME));
+        CommandParserTestUtil.assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_GARFIELD + DATETIME_DESC_COCO
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_TIME));
 
         // Multiple durations - last duration accepted
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.DATETIME_DESC_COCO + CommandTestUtil.DURATION_DESC_GARFIELD
-                + CommandTestUtil.DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_DURATION));
+        CommandParserTestUtil.assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_COCO + DURATION_DESC_GARFIELD
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, Messages.WARNING_MESSAGE_DURATION));
     }
 
     @Test
@@ -45,19 +55,19 @@ public class AddSlotCommandParserTest {
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddSlotCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_COCO + CommandTestUtil.DATETIME_DESC_COCO + CommandTestUtil.DURATION_DESC_COCO,
+        CommandParserTestUtil.assertParseFailure(parser, VALID_NAME_COCO + DATETIME_DESC_COCO + DURATION_DESC_COCO,
                 expectedMessage);
 
         // missing phone prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.VALID_DATETIME_COCO + CommandTestUtil.DURATION_DESC_COCO,
+        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_COCO + VALID_DATETIME_COCO + DURATION_DESC_COCO,
                 expectedMessage);
 
         // missing email prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.DATETIME_DESC_COCO + CommandTestUtil.VALID_DURATION_COCO,
+        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_COCO + DATETIME_DESC_COCO + VALID_DURATION_COCO,
                 expectedMessage);
 
         // all prefixes missing
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_COCO + CommandTestUtil.VALID_DATETIME_COCO + CommandTestUtil.VALID_DURATION_COCO,
+        CommandParserTestUtil.assertParseFailure(parser, VALID_NAME_COCO + VALID_DATETIME_COCO + VALID_DURATION_COCO,
                 expectedMessage);
     }
 }

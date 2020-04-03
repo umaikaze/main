@@ -1,9 +1,13 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.COCO;
+import static clzzz.helper.testutil.pet.TypicalPets.GARFIELD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,12 +15,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.model.pet.exceptions.DuplicatePetException;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
+import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.PetBuilder;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class UniquePetListTest {
 
@@ -24,69 +26,69 @@ public class UniquePetListTest {
 
     @Test
     public void contains_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.contains(null));
     }
 
     @Test
     public void contains_petNotInList_returnsFalse() {
-        assertFalse(uniquePetList.contains(TypicalPets.COCO));
+        assertFalse(uniquePetList.contains(COCO));
     }
 
     @Test
     public void contains_petInList_returnsTrue() {
-        uniquePetList.add(TypicalPets.COCO);
-        assertTrue(uniquePetList.contains(TypicalPets.COCO));
+        uniquePetList.add(COCO);
+        assertTrue(uniquePetList.contains(COCO));
     }
 
     @Test
     public void contains_petWithSameIdentityFieldsInList_returnsTrue() {
-        uniquePetList.add(TypicalPets.COCO);
-        Pet editedAlice = new PetBuilder(TypicalPets.COCO).withTags(CommandTestUtil.VALID_TAG_FAT)
+        uniquePetList.add(COCO);
+        Pet editedAlice = new PetBuilder(COCO).withTags(VALID_TAG_FAT)
                 .build();
         assertTrue(uniquePetList.contains(editedAlice));
     }
 
     @Test
     public void add_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.add(null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.add(null));
     }
 
     @Test
     public void add_duplicatePet_throwsDuplicatePetException() {
-        uniquePetList.add(TypicalPets.COCO);
-        Assert.assertThrows(DuplicatePetException.class, () -> uniquePetList.add(TypicalPets.COCO));
+        uniquePetList.add(COCO);
+        assertThrows(DuplicatePetException.class, () -> uniquePetList.add(COCO));
     }
 
     @Test
     public void setPet_nullTargetPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.setPet(null, TypicalPets.COCO));
+        assertThrows(NullPointerException.class, () -> uniquePetList.setPet(null, COCO));
     }
 
     @Test
     public void setPet_nullEditedPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.setPet(TypicalPets.COCO, null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.setPet(COCO, null));
     }
 
     @Test
     public void setPet_targetPetNotInList_throwsPetNotFoundException() {
-        Assert.assertThrows(PetNotFoundException.class, () -> uniquePetList.setPet(TypicalPets.COCO, TypicalPets.COCO));
+        assertThrows(PetNotFoundException.class, () -> uniquePetList.setPet(COCO, COCO));
     }
 
     @Test
     public void setPet_editedPetIsSamePet_success() {
-        uniquePetList.add(TypicalPets.COCO);
-        uniquePetList.setPet(TypicalPets.COCO, TypicalPets.COCO);
+        uniquePetList.add(COCO);
+        uniquePetList.setPet(COCO, COCO);
         UniquePetList expectedUniquePetList = new UniquePetList();
-        expectedUniquePetList.add(TypicalPets.COCO);
+        expectedUniquePetList.add(COCO);
         assertEquals(expectedUniquePetList, uniquePetList);
     }
 
     @Test
     public void setPet_editedPetHasSameIdentity_success() {
-        uniquePetList.add(TypicalPets.COCO);
-        Pet editedAlice = new PetBuilder(TypicalPets.COCO).withSpecies(CommandTestUtil.VALID_SPECIES_GARFIELD).withTags(CommandTestUtil.VALID_TAG_FAT)
+        uniquePetList.add(COCO);
+        Pet editedAlice = new PetBuilder(COCO).withSpecies(VALID_SPECIES_GARFIELD).withTags(VALID_TAG_FAT)
                 .build();
-        uniquePetList.setPet(TypicalPets.COCO, editedAlice);
+        uniquePetList.setPet(COCO, editedAlice);
         UniquePetList expectedUniquePetList = new UniquePetList();
         expectedUniquePetList.add(editedAlice);
         assertEquals(expectedUniquePetList, uniquePetList);
@@ -94,34 +96,34 @@ public class UniquePetListTest {
 
     @Test
     public void setPet_editedPetHasDifferentIdentity_success() {
-        uniquePetList.add(TypicalPets.COCO);
-        uniquePetList.setPet(TypicalPets.COCO, TypicalPets.GARFIELD);
+        uniquePetList.add(COCO);
+        uniquePetList.setPet(COCO, GARFIELD);
         UniquePetList expectedUniquePetList = new UniquePetList();
-        expectedUniquePetList.add(TypicalPets.GARFIELD);
+        expectedUniquePetList.add(GARFIELD);
         assertEquals(expectedUniquePetList, uniquePetList);
     }
 
     @Test
     public void setPet_editedPetHasNonUniqueIdentity_throwsDuplicatePetException() {
-        uniquePetList.add(TypicalPets.COCO);
-        uniquePetList.add(TypicalPets.GARFIELD);
-        Assert.assertThrows(DuplicatePetException.class, () -> uniquePetList.setPet(TypicalPets.COCO, TypicalPets.GARFIELD));
+        uniquePetList.add(COCO);
+        uniquePetList.add(GARFIELD);
+        assertThrows(DuplicatePetException.class, () -> uniquePetList.setPet(COCO, GARFIELD));
     }
 
     @Test
     public void remove_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.remove(null));
     }
 
     @Test
     public void remove_petDoesNotExist_throwsPetNotFoundException() {
-        Assert.assertThrows(PetNotFoundException.class, () -> uniquePetList.remove(TypicalPets.COCO));
+        assertThrows(PetNotFoundException.class, () -> uniquePetList.remove(COCO));
     }
 
     @Test
     public void remove_existingPet_removesPet() {
-        uniquePetList.add(TypicalPets.COCO);
-        uniquePetList.remove(TypicalPets.COCO);
+        uniquePetList.add(COCO);
+        uniquePetList.remove(COCO);
         UniquePetList expectedUniquePetList = new UniquePetList();
         assertEquals(expectedUniquePetList, uniquePetList);
     }
@@ -133,9 +135,9 @@ public class UniquePetListTest {
 
     @Test
     public void setPets_uniquePetList_replacesOwnListWithProvidedUniquePetList() {
-        uniquePetList.add(TypicalPets.COCO);
+        uniquePetList.add(COCO);
         UniquePetList expectedUniquePetList = new UniquePetList();
-        expectedUniquePetList.add(TypicalPets.GARFIELD);
+        expectedUniquePetList.add(GARFIELD);
         uniquePetList.setPets(expectedUniquePetList);
         assertEquals(expectedUniquePetList, uniquePetList);
     }
@@ -147,23 +149,23 @@ public class UniquePetListTest {
 
     @Test
     public void setPets_list_replacesOwnListWithProvidedList() {
-        uniquePetList.add(TypicalPets.COCO);
-        List<Pet> petList = Collections.singletonList(TypicalPets.GARFIELD);
+        uniquePetList.add(COCO);
+        List<Pet> petList = Collections.singletonList(GARFIELD);
         uniquePetList.setPets(petList);
         UniquePetList expectedUniquePetList = new UniquePetList();
-        expectedUniquePetList.add(TypicalPets.GARFIELD);
+        expectedUniquePetList.add(GARFIELD);
         assertEquals(expectedUniquePetList, uniquePetList);
     }
 
     @Test
     public void setPets_listWithDuplicatePets_throwsDuplicatePetException() {
-        List<Pet> listWithDuplicatePets = Arrays.asList(TypicalPets.COCO, TypicalPets.COCO);
-        Assert.assertThrows(DuplicatePetException.class, () -> uniquePetList.setPets(listWithDuplicatePets));
+        List<Pet> listWithDuplicatePets = Arrays.asList(COCO, COCO);
+        assertThrows(DuplicatePetException.class, () -> uniquePetList.setPets(listWithDuplicatePets));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, ()
+        assertThrows(UnsupportedOperationException.class, ()
             -> uniquePetList.asUnmodifiableObservableList().remove(0));
     }
 }

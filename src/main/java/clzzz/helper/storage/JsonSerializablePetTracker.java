@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;
-import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
 

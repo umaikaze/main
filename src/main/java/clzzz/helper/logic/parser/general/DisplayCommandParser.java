@@ -1,6 +1,7 @@
 package clzzz.helper.logic.parser.general;
 
-import clzzz.helper.commons.core.Messages;
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import clzzz.helper.logic.commands.general.DisplayCommand;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 
@@ -18,7 +19,7 @@ public class DisplayCommandParser {
         try {
             return new DisplayCommand(ParserUtil.parseDisplaySystemType(args));
         } catch (ParseException pe) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE), pe);
         }
     }
 }

@@ -2,7 +2,6 @@ package clzzz.helper.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,10 +11,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.model.UserPrefs;
+import clzzz.helper.testutil.Assert;
 
 public class JsonUserPrefsStorageTest {
 

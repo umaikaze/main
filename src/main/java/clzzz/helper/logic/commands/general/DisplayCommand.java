@@ -3,9 +3,9 @@ package clzzz.helper.logic.commands.general;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.ui.DisplaySystemType;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
 
 /**
  * Displays the specified system.

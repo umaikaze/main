@@ -1,5 +1,6 @@
 package clzzz.helper.logic.parser.slot;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 
@@ -9,39 +10,19 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.logic.commands.slot.FindSlotCommand;
 import clzzz.helper.logic.parser.general.ArgumentMultimap;
+import clzzz.helper.logic.parser.general.ArgumentTokenizer;
 import clzzz.helper.logic.parser.general.Parser;
+import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotDatePredicate;
 import clzzz.helper.model.slot.SlotPetNamePredicate;
-import clzzz.helper.logic.commands.slot.FindSlotCommand;
-import clzzz.helper.logic.parser.general.ArgumentTokenizer;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new FindSlotCommand object
  */
 public class FindSlotCommandParser implements Parser<FindSlotCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindSlotCommand
-     * and returns a FindSlotCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public FindSlotCommand parse(String args) throws ParseException {
-        Predicate<Slot> predicates = getPredicates(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
-        String warningMessage = "";
-        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_NAME;
-        }
-        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_TIME;
-        }
-
-        return new FindSlotCommand(predicates, warningMessage);
-    }
 
     public static Predicate<Slot> getPredicates(String args) throws ParseException {
 
@@ -51,7 +32,7 @@ public class FindSlotCommandParser implements Parser<FindSlotCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 && argMultimap.getValue(PREFIX_DATETIME).isEmpty()) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSlotCommand.MESSAGE_USAGE));
         }
 
         List<Predicate<Slot>> predicates = new ArrayList<>();
@@ -75,5 +56,25 @@ public class FindSlotCommandParser implements Parser<FindSlotCommand> {
         return predicates.stream()
                 .reduce(Predicate::and)
                 .get();
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindSlotCommand
+     * and returns a FindSlotCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public FindSlotCommand parse(String args) throws ParseException {
+        Predicate<Slot> predicates = getPredicates(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
+        String warningMessage = "";
+        if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_NAME;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
+            warningMessage += Messages.WARNING_MESSAGE_TIME;
+        }
+
+        return new FindSlotCommand(predicates, warningMessage);
     }
 }

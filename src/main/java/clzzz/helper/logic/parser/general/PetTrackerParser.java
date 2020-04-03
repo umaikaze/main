@@ -1,16 +1,11 @@
 package clzzz.helper.logic.parser.general;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.parser.pet.AddPetCommandParser;
-import clzzz.helper.logic.parser.pet.DeletePetCommandParser;
-import clzzz.helper.logic.parser.pet.EditPetCommandParser;
-import clzzz.helper.logic.parser.pet.FindPetCommandParser;
-import clzzz.helper.logic.parser.slot.EditSlotCommandParser;
-import clzzz.helper.model.Model;
-import clzzz.helper.storage.Storage;
 import clzzz.helper.logic.commands.general.BackUpCommand;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.DisplayCommand;
@@ -28,9 +23,16 @@ import clzzz.helper.logic.commands.slot.DeleteSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.logic.commands.slot.FindSlotCommand;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.logic.parser.pet.AddPetCommandParser;
+import clzzz.helper.logic.parser.pet.DeletePetCommandParser;
+import clzzz.helper.logic.parser.pet.EditPetCommandParser;
+import clzzz.helper.logic.parser.pet.FindPetCommandParser;
 import clzzz.helper.logic.parser.slot.AddSlotCommandParser;
 import clzzz.helper.logic.parser.slot.DeleteSlotCommandParser;
+import clzzz.helper.logic.parser.slot.EditSlotCommandParser;
 import clzzz.helper.logic.parser.slot.FindSlotCommandParser;
+import clzzz.helper.model.Model;
+import clzzz.helper.storage.Storage;
 
 /**
  * Parse user input.
@@ -60,7 +62,7 @@ public class PetTrackerParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -128,7 +130,7 @@ public class PetTrackerParser {
             return new ConflictCommand();
 
         default:
-            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

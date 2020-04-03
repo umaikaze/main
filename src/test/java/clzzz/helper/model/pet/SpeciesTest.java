@@ -1,30 +1,28 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import clzzz.helper.testutil.Assert;
 
 class SpeciesTest {
 
     @Test
     void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Species(null));
+        assertThrows(NullPointerException.class, () -> new Species(null));
     }
 
     @Test
     void constructor_invalidSpecies_throwsIllegalArgumentException() {
         String invalidSpecies = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Species(invalidSpecies));
+        assertThrows(IllegalArgumentException.class, () -> new Species(invalidSpecies));
     }
 
     @Test
     void isValidSpecies() {
         // null Species
-        Assert.assertThrows(NullPointerException.class, () -> Species.isValidSpecies(null));
+        assertThrows(NullPointerException.class, () -> Species.isValidSpecies(null));
 
         // invalid Species
         assertFalse(Species.isValidSpecies("")); // empty string

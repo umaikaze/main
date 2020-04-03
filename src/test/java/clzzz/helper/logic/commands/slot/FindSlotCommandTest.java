@@ -1,19 +1,19 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
 import clzzz.helper.logic.parser.CommandParserTestUtil;
-import clzzz.helper.testutil.pet.TypicalPets;
-import clzzz.helper.testutil.slot.TypicalSlots;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.logic.parser.slot.FindSlotCommandParser;
 import clzzz.helper.model.Model;
@@ -21,11 +21,12 @@ import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotPetNamePredicate;
+import clzzz.helper.testutil.slot.TypicalSlots;
 
 class FindSlotCommandTest {
 
-    private Model model = new ModelManager(TypicalPets.getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalPets.getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -63,7 +64,7 @@ class FindSlotCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
-        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(CommandTestUtil.NAME_DESC_COCO + " " + CommandTestUtil.NAME_DESC_GARFIELD);
+        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
         expectedModel.updateFilteredSlotList(predicate);
         assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
     }

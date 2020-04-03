@@ -1,14 +1,16 @@
 package clzzz.helper.logic.commands.pet;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandFailure;
+import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static clzzz.helper.logic.commands.CommandTestUtil.showPetAtIndex;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
-import clzzz.helper.testutil.TypicalIndexes;
-import clzzz.helper.testutil.pet.TypicalPets;
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.model.Model;
@@ -22,12 +24,12 @@ import clzzz.helper.model.pet.Pet;
  */
 public class DeletePetCommandTest {
 
-    private Model model = new ModelManager(TypicalPets.getTypicalPetTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetTracker(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Pet petToDelete = model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased());
-        DeletePetCommand deleteCommand = new DeletePetCommand(TypicalIndexes.INDEX_FIRST_PET);
+        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        DeletePetCommand deleteCommand = new DeletePetCommand(INDEX_FIRST_PET);
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
@@ -42,15 +44,15 @@ public class DeletePetCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         DeletePetCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showPetAtIndex(model, TypicalIndexes.INDEX_FIRST_PET);
+        showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Pet petToDelete = model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased());
-        DeletePetCommand deleteCommand = new DeletePetCommand(TypicalIndexes.INDEX_FIRST_PET);
+        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        DeletePetCommand deleteCommand = new DeletePetCommand(INDEX_FIRST_PET);
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
@@ -63,27 +65,27 @@ public class DeletePetCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        CommandTestUtil.showPetAtIndex(model, TypicalIndexes.INDEX_FIRST_PET);
+        showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PET;
+        Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetTracker().getPetList().size());
 
         DeletePetCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeletePetCommand deleteFirstCommand = new DeletePetCommand(TypicalIndexes.INDEX_FIRST_PET);
-        DeletePetCommand deleteSecondCommand = new DeletePetCommand(TypicalIndexes.INDEX_SECOND_PET);
+        DeletePetCommand deleteFirstCommand = new DeletePetCommand(INDEX_FIRST_PET);
+        DeletePetCommand deleteSecondCommand = new DeletePetCommand(INDEX_SECOND_PET);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeletePetCommand deleteFirstCommandCopy = new DeletePetCommand(TypicalIndexes.INDEX_FIRST_PET);
+        DeletePetCommand deleteFirstCommandCopy = new DeletePetCommand(INDEX_FIRST_PET);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

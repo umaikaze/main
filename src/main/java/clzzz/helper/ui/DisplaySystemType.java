@@ -22,10 +22,6 @@ public enum DisplaySystemType {
         this.cliArg = cliArg;
     }
 
-    private boolean isAvailableToUser() {
-        return !cliArg.equals(UNUSED_CLI_ARG);
-    }
-
     /**
      * Returns the corresponding {@code DisplaySystemType} based on the {@code cliArg} passed in.
      */
@@ -36,6 +32,10 @@ public enum DisplaySystemType {
             }
         }
         throw new IllegalArgumentException(cliArg);
+    }
+
+    private boolean isAvailableToUser() {
+        return !cliArg.equals(UNUSED_CLI_ARG);
     }
 
     @Override

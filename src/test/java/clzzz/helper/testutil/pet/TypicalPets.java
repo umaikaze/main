@@ -1,16 +1,29 @@
 package clzzz.helper.testutil.pet;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DOB_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DOB_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_FOOD_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_FOOD_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_GENDER_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_GENDER_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_FAT;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_LAZY;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
-import clzzz.helper.testutil.slot.TypicalSlots;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.testutil.slot.TypicalSlots;
 
 //TODO the package it belongs to does not fit its usage (potentially used for slots too, make it outside or split up)
+
 /**
  * A utility class containing a list of {@code Pet} objects to be used in tests.
  */
@@ -42,14 +55,15 @@ public class TypicalPets {
             .withDateOfBirth("7/3/2015").withSpecies("bull").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}
-    public static final Pet COCO = new PetBuilder().withName(CommandTestUtil.VALID_NAME_COCO).withGender(CommandTestUtil.VALID_GENDER_COCO)
-            .withDateOfBirth(CommandTestUtil.VALID_DOB_COCO).withSpecies(CommandTestUtil.VALID_SPECIES_COCO).withFoodList(CommandTestUtil.VALID_FOOD_COCO)
-            .withTags(CommandTestUtil.VALID_TAG_LAZY).build();
-    public static final Pet GARFIELD = new PetBuilder().withName(CommandTestUtil.VALID_NAME_GARFIELD).withGender(CommandTestUtil.VALID_GENDER_GARFIELD)
-            .withDateOfBirth(CommandTestUtil.VALID_DOB_GARFIELD).withSpecies(CommandTestUtil.VALID_SPECIES_GARFIELD).withFoodList(CommandTestUtil.VALID_FOOD_GARFIELD)
-            .withTags(CommandTestUtil.VALID_TAG_FAT, CommandTestUtil.VALID_TAG_LAZY).build();
+    public static final Pet COCO = new PetBuilder().withName(VALID_NAME_COCO).withGender(VALID_GENDER_COCO)
+            .withDateOfBirth(VALID_DOB_COCO).withSpecies(VALID_SPECIES_COCO).withFoodList(VALID_FOOD_COCO)
+            .withTags(VALID_TAG_LAZY).build();
+    public static final Pet GARFIELD = new PetBuilder().withName(VALID_NAME_GARFIELD).withGender(VALID_GENDER_GARFIELD)
+            .withDateOfBirth(VALID_DOB_GARFIELD).withSpecies(VALID_SPECIES_GARFIELD).withFoodList(VALID_FOOD_GARFIELD)
+            .withTags(VALID_TAG_FAT, VALID_TAG_LAZY).build();
 
-    private TypicalPets() {} // prevents instantiation
+    private TypicalPets() {
+    } // prevents instantiation
 
     /**
      * Returns a {@code PetTracker} with all the typical pets.

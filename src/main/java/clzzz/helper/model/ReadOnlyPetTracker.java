@@ -1,9 +1,9 @@
 package clzzz.helper.model;
 
-import javafx.collections.ObservableList;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import javafx.collections.ObservableList;
 
 /**
  * Unmodifiable view of an address book

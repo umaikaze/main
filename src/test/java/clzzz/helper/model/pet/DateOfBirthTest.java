@@ -1,24 +1,22 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import clzzz.helper.testutil.Assert;
 
 class DateOfBirthTest {
 
     @Test
     void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DateOfBirth(null));
+        assertThrows(NullPointerException.class, () -> new DateOfBirth(null));
     }
 
     @Test
     void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidDate));
     }
 
     @Test

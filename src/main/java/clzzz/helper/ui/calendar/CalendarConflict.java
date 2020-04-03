@@ -8,11 +8,11 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.slot.Slot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * A region of a calendar view that represents a multiple conflicted slots.

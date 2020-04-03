@@ -1,17 +1,16 @@
 package clzzz.helper.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.commons.util.JsonUtil;
 import clzzz.helper.model.PetTracker;
+import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.TypicalPets;
 
 public class JsonSerializablePetTrackerTest {

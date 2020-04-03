@@ -1,13 +1,12 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.commons.util.AppUtil;
 
 /**
  * Represents a Pet's date of birth.
@@ -27,7 +26,7 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dateOfBirth) {
         requireNonNull(dateOfBirth);
-        AppUtil.checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(dateOfBirth, DateTimeUtil.DATE_FORMAT);
     }
 

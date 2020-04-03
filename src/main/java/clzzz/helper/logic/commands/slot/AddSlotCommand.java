@@ -1,12 +1,14 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
-import clzzz.helper.logic.parser.general.CliSyntax;
-import clzzz.helper.model.Model;
-import clzzz.helper.model.slot.Slot;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.model.Model;
+import clzzz.helper.model.slot.Slot;
 
 /**
  * Adds a slot to the schedule.
@@ -17,13 +19,13 @@ public class AddSlotCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to the pet store helper. "
             + "Parameters: "
-            + CliSyntax.PREFIX_NAME + "PETNAME "
-            + CliSyntax.PREFIX_DATETIME + "DATETIME "
-            + CliSyntax.PREFIX_DURATION + "DURATION\n"
+            + PREFIX_NAME + "PETNAME "
+            + PREFIX_DATETIME + "DATETIME "
+            + PREFIX_DURATION + "DURATION\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "Coco "
-            + CliSyntax.PREFIX_DATETIME + "16/11/2020 1300 "
-            + CliSyntax.PREFIX_DURATION + "90 ";
+            + PREFIX_NAME + "Coco "
+            + PREFIX_DATETIME + "16/11/2020 1300 "
+            + PREFIX_DURATION + "90 ";
 
     public static final String MESSAGE_SUCCESS = "New slot added: %1$s\n";
 

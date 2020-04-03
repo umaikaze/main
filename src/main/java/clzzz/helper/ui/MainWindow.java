@@ -2,7 +2,15 @@ package clzzz.helper.ui;
 
 import java.util.logging.Logger;
 
+import clzzz.helper.commons.core.GuiSettings;
+import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.logic.Logic;
+import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.logic.commands.general.DisplayCommand;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.ui.calendar.CalendarPanel;
+import clzzz.helper.ui.list.DisplayListPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -12,14 +20,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import clzzz.helper.commons.core.GuiSettings;
-import clzzz.helper.commons.core.LogsCenter;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.DisplayCommand;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
-import clzzz.helper.ui.calendar.CalendarPanel;
-import clzzz.helper.ui.list.DisplayListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -204,7 +204,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see Logic#execute(String)
+     * @see clzzz.helper.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {

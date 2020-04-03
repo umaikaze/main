@@ -1,5 +1,7 @@
 package clzzz.helper.logic.commands.general;
 
+import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_PETS;
+import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
@@ -7,10 +9,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import clzzz.helper.commons.exceptions.DataConversionException;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.storage.Storage;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
 
 /**
  * Loads a pet tracker from a file.
@@ -54,8 +56,8 @@ public class LoadCommand extends Command {
         }
 
 
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
-        model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()));
     }

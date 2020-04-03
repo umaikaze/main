@@ -2,8 +2,6 @@ package clzzz.helper.logic;
 
 import java.nio.file.Path;
 
-import clzzz.helper.ui.DisplaySystemType;
-import javafx.collections.ObservableList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
@@ -12,7 +10,9 @@ import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
 
 /**
  * API of the Logic component for Pet Store Helper

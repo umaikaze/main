@@ -2,9 +2,9 @@ package clzzz.helper.logic.parser.slot;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.parser.CommandParserTestUtil;
-import clzzz.helper.logic.commands.slot.FindSlotCommand;
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.logic.commands.slot.FindSlotCommand;
+import clzzz.helper.logic.parser.CommandParserTestUtil;
 
 class FindSlotCommandParserTest {
 

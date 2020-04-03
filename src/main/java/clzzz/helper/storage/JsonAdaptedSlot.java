@@ -1,5 +1,6 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DATETIME;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_DURATION;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_PETNAME;
@@ -12,14 +13,13 @@ import java.time.format.DateTimeParseException;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import clzzz.helper.model.PetTracker;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
  * Jackson-friendly version of {@link Slot}.
@@ -48,7 +48,7 @@ public class JsonAdaptedSlot {
      */
     public JsonAdaptedSlot(Slot source) {
         name = source.getPet().getName().fullName;
-        dateTime = source.getDateTime().format(DateTimeUtil.DATETIME_FORMAT);
+        dateTime = source.getDateTime().format(DATETIME_FORMAT);
         duration = String.valueOf(source.getDuration().toMinutes());
     }
 
@@ -77,7 +77,7 @@ public class JsonAdaptedSlot {
         }
         final LocalDateTime modelDateTime;
         try {
-            modelDateTime = LocalDateTime.parse(dateTime, DateTimeUtil.DATETIME_FORMAT);
+            modelDateTime = LocalDateTime.parse(dateTime, DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }

@@ -1,5 +1,8 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
+import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
+import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
@@ -8,15 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.commons.util.CollectionUtil;
-import clzzz.helper.logic.parser.general.CliSyntax;
-import clzzz.helper.model.Model;
-import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.slot.Slot;
 import clzzz.helper.commons.core.index.Index;
+import clzzz.helper.commons.util.CollectionUtil;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.model.Model;
+import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.slot.Slot;
 
 /**
  * Edits the details of an slot in the schedule.
@@ -29,10 +31,10 @@ public class EditSlotCommand extends Command {
             + "by the index number used in the displayed slots list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + CliSyntax.PREFIX_DATETIME + "DATETIME] "
-            + "[" + CliSyntax.PREFIX_DURATION + "DURATION]\n"
+            + "[" + PREFIX_DATETIME + "DATETIME] "
+            + "[" + PREFIX_DURATION + "DURATION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_DURATION + "360";
+            + PREFIX_DURATION + "360";
 
     public static final String MESSAGE_EDIT_SLOT_SUCCESS = "Edited slot: %1$s\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -54,6 +56,20 @@ public class EditSlotCommand extends Command {
         this.warningMessage = warningMessage;
     }
 
+    /**
+     * Creates and returns a {@code Slot} with the details of {@code slotToEdit}
+     * edited with {@code editSlotDescriptor}.
+     */
+    private static Slot createEditedSlot(Slot slotToEdit, EditSlotDescriptor editSlotDescriptor) {
+        assert slotToEdit != null;
+
+        Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
+        LocalDateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
+        Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
+
+        return new Slot(updatedPet, updatedDateTime, updatedDuration);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -71,22 +87,8 @@ public class EditSlotCommand extends Command {
         }
 
         model.setSlot(slotToEdit, editedSlot);
-        model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
+        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot) + warningMessage);
-    }
-
-    /**
-     * Creates and returns a {@code Slot} with the details of {@code slotToEdit}
-     * edited with {@code editSlotDescriptor}.
-     */
-    private static Slot createEditedSlot(Slot slotToEdit, EditSlotDescriptor editSlotDescriptor) {
-        assert slotToEdit != null;
-
-        Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
-        LocalDateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
-        Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
-
-        return new Slot(updatedPet, updatedDateTime, updatedDuration);
     }
 
     @Override
@@ -136,28 +138,28 @@ public class EditSlotCommand extends Command {
             return CollectionUtil.isAnyNonNull(pet, dateTime, duration);
         }
 
-        public void setPet(Pet pet) {
-            this.pet = pet;
-        }
-
         public Optional<Pet> getPet() {
             return Optional.ofNullable(pet);
         }
 
-        public void setDateTime(LocalDateTime dateTime) {
-            this.dateTime = dateTime;
+        public void setPet(Pet pet) {
+            this.pet = pet;
         }
 
         public Optional<LocalDateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
         }
 
-        public void setDuration(Duration duration) {
-            this.duration = duration;
+        public void setDateTime(LocalDateTime dateTime) {
+            this.dateTime = dateTime;
         }
 
         public Optional<Duration> getDuration() {
             return Optional.ofNullable(duration);
+        }
+
+        public void setDuration(Duration duration) {
+            this.duration = duration;
         }
 
         @Override

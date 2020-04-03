@@ -1,12 +1,11 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.TypicalPets;
 
 public class FoodCollectionListTest {
@@ -14,7 +13,7 @@ public class FoodCollectionListTest {
 
     @Test
     public void contains_nullFood_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> foodCollectionList.contains(null));
+        assertThrows(NullPointerException.class, () -> foodCollectionList.contains(null));
     }
 
     @Test
@@ -43,7 +42,7 @@ public class FoodCollectionListTest {
 
     @Test
     public void getUnmodifiablePets_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 foodCollectionList.asUnmodifiableObservableList().remove(0));
     }
 

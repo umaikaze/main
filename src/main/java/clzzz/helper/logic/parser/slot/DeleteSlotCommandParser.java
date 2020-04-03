@@ -1,9 +1,10 @@
 package clzzz.helper.logic.parser.slot;
 
-import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.parser.general.Parser;
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.DeleteSlotCommand;
+import clzzz.helper.logic.parser.general.Parser;
 import clzzz.helper.logic.parser.general.ParserUtil;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 
@@ -23,7 +24,7 @@ public class DeleteSlotCommandParser implements Parser<DeleteSlotCommand> {
             return new DeleteSlotCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteSlotCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSlotCommand.MESSAGE_USAGE), pe);
         }
     }
 

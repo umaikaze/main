@@ -4,20 +4,19 @@ import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.PetBuilder;
 
 class FoodAmountAndPetTest {
 
     @Test
     void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new FoodAmountAndPet(0, null));
+        assertThrows(NullPointerException.class, () -> new FoodAmountAndPet(0, null));
     }
 
     @Test
     void constructor_invalidFoodAmount_throwsIllegalArgumentException() {
         Pet validPet = new PetBuilder().build();
         int invalidAmount = -1;
-        Assert.assertThrows(IllegalArgumentException.class, () -> new FoodAmountAndPet(invalidAmount, validPet));
+        assertThrows(IllegalArgumentException.class, () -> new FoodAmountAndPet(invalidAmount, validPet));
     }
 }

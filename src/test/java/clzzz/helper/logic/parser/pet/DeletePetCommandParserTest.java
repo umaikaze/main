@@ -1,11 +1,13 @@
 package clzzz.helper.logic.parser.pet;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static clzzz.helper.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
+
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.logic.parser.CommandParserTestUtil;
-import clzzz.helper.testutil.TypicalIndexes;
 import clzzz.helper.logic.commands.pet.DeletePetCommand;
-import clzzz.helper.commons.core.Messages;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -20,11 +22,11 @@ public class DeletePetCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeletePetCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new DeletePetCommand(TypicalIndexes.INDEX_FIRST_PET));
+        assertParseSuccess(parser, "1", new DeletePetCommand(INDEX_FIRST_PET));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePetCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePetCommand.MESSAGE_USAGE));
     }
 }

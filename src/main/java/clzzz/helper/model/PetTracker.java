@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.collections.ObservableList;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.UniquePetList;
 import clzzz.helper.model.slot.Slot;
+import javafx.collections.ObservableList;
 
 /**
  * Wraps all pet system data at the pet-tracker level

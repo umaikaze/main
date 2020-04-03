@@ -1,13 +1,12 @@
 package clzzz.helper.ui;
 
+import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
-import clzzz.helper.logic.Logic;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -70,7 +69,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see Logic#execute(String)
+         * @see clzzz.helper.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }

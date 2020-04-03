@@ -7,10 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import clzzz.helper.model.tag.Tag;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
-import clzzz.helper.model.tag.Tag;
-import clzzz.helper.commons.util.CollectionUtil;
 
 /**
  * Represents a Pet in the pet store helper.
@@ -32,7 +31,7 @@ public class Pet implements DisplayItem {
      * Every field must be present and not null.
      */
     public Pet(Name name, Gender gender, DateOfBirth dateOfBirth, Species species, Set<Food> foodList, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, gender, dateOfBirth, species, foodList, tags);
+        requireAllNonNull(name, gender, dateOfBirth, species, foodList, tags);
         this.name = name;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;

@@ -4,13 +4,13 @@ import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
 
+import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.slot.Slot;
 import clzzz.helper.ui.UiPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * An UI component that displays information of a {@code Slot}.

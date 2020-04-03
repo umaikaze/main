@@ -1,21 +1,20 @@
 package clzzz.helper.logic.parser.slot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
-import static clzzz.helper.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.TypicalPets;
+import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
-import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.testutil.Assert;
+import clzzz.helper.testutil.pet.TypicalPets;
 
 class SlotParserUtilTest {
 

@@ -1,8 +1,8 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -95,7 +95,7 @@ public class FoodCollectionTest {
     public void getUnmodifiablePets_modifyList_throwsUnsupportedOperationException() {
         FoodCollection foodCollection = FoodCollection.generateFoodCollection(foodA1, pet1);
 
-        Assert.assertThrows(UnsupportedOperationException.class, () ->
+        assertThrows(UnsupportedOperationException.class, () ->
                 foodCollection.getUnmodifiablePets().remove(0));
     }
 }

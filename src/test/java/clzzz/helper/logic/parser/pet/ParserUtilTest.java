@@ -1,9 +1,16 @@
 package clzzz.helper.logic.parser.pet;
 
+import static clzzz.helper.logic.parser.general.ParserUtil.MESSAGE_INVALID_INDEX;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseDateOfBirth;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseGender;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseIndex;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseName;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseSpecies;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseTag;
+import static clzzz.helper.logic.parser.general.ParserUtil.parseTags;
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.logic.parser.general.ParserUtil.MESSAGE_INVALID_INDEX;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,15 +19,14 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.TypicalIndexes;
-import clzzz.helper.logic.parser.general.ParserUtil;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
+import clzzz.helper.testutil.Assert;
+import clzzz.helper.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -40,157 +46,157 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> parseIndex("10 a"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()->
-            ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()->
+            parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PET, ParserUtil.parseIndex("1"));
+        assertEquals(TypicalIndexes.INDEX_FIRST_PET, parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PET, ParserUtil.parseIndex("  1  "));
+        assertEquals(TypicalIndexes.INDEX_FIRST_PET, parseIndex("  1  "));
     }
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> parseName((String) null));
     }
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+        Assert.assertThrows(ParseException.class, () -> parseName(INVALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+        assertEquals(expectedName, parseName(VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        assertEquals(expectedName, parseName(nameWithWhitespace));
     }
 
     @Test
     public void parseGender_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseGender((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> parseGender((String) null));
     }
 
     @Test
     public void parseGender_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_GENDER));
+        Assert.assertThrows(ParseException.class, () -> parseGender(INVALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
         Gender expectedGender = Gender.valueOf(VALID_GENDER);
-        assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
+        assertEquals(expectedGender, parseGender(VALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
         String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
         Gender expectedGender = Gender.valueOf(VALID_GENDER);
-        assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
+        assertEquals(expectedGender, parseGender(genderWithWhitespace));
     }
 
     @Test
     public void parseDateOfBirth_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDateOfBirth((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> parseDateOfBirth((String) null));
     }
 
     @Test
     public void parseDateOfBirth_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATEOFBIRTH));
+        Assert.assertThrows(ParseException.class, () -> parseDateOfBirth(INVALID_DATEOFBIRTH));
     }
 
     @Test
     public void parseDateOfBirth_validValueWithoutWhitespace_returnsDateOfBirth() throws Exception {
         DateOfBirth expectedDateOfBirth = new DateOfBirth(VALID_DATEOFBIRTH);
-        assertEquals(expectedDateOfBirth, ParserUtil.parseDateOfBirth(VALID_DATEOFBIRTH));
+        assertEquals(expectedDateOfBirth, parseDateOfBirth(VALID_DATEOFBIRTH));
     }
 
     @Test
     public void parseDateOfBirth_validValueWithWhitespace_returnsTrimmedDateOfBirth() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_DATEOFBIRTH + WHITESPACE;
         DateOfBirth expectedDateOfBirth = new DateOfBirth(VALID_DATEOFBIRTH);
-        assertEquals(expectedDateOfBirth, ParserUtil.parseDateOfBirth(addressWithWhitespace));
+        assertEquals(expectedDateOfBirth, parseDateOfBirth(addressWithWhitespace));
     }
 
     @Test
     public void parseSpecies_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSpecies((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> parseSpecies((String) null));
     }
 
     @Test
     public void parseSpecies_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseSpecies(INVALID_SPECIES));
+        Assert.assertThrows(ParseException.class, () -> parseSpecies(INVALID_SPECIES));
     }
 
     @Test
     public void parseSpecies_validValueWithoutWhitespace_returnsSpecies() throws Exception {
         Species expectedSpecies = new Species(VALID_SPECIES);
-        assertEquals(expectedSpecies, ParserUtil.parseSpecies(VALID_SPECIES));
+        assertEquals(expectedSpecies, parseSpecies(VALID_SPECIES));
     }
 
     @Test
     public void parseSpecies_validValueWithWhitespace_returnsTrimmedSpecies() throws Exception {
         String speciesWithWhitespace = WHITESPACE + VALID_SPECIES + WHITESPACE;
         Species expectedSpecies = new Species(VALID_SPECIES);
-        assertEquals(expectedSpecies, ParserUtil.parseSpecies(speciesWithWhitespace));
+        assertEquals(expectedSpecies, parseSpecies(speciesWithWhitespace));
     }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        Assert.assertThrows(NullPointerException.class, () -> parseTag(null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        Assert.assertThrows(ParseException.class, () -> parseTag(INVALID_TAG));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        assertEquals(expectedTag, parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        assertEquals(expectedTag, parseTag(tagWithWhitespace));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        Assert.assertThrows(NullPointerException.class, () -> parseTags(null));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        Assert.assertThrows(ParseException.class, () -> parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
     }
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+        assertTrue(parseTags(Collections.emptyList()).isEmpty());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Tag> actualTagSet = parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);

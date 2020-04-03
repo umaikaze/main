@@ -1,16 +1,16 @@
 package clzzz.helper.logic.commands.general;
 
+import static clzzz.helper.commons.util.DateTimeUtil.BACK_UP_FORMAT;
+import static clzzz.helper.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.logic.LogicManager;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.storage.Storage;
 import clzzz.helper.ui.DisplaySystemType;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
 
 /**
  * Saves the current state of the pet tracker in a separate JSON file.
@@ -34,9 +34,9 @@ public class BackUpCommand extends Command {
         try {
             storage.savePetTracker(model.getPetTracker(), now);
         } catch (IOException ioe) {
-            throw new CommandException(LogicManager.FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(DateTimeUtil.BACK_UP_FORMAT) + ".json"),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(BACK_UP_FORMAT) + ".json"),
                 false, false, DisplaySystemType.NO_CHANGE, false);
     }
 }

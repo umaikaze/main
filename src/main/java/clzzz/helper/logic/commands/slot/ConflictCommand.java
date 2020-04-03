@@ -1,13 +1,14 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.logic.commands.general.Command;
+import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.slot.SlotConflictPredicate;
 import clzzz.helper.ui.DisplaySystemType;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
 
 /**
  * Finds and lists all slots in the schedule which have conflicts.
@@ -21,7 +22,7 @@ public class ConflictCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
+        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),

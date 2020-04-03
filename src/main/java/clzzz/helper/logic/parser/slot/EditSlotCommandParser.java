@@ -1,13 +1,13 @@
 package clzzz.helper.logic.parser.slot;
 
-import static java.util.Objects.requireNonNull;
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
+import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.model.Model;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
@@ -15,6 +15,7 @@ import clzzz.helper.logic.parser.general.ArgumentMultimap;
 import clzzz.helper.logic.parser.general.ArgumentTokenizer;
 import clzzz.helper.logic.parser.general.Parser;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.model.Model;
 
 /**
  * Parses input arguments and creates a new EditSlotCommand object
@@ -43,7 +44,7 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
         try {
             index = SlotParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditSlotCommand.MESSAGE_USAGE), pe);
         }
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();

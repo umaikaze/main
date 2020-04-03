@@ -1,10 +1,16 @@
 package clzzz.helper.testutil.slot;
 
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DATETIME_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DATETIME_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DURATION_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_DURATION_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import clzzz.helper.logic.commands.CommandTestUtil;
 import clzzz.helper.model.slot.Slot;
 
 /**
@@ -12,12 +18,12 @@ import clzzz.helper.model.slot.Slot;
  */
 public class TypicalSlots {
 
-    public static final Slot COCO_SLOT = new SlotBuilder().withPet(CommandTestUtil.VALID_NAME_COCO)
-            .withDateTime(CommandTestUtil.VALID_DATETIME_COCO)
-            .withDuration(CommandTestUtil.VALID_DURATION_COCO).build();
-    public static final Slot GARFIELD_SLOT = new SlotBuilder().withPet(CommandTestUtil.VALID_NAME_GARFIELD)
-            .withDateTime(CommandTestUtil.VALID_DATETIME_GARFIELD)
-            .withDuration(CommandTestUtil.VALID_DURATION_GARFIELD).build();
+    public static final Slot COCO_SLOT = new SlotBuilder().withPet(VALID_NAME_COCO)
+            .withDateTime(VALID_DATETIME_COCO)
+            .withDuration(VALID_DURATION_COCO).build();
+    public static final Slot GARFIELD_SLOT = new SlotBuilder().withPet(VALID_NAME_GARFIELD)
+            .withDateTime(VALID_DATETIME_GARFIELD)
+            .withDuration(VALID_DURATION_GARFIELD).build();
 
 
     public static List<Slot> getTypicalSlots() {

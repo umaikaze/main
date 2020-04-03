@@ -1,7 +1,5 @@
 package clzzz.helper.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
@@ -11,12 +9,13 @@ import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.CommandResult;
@@ -137,7 +136,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
+                                                   Model expectedModel) {
         CommandResult expectedCommandResult =
                 new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
@@ -155,7 +154,7 @@ public class CommandTestUtil {
         PetTracker expectedPetTracker = new PetTracker(actualModel.getPetTracker());
         List<Pet> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPetList());
 
-        Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedPetTracker, actualModel.getPetTracker());
         assertEquals(expectedFilteredList, actualModel.getFilteredPetList());
     }

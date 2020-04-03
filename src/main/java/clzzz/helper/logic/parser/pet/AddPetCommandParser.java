@@ -11,13 +11,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.model.pet.DateOfBirth;
-import clzzz.helper.model.pet.Food;
-import clzzz.helper.model.pet.Gender;
-import clzzz.helper.model.pet.Name;
-import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.pet.Species;
-import clzzz.helper.model.tag.Tag;
 import clzzz.helper.logic.commands.pet.AddPetCommand;
 import clzzz.helper.logic.parser.general.ArgumentMultimap;
 import clzzz.helper.logic.parser.general.ArgumentTokenizer;
@@ -25,12 +18,27 @@ import clzzz.helper.logic.parser.general.Parser;
 import clzzz.helper.logic.parser.general.ParserUtil;
 import clzzz.helper.logic.parser.general.Prefix;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.model.pet.DateOfBirth;
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.pet.Gender;
+import clzzz.helper.model.pet.Name;
+import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.pet.Species;
+import clzzz.helper.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddPetCommand object.
  */
 public class AddPetCommandParser implements Parser<AddPetCommand> {
 
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddPetCommand
@@ -72,15 +80,6 @@ public class AddPetCommandParser implements Parser<AddPetCommand> {
             warningMessage += Messages.WARNING_MESSAGE_DOB;
         }
         return new AddPetCommand(pet, warningMessage);
-    }
-
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

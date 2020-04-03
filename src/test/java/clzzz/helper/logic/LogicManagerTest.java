@@ -1,7 +1,14 @@
 package clzzz.helper.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
+import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static clzzz.helper.logic.commands.CommandTestUtil.DOB_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.FOOD_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.GENDER_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
+import static clzzz.helper.logic.commands.CommandTestUtil.SPECIES_DESC_COCO;
 import static clzzz.helper.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,8 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import clzzz.helper.commons.core.Messages;
-import clzzz.helper.logic.commands.CommandTestUtil;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.StatsCommand;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
@@ -25,7 +30,6 @@ import clzzz.helper.model.pet.Pet;
 import clzzz.helper.storage.JsonPetTrackerStorage;
 import clzzz.helper.storage.JsonUserPrefsStorage;
 import clzzz.helper.storage.StorageManager;
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.PetBuilder;
 import clzzz.helper.testutil.pet.TypicalPets;
 
@@ -50,13 +54,13 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletepet 9";
-        assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -77,8 +81,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddPetCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_COCO + CommandTestUtil.GENDER_DESC_COCO + CommandTestUtil.DOB_DESC_COCO
-                + CommandTestUtil.SPECIES_DESC_COCO + CommandTestUtil.FOOD_DESC_COCO;
+        String addCommand = AddPetCommand.COMMAND_WORD + NAME_DESC_COCO + GENDER_DESC_COCO + DOB_DESC_COCO
+                + SPECIES_DESC_COCO + FOOD_DESC_COCO;
         Pet expectedPet = new PetBuilder(TypicalPets.COCO).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPet(expectedPet);
@@ -88,7 +92,7 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredDisplayList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredDisplayList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredDisplayList().remove(0));
     }
 
     /**
@@ -144,7 +148,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
-        Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
 

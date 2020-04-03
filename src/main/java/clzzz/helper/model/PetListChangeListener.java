@@ -2,9 +2,9 @@ package clzzz.helper.model;
 
 import java.util.List;
 
-import javafx.collections.ListChangeListener;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import javafx.collections.ListChangeListener;
 
 /**
  * Listener class to look out for changes in the pet list and use to modify schedule correspondingly

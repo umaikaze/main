@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import clzzz.helper.commons.core.Config;
 import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.commons.core.Version;
@@ -30,6 +28,8 @@ import clzzz.helper.storage.StorageManager;
 import clzzz.helper.storage.UserPrefsStorage;
 import clzzz.helper.ui.Ui;
 import clzzz.helper.ui.UiManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Runs the application.

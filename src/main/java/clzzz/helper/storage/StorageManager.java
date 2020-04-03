@@ -1,17 +1,18 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.commons.util.DateTimeUtil.BACK_UP_FORMAT;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import clzzz.helper.commons.core.LogsCenter;
+import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.ReadOnlyUserPrefs;
 import clzzz.helper.model.UserPrefs;
-import clzzz.helper.commons.core.LogsCenter;
-import clzzz.helper.commons.exceptions.DataConversionException;
-import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
  * Manages storage of PetTracker data in local storage.
@@ -73,7 +74,7 @@ public class StorageManager implements Storage {
     @Override
     public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
         savePetTracker(petTracker,
-                petTrackerStorage.getPetTrackerFilePath().resolveSibling(timestamp.format(DateTimeUtil.BACK_UP_FORMAT) + ".json"));
+                petTrackerStorage.getPetTrackerFilePath().resolveSibling(timestamp.format(BACK_UP_FORMAT) + ".json"));
     }
 
     @Override

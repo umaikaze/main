@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.model.Model;
-import clzzz.helper.model.slot.Slot;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.model.Model;
+import clzzz.helper.model.slot.Slot;
 
 /**
  * Deletes a slot identified using it's displayed index from the address book.

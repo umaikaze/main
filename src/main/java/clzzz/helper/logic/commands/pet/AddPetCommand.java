@@ -1,19 +1,18 @@
 package clzzz.helper.logic.commands.pet;
 
-import static java.util.Objects.requireNonNull;
-
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
-import clzzz.helper.model.Model;
-import clzzz.helper.model.pet.Pet;
 import clzzz.helper.logic.commands.general.Command;
 import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.model.Model;
+import clzzz.helper.model.pet.Pet;
 
 /**
  * Adds a pet to the pet tracker.

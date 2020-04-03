@@ -1,7 +1,7 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
@@ -9,7 +9,6 @@ import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import clzzz.helper.commons.util.AppUtil;
 
 /**
  * Represents a Food Collection object in Pet Store Helper. It is used to model a collection of the same type
@@ -41,28 +40,11 @@ public class FoodCollection implements DisplayItem {
     private FoodCollection(Food food, Pet pet) {
         requireNonNull(food);
         requireNonNull(pet);
-        AppUtil.checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
         this.name = food.foodName;
-        AppUtil.checkArgument(isValidFoodCollectionAmount(food.foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
+        checkArgument(isValidFoodCollectionAmount(food.foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.amount = food.foodAmount;
         this.foodAmountAndPets.add(new FoodAmountAndPet(food.foodAmount, pet));
-    }
-
-    /**
-     * Adds food into the food collection.
-     * @param pet The owner of the food being added
-     * @param other The food to be added.
-     * @return true if it is successfully added, which means
-     * the type of food has the same name as that of the food collection.
-     */
-    public boolean addFoodToCollection(Food other, Pet pet) {
-        if (isSameType(other)) {
-            amount += other.foodAmount;
-            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet));
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -84,6 +66,23 @@ public class FoodCollection implements DisplayItem {
      */
     public static boolean isValidFoodCollectionAmount(Integer test) {
         return test > 0;
+    }
+
+    /**
+     * Adds food into the food collection.
+     * @param pet The owner of the food being added
+     * @param other The food to be added.
+     * @return true if it is successfully added, which means
+     * the type of food has the same name as that of the food collection.
+     */
+    public boolean addFoodToCollection(Food other, Pet pet) {
+        if (isSameType(other)) {
+            amount += other.foodAmount;
+            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

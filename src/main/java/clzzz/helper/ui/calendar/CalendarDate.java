@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import clzzz.helper.commons.util.DateTimeUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
  * A region of a calendar view that indicates the date.

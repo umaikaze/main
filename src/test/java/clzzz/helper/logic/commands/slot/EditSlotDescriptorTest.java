@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.logic.commands.CommandTestUtil;
-import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
+import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
 
 class EditSlotDescriptorTest {
 

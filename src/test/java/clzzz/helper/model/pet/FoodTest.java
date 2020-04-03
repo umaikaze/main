@@ -1,18 +1,16 @@
 package clzzz.helper.model.pet;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import clzzz.helper.testutil.Assert;
 
 class FoodTest {
 
     @Test
     void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Food(null, 0));
+        assertThrows(NullPointerException.class, () -> new Food(null, 0));
     }
 
     @Test
@@ -21,14 +19,14 @@ class FoodTest {
         String validName = "kibbles";
         int invalidAmount = -1;
         int validAmount = 1;
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Food(invalidName, validAmount));
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Food(validName, invalidAmount));
+        assertThrows(IllegalArgumentException.class, () -> new Food(invalidName, validAmount));
+        assertThrows(IllegalArgumentException.class, () -> new Food(validName, invalidAmount));
     }
 
     @Test
     void isValidFoodName() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> Food.isValidFoodName(null));
+        assertThrows(NullPointerException.class, () -> Food.isValidFoodName(null));
 
         // invalid name
         assertFalse(Food.isValidFoodName("")); // empty string

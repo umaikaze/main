@@ -1,13 +1,12 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
-import clzzz.helper.commons.util.AppUtil;
 
 /**
  * Represents a relationship between pet and an integer attribute amount, which indicates the amount of a certain
@@ -27,9 +26,16 @@ public class FoodAmountAndPet implements DisplayItem {
      */
     public FoodAmountAndPet(int foodAmount, Pet pet) {
         requireNonNull(pet);
-        AppUtil.checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
+        checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.foodAmount = foodAmount;
         this.pet = pet;
+    }
+
+    /**
+     * Returns true if a given food amount is positive.
+     */
+    public static boolean isValidFoodAmount(Integer test) {
+        return test > 0;
     }
 
     @Override
@@ -49,13 +55,6 @@ public class FoodAmountAndPet implements DisplayItem {
      */
     public Pet getPet() {
         return pet;
-    }
-
-    /**
-     * Returns true if a given food amount is positive.
-     */
-    public static boolean isValidFoodAmount(Integer test) {
-        return test > 0;
     }
 
     @Override

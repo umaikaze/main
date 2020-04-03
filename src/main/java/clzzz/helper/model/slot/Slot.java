@@ -9,11 +9,10 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
+import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.commons.util.CollectionUtil;
 
 /**
  * Represents a Slot in the pet store helper schedule system.
@@ -29,7 +28,7 @@ public class Slot implements Comparable<Slot>, DisplayItem {
      * Every field must be present and not null.
      */
     public Slot(Pet pet, LocalDateTime dateTime, Duration duration) {
-        CollectionUtil.requireAllNonNull(pet, dateTime, duration);
+        requireAllNonNull(pet, dateTime, duration);
         this.pet = pet;
         this.dateTime = dateTime;
         this.duration = duration;

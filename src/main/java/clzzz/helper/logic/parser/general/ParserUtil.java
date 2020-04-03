@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.StringUtil;
+import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;
 import clzzz.helper.model.pet.Gender;
@@ -14,8 +16,6 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
 import clzzz.helper.ui.DisplaySystemType;
-import clzzz.helper.commons.core.index.Index;
-import clzzz.helper.logic.parser.general.exceptions.ParseException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes under package parser/pet.

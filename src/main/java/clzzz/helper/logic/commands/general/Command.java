@@ -1,7 +1,7 @@
 package clzzz.helper.logic.commands.general;
 
-import clzzz.helper.model.Model;
 import clzzz.helper.logic.commands.general.exceptions.CommandException;
+import clzzz.helper.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

@@ -7,7 +7,6 @@ import clzzz.helper.model.pet.FoodAmountAndPet;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.UiPart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

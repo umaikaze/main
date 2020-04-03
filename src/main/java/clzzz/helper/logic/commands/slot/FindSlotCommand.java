@@ -5,11 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.logic.commands.general.Command;
+import clzzz.helper.logic.commands.general.CommandResult;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.ui.DisplaySystemType;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
 
 /**
  * Finds and lists all slots in the schedule whose contents contains any of the argument keywords.

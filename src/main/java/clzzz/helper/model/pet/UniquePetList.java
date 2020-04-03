@@ -1,7 +1,7 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,14 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import clzzz.helper.model.PetListChangeListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import clzzz.helper.model.pet.exceptions.DuplicatePetException;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 import clzzz.helper.model.slot.Schedule;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.commons.util.CollectionUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.
@@ -115,7 +114,7 @@ public class UniquePetList implements Iterable<Pet> {
      * The pet identity of {@code editedPet} must not be the same as another existing pet in the list.
      */
     public void setPet(Pet target, Pet editedPet) {
-        CollectionUtil.requireAllNonNull(target, editedPet);
+        requireAllNonNull(target, editedPet);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -153,7 +152,7 @@ public class UniquePetList implements Iterable<Pet> {
      * {@code pets} must not contain duplicate pets.
      */
     public void setPets(List<Pet> pets) {
-        CollectionUtil.requireAllNonNull(pets);
+        requireAllNonNull(pets);
         if (!petsAreUnique(pets)) {
             throw new DuplicatePetException();
         }

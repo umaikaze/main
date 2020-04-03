@@ -4,10 +4,10 @@ import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 
+import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
  * A utility class for Slot.

@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.pet.Species;
+import clzzz.helper.model.slot.Slot;
 import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,11 +28,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import clzzz.helper.commons.util.DateTimeUtil;
-import clzzz.helper.model.pet.FoodCollection;
-import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.pet.Species;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * Panel containing the overall statistics as charts and tables. The stats are displayed vertically.

@@ -1,13 +1,13 @@
 package clzzz.helper.logic.commands.pet;
 
-import static java.util.Objects.requireNonNull;
-
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_PETS;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,7 +16,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.CollectionUtil;
+import clzzz.helper.logic.commands.general.Command;
+import clzzz.helper.logic.commands.general.CommandResult;
+import clzzz.helper.logic.commands.general.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;
@@ -25,10 +29,6 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
-import clzzz.helper.commons.core.index.Index;
-import clzzz.helper.logic.commands.general.Command;
-import clzzz.helper.logic.commands.general.CommandResult;
-import clzzz.helper.logic.commands.general.exceptions.CommandException;
 
 /**
  * Edits the details of an existing pet in the pet tracker.
@@ -73,6 +73,23 @@ public class EditPetCommand extends Command {
         this.warningMessage = warningMessage;
     }
 
+    /**
+     * Creates and returns a {@code Pet} with the details of {@code petToEdit}
+     * edited with {@code editPetDescriptor}.
+     */
+    private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
+        assert petToEdit != null;
+
+        Name updatedName = editPetDescriptor.getName().orElse(petToEdit.getName());
+        Gender updatedGender = editPetDescriptor.getGender().orElse(petToEdit.getGender());
+        DateOfBirth updatedDateOfBirth = editPetDescriptor.getDateOfBirth().orElse(petToEdit.getDateOfBirth());
+        Species updatedSpecies = editPetDescriptor.getSpecies().orElse(petToEdit.getSpecies());
+        Set<Food> updatedFoodList = editPetDescriptor.getFoodList().orElse(petToEdit.getFoodList());
+        Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
+
+        return new Pet(updatedName, updatedGender, updatedDateOfBirth, updatedSpecies, updatedFoodList, updatedTags);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -90,26 +107,9 @@ public class EditPetCommand extends Command {
         }
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet) + warningMessage);
 
-    }
-
-    /**
-     * Creates and returns a {@code Pet} with the details of {@code petToEdit}
-     * edited with {@code editPetDescriptor}.
-     */
-    private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
-        assert petToEdit != null;
-
-        Name updatedName = editPetDescriptor.getName().orElse(petToEdit.getName());
-        Gender updatedGender = editPetDescriptor.getGender().orElse(petToEdit.getGender());
-        DateOfBirth updatedDateOfBirth = editPetDescriptor.getDateOfBirth().orElse(petToEdit.getDateOfBirth());
-        Species updatedSpecies = editPetDescriptor.getSpecies().orElse(petToEdit.getSpecies());
-        Set<Food> updatedFoodList = editPetDescriptor.getFoodList().orElse(petToEdit.getFoodList());
-        Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
-
-        return new Pet(updatedName, updatedGender, updatedDateOfBirth, updatedSpecies, updatedFoodList, updatedTags);
     }
 
     @Override
@@ -165,51 +165,44 @@ public class EditPetCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, gender, dateOfBirth, species, foodList, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setGender(Gender gender) {
-            this.gender = gender;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
         }
 
-        public void setDateOfBirth(DateOfBirth dateOfBirth) {
-            this.dateOfBirth = dateOfBirth;
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
         }
 
-        public void setSpecies(Species species) {
-            this.species = species;
+        public void setDateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
         }
 
         public Optional<Species> getSpecies() {
             return Optional.ofNullable(species);
         }
 
-        public void setFoodList(Set<Food> foodList) {
-            this.foodList = (foodList != null) ? new HashSet<>(foodList) : null;
+        public void setSpecies(Species species) {
+            this.species = species;
         }
 
         public Optional<Set<Food>> getFoodList() {
             return (foodList != null) ? Optional.of(Collections.unmodifiableSet(foodList)) : Optional.empty();
         }
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+
+        public void setFoodList(Set<Food> foodList) {
+            this.foodList = (foodList != null) ? new HashSet<>(foodList) : null;
         }
 
         /**
@@ -219,6 +212,14 @@ public class EditPetCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         @Override

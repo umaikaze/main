@@ -1,12 +1,13 @@
 package clzzz.helper.logic.parser.pet;
 
-import static java.util.Objects.requireNonNull;
+import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_DOB;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_FOODLIST;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_GENDER;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,8 +15,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.model.pet.Food;
-import clzzz.helper.model.tag.Tag;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
 import clzzz.helper.logic.parser.general.ArgumentMultimap;
@@ -23,6 +22,8 @@ import clzzz.helper.logic.parser.general.ArgumentTokenizer;
 import clzzz.helper.logic.parser.general.Parser;
 import clzzz.helper.logic.parser.general.ParserUtil;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditPetCommand object
@@ -45,7 +46,7 @@ public class EditPetCommandParser implements Parser<EditPetCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPetCommand.MESSAGE_USAGE), pe);
         }
 
         EditPetCommand.EditPetDescriptor editPetDescriptor = new EditPetCommand.EditPetDescriptor();

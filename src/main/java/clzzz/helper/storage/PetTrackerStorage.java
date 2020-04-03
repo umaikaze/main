@@ -5,12 +5,11 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import clzzz.helper.model.PetTracker;
-import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.commons.exceptions.DataConversionException;
+import clzzz.helper.model.ReadOnlyPetTracker;
 
 /**
- * Represents a storage for {@link PetTracker}.
+ * Represents a storage for {@link clzzz.helper.model.PetTracker}.
  */
 public interface PetTrackerStorage {
 

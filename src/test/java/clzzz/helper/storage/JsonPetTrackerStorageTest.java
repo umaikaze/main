@@ -1,8 +1,8 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static clzzz.helper.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,10 +11,10 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;
+import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.TypicalPets;
 
 public class JsonPetTrackerStorageTest {
@@ -61,7 +61,7 @@ public class JsonPetTrackerStorageTest {
     @Test
     public void readAndSavePetTracker_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempPetTracker.json");
-        PetTracker original = TypicalPets.getTypicalPetTracker();
+        PetTracker original = getTypicalPetTracker();
         JsonPetTrackerStorage jsonPetTrackerStorage = new JsonPetTrackerStorage(filePath);
 
         // Save in new file and read back

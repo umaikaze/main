@@ -2,13 +2,12 @@ package clzzz.helper.ui.list;
 
 import static java.util.Objects.requireNonNull;
 
+import clzzz.helper.model.pet.FoodAmountAndPet;
 import clzzz.helper.ui.UiPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-
-import clzzz.helper.model.pet.FoodAmountAndPet;
 
 
 /**

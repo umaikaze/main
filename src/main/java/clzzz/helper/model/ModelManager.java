@@ -1,15 +1,12 @@
 package clzzz.helper.model;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import clzzz.helper.ui.DisplaySystemType;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.commons.exceptions.IllegalValueException;
@@ -19,7 +16,10 @@ import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents the in-memory model of the pet tracker data.
@@ -40,7 +40,7 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyPetTracker petTracker, ReadOnlyUserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(petTracker, userPrefs);
+        requireAllNonNull(petTracker, userPrefs);
 
         logger.fine("Initializing with pet tracker: " + petTracker + " and user prefs " + userPrefs);
 
@@ -61,14 +61,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -96,13 +96,13 @@ public class ModelManager implements Model {
     //=========== Pet Tracker ================================================================================
 
     @Override
-    public void setPetTracker(ReadOnlyPetTracker petTracker) {
-        this.petTracker.resetData(petTracker);
+    public ReadOnlyPetTracker getPetTracker() {
+        return petTracker;
     }
 
     @Override
-    public ReadOnlyPetTracker getPetTracker() {
-        return petTracker;
+    public void setPetTracker(ReadOnlyPetTracker petTracker) {
+        this.petTracker.resetData(petTracker);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setPet(Pet target, Pet editedPet) {
-        CollectionUtil.requireAllNonNull(target, editedPet);
+        requireAllNonNull(target, editedPet);
 
         petTracker.setPet(target, editedPet);
     }
@@ -170,7 +170,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setSlot(Slot target, Slot editedSlot) {
-        CollectionUtil.requireAllNonNull(target, editedSlot);
+        requireAllNonNull(target, editedSlot);
         petTracker.setSlot(target, editedSlot);
     }
 

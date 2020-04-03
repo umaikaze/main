@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import clzzz.helper.model.ReadOnlyUserPrefs;
-import clzzz.helper.model.UserPrefs;
 import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.commons.util.JsonUtil;
+import clzzz.helper.model.ReadOnlyUserPrefs;
+import clzzz.helper.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

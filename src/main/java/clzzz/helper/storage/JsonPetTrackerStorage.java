@@ -1,5 +1,6 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.commons.util.DateTimeUtil.BACK_UP_FORMAT;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
@@ -8,13 +9,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.commons.util.FileUtil;
 import clzzz.helper.commons.util.JsonUtil;
-import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.ReadOnlyPetTracker;
 
 /**
  * A class to access PetTracker data stored as a json file on the hard disk.
@@ -68,7 +68,7 @@ public class JsonPetTrackerStorage implements PetTrackerStorage {
 
     @Override
     public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
-        savePetTracker(petTracker, filePath.resolveSibling(timestamp.format(DateTimeUtil.BACK_UP_FORMAT) + ".json"));
+        savePetTracker(petTracker, filePath.resolveSibling(timestamp.format(BACK_UP_FORMAT) + ".json"));
     }
 
     /**

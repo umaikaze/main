@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import clzzz.helper.model.ReadOnlyPetTracker;
-import clzzz.helper.ui.DisplaySystemType;
-import javafx.collections.ObservableList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.logic.commands.general.Command;
@@ -15,11 +12,14 @@ import clzzz.helper.logic.commands.general.exceptions.CommandException;
 import clzzz.helper.logic.parser.general.PetTrackerParser;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
 import clzzz.helper.model.Model;
+import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.storage.Storage;
+import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
 
 /**
  * The main LogicManager of Pet Store Helper.

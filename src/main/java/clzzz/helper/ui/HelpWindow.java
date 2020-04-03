@@ -2,13 +2,13 @@ package clzzz.helper.ui;
 
 import java.util.logging.Logger;
 
+import clzzz.helper.commons.core.LogsCenter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
-import clzzz.helper.commons.core.LogsCenter;
 
 /**
  * Controller for a help page

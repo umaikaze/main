@@ -1,9 +1,9 @@
 package clzzz.helper.logic.parser.general;
 
 import clzzz.helper.commons.core.Messages;
-import clzzz.helper.storage.Storage;
 import clzzz.helper.logic.commands.general.LoadCommand;
 import clzzz.helper.logic.parser.general.exceptions.ParseException;
+import clzzz.helper.storage.Storage;
 
 /**
  * Parses input arguments and creates a new LoadCommand object

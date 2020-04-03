@@ -1,9 +1,7 @@
 package clzzz.helper.model.tag;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
-
-import clzzz.helper.commons.util.AppUtil;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Tag in the pet store helper
@@ -23,7 +21,7 @@ public class Tag implements Comparable<Tag> {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        AppUtil.checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName.toLowerCase();
     }
 

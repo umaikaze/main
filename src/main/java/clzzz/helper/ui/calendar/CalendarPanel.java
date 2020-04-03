@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import clzzz.helper.model.slot.Slot;
 import clzzz.helper.ui.UiPart;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -16,7 +17,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import clzzz.helper.model.slot.Slot;
 
 /**
  * Panel containing a calendar view of the schedule.

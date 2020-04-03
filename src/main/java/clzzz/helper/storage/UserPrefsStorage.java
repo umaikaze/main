@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.model.ReadOnlyUserPrefs;
 import clzzz.helper.model.UserPrefs;
-import clzzz.helper.commons.exceptions.DataConversionException;
 
 /**
- * Represents a storage for {@link UserPrefs}.
+ * Represents a storage for {@link clzzz.helper.model.UserPrefs}.
  */
 public interface UserPrefsStorage {
 

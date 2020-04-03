@@ -1,9 +1,7 @@
 package clzzz.helper.model.pet;
 
-import static java.util.Objects.requireNonNull;
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
-
-import clzzz.helper.commons.util.AppUtil;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Pet's Species in the pet store helper.
@@ -29,8 +27,15 @@ public class Species {
      */
     public Species(String species) {
         requireNonNull(species);
-        AppUtil.checkArgument(isValidSpecies(species), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSpecies(species), MESSAGE_CONSTRAINTS);
         this.species = formatSpecies(species);
+    }
+
+    /**
+     * Returns true if a given string is a valid species.
+     */
+    public static boolean isValidSpecies(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -47,14 +52,6 @@ public class Species {
         }
         return formattedSpecies.trim();
     }
-
-    /**
-     * Returns true if a given string is a valid species.
-     */
-    public static boolean isValidSpecies(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
 
     @Override
     public String toString() {

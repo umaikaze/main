@@ -1,8 +1,10 @@
 package clzzz.helper.logic.parser.slot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
 import static clzzz.helper.logic.parser.general.CliSyntax.PREFIX_NAME;
-import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -12,12 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.TypicalIndexes;
-import clzzz.helper.testutil.pet.TypicalPets;
-import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
-import clzzz.helper.testutil.slot.SlotBuilder;
-import clzzz.helper.testutil.slot.SlotUtil;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;
 import clzzz.helper.logic.commands.slot.DeleteSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
@@ -31,7 +27,11 @@ import clzzz.helper.model.slot.Slot;
 import clzzz.helper.storage.JsonPetTrackerStorage;
 import clzzz.helper.storage.JsonUserPrefsStorage;
 import clzzz.helper.storage.StorageManager;
-import clzzz.helper.commons.core.Messages;
+import clzzz.helper.testutil.Assert;
+import clzzz.helper.testutil.pet.TypicalPets;
+import clzzz.helper.testutil.slot.EditSlotDescriptorBuilder;
+import clzzz.helper.testutil.slot.SlotBuilder;
+import clzzz.helper.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
     @TempDir
@@ -60,8 +60,8 @@ class ScheduleParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteSlotCommand command = (DeleteSlotCommand) parser.parseCommand(
-                DeleteSlotCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_SLOT.getOneBased());
-        assertEquals(new DeleteSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT), command);
+                DeleteSlotCommand.COMMAND_WORD + " " + INDEX_FIRST_SLOT.getOneBased());
+        assertEquals(new DeleteSlotCommand(INDEX_FIRST_SLOT), command);
     }
 
     @Test
@@ -69,8 +69,8 @@ class ScheduleParserTest {
         Slot slot = new SlotBuilder().build();
         EditSlotCommand.EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder(slot).build();
         EditSlotCommand command = (EditSlotCommand) parser.parseCommand(EditSlotCommand.COMMAND_WORD + " "
-                + TypicalIndexes.INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));
-        assertEquals(new EditSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT, descriptor, ""), command);
+                + INDEX_FIRST_SLOT.getOneBased() + " " + SlotUtil.getEditSlotDescriptorDetails(descriptor));
+        assertEquals(new EditSlotCommand(INDEX_FIRST_SLOT, descriptor, ""), command);
     }
 
     @Test
@@ -80,13 +80,14 @@ class ScheduleParserTest {
         keywords.forEach(x -> sb.append(PREFIX_NAME).append(x).append(" "));
         FindSlotCommand command = (FindSlotCommand) parser.parseCommand(
                 FindSlotCommand.COMMAND_WORD + " " + sb.toString());
-        assertEquals(new FindSlotCommand(FindSlotCommandParser.getPredicates(sb.toString()), Messages.WARNING_MESSAGE_NAME), command);
+        assertEquals(new FindSlotCommand(FindSlotCommandParser.getPredicates(sb.toString()), WARNING_MESSAGE_NAME),
+                command);
     }
 
     // Test for help already done in PetTrackerParserTest
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        Assert.assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

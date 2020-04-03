@@ -3,15 +3,15 @@ package clzzz.helper.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import clzzz.helper.ui.DisplaySystemType;
-import javafx.collections.ObservableList;
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.pet.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
+import javafx.collections.ObservableList;
 
 /**
  * The API of the Pet Store Helper Model component.
@@ -34,14 +34,14 @@ public interface Model {
     Predicate<FoodCollection> PREDICATE_SHOW_ALL_FOOD_COLLECTIONS = unused -> true;
 
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
-     */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
-    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -64,14 +64,14 @@ public interface Model {
     void setPetTrackerFilePath(Path petTrackerFilePath);
 
     /**
-     * Replaces pet tracker book data with the data in {@code petTracker}.
-     */
-    void setPetTracker(ReadOnlyPetTracker petTracker);
-
-    /**
      * Returns the PetTracker.
      */
     ReadOnlyPetTracker getPetTracker();
+
+    /**
+     * Replaces pet tracker book data with the data in {@code petTracker}.
+     */
+    void setPetTracker(ReadOnlyPetTracker petTracker);
 
     /**
      * Returns true if a pet with the same identity as {@code pet} exists in the pet tracker.
