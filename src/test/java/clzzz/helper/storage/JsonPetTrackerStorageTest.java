@@ -1,5 +1,9 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.testutil.Assert.assertThrows;
+import static clzzz.helper.testutil.pet.TypicalPets.AMY;
+import static clzzz.helper.testutil.pet.TypicalPets.HOON;
+import static clzzz.helper.testutil.pet.TypicalPets.IDA;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +18,6 @@ import org.junit.jupiter.api.io.TempDir;
 import clzzz.helper.commons.exceptions.DataConversionException;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;
-import clzzz.helper.testutil.Assert;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class JsonPetTrackerStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonPetTrackerStorageTest");
@@ -25,7 +27,7 @@ public class JsonPetTrackerStorageTest {
 
     @Test
     public void readPetTracker_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> readPetTracker(null));
+        assertThrows(NullPointerException.class, () -> readPetTracker(null));
     }
 
     private java.util.Optional<ReadOnlyPetTracker> readPetTracker(String filePath) throws Exception {
@@ -45,17 +47,17 @@ public class JsonPetTrackerStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("notJsonFormatPetTracker.json"));
+        assertThrows(DataConversionException.class, () -> readPetTracker("notJsonFormatPetTracker.json"));
     }
 
     @Test
     public void readPetTracker_invalidPetTracker_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("invalidPetTracker.json"));
+        assertThrows(DataConversionException.class, () -> readPetTracker("invalidPetTracker.json"));
     }
 
     @Test
     public void readPetTracker_invalidAndValidPetTracker_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("invalidAndValidPetTracker.json"));
+        assertThrows(DataConversionException.class, () -> readPetTracker("invalidAndValidPetTracker.json"));
     }
 
     @Test
@@ -70,14 +72,14 @@ public class JsonPetTrackerStorageTest {
         assertEquals(original, new PetTracker(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPet(TypicalPets.HOON);
-        original.removePet(TypicalPets.AMY);
+        original.addPet(HOON);
+        original.removePet(AMY);
         jsonPetTrackerStorage.savePetTracker(original, filePath);
         readBack = jsonPetTrackerStorage.readPetTracker(filePath).get();
         assertEquals(original, new PetTracker(readBack));
 
         // Save and read without specifying file path
-        original.addPet(TypicalPets.IDA);
+        original.addPet(IDA);
         jsonPetTrackerStorage.savePetTracker(original); // file path not specified
         readBack = jsonPetTrackerStorage.readPetTracker().get(); // file path not specified
         assertEquals(original, new PetTracker(readBack));
@@ -86,7 +88,7 @@ public class JsonPetTrackerStorageTest {
 
     @Test
     public void savePetTracker_nullPetTracker_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> savePetTracker(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> savePetTracker(null, "SomeFile.json"));
     }
 
     /**
@@ -103,6 +105,6 @@ public class JsonPetTrackerStorageTest {
 
     @Test
     public void savePetTracker_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> savePetTracker(new PetTracker(), null));
+        assertThrows(NullPointerException.class, () -> savePetTracker(new PetTracker(), null));
     }
 }
