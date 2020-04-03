@@ -2,6 +2,7 @@ package clzzz.helper.logic.commands;
 
 import static clzzz.helper.commons.util.DateTimeUtil.BACK_UP_FORMAT;
 import static clzzz.helper.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
+import static java.time.LocalDateTime.now;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class BackUpCommand extends Command {
 
     public BackUpCommand(Storage storage) {
         this.storage = storage;
-        now = java.time.LocalDateTime.now();
+        now = now();
     }
 
     @Override

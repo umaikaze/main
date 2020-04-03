@@ -1,6 +1,7 @@
 package clzzz.helper.logic.parser;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static clzzz.helper.testutil.pet.PetUtil.getAddPetCommand;
 import static clzzz.helper.testutil.pet.PetUtil.getEditPetDescriptorDetails;
@@ -29,7 +30,6 @@ import clzzz.helper.model.pet.Pet;
 import clzzz.helper.storage.JsonPetTrackerStorage;
 import clzzz.helper.storage.JsonUserPrefsStorage;
 import clzzz.helper.storage.StorageManager;
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.EditPetDescriptorBuilder;
 import clzzz.helper.testutil.pet.PetBuilder;
 
@@ -83,6 +83,6 @@ public class PetTrackerParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }
