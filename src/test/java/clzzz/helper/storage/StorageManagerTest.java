@@ -1,5 +1,6 @@
 package clzzz.helper.storage;
 
+import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -13,7 +14,6 @@ import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.UserPrefs;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 public class StorageManagerTest {
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonPetTrackerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonPetTrackerStorageTest} class.
          */
-        PetTracker original = TypicalPets.getTypicalPetTracker();
+        PetTracker original = getTypicalPetTracker();
         storageManager.savePetTracker(original);
         ReadOnlyPetTracker retrieved = storageManager.readPetTracker().get();
         assertEquals(original, new PetTracker(retrieved));
