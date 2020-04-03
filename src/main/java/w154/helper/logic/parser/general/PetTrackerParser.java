@@ -1,0 +1,135 @@
+package w154.helper.logic.parser.general;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import w154.helper.logic.commands.general.BackUpCommand;
+import w154.helper.logic.commands.general.Command;
+import w154.helper.logic.commands.general.DisplayCommand;
+import w154.helper.logic.commands.general.ExitCommand;
+import w154.helper.logic.commands.general.HelpCommand;
+import w154.helper.logic.commands.general.LoadCommand;
+import w154.helper.logic.commands.general.StatsCommand;
+import w154.helper.logic.commands.pet.AddPetCommand;
+import w154.helper.logic.commands.pet.DeletePetCommand;
+import w154.helper.logic.commands.pet.EditPetCommand;
+import w154.helper.logic.commands.pet.FindPetCommand;
+import w154.helper.logic.commands.slot.AddSlotCommand;
+import w154.helper.logic.commands.slot.ConflictCommand;
+import w154.helper.logic.commands.slot.DeleteSlotCommand;
+import w154.helper.logic.commands.slot.EditSlotCommand;
+import w154.helper.logic.commands.slot.FindSlotCommand;
+import w154.helper.logic.parser.general.exceptions.ParseException;
+import w154.helper.logic.parser.pet.AddPetCommandParser;
+import w154.helper.logic.parser.pet.DeletePetCommandParser;
+import w154.helper.logic.parser.pet.EditPetCommandParser;
+import w154.helper.logic.parser.pet.FindPetCommandParser;
+import w154.helper.logic.parser.slot.AddSlotCommandParser;
+import w154.helper.logic.parser.slot.DeleteSlotCommandParser;
+import w154.helper.logic.parser.slot.EditSlotCommandParser;
+import w154.helper.logic.parser.slot.FindSlotCommandParser;
+import w154.helper.model.Model;
+import w154.helper.storage.Storage;
+import w154.helper.commons.core.Messages;
+
+/**
+ * Parse user input.
+ */
+public class PetTrackerParser {
+    /**
+     * Used for initial separation of command word and args.
+     */
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private final Model model;
+    private final Storage storage;
+
+
+    public PetTrackerParser(Model model, Storage storage) {
+        this.model = model;
+        this.storage = storage;
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public Command parseCommand(String userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+        return parseCommand(commandWord, arguments);
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param commandWord the command name
+     * @param arguments   the string of arguments to the command
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    private Command parseCommand(String commandWord, String arguments) throws ParseException {
+        switch (commandWord) {
+
+        // general
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
+
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand(storage);
+
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser(storage).parse(arguments);
+
+        // pet tracker
+        case AddPetCommand.COMMAND_WORD:
+            return new AddPetCommandParser().parse(arguments);
+
+        case EditPetCommand.COMMAND_WORD:
+            return new EditPetCommandParser().parse(arguments);
+
+        case DeletePetCommand.COMMAND_WORD:
+            return new DeletePetCommandParser().parse(arguments);
+
+        case FindPetCommand.COMMAND_WORD:
+            return new FindPetCommandParser().parse(arguments);
+
+        // schedule
+        case AddSlotCommand.COMMAND_WORD:
+            return new AddSlotCommandParser(model).parse(arguments);
+
+        case EditSlotCommand.COMMAND_WORD:
+            return new EditSlotCommandParser(model).parse(arguments);
+
+        case DeleteSlotCommand.COMMAND_WORD:
+            return new DeleteSlotCommandParser().parse(arguments);
+
+        case FindSlotCommand.COMMAND_WORD:
+            return new FindSlotCommandParser().parse(arguments);
+
+        case ConflictCommand.COMMAND_WORD:
+            return new ConflictCommand();
+
+        default:
+            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+}

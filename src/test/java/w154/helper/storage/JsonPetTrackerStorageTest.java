@@ -1,0 +1,108 @@
+package w154.helper.storage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static w154.helper.testutil.Assert.assertThrows;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import w154.helper.commons.exceptions.DataConversionException;
+import w154.helper.model.PetTracker;
+import w154.helper.model.ReadOnlyPetTracker;
+import w154.helper.testutil.Assert;
+import w154.helper.testutil.pet.TypicalPets;
+
+public class JsonPetTrackerStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonPetTrackerStorageTest");
+
+    @TempDir
+    public Path testFolder;
+
+    @Test
+    public void readPetTracker_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> readPetTracker(null));
+    }
+
+    private java.util.Optional<ReadOnlyPetTracker> readPetTracker(String filePath) throws Exception {
+        return new JsonPetTrackerStorage(Paths.get(filePath)).readPetTracker(addToTestDataPathIfNotNull(filePath));
+    }
+
+    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
+        return prefsFileInTestDataFolder != null
+                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+                : null;
+    }
+
+    @Test
+    public void read_missingFile_emptyResult() throws Exception {
+        assertFalse(readPetTracker("NonExistentFile.json").isPresent());
+    }
+
+    @Test
+    public void read_notJsonFormat_exceptionThrown() {
+        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("notJsonFormatPetTracker.json"));
+    }
+
+    @Test
+    public void readPetTracker_invalidPetTracker_throwDataConversionException() {
+        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("invalidPetTracker.json"));
+    }
+
+    @Test
+    public void readPetTracker_invalidAndValidPetTracker_throwDataConversionException() {
+        Assert.assertThrows(DataConversionException.class, () -> readPetTracker("invalidAndValidPetTracker.json"));
+    }
+
+    @Test
+    public void readAndSavePetTracker_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempPetTracker.json");
+        PetTracker original = TypicalPets.getTypicalPetTracker();
+        JsonPetTrackerStorage jsonPetTrackerStorage = new JsonPetTrackerStorage(filePath);
+
+        // Save in new file and read back
+        jsonPetTrackerStorage.savePetTracker(original, filePath);
+        ReadOnlyPetTracker readBack = jsonPetTrackerStorage.readPetTracker(filePath).get();
+        assertEquals(original, new PetTracker(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.addPet(TypicalPets.HOON);
+        original.removePet(TypicalPets.AMY);
+        jsonPetTrackerStorage.savePetTracker(original, filePath);
+        readBack = jsonPetTrackerStorage.readPetTracker(filePath).get();
+        assertEquals(original, new PetTracker(readBack));
+
+        // Save and read without specifying file path
+        original.addPet(TypicalPets.IDA);
+        jsonPetTrackerStorage.savePetTracker(original); // file path not specified
+        readBack = jsonPetTrackerStorage.readPetTracker().get(); // file path not specified
+        assertEquals(original, new PetTracker(readBack));
+
+    }
+
+    @Test
+    public void savePetTracker_nullPetTracker_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> savePetTracker(null, "SomeFile.json"));
+    }
+
+    /**
+     * Saves {@code petTracker} at the specified {@code filePath}.
+     */
+    private void savePetTracker(ReadOnlyPetTracker petTracker, String filePath) {
+        try {
+            new JsonPetTrackerStorage(Paths.get(filePath))
+                    .savePetTracker(petTracker, addToTestDataPathIfNotNull(filePath));
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    @Test
+    public void savePetTracker_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> savePetTracker(new PetTracker(), null));
+    }
+}
