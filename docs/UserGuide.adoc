@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103-W15-4/main
 
-By: `AY1920S2-CS2103-W15-4`      Since: `Feb 2020`      Licence: `MIT`
+By: AY1920S2-CS2103-W15-4    Since: Feb 2020      Licence: MIT
 
 == Introduction
 
@@ -126,7 +126,7 @@ Displays all **_p_**ets.
 - `display s` +
 Displays all **_s_**lots as a list.
 - `display c` +
-Displays all slots in **_c_**alendar view.
+Displays all slots in **_c_**alendar view. Conflicted slots are shown in red color. Non-conflicted slots are in pink.
 - `display i` +
 Displays a list of all pet food (**_i_**nventory) and the needed amount per week.
 
