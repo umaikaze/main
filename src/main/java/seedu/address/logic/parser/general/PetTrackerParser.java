@@ -6,10 +6,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.general.BackUpCommand;
 import seedu.address.logic.commands.general.Command;
 import seedu.address.logic.commands.general.DisplayCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.LoadCommand;
 import seedu.address.logic.commands.general.StatsCommand;
 import seedu.address.logic.commands.pet.AddPetCommand;
 import seedu.address.logic.commands.pet.DeletePetCommand;
@@ -30,6 +32,7 @@ import seedu.address.logic.parser.slot.DeleteSlotParser;
 import seedu.address.logic.parser.slot.EditSlotParser;
 import seedu.address.logic.parser.slot.FindSlotParser;
 import seedu.address.model.Model;
+import seedu.address.storage.Storage;
 
 /**
  * Parse user input.
@@ -41,9 +44,12 @@ public class PetTrackerParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private final Model model;
+    private final Storage storage;
 
-    public PetTrackerParser(Model model) {
+
+    public PetTrackerParser(Model model, Storage storage) {
         this.model = model;
+        this.storage = storage;
     }
 
     /**
@@ -68,7 +74,7 @@ public class PetTrackerParser {
      * Parses user input into command for execution.
      *
      * @param commandWord the command name
-     * @param arguments the string of arguments to the command
+     * @param arguments   the string of arguments to the command
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -87,6 +93,12 @@ public class PetTrackerParser {
 
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
+
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand(storage);
+
+        case LoadCommand.COMMAND_WORD:
+            return new LoadParser(storage).parse(arguments);
 
         // pet tracker
         case AddPetCommand.COMMAND_WORD:

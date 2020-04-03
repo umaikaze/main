@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.BACK_UP_FORMAT;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -62,6 +64,11 @@ public class JsonPetTrackerStorage implements PetTrackerStorage {
     @Override
     public void savePetTracker(ReadOnlyPetTracker petTracker) throws IOException {
         savePetTracker(petTracker, filePath);
+    }
+
+    @Override
+    public void savePetTracker(ReadOnlyPetTracker petTracker, LocalDateTime timestamp) throws IOException {
+        savePetTracker(petTracker, filePath.resolveSibling(timestamp.format(BACK_UP_FORMAT) + ".json"));
     }
 
     /**

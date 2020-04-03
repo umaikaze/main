@@ -207,11 +207,11 @@ Format: `editpet INDEX  [n/NAME] [g/GENDER] [t/TAG]...`
 Example:
 
 - `display p` +
-  `editpet 2 n/Coco b/02/01/2020 t/cuddly t/grey` +
+`editpet 2 n/Coco b/02/01/2020 t/cuddly t/grey` +
 Overwrites information of the 2nd pet in the system with name "Coco", date of birth "2 Jan 2020, and 2 tags of “cuddly”, “grey”.
 
 - `findpets garfield` +
-  `editpet 2 n/Coco` +
+`editpet 2 n/Coco` +
 Overwrites the name of the 2nd pet in the results of `findpets garfield` to "Coco"
 
 - `display s` +
@@ -231,10 +231,10 @@ Format: `deletepet INDEX`
 Examples:
 
 - `display p` +
-  `deletepet 2` +
+`deletepet 2` +
 Deletes the 2nd pet in the system.
 - `findpets n/garfield` +
-  `deletepet 2` +
+`deletepet 2` +
 Deletes the 2nd pet in the results of the `findpets garfield` command.
 - `display i` +
 `deletepet 2`
@@ -303,7 +303,7 @@ Examples:
 `editslot 1 t/16/11/2020 1300 d/120` +
 Edits the datetime and duration of the 1st slot to be `16/11/2020 1300`, and `120` minutes respectively.
 - `findslots t/1/1/2020 +
-   editslot 3 d/45` +
+editslot 3 d/45` +
 Edits the duration of the 3rd slot in the search results of `findslots` to be `45` minutes.
 - `display p` +
 `editslot 12 n/Brian Griffin` +
@@ -345,37 +345,37 @@ Format: `conflicts`
 - **Help**: `help`
 - **Exit**: `exit`
 - **Display**: `display SYSTEM` +
-  e.g. `display p` +
-  e.g. `display s` +
-  e.g. `display c` +
-  e.g. `display i`
+e.g. `display p` +
+e.g. `display s` +
+e.g. `display c` +
+e.g. `display i`
 - **Statistics**: `stats`
 - **Back up**: `backup`
 - **Load backup**: `load FILE_NAME` +
-  e.g. `load 20200402_21_54_52`
+e.g. `load 20200402_21_54_52`
 . Pet-related commands
 - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
-  e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/lasagna`
+e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/lasagna`
 - **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
-  e.g. `findpets n/garfield n/odie t/jon`
+e.g. `findpets n/garfield n/odie t/jon`
 - **Edit pet**: `editpet INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
-  e.g. `editpet 2 n/garfield t/cuddly`
+e.g. `editpet 2 n/garfield t/cuddly`
 - **Delete pet**: `deletepet INDEX` +
-  e.g. `deletepet 2`
+e.g. `deletepet 2`
 . Schedule-related commands
 - **Add slot**: `addslot n/PETNAME t/DATETIME d/DURATION` +
-  e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
-  e.g. `addslot n/Brian Griffin t/17/11/2020 1500 d/45`
+e.g. `addslot n/Coco t/16/11/2020 1300 d/90` +
+e.g. `addslot n/Brian Griffin t/17/11/2020 1500 d/45`
 - **Find slot**: `findslots [n/PETNAME] [t/DATE]` +
-  e.g. `findslots n/Brian Griffin` +
-  e.g. `findslots t/20/2/2020` +
-  e.g. `findslots n/Coco t/16/11/2020`
+e.g. `findslots n/Brian Griffin` +
+e.g. `findslots t/20/2/2020` +
+e.g. `findslots n/Coco t/16/11/2020`
 - **Edit slot**: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]` +
-  e.g. `editslot 1 t/16/11/2020 1300 d/120` +
-  e.g. `editslot 3 d/45` +
-  e.g. `editslot 12 n/Brian Griffin`
+e.g. `editslot 1 t/16/11/2020 1300 d/120` +
+e.g. `editslot 3 d/45` +
+e.g. `editslot 12 n/Brian Griffin`
 - **Delete slot**: `deleteslot INDEX` +
-  e.g. `deleteslot 2`
+e.g. `deleteslot 2`
 - **Show conflicts**: `conflicts`
 
 
@@ -383,4 +383,3 @@ Format: `conflicts`
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Shop Helper folder.
-

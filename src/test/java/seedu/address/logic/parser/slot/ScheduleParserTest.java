@@ -8,10 +8,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
 import static seedu.address.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.slot.AddSlotCommand;
 import seedu.address.logic.commands.slot.DeleteSlotCommand;
@@ -23,14 +26,29 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.slot.Slot;
+import seedu.address.storage.JsonPetTrackerStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
 import seedu.address.testutil.slot.EditSlotDescriptorBuilder;
 import seedu.address.testutil.slot.SlotBuilder;
 import seedu.address.testutil.slot.SlotUtil;
 
 class ScheduleParserTest {
+    @TempDir
+    public Path temporaryFolder;
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
-    private final PetTrackerParser parser = new PetTrackerParser(model);
+    private PetTrackerParser parser;
+
+    @BeforeEach
+    public void setUp() {
+        JsonPetTrackerStorage petTrackerStorage =
+                new JsonPetTrackerStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(petTrackerStorage, userPrefsStorage);
+        parser = new PetTrackerParser(model, storage);
+    }
+
 
     @Test
     public void parseCommand_add() throws Exception {

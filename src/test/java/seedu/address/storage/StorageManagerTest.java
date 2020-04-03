@@ -29,7 +29,7 @@ public class StorageManagerTest {
         storageManager = new StorageManager(petTrackerStorage, userPrefsStorage);
     }
 
-    private Path getTempFilePath(String fileName) {
+    public Path getTempFilePath(String fileName) {
         return testFolder.resolve(fileName);
     }
 
