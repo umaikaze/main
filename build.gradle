@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'petStoreHelper.jar'
+    archiveName = 'petstorehelper.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
