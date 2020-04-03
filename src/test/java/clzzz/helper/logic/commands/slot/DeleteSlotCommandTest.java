@@ -3,6 +3,8 @@ package clzzz.helper.logic.commands.slot;
 import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandFailure;
 import static clzzz.helper.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static clzzz.helper.logic.commands.CommandTestUtil.showSlotAtIndex;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_FIRST_SLOT;
+import static clzzz.helper.testutil.TypicalIndexes.INDEX_SECOND_SLOT;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +17,6 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,8 +28,8 @@ class DeleteSlotCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Slot slotToDelete = model.getFilteredSlotList().get(TypicalIndexes.INDEX_FIRST_SLOT.getZeroBased());
-        DeleteSlotCommand deleteCommand = new DeleteSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT);
+        Slot slotToDelete = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());
+        DeleteSlotCommand deleteCommand = new DeleteSlotCommand(INDEX_FIRST_SLOT);
 
         String expectedMessage = String.format(DeleteSlotCommand.MESSAGE_DELETE_SLOT_SUCCESS, slotToDelete);
 
@@ -48,10 +49,10 @@ class DeleteSlotCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showSlotAtIndex(model, TypicalIndexes.INDEX_FIRST_SLOT);
+        showSlotAtIndex(model, INDEX_FIRST_SLOT);
 
-        Slot slotToDelete = model.getFilteredSlotList().get(TypicalIndexes.INDEX_FIRST_SLOT.getZeroBased());
-        DeleteSlotCommand deleteCommand = new DeleteSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT);
+        Slot slotToDelete = model.getFilteredSlotList().get(INDEX_FIRST_SLOT.getZeroBased());
+        DeleteSlotCommand deleteCommand = new DeleteSlotCommand(INDEX_FIRST_SLOT);
 
         String expectedMessage = String.format(DeleteSlotCommand.MESSAGE_DELETE_SLOT_SUCCESS, slotToDelete);
 
@@ -64,9 +65,9 @@ class DeleteSlotCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showSlotAtIndex(model, TypicalIndexes.INDEX_FIRST_SLOT);
+        showSlotAtIndex(model, INDEX_FIRST_SLOT);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_SLOT;
+        Index outOfBoundIndex = INDEX_SECOND_SLOT;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetTracker().getSlotList().size());
 
@@ -77,14 +78,14 @@ class DeleteSlotCommandTest {
 
     @Test
     public void equals() {
-        DeleteSlotCommand deleteFirstCommand = new DeleteSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT);
-        DeleteSlotCommand deleteSecondCommand = new DeleteSlotCommand(TypicalIndexes.INDEX_SECOND_SLOT);
+        DeleteSlotCommand deleteFirstCommand = new DeleteSlotCommand(INDEX_FIRST_SLOT);
+        DeleteSlotCommand deleteSecondCommand = new DeleteSlotCommand(INDEX_SECOND_SLOT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteSlotCommand deleteFirstCommandCopy = new DeleteSlotCommand(TypicalIndexes.INDEX_FIRST_SLOT);
+        DeleteSlotCommand deleteFirstCommandCopy = new DeleteSlotCommand(INDEX_FIRST_SLOT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

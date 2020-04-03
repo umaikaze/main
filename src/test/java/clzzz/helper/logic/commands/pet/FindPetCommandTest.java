@@ -2,6 +2,9 @@ package clzzz.helper.logic.commands.pet;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_PETS_LISTED_OVERVIEW;
 import static clzzz.helper.logic.commands.CommandTestUtil.assertFindPetCommandSuccess;
+import static clzzz.helper.testutil.pet.TypicalPets.CARL;
+import static clzzz.helper.testutil.pet.TypicalPets.ELLE;
+import static clzzz.helper.testutil.pet.TypicalPets.FIONA;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,7 +19,6 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
-import clzzz.helper.testutil.pet.TypicalPets;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindPetCommand}.
@@ -69,7 +71,7 @@ public class FindPetCommandTest {
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPets.CARL, TypicalPets.ELLE, TypicalPets.FIONA), model.getFilteredPetList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPetList());
     }
 
     /**

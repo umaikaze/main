@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import clzzz.helper.model.pet.exceptions.DuplicatePetException;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
-import clzzz.helper.testutil.Assert;
 import clzzz.helper.testutil.pet.PetBuilder;
 
 public class UniquePetListTest {
@@ -130,7 +129,7 @@ public class UniquePetListTest {
 
     @Test
     public void setPets_nullUniquePetList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.setPets((UniquePetList) null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.setPets((UniquePetList) null));
     }
 
     @Test
@@ -144,7 +143,7 @@ public class UniquePetListTest {
 
     @Test
     public void setPets_nullList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniquePetList.setPets((List<Pet>) null));
+        assertThrows(NullPointerException.class, () -> uniquePetList.setPets((List<Pet>) null));
     }
 
     @Test
