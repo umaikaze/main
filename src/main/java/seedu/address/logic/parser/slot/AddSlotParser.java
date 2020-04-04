@@ -70,8 +70,7 @@ public class AddSlotParser implements Parser<AddSlotCommand> {
         }
         if (dateTime.toLocalDate().isBefore(LocalDate.EPOCH)) {
             warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
-        }
-        if (dateTime.toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
+        } else if (dateTime.toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
             warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
         }
 

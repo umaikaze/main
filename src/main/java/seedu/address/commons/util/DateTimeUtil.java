@@ -23,6 +23,9 @@ public class DateTimeUtil {
     public static final DateTimeFormatter BACK_UP_FORMAT =
             DateTimeFormatter.ofPattern(BACK_UP_PATTERN);
 
+    /**
+     * Check if the given date is a valid date.
+     */
     public static boolean isValidDateString(String date) {
         String[] parsedDate = date.split("/");
         int day = Integer.parseInt(parsedDate[0]);
@@ -31,6 +34,9 @@ public class DateTimeUtil {
         return isValidDate(day, month, year);
     }
 
+    /**
+     * Check if the given time is a valid time.
+     */
     public static boolean isValidTimeString(String time) {
         int timeInt = Integer.parseInt(time);
         if (timeInt < 0 || timeInt >= 2400) {
@@ -42,6 +48,9 @@ public class DateTimeUtil {
         return true;
     }
 
+    /**
+     * Check if the date is valid
+     */
     public static boolean isValidDate(int day, int month, int year) {
         if (day < 1 || day > 31 || month < 1 || month > 12) {
             return false;
@@ -60,10 +69,14 @@ public class DateTimeUtil {
         case 9:
         case 11:
             return day <= 30;
+        default:
+            return true;
         }
-        return true;
     }
 
+    /**
+     * Check if the given yrat is a leap year.
+     */
     public static boolean isLeap(int year) {
         if (year % 400 == 0) {
             return true;
