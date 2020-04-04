@@ -35,7 +35,14 @@ public class StringUtil {
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+                .anyMatch(eachWord -> containsAsSubstringIgnoreCase(eachWord, preppedWord));
+    }
+
+    /**
+     * Check if the key word appears as a substring.
+     */
+    private static boolean containsAsSubstringIgnoreCase(String wordInSentence, String keyWord) {
+        return wordInSentence.toLowerCase().contains(keyWord.toLowerCase());
     }
 
     /**
