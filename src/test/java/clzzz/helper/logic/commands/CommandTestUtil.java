@@ -136,7 +136,7 @@ public class CommandTestUtil {
     public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                                    Model expectedModel) {
         CommandResult expectedCommandResult =
-                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS, false);
+                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
