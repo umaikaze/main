@@ -13,8 +13,14 @@ public class Messages {
     public static final String MESSAGE_PETS_LISTED_OVERVIEW = "%1$d pets listed!\n";
     public static final String MESSAGE_SLOTS_LISTED_OVERVIEW = "%1$d slots listed!\n";
     public static final String MESSAGE_SLOT_NOT_IN_ONE_DAY = "Slot does not start and end on the same day!";
+    public static final String MESSAGE_INVALID_DATE = "The date entered is not a valid date.\n";
+    public static final String MESSAGE_INVALID_TIME = "The time entered is not a valid time.\n";
+    public static final String MESSAGE_INVALID_DATE_TIME = "The date and time entered are not valid.\n";
 
-    public static final String WARNING_MESSAGE_DATE_TOO_EARLY = "Warning: The date entered might be too early.";
+
+    public static final String WARNING_MESSAGE_DATE_TOO_EARLY = "Warning: The date entered might be too early.\n";
+    public static final String WARNING_MESSAGE_DATE_TOO_LATE = "Warning: The date entered might be too late.\n";
+
 
     public static final String WARNING_MESSAGE_END = "Only the last one will be accepted.\n";
     public static final String WARNING_MESSAGE_NAME = "Warning: You have entered more than 1 entries for "

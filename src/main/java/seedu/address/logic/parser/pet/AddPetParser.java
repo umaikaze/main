@@ -75,6 +75,9 @@ public class AddPetParser implements Parser<AddPetCommand> {
         if (dateOfBirth.value.isBefore(LocalDate.EPOCH)) {
             warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
         }
+        if (dateOfBirth.value.isAfter(LocalDate.now())) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
+        }
         return new AddPetCommand(pet, warningMessage);
     }
 

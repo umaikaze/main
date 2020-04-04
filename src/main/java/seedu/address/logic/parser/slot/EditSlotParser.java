@@ -71,6 +71,9 @@ public class EditSlotParser implements Parser<EditSlotCommand> {
             if (SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
                     .toLocalDate().isBefore(LocalDate.EPOCH)) {
                 warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+            } else if (SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
+                    .toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
             }
         }
         if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {

@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.general.exceptions.ParseException;
 import seedu.address.model.pet.DateOfBirth;
@@ -93,6 +95,9 @@ public class ParserUtil {
         String trimmedDateOfBirth = dateOfBirth.trim();
         if (!DateOfBirth.isValidDateOfBirth(trimmedDateOfBirth)) {
             throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        if (!DateTimeUtil.isValidDateString(trimmedDateOfBirth)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
         return new DateOfBirth(trimmedDateOfBirth);
     }

@@ -76,6 +76,9 @@ public class EditPetParser implements Parser<EditPetCommand> {
             if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()).value.isBefore(LocalDate.EPOCH)) {
                 warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
             }
+            if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get()).value.isAfter(LocalDate.now())) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
+            }
         }
         if (argMultimap.getValue(PREFIX_SPECIES).isPresent()) {
             editPetDescriptor.setSpecies(ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get()));

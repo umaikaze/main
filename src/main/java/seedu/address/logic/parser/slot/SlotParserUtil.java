@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
@@ -78,6 +79,15 @@ public class SlotParserUtil {
             parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
+        }
+        if (!DateTimeUtil.isValidDateString(trimmedDateTime.split("\\s+")[0])) {
+            if (!DateTimeUtil.isValidTimeString(trimmedDateTime.split("\\s+")[1])) {
+                throw new ParseException(Messages.MESSAGE_INVALID_DATE_TIME);
+            }
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+        }
+        if (!DateTimeUtil.isValidTimeString(trimmedDateTime.split("\\s+")[1])) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
         }
         return parsedDateTime;
     }
