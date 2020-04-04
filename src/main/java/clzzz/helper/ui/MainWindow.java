@@ -141,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
             break;
         case NO_CHANGE:
-            // do nothing since system does not change
+            handleChangeDisplay(logic.getDisplaySystemType());
             break;
         default:
             throw new CommandException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);

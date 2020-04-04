@@ -154,12 +154,16 @@ public interface Model {
      */
     void updateFilteredFoodCollectionList(Predicate<FoodCollection> predicate);
 
+    void updateAll();
+
     /**
      * Returns an unmodifiable view of the filtered list of display items.
      */
     ObservableList<DisplayItem> getFilteredDisplayList();
 
     DisplaySystemType getCurrentDisplaySystemType();
+
+    void setCurrentDisplaySystemType(DisplaySystemType type);
 
     /**
      * Changes the list to be displayed.

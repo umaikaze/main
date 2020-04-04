@@ -1,6 +1,5 @@
 package clzzz.helper.logic.commands.slot;
 
-import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
@@ -22,8 +21,8 @@ public class ConflictCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
+        model.setCurrentDisplaySystemType(DisplaySystemType.SCHEDULE);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),
                 false, false, DisplaySystemType.SCHEDULE);

@@ -152,7 +152,6 @@ public class ModelManager implements Model {
         filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
         filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
         filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
-        currentDisplaySystemType = DisplaySystemType.PETS;
     }
 
     //=========== Slot  ================================================================================
@@ -192,7 +191,6 @@ public class ModelManager implements Model {
         filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
         filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
         filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
-        currentDisplaySystemType = DisplaySystemType.SCHEDULE;
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -206,7 +204,6 @@ public class ModelManager implements Model {
         filteredFoodCollections.setPredicate(predicate);
         filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
         filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
-        currentDisplaySystemType = DisplaySystemType.INVENTORY;
     }
 
     public ObservableList<FoodCollection> getFilteredFoodCollectionList() {
@@ -216,13 +213,27 @@ public class ModelManager implements Model {
     //=========== Common methods =============================================================
 
     @Override
+    public void updateAll() {
+        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+        filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
+        filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+    }
+
+
+    @Override
     public ObservableList<DisplayItem> getFilteredDisplayList() {
         return filteredDisplayItems;
     }
 
-
+    @Override
     public DisplaySystemType getCurrentDisplaySystemType() {
         return currentDisplaySystemType;
+    }
+
+    @Override
+    public void setCurrentDisplaySystemType(DisplaySystemType type) {
+        assert !currentDisplaySystemType.equals(DisplaySystemType.NO_CHANGE);
+        currentDisplaySystemType = type;
     }
 
     @Override
@@ -230,9 +241,7 @@ public class ModelManager implements Model {
      * Used for display all pets/slots/inventory in display command.
      */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
-        filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
-        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
-        filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+        updateAll();
         switch (newDisplayType) {
         case PETS:
             filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);

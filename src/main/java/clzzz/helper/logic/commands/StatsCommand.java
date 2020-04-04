@@ -16,9 +16,8 @@ public class StatsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
-        model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
-        model.updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
+        model.updateAll();
+        model.setCurrentDisplaySystemType(DisplaySystemType.STATISTICS);
         return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.STATISTICS);
     }
 
