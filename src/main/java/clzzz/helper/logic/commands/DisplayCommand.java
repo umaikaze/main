@@ -40,7 +40,7 @@ public class DisplayCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);
         }
         String message = String.format(getMessageSuccess(), type);
-        return new CommandResult(message, false, false, type, false);
+        return new CommandResult(message, false, false, type);
     }
 
     public String getMessageSuccess() {

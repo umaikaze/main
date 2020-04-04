@@ -9,6 +9,7 @@ public enum DisplaySystemType {
     INVENTORY("i"),
     CALENDAR("c"),
     FOOD_AMOUNT_AND_PET("fp"),
+    STATISTICS("stats"),
     NO_CHANGE(DisplaySystemType.UNUSED_CLI_ARG);
 
     public static final String MESSAGE_CONSTRAINTS =

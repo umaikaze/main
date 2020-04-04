@@ -43,7 +43,7 @@ public class FindSlotCommand extends Command {
         model.updateFilteredSlotList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size())
-                        + warningMessage, false, false, DisplaySystemType.SCHEDULE, false);
+                        + warningMessage, false, false, DisplaySystemType.SCHEDULE);
 
     }
 

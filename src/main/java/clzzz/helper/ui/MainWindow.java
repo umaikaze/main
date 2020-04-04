@@ -134,6 +134,11 @@ public class MainWindow extends UiPart<Stage> {
             calendarPanel.construct();
             resultDisplayPlaceholder.getChildren().set(0, calendarPanel.getRoot());
             break;
+        case STATISTICS:
+            resultDisplayPlaceholder.getChildren().clear();
+            overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
+                    logic.getFilteredFoodCollectionList());
+            resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
         case NO_CHANGE:
             // do nothing since system does not change
             break;
@@ -158,16 +163,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
     }
 
-    /**
-     *  Display overall statistics
-     */
-    public void handleStats() {
-        //TODO: move this under the display switching
-        resultDisplayPlaceholder.getChildren().clear();
-        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
-                logic.getFilteredFoodCollectionList());
-        resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
-    }
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -211,10 +206,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowStats()) {
-                handleStats();
-            }
 
             handleChangeDisplay(commandResult.getDisplaySystemType());
 
