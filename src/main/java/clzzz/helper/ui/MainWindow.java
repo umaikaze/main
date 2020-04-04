@@ -139,6 +139,7 @@ public class MainWindow extends UiPart<Stage> {
             overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
                     logic.getFilteredFoodCollectionList());
             resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
+            break;
         case NO_CHANGE:
             // do nothing since system does not change
             break;
