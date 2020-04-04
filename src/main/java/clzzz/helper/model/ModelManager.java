@@ -227,6 +227,7 @@ public class ModelManager implements Model {
 
     @Override
     public DisplaySystemType getCurrentDisplaySystemType() {
+        assert !currentDisplaySystemType.equals(DisplaySystemType.NO_CHANGE);
         return currentDisplaySystemType;
     }
 
