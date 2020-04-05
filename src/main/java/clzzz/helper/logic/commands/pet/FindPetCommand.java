@@ -3,9 +3,9 @@ package clzzz.helper.logic.commands.pet;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.Command;
 import clzzz.helper.logic.commands.CommandResult;
-import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
 import clzzz.helper.ui.DisplaySystemType;
@@ -30,10 +30,10 @@ public class FindPetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws IllegalValueException {
         requireNonNull(model);
         model.updateFilteredPetList(predicate);
-        model.setCurrentDisplaySystemType(DisplaySystemType.PETS);
+        model.changeDisplaySystem(DisplaySystemType.PETS);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PETS_LISTED_OVERVIEW, model.getFilteredPetList().size()),
                 false, false, DisplaySystemType.PETS);

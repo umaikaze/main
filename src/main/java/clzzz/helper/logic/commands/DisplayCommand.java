@@ -35,6 +35,7 @@ public class DisplayCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
+            model.updateAll();
             model.changeDisplaySystem(type);
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_INVALID_SYSTEM_TYPE);

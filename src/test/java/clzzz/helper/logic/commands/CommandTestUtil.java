@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import clzzz.helper.commons.core.index.Index;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
@@ -113,7 +114,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
-        } catch (CommandException ce) {
+        } catch (CommandException | IllegalValueException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }

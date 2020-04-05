@@ -163,7 +163,6 @@ public interface Model {
 
     DisplaySystemType getCurrentDisplaySystemType();
 
-    void setCurrentDisplaySystemType(DisplaySystemType type);
 
     /**
      * Changes the list to be displayed.

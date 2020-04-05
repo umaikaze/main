@@ -151,7 +151,6 @@ public class ModelManager implements Model {
         filteredPets.setPredicate(predicate);
         filteredSlots.setPredicate(PREDICATE_SHOW_ALL_SLOTS);
         filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
-        filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
     }
 
     //=========== Slot  ================================================================================
@@ -190,7 +189,6 @@ public class ModelManager implements Model {
         filteredSlots.setPredicate(predicate);
         filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
         filteredFoodCollections.setPredicate(PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
-        filteredDisplayItems = CollectionUtil.map(filteredSlots, slot -> slot);
     }
 
     //=========== Filtered Food Collection List Accessors =============================================================
@@ -232,17 +230,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setCurrentDisplaySystemType(DisplaySystemType type) {
-        assert !currentDisplaySystemType.equals(DisplaySystemType.NO_CHANGE);
-        currentDisplaySystemType = type;
-    }
-
-    @Override
     /**
      * Used for display all pets/slots/inventory in display command.
      */
     public void changeDisplaySystem(DisplaySystemType newDisplayType) throws IllegalValueException {
-        updateAll();
         switch (newDisplayType) {
         case PETS:
             filteredDisplayItems = CollectionUtil.map(filteredPets, pet -> pet);
@@ -255,6 +246,8 @@ public class ModelManager implements Model {
                     CollectionUtil.map(petTracker.getFoodCollectionList(), foodCollection -> foodCollection);
             break;
         case CALENDAR: // do nothing since calendar does not depend on filteredDisplayItems
+            break;
+        case STATISTICS: //same as calendar
             break;
         default:
             throw new IllegalValueException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);

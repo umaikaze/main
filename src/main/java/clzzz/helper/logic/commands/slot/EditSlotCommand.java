@@ -18,7 +18,6 @@ import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
-import clzzz.helper.ui.DisplaySystemType;
 
 /**
  * Edits the details of an slot in the schedule.
@@ -88,7 +87,6 @@ public class EditSlotCommand extends Command {
 
         model.setSlot(slotToEdit, editedSlot);
         model.updateFilteredSlotList(model.PREDICATE_SHOW_ALL_SLOTS);
-        model.setCurrentDisplaySystemType((DisplaySystemType.SCHEDULE));
         return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot) + warningMessage);
     }
 

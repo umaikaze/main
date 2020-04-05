@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.Command;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.model.Model;
@@ -38,10 +39,10 @@ public class FindSlotCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws IllegalValueException {
         requireNonNull(model);
         model.updateFilteredSlotList(predicate);
-        model.setCurrentDisplaySystemType(DisplaySystemType.SCHEDULE);
+        model.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size())
                         + warningMessage, false, false, DisplaySystemType.SCHEDULE);

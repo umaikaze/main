@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.Logic;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.DisplayCommand;
@@ -202,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see clzzz.helper.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, IllegalValueException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());

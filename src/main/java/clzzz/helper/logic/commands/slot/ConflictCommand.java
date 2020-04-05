@@ -3,6 +3,7 @@ package clzzz.helper.logic.commands.slot;
 import static java.util.Objects.requireNonNull;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.Command;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.model.Model;
@@ -19,10 +20,10 @@ public class ConflictCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws IllegalValueException {
         requireNonNull(model);
         model.updateFilteredSlotList(new SlotConflictPredicate(model.getFilteredSlotList()));
-        model.setCurrentDisplaySystemType(DisplaySystemType.SCHEDULE);
+        model.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, model.getFilteredSlotList().size()),
                 false, false, DisplaySystemType.SCHEDULE);

@@ -28,7 +28,6 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
-import clzzz.helper.ui.DisplaySystemType;
 
 /**
  * Edits the details of an existing pet in the pet tracker.
@@ -108,7 +107,6 @@ public class EditPetCommand extends Command {
 
         model.setPet(petToEdit, editedPet);
         model.updateFilteredPetList(model.PREDICATE_SHOW_ALL_PETS);
-        model.setCurrentDisplaySystemType((DisplaySystemType.PETS));
         return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet) + warningMessage);
 
     }
