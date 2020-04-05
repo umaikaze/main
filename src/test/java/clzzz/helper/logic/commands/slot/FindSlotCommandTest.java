@@ -1,7 +1,9 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
+import static clzzz.helper.logic.commands.CommandTestUtil.assertFindPetCommandSuccess;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,6 +24,7 @@ import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotPetNamePredicate;
 import clzzz.helper.testutil.slot.TypicalSlots;
+
 
 class FindSlotCommandTest {
 
@@ -66,6 +69,16 @@ class FindSlotCommandTest {
     public void execute_multipleKeywords_multipleSlotsFound() throws ParseException {
         Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
         expectedModel.updateFilteredSlotList(predicate);
+        assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
+    }
+
+    @Test
+    public void execute_partialKeyWords_multipleSlotsFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 2);
+        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(PREFIX_NAME + "CO garf");
+        FindSlotCommand command = new FindSlotCommand(predicate, "");
+        expectedModel.updateFilteredSlotList(predicate);
+        assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
     }
 }
