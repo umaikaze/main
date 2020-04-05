@@ -33,13 +33,6 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         this.duration = duration;
     }
 
-    // public Slot(Pet pet, LocalDateTime dateTime, Duration duration) {
-    //     requireAllNonNull(pet, dateTime, duration);
-    //     this.pet = pet;
-    //     this.dateTime = new DateTime(dateTime);
-    //     this.duration = duration;
-    // }
-
     public Pet getPet() {
         return pet;
     }

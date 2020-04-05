@@ -45,7 +45,7 @@ public class EditSlotDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code LocalDateTime} of the {@code EditSlotDescriptor} that we are building.
+     * Sets the {@code DateTime} of the {@code EditSlotDescriptor} that we are building.
      */
     public EditSlotDescriptorBuilder withDateTime(String dateTime) {
         descriptor.setDateTime(new DateTime(dateTime));

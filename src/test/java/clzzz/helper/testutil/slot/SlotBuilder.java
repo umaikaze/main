@@ -47,7 +47,7 @@ public class SlotBuilder {
     }
 
     /**
-     * Sets the {@code LocalDateTime} of the {@code Slot} that we are building.
+     * Sets the {@code DateTime} of the {@code Slot} that we are building.
      */
     public SlotBuilder withDateTime(String dateTime) {
         this.dateTime = new DateTime(dateTime);
@@ -55,7 +55,7 @@ public class SlotBuilder {
     }
 
     /**
-     * Sets the {@code LocalDateTime} of the {@code Slot} that we are building.
+     * Sets the {@code Duration} of the {@code Slot} that we are building.
      */
     public SlotBuilder withDuration(String duration) {
         this.duration = Duration.ofMinutes(Long.parseLong(duration));
