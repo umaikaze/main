@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.commons.core.Messages;
@@ -65,23 +66,23 @@ class FindSlotCommandTest {
     }
 
     @Test
-    public void execute_multiplePrefixes_oneSlotFound() throws ParseException {
+    public void execute_multiplePrefixes_oneSlotFound() throws IllegalValueException {
         Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(NAME_DESC_COCO + " " + NAME_DESC_GARFIELD);
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         String expectedMessage = String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, 1);
         expectedModel.updateFilteredSlotList(predicate);
-        expectedModel.setCurrentDisplaySystemType(DisplaySystemType.SCHEDULE);
+        expectedModel.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         assertEquals(Arrays.asList(TypicalSlots.GARFIELD_SLOT), expectedModel.getFilteredSlotList());
         assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.SCHEDULE);
     }
 
     @Test
-    public void execute_multipleNames_multipleSlotsFound() throws ParseException {
+    public void execute_multipleNames_multipleSlotsFound() throws IllegalValueException {
         Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(NAME_DESC_COCO + " " + VALID_NAME_GARFIELD);
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         String expectedMessage = String.format(Messages.MESSAGE_SLOTS_LISTED_OVERVIEW, 2);
         expectedModel.updateFilteredSlotList(predicate);
-        expectedModel.setCurrentDisplaySystemType(DisplaySystemType.SCHEDULE);
+        expectedModel.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         assertEquals(TypicalSlots.getTypicalSlots(), expectedModel.getFilteredSlotList());
         assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.SCHEDULE);
     }

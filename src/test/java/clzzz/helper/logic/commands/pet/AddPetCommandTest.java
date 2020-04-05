@@ -206,11 +206,6 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void setCurrentDisplaySystemType(DisplaySystemType type) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateAll() {
             throw new AssertionError("This method should not be called.");
         }
