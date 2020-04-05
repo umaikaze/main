@@ -4,7 +4,6 @@ import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
@@ -21,24 +20,31 @@ import clzzz.helper.ui.list.DisplayItem;
 public class Slot implements Comparable<Slot>, DisplayItem {
 
     private final Pet pet;
-    private final LocalDateTime dateTime;
+    private final DateTime dateTime;
     private final Duration duration;
 
     /**
      * Every field must be present and not null.
      */
-    public Slot(Pet pet, LocalDateTime dateTime, Duration duration) {
+    public Slot(Pet pet, DateTime dateTime, Duration duration) {
         requireAllNonNull(pet, dateTime, duration);
         this.pet = pet;
         this.dateTime = dateTime;
         this.duration = duration;
     }
 
+    // public Slot(Pet pet, LocalDateTime dateTime, Duration duration) {
+    //     requireAllNonNull(pet, dateTime, duration);
+    //     this.pet = pet;
+    //     this.dateTime = new DateTime(dateTime);
+    //     this.duration = duration;
+    // }
+
     public Pet getPet() {
         return pet;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -64,7 +70,7 @@ public class Slot implements Comparable<Slot>, DisplayItem {
      * Returns the ending datetime of the slot, based on its starting datetime and duration.
      */
 
-    public LocalDateTime getEndDateTime() {
+    public DateTime getEndDateTime() {
         return getDateTime().plus(duration);
     }
 
@@ -104,10 +110,10 @@ public class Slot implements Comparable<Slot>, DisplayItem {
             // and having the same duration must be in conflict with each other.
             return true;
         }
-        LocalDateTime start = getDateTime();
-        LocalDateTime end = getEndDateTime();
-        LocalDateTime otherStart = otherSlot.getDateTime();
-        LocalDateTime otherEnd = otherSlot.getEndDateTime();
+        DateTime start = getDateTime();
+        DateTime end = getEndDateTime();
+        DateTime otherStart = otherSlot.getDateTime();
+        DateTime otherEnd = otherSlot.getEndDateTime();
         return start.isBefore(otherEnd) && otherStart.isBefore(end);
     }
 
@@ -117,6 +123,13 @@ public class Slot implements Comparable<Slot>, DisplayItem {
     public boolean hasConflict(List<Slot> allSlots) {
         return allSlots.stream()
                 .anyMatch(otherSlot -> isInConflictWith(otherSlot));
+    }
+
+    /**
+     * Returns a new slot, with the current pet replaced with {@code newPet}.
+     */
+    public Slot replacePetWith(Pet newPet) {
+        return new Slot(newPet, dateTime, duration);
     }
 
     /**

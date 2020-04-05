@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
+import clzzz.helper.model.slot.DateTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -24,8 +24,6 @@ import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATETIME =
-            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + ".";
     public static final String MESSAGE_INVALID_DATE = "Date must follow format " + DateTimeUtil.DATE_PATTERN + ".";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
@@ -70,16 +68,13 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        LocalDateTime parsedDateTime;
-        try {
-            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATETIME);
+        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        return parsedDateTime;
+        return new DateTime(trimmedDateTime);
     }
 
     /**

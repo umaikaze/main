@@ -3,12 +3,11 @@ package clzzz.helper.testutil.slot;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 
-import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Name;
+import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
 
 /**
@@ -49,7 +48,7 @@ public class EditSlotDescriptorBuilder {
      * Sets the {@code LocalDateTime} of the {@code EditSlotDescriptor} that we are building.
      */
     public EditSlotDescriptorBuilder withDateTime(String dateTime) {
-        descriptor.setDateTime(LocalDateTime.parse(dateTime, DateTimeUtil.DATETIME_FORMAT));
+        descriptor.setDateTime(new DateTime(dateTime));
         return this;
     }
 

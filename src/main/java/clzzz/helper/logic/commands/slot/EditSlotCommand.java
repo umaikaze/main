@@ -6,7 +6,6 @@ import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +17,7 @@ import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
 
 /**
@@ -64,7 +64,7 @@ public class EditSlotCommand extends Command {
         assert slotToEdit != null;
 
         Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
-        LocalDateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
+        DateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
         Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
 
         return new Slot(updatedPet, updatedDateTime, updatedDuration);
@@ -116,7 +116,7 @@ public class EditSlotCommand extends Command {
      */
     public static class EditSlotDescriptor {
         private Pet pet;
-        private LocalDateTime dateTime;
+        private DateTime dateTime;
         private Duration duration;
 
         public EditSlotDescriptor() {}
@@ -146,11 +146,11 @@ public class EditSlotCommand extends Command {
             this.pet = pet;
         }
 
-        public Optional<LocalDateTime> getDateTime() {
+        public Optional<DateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
         }
 
-        public void setDateTime(LocalDateTime dateTime) {
+        public void setDateTime(DateTime dateTime) {
             this.dateTime = dateTime;
         }
 

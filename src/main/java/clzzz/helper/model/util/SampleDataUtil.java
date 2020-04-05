@@ -1,9 +1,6 @@
 package clzzz.helper.model.util;
 
-import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
-
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +14,7 @@ import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
+import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.tag.Tag;
 
@@ -43,11 +41,11 @@ public class SampleDataUtil {
 
     public static Slot[] getSampleSlots(PetTracker samplePt) {
         return new Slot[]{
-            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("1/4/2020 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("Alex")), new DateTime("1/4/2020 1200"),
                     Duration.ofMinutes(Long.parseLong("75"))),
-            new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("7/7/2020 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("David")), new DateTime("7/7/2020 1200"),
                     Duration.ofMinutes(Long.parseLong("88"))),
-            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("2/4/2020 1200", DATETIME_FORMAT),
+            new Slot(samplePt.getPet(new Name("Elsa")), new DateTime("2/4/2020 1200"),
                     Duration.ofMinutes(Long.parseLong("100")))};
     }
 

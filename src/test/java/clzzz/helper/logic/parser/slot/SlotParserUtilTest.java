@@ -1,6 +1,5 @@
 package clzzz.helper.logic.parser.slot;
 
-import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.pet.TypicalPets.COCO;
@@ -8,7 +7,6 @@ import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlot
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +14,7 @@ import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
+import clzzz.helper.model.slot.DateTime;
 
 class SlotParserUtilTest {
 
@@ -31,7 +30,7 @@ class SlotParserUtilTest {
 
     private static final String WHITESPACE = " \t\r\n";
 
-    private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE, DATETIME_FORMAT);
+    private static final DateTime DATETIME = new DateTime(VALID_DATE);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 

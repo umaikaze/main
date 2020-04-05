@@ -2,8 +2,8 @@ package clzzz.helper.ui;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -121,13 +121,13 @@ public class OverallStats extends UiPart<Region> {
     public void getScheduleStats(ObservableList<Slot> slots) {
         for (Slot s : slots) {
             if (s.getDate().equals(LocalDate.now())) {
-                createRectangles(s.getDateTime(), s.getDuration(),
+                createRectangles(s.getTime(), s.getDuration(),
                         timeTablePlaceHolder.widthProperty().divide(10000000), false, false);
             } else if (s.getDate().equals(LocalDate.now().plusDays(1))) {
-                createRectangles(s.getDateTime(), s.getDuration(),
+                createRectangles(s.getTime(), s.getDuration(),
                         timeTablePlaceHolder.widthProperty().divide(3), true, false);
             } else if (s.getDate().equals(LocalDate.now().plusDays(2))) {
-                createRectangles(s.getDateTime(), s.getDuration(),
+                createRectangles(s.getTime(), s.getDuration(),
                         timeTablePlaceHolder.widthProperty().divide(3).multiply(2), false, true);
             }
         }
@@ -140,11 +140,11 @@ public class OverallStats extends UiPart<Region> {
      * @param xCoordinate x coordinate of the rectangle
      * @param isLastDay if the date is third day from now
      */
-    public void createRectangles(LocalDateTime time, Duration duration,
+    public void createRectangles(LocalTime time, Duration duration,
                                  DoubleBinding xCoordinate, boolean isSecondDay, boolean isLastDay) {
         Rectangle rec = new Rectangle();
         //find start point of the rectangle
-        long minutes = ChronoUnit.MINUTES.between(time.toLocalDate().atStartOfDay(), time);
+        long minutes = time.get(ChronoField.MINUTE_OF_DAY);
         //set position of the rectangles
         rec.xProperty().bind(xCoordinate);
         rec.yProperty().bind(timeTablePlaceHolder.heightProperty().multiply(minutes).divide(60 * 24));
@@ -161,15 +161,11 @@ public class OverallStats extends UiPart<Region> {
                     .multiply(24 * 60 - minutes).divide(24 * 60));
             if (!isLastDay) {
                 if (isSecondDay) {
-                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
-                            timeTablePlaceHolder.widthProperty().divide(3).multiply(2),
-                            false, true);
+                    createRectangles(time, Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3).multiply(2), false, true);
                 } else {
-                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
-                            timeTablePlaceHolder.widthProperty().divide(3),
-                            true, false);
+                    createRectangles(time, Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
+                            timeTablePlaceHolder.widthProperty().divide(3), true, false);
                 }
             }
         } else {
