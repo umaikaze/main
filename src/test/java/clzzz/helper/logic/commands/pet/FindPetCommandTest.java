@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 
-import clzzz.helper.ui.DisplaySystemType;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
+import clzzz.helper.ui.DisplaySystemType;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindPetCommand}.
