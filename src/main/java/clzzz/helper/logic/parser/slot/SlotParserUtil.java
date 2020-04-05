@@ -104,7 +104,7 @@ public class SlotParserUtil {
         if (!Slot.isValidDate(trimmedDate)) {
             throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
-        return LocalDate.parse(trimmedDate, DateTimeUtil.DATETIME_FORMAT);
+        return LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
     }
 
     /**

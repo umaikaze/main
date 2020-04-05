@@ -35,9 +35,9 @@ class DateOfBirthTest {
         assertFalse(DateOfBirth.isValidDateFormat("7-3")); // date and month only
 
         //Invalid dates
-        assertFalse(DateOfBirth.isValidDateFormat("29/2/2019"));
-        assertFalse(DateOfBirth.isValidDateFormat("-1/1/2019"));
-        assertFalse(DateOfBirth.isValidDateFormat("31/4/2019"));
+        assertFalse(DateOfBirth.isValidDate("29/2/2019"));
+        assertFalse(DateOfBirth.isValidDate("-1/1/2019"));
+        assertFalse(DateOfBirth.isValidDate("31/4/2019"));
 
 
         // Good dates

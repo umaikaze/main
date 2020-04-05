@@ -117,7 +117,7 @@ class SlotParserUtilTest {
 
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
-        assertEquals(DATETIME, SlotParserUtil.parseDateTime(WHITESPACE + VALID_DATE + WHITESPACE));
+        assertEquals(DATETIME, SlotParserUtil.parseDateTime(WHITESPACE + VALID_DATETIME + WHITESPACE));
     }
 
     @Test
