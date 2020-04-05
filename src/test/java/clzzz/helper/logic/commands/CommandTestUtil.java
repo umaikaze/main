@@ -133,12 +133,13 @@ public class CommandTestUtil {
      * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                                   Model expectedModel) {
+    public static void assertFindCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                   Model expectedModel, DisplaySystemType type) {
         CommandResult expectedCommandResult =
-                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS);
+                new CommandResult(expectedMessage, false, false, type);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

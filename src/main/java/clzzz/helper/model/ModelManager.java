@@ -279,7 +279,10 @@ public class ModelManager implements Model {
         return petTracker.equals(other.petTracker)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPets.equals(other.filteredPets)
-                && filteredSlots.equals(other.filteredSlots);
+                && filteredSlots.equals(other.filteredSlots)
+                && filteredFoodCollections.equals(other.filteredFoodCollections)
+                && currentDisplaySystemType.equals(other.currentDisplaySystemType)
+                && filteredDisplayItems.equals(other.filteredDisplayItems);
     }
 
 }

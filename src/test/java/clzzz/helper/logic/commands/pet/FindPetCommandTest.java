@@ -1,7 +1,7 @@
 package clzzz.helper.logic.commands.pet;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_PETS_LISTED_OVERVIEW;
-import static clzzz.helper.logic.commands.CommandTestUtil.assertFindPetCommandSuccess;
+import static clzzz.helper.logic.commands.CommandTestUtil.assertFindCommandSuccess;
 import static clzzz.helper.testutil.pet.TypicalPets.CARL;
 import static clzzz.helper.testutil.pet.TypicalPets.ELLE;
 import static clzzz.helper.testutil.pet.TypicalPets.FIONA;
@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 
+import clzzz.helper.ui.DisplaySystemType;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.model.Model;
@@ -60,7 +61,7 @@ public class FindPetCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
-        assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.PETS);
         assertEquals(Collections.emptyList(), model.getFilteredPetList());
     }
 
@@ -70,7 +71,7 @@ public class FindPetCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Carl Elle Fiona");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
-        assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.PETS);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPetList());
     }
 
