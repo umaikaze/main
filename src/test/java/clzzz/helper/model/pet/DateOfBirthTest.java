@@ -22,22 +22,28 @@ class DateOfBirthTest {
     @Test
     void isValidDateOfBirth() {
         // Non-dates
-        assertFalse(DateOfBirth.isValidDateOfBirth(" ")); // just empty space
-        assertFalse(DateOfBirth.isValidDateOfBirth("not a date")); // a sentence
+        assertFalse(DateOfBirth.isValidDateFormat(" ")); // just empty space
+        assertFalse(DateOfBirth.isValidDateFormat("not a date")); // a sentence
 
         // Badly formatted dates
-        assertFalse(DateOfBirth.isValidDateOfBirth("7-Mar-2020")); // d MMM yyyy
-        assertFalse(DateOfBirth.isValidDateOfBirth("2020-03-10")); // yyyy mm dd
-        assertFalse(DateOfBirth.isValidDateOfBirth("10-3-20")); // d-M-yy
-        assertFalse(DateOfBirth.isValidDateOfBirth("7_3_2020")); // bad seperator
-        assertFalse(DateOfBirth.isValidDateOfBirth("7-3-2020")); // bad seperator
-        assertFalse(DateOfBirth.isValidDateOfBirth("2020")); // year only
-        assertFalse(DateOfBirth.isValidDateOfBirth("7-3")); // date and month only
+        assertFalse(DateOfBirth.isValidDateFormat("7-Mar-2020")); // d MMM yyyy
+        assertFalse(DateOfBirth.isValidDateFormat("2020-03-10")); // yyyy mm dd
+        assertFalse(DateOfBirth.isValidDateFormat("10-3-20")); // d-M-yy
+        assertFalse(DateOfBirth.isValidDateFormat("7_3_2020")); // bad seperator
+        assertFalse(DateOfBirth.isValidDateFormat("7-3-2020")); // bad seperator
+        assertFalse(DateOfBirth.isValidDateFormat("2020")); // year only
+        assertFalse(DateOfBirth.isValidDateFormat("7-3")); // date and month only
+
+        //Invalid dates
+        assertFalse(DateOfBirth.isValidDateFormat("29/2/2019"));
+        assertFalse(DateOfBirth.isValidDateFormat("-1/1/2019"));
+        assertFalse(DateOfBirth.isValidDateFormat("31/4/2019"));
+
 
         // Good dates
-        assertTrue(DateOfBirth.isValidDateOfBirth("7/3/2020")); // d/M/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("07/03/2020")); // dd/MM/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("7/03/2020")); // d/MM/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("07/3/2020")); // dd/M/yyyy
+        assertTrue(DateOfBirth.isValidDate("7/3/2020")); // d/M/uuuu
+        assertTrue(DateOfBirth.isValidDate("07/03/2020")); // dd/MM/uuuu
+        assertTrue(DateOfBirth.isValidDate("7/03/2020")); // d/MM/uuuu
+        assertTrue(DateOfBirth.isValidDate("07/3/2020")); // dd/M/uuuu
     }
 }

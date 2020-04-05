@@ -11,12 +11,12 @@ import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
  * Represents a Pet's date of birth.
- * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of birth must follow the format of " + DateTimeUtil.DATE_PATTERN + ".";
+            "Date of birth must follow the format of d/M/yyyy.";
 
     public final LocalDate value;
 

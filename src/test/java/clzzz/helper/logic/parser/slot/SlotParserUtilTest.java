@@ -1,6 +1,7 @@
 package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
+import static clzzz.helper.commons.util.DateTimeUtil.DATE_FORMAT;
 import static clzzz.helper.logic.parser.slot.SlotParserUtil.MESSAGE_INVALID_INDEX;
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.pet.TypicalPets.COCO;
@@ -8,6 +9,7 @@ import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlot
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -20,18 +22,25 @@ import clzzz.helper.model.UserPrefs;
 class SlotParserUtilTest {
 
     private static final String NON_EXIST_PET = "Kyaru";
-    private static final String INVALID_DATETIME = "1-3-2020 12:00";
+    private static final String INVALID_DATETIME_FORMAT = "1-3-2020 12:00";
+    private static final String INVALID_DATETIME_1 = "30/2/2019 1200";
+    private static final String INVALID_DATETIME_2 = "12/2/2019 2400";
+    private static final String INVALID_DATETIME_3 = "30/2/2019 2400";
+    private static final String INVALID_DATE_FORMAT = "1-3-2020";
+    private static final String INVALID_DATE = "29/2/2019";
     private static final String INVALID_DURATION = "14.5";
     private static final String INVALID_INDEX = "1a";
     private static final String INVALID_PETNAME = "Bob*";
 
     private static final String EXIST_PET = "Coco";
-    private static final String VALID_DATE = "1/3/2020 1200";
+    private static final String VALID_DATE = "1/3/2020";
+    private static final String VALID_DATETIME = "1/3/2020 1200";
     private static final String VALID_DURATION = "20";
 
     private static final String WHITESPACE = " \t\r\n";
 
-    private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATE, DATETIME_FORMAT);
+    private static final LocalDateTime DATETIME = LocalDateTime.parse(VALID_DATETIME, DATETIME_FORMAT);
+    private static final LocalDate DATE = LocalDate.parse(VALID_DATE, DATE_FORMAT);
     private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
@@ -77,8 +86,23 @@ class SlotParserUtilTest {
     }
 
     @Test
-    public void parseDateTime_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME));
+    public void parseDateTime_invalidInputFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME_FORMAT));
+    }
+
+    @Test
+    public void parseDateTime_invalidInputDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME_1));
+    }
+
+    @Test
+    public void parseDateTime_invalidInputTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME_2));
+    }
+
+    @Test
+    public void parseDateTime_invalidInputDateAndTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDateTime(INVALID_DATETIME_3));
     }
 
     @Test
@@ -88,12 +112,37 @@ class SlotParserUtilTest {
 
     @Test
     public void parseDateTime_validValueWithoutWhitespace_returnsDate() throws Exception {
-        assertEquals(DATETIME, SlotParserUtil.parseDateTime(VALID_DATE));
+        assertEquals(DATETIME, SlotParserUtil.parseDateTime(VALID_DATETIME));
     }
 
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         assertEquals(DATETIME, SlotParserUtil.parseDateTime(WHITESPACE + VALID_DATE + WHITESPACE));
+    }
+
+    @Test
+    public void parseDate_invalidInputFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDate(INVALID_DATE_FORMAT));
+    }
+
+    @Test
+    public void parseDate_invalidInputDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> SlotParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        assertEquals(DATE, SlotParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        assertEquals(DATE, SlotParserUtil.parseDate(WHITESPACE + VALID_DATE + WHITESPACE));
     }
 
     @Test
