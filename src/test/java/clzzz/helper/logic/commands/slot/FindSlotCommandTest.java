@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import clzzz.helper.commons.exceptions.IllegalValueException;
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.commons.core.Messages;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.parser.CommandParserTestUtil;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.logic.parser.slot.FindSlotCommandParser;
@@ -26,6 +26,7 @@ import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotPetNamePredicate;
 import clzzz.helper.testutil.slot.TypicalSlots;
 import clzzz.helper.ui.DisplaySystemType;
+
 class FindSlotCommandTest {
 
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
