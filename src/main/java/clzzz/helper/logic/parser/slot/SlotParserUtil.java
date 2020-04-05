@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
+import clzzz.helper.model.slot.Slot;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -74,22 +74,19 @@ public class SlotParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        LocalDateTime parsedDateTime;
-        try {
-            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
+        if (!Slot.isValidDateTimeFormat(trimmedDateTime)) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
-        if (!DateTimeUtil.isValidDateString(trimmedDateTime.split("\\s+")[0])) {
-            if (!DateTimeUtil.isValidTimeString(trimmedDateTime.split("\\s+")[1])) {
-                throw new ParseException(Messages.MESSAGE_INVALID_DATE_TIME);
-            }
+        if (!Slot.isValidDate(trimmedDateTime) && !Slot.isValidTime(trimmedDateTime)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_TIME);
+        }
+        if (!Slot.isValidDate(trimmedDateTime)) {
             throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
-        if (!DateTimeUtil.isValidTimeString(trimmedDateTime.split("\\s+")[1])) {
+        if (!Slot.isValidTime(trimmedDateTime)) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME);
         }
-        return parsedDateTime;
+        return LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
     }
 
     /**
@@ -101,13 +98,13 @@ public class SlotParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        LocalDate parsedDate;
-        try {
-            parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
-        } catch (DateTimeParseException e) {
+        if (!Slot.isValidDateFormat(trimmedDate)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
-        return parsedDate;
+        if (!Slot.isValidDate(trimmedDate)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+        }
+        return LocalDate.parse(trimmedDate, DateTimeUtil.DATETIME_FORMAT);
     }
 
     /**

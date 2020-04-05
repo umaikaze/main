@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,6 +74,44 @@ public class Slot implements Comparable<Slot>, DisplayItem {
      */
     public LocalTime getEndTime() {
         return getTime().plus(duration);
+    }
+
+    public static boolean isValidDateTimeFormat(String test) {
+        try {
+            LocalDateTime mightBeValid = LocalDateTime.parse(test, DateTimeUtil.DATETIME_FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidDateFormat(String test) {
+        try {
+            LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidDate(String test) {
+        try {
+            String[] tests = test.split("\\s+");
+            LocalDate date = LocalDate.parse(tests[0], DateTimeUtil.STRICT_DATE_FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidTime(String test) {
+        try {
+            String[] tests = test.split("\\s+");
+            LocalTime time = LocalTime.parse(tests[1], DateTimeUtil.STRICT_TIME_FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**
