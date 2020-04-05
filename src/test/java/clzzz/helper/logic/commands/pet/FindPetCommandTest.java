@@ -15,12 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.jupiter.api.Test;
-
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.pet.NameContainsKeywordsPredicate;
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindPetCommand}.
@@ -83,7 +82,7 @@ public class FindPetCommandTest {
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, GARFIELD, FIONA), model.getFilteredPetList());
+        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GARFIELD), model.getFilteredPetList());
     }
 
     /**

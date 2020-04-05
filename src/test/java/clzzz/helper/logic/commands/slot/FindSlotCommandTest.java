@@ -75,7 +75,7 @@ class FindSlotCommandTest {
     @Test
     public void execute_partialKeyWords_multipleSlotsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 2);
-        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(PREFIX_NAME + "CO garf");
+        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(" " + PREFIX_NAME + "CO garf");
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
         assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
