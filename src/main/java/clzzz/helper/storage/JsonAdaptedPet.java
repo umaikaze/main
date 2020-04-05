@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import clzzz.helper.commons.core.Messages;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;
@@ -18,6 +18,7 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Pet}.

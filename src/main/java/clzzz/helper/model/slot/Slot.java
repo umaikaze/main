@@ -76,6 +76,10 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         return getTime().plus(duration);
     }
 
+
+    /**
+     * Returns true if the string is in correct datetime format (might be invalid datetime)
+     */
     public static boolean isValidDateTimeFormat(String test) {
         try {
             LocalDateTime mightBeValid = LocalDateTime.parse(test, DateTimeUtil.DATETIME_FORMAT);
@@ -85,6 +89,9 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         }
     }
 
+    /**
+     * Returns true if the string is in correct date format (might be invalid date)
+     */
     public static boolean isValidDateFormat(String test) {
         try {
             LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
@@ -94,6 +101,10 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         }
     }
 
+    /**
+     * This method should be called after making sure the format is correct.
+     * It checks if the date entered is valid.
+     */
     public static boolean isValidDate(String test) {
         try {
             String[] tests = test.split("\\s+");
@@ -104,6 +115,10 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         }
     }
 
+    /**
+     * This method should be called after making sure the format is correct.
+     * It checks if the time entered is valid.
+     */
     public static boolean isValidTime(String test) {
         try {
             String[] tests = test.split("\\s+");
