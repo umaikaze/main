@@ -75,7 +75,7 @@ public class DateTimeUtil {
     }
 
     /**
-     * Check if the given yrat is a leap year.
+     * Check if the given year is a leap year.
      */
     public static boolean isLeap(int year) {
         if (year % 400 == 0) {
