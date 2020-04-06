@@ -7,6 +7,8 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
@@ -49,21 +51,6 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model));
-        }
-
-        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
-            editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
-            editSlotDescriptor.setDuration(SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
-        }
-
-        if (!editSlotDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditSlotCommand.MESSAGE_NOT_EDITED);
-        }
-
         String warningMessage = "";
         if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
@@ -73,6 +60,28 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model));
+        }
+
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
+            if (SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
+                    .toLocalDate().isBefore(LocalDate.EPOCH)) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+            } else if (SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
+                    .toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
+            }
+        }
+        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
+            editSlotDescriptor.setDuration(SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
+        }
+
+        if (!editSlotDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditSlotCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditSlotCommand(index, editSlotDescriptor, warningMessage);
