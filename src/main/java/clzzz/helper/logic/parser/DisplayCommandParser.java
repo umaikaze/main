@@ -18,14 +18,14 @@ public class DisplayCommandParser {
      */
     public DisplayCommand parse(String args) throws ParseException {
         try {
-             DisplaySystemType type = ParserUtil.parseDisplaySystemType(args);
-             if (!type.equals(DisplaySystemType.PETS)
-                     && !type.equals(DisplaySystemType.SCHEDULE)
-                     && !type.equals(DisplaySystemType.INVENTORY)
-                     && !type.equals(DisplaySystemType.CALENDAR)) {
-                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE));
-             }
-             return new DisplayCommand(type);
+            DisplaySystemType type = ParserUtil.parseDisplaySystemType(args);
+            if (!type.equals(DisplaySystemType.PETS)
+                    && !type.equals(DisplaySystemType.SCHEDULE)
+                    && !type.equals(DisplaySystemType.INVENTORY)
+                    && !type.equals(DisplaySystemType.CALENDAR)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE));
+            }
+            return new DisplayCommand(type);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DisplayCommand.MESSAGE_USAGE), pe);
         }
