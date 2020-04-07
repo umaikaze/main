@@ -35,7 +35,7 @@ public class DateOfBirth {
      */
     public static boolean isValidDateOfBirth(String test) {
         try {
-            LocalDate mightBeValid = DateTimeUtil.parseLocalDate(test);
+            DateTimeUtil.parseLocalDate(test); // parsed date is never used
             return true;
         } catch (DateTimeParseException p) {
             return false;
