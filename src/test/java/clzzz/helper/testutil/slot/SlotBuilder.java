@@ -2,14 +2,13 @@ package clzzz.helper.testutil.slot;
 
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTracker;
 
-import java.time.Duration;
-
 import clzzz.helper.logic.commands.CommandTestUtil;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * A utility class to help with building Slot objects.
@@ -21,12 +20,12 @@ public class SlotBuilder {
     private PetTracker typicalPetTracker = getTypicalPetTracker();
     private Pet pet;
     private DateTime dateTime;
-    private Duration duration;
+    private SlotDuration duration;
 
     public SlotBuilder() {
         pet = typicalPetTracker.getPet(new Name(DEFAULT_NAME));
         dateTime = new DateTime(DEFAULT_DATETIME);
-        duration = Duration.ofMinutes(Long.parseLong(DEFAULT_DURATION));
+        duration = new SlotDuration(DEFAULT_DURATION);
     }
 
     /**
@@ -58,7 +57,7 @@ public class SlotBuilder {
      * Sets the {@code Duration} of the {@code Slot} that we are building.
      */
     public SlotBuilder withDuration(String duration) {
-        this.duration = Duration.ofMinutes(Long.parseLong(duration));
+        this.duration = new SlotDuration(duration);
         return this;
     }
 

@@ -7,6 +7,8 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
@@ -49,15 +51,19 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editSlotDescriptor.setPet(SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model));
+        Optional<String> newPetNameString = argMultimap.getValue(PREFIX_NAME);
+        if (newPetNameString.isPresent()) {
+            editSlotDescriptor.setPet(SlotParserUtil.parsePet(newPetNameString.get(), model));
         }
 
-        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
-            editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
+        Optional<String> newDateTimeString = argMultimap.getValue(PREFIX_DATETIME);
+        if (newDateTimeString.isPresent()) {
+            editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(newDateTimeString.get()));
         }
-        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
-            editSlotDescriptor.setDuration(SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
+
+        Optional<String> newSlotDurationString = argMultimap.getValue(PREFIX_DURATION);
+        if (newSlotDurationString.isPresent()) {
+            editSlotDescriptor.setDuration(SlotParserUtil.parseSlotDuration(newSlotDurationString.get()));
         }
 
         if (!editSlotDescriptor.isAnyFieldEdited()) {

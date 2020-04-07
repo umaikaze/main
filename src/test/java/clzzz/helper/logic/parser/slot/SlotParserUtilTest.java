@@ -6,8 +6,6 @@ import static clzzz.helper.testutil.pet.TypicalPets.COCO;
 import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlots;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Duration;
-
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.logic.parser.exceptions.ParseException;
@@ -15,6 +13,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.ModelManager;
 import clzzz.helper.model.UserPrefs;
 import clzzz.helper.model.slot.DateTime;
+import clzzz.helper.model.slot.SlotDuration;
 
 class SlotParserUtilTest {
 
@@ -31,7 +30,7 @@ class SlotParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     private static final DateTime DATETIME = new DateTime(VALID_DATE);
-    private static final Duration DURATION = Duration.ofMinutes(Long.parseLong(VALID_DURATION));
+    private static final SlotDuration DURATION = new SlotDuration(VALID_DURATION);
     private Model model = new ModelManager(getTypicalPetTrackerWithSlots(), new UserPrefs());
 
     @Test
@@ -97,21 +96,21 @@ class SlotParserUtilTest {
 
     @Test
     public void parseDuration_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> SlotParserUtil.parseDuration(INVALID_DURATION));
+        assertThrows(ParseException.class, () -> SlotParserUtil.parseSlotDuration(INVALID_DURATION));
     }
 
     @Test
     public void parseDuration_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> SlotParserUtil.parseDuration(null));
+        assertThrows(NullPointerException.class, () -> SlotParserUtil.parseSlotDuration(null));
     }
 
     @Test
     public void parseDuration_validValueWithoutWhitespace_returnsDate() throws Exception {
-        assertEquals(DURATION, SlotParserUtil.parseDuration(VALID_DURATION));
+        assertEquals(DURATION, SlotParserUtil.parseSlotDuration(VALID_DURATION));
     }
 
     @Test
     public void parseDuration_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
-        assertEquals(DURATION, SlotParserUtil.parseDuration(WHITESPACE + VALID_DURATION + WHITESPACE));
+        assertEquals(DURATION, SlotParserUtil.parseSlotDuration(WHITESPACE + VALID_DURATION + WHITESPACE));
     }
 }

@@ -2,7 +2,6 @@ package clzzz.helper.model.slot;
 
 import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -21,12 +20,12 @@ public class Slot implements Comparable<Slot>, DisplayItem {
 
     private final Pet pet;
     private final DateTime dateTime;
-    private final Duration duration;
+    private final SlotDuration duration;
 
     /**
      * Every field must be present and not null.
      */
-    public Slot(Pet pet, DateTime dateTime, Duration duration) {
+    public Slot(Pet pet, DateTime dateTime, SlotDuration duration) {
         requireAllNonNull(pet, dateTime, duration);
         this.pet = pet;
         this.dateTime = dateTime;
@@ -41,7 +40,7 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         return dateTime;
     }
 
-    public Duration getDuration() {
+    public SlotDuration getDuration() {
         return duration;
     }
 

@@ -1,6 +1,5 @@
 package clzzz.helper.model.util;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +15,7 @@ import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 import clzzz.helper.model.tag.Tag;
 
 
@@ -42,11 +42,11 @@ public class SampleDataUtil {
     public static Slot[] getSampleSlots(PetTracker samplePt) {
         return new Slot[]{
             new Slot(samplePt.getPet(new Name("Alex")), new DateTime("1/4/2020 1200"),
-                    Duration.ofMinutes(Long.parseLong("75"))),
+                    new SlotDuration("75")),
             new Slot(samplePt.getPet(new Name("David")), new DateTime("7/7/2020 1200"),
-                    Duration.ofMinutes(Long.parseLong("88"))),
+            new SlotDuration("88")),
             new Slot(samplePt.getPet(new Name("Elsa")), new DateTime("2/4/2020 1200"),
-                    Duration.ofMinutes(Long.parseLong("100")))};
+            new SlotDuration("100"))};
     }
 
 

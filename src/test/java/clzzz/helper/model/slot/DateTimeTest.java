@@ -8,7 +8,14 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import clzzz.helper.commons.util.DateTimeUtil;
+
 class DateTimeTest {
+
+    @Test
+    void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DateTime(null));
+    }
 
     @Test
     void constructor_invalidName_throwsIllegalArgumentException() {
@@ -44,7 +51,8 @@ class DateTimeTest {
         // Other invalid date-times
         assertFalse(DateTime.isValidDateTime("7/3/20202130")); // no space separator between date and time
         assertFalse(DateTime.isValidDateTime("2130 7/3/2020")); // wrong sequence of date and time
-        assertFalse(DateTime.isValidDateTime(LocalDate.EPOCH.atStartOfDay())); // not after the epoch
+        String epoch = DateTimeUtil.formatLocalDateTime(LocalDate.EPOCH.atStartOfDay());
+        assertFalse(DateTime.isValidDateTime(epoch)); // not after the epoch, exactly on the epoch
 
         // Good dates
         assertTrue(DateTime.isValidDateTime("7/3/2020 2130")); // d/M/yyyy

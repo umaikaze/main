@@ -6,8 +6,6 @@ import static clzzz.helper.testutil.pet.TypicalPets.getTypicalPetTrackerWithSlot
 import static clzzz.helper.testutil.slot.TypicalSlots.GARFIELD_SLOT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Duration;
-
 import org.junit.jupiter.api.Test;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
@@ -15,6 +13,7 @@ import clzzz.helper.logic.parser.slot.SlotParserUtil;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.slot.DateTime;
+import clzzz.helper.model.slot.SlotDuration;
 
 public class JsonAdaptedSlotTest {
     private static final String INVALID_NAME = "R@chel";
@@ -65,14 +64,14 @@ public class JsonAdaptedSlotTest {
     @Test
     public void toModelType_invalidDuration_throwsIllegalValueException() {
         JsonAdaptedSlot slot = new JsonAdaptedSlot(VALID_NAME, VALID_DATE_TIME, INVALID_DURATION);
-        String expectedMessage = SlotParserUtil.MESSAGE_INVALID_DURATION;
+        String expectedMessage = SlotDuration.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> slot.toModelType(typicalPetTracker));
     }
 
     @Test
     public void toModelType_nullDuration_throwsIllegalValueException() {
         JsonAdaptedSlot slot = new JsonAdaptedSlot(VALID_NAME, VALID_DATE_TIME, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, SlotDuration.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> slot.toModelType(typicalPetTracker));
     }
 

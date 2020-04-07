@@ -5,7 +5,6 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * Edits the details of an slot in the schedule.
@@ -65,7 +65,7 @@ public class EditSlotCommand extends Command {
 
         Pet updatedPet = editSlotDescriptor.getPet().orElse(slotToEdit.getPet());
         DateTime updatedDateTime = editSlotDescriptor.getDateTime().orElse(slotToEdit.getDateTime());
-        Duration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
+        SlotDuration updatedDuration = editSlotDescriptor.getDuration().orElse(slotToEdit.getDuration());
 
         return new Slot(updatedPet, updatedDateTime, updatedDuration);
     }
@@ -117,7 +117,7 @@ public class EditSlotCommand extends Command {
     public static class EditSlotDescriptor {
         private Pet pet;
         private DateTime dateTime;
-        private Duration duration;
+        private SlotDuration duration;
 
         public EditSlotDescriptor() {}
 
@@ -154,11 +154,11 @@ public class EditSlotCommand extends Command {
             this.dateTime = dateTime;
         }
 
-        public Optional<Duration> getDuration() {
+        public Optional<SlotDuration> getDuration() {
             return Optional.ofNullable(duration);
         }
 
-        public void setDuration(Duration duration) {
+        public void setDuration(SlotDuration duration) {
             this.duration = duration;
         }
 

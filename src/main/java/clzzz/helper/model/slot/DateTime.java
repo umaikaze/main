@@ -30,10 +30,10 @@ public class DateTime implements Comparable<DateTime> {
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        this.value = LocalDateTime.parse(dateTime, DateTimeUtil.DATETIME_FORMAT);
+        this.value = DateTimeUtil.parseLocalDateTime(dateTime);
     }
 
-    public DateTime(LocalDateTime dateTime) {
+    private DateTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         this.value = dateTime;
@@ -61,21 +61,19 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Returns if a given string is a valid date-time.
+     * Returns if a given string is in the correct format for date-time,
+     * and when parsed, the date-time comes after the Unix epoch.
      */
     public static boolean isValidDateTime(String test) {
         try {
-            LocalDateTime mightBeValid = LocalDateTime.parse(test, DateTimeUtil.DATETIME_FORMAT);
+            LocalDateTime mightBeValid = DateTimeUtil.parseLocalDateTime(test);
             return isValidDateTime(mightBeValid);
         } catch (DateTimeParseException p) {
             return false;
         }
     }
 
-    /**
-     * Returns if a given {@code LocaDateTime} is a valid date-time.
-     */
-    public static boolean isValidDateTime(LocalDateTime test) {
+    private static boolean isValidDateTime(LocalDateTime test) {
         return test.isAfter(LocalDate.EPOCH.atStartOfDay());
     }
 
@@ -107,7 +105,7 @@ public class DateTime implements Comparable<DateTime> {
 
     @Override
     public String toString() {
-        return value.format(DateTimeUtil.DATETIME_FORMAT);
+        return DateTimeUtil.formatLocalDateTime(value);
     }
 
     @Override

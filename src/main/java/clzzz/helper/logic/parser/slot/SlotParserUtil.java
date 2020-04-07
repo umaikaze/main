@@ -2,7 +2,6 @@ package clzzz.helper.logic.parser.slot;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 import clzzz.helper.model.slot.DateTime;
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -115,18 +115,12 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code duration} is invalid.
      */
-    public static Duration parseDuration(String duration) throws ParseException {
+    public static SlotDuration parseSlotDuration(String duration) throws ParseException {
         requireNonNull(duration);
         String trimmedDuration = duration.trim();
-        Duration newDuration;
-        try {
-            newDuration = Duration.ofMinutes(Long.parseLong(trimmedDuration));
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
+        if (!SlotDuration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        if (newDuration.isNegative() || newDuration.isZero()) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
-        }
-        return newDuration;
+        return new SlotDuration(trimmedDuration);
     }
 }
