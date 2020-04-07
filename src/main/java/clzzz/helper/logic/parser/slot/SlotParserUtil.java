@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.commons.util.StringUtil;
@@ -17,6 +17,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
+import clzzz.helper.model.slot.Slot;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,8 +26,8 @@ public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATETIME =
-            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + ".";
-    public static final String MESSAGE_INVALID_DATE = "Date must follow format " + DateTimeUtil.DATE_PATTERN + ".";
+            "Date and time must follow format d/M/yyyy HHmm.";
+    public static final String MESSAGE_INVALID_DATE = "Date must follow format d/M/yyyy.";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
@@ -73,13 +74,19 @@ public class SlotParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        LocalDateTime parsedDateTime;
-        try {
-            parsedDateTime = LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
+        if (!Slot.isValidDateTimeFormat(trimmedDateTime)) {
             throw new ParseException(MESSAGE_INVALID_DATETIME);
         }
-        return parsedDateTime;
+        if (!Slot.isValidDate(trimmedDateTime) && !Slot.isValidTime(trimmedDateTime)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_TIME);
+        }
+        if (!Slot.isValidDate(trimmedDateTime)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+        }
+        if (!Slot.isValidTime(trimmedDateTime)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        }
+        return LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
     }
 
     /**
@@ -91,13 +98,13 @@ public class SlotParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        LocalDate parsedDate;
-        try {
-            parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
-        } catch (DateTimeParseException e) {
+        if (!Slot.isValidDateFormat(trimmedDate)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
-        return parsedDate;
+        if (!Slot.isValidDate(trimmedDate)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
+        }
+        return LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
     }
 
     /**

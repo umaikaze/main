@@ -20,7 +20,7 @@ public class FindSlotCommand extends Command {
 
     public static final String COMMAND_WORD = "findslots";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots where pet name matches exactly "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all slots where pet name contains keyword(s) "
             + "(case-insensitive) or slots that is within the date specified (ignoring timing) and displays them as a "
             + "list with index numbers.\n"
             + "Parameters: [n/PET NAME] [t/DATE [MORE DATES]...]\n"
