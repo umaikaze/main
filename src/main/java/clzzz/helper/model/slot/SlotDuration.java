@@ -16,7 +16,7 @@ import java.util.List;
 public class SlotDuration implements Comparable<SlotDuration>, TemporalAmount {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Duration must be positive, non-zero and no longer than a day.";
+            "Duration must be positive, non-zero and shorter than a day.";
 
     private final Duration value;
 
@@ -34,7 +34,7 @@ public class SlotDuration implements Comparable<SlotDuration>, TemporalAmount {
 
     /**
      * Returns if a given string is a valid representation of number of minutes,
-     * and when parsed, the duration is positive, non-zero and no longer than a day.
+     * and when parsed, the duration is positive, non-zero and shorter than a day.
      */
     public static boolean isValidDuration(String test) {
         try {
@@ -49,7 +49,7 @@ public class SlotDuration implements Comparable<SlotDuration>, TemporalAmount {
     private static boolean isValidDuration(Duration test) {
         return !test.isNegative() // positive
                 && !test.isZero() // non-zero
-                && test.compareTo(Duration.ofDays(1)) <= 0; // not longer than a day
+                && test.compareTo(Duration.ofDays(1)) < 0; // shorter than a day
     }
 
     public static SlotDuration between(Temporal startInclusive, Temporal endExclusive) {
