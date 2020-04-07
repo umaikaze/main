@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="slotPane" fx:id="slotPane" styleClass="calendar-grid-conflict" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="slotPane" fx:id="slotPane" styleClass="calendar-grid-conflict" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <VBox alignment="TOP_LEFT" prefHeight="50" GridPane.columnIndex="0">
     <HBox alignment="CENTER_LEFT" spacing="5">
       <Label fx:id="ids" styleClass="calendar_small_label" />

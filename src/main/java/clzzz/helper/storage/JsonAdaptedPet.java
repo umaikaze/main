@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Food;
@@ -17,6 +18,7 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Pet}.
@@ -104,8 +106,11 @@ class JsonAdaptedPet {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DateOfBirth.class.getSimpleName()));
         }
-        if (!DateOfBirth.isValidDateOfBirth(dateOfBirth)) {
+        if (!DateOfBirth.isValidDateFormat(dateOfBirth)) {
             throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        if (!DateOfBirth.isValidDate(dateOfBirth)) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE);
         }
         final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 

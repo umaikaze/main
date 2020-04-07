@@ -7,6 +7,7 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -78,6 +79,11 @@ public class AddPetCommandParser implements Parser<AddPetCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DOB).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DOB;
+        }
+        if (dateOfBirth.value.isBefore(LocalDate.EPOCH)) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+        } else if (dateOfBirth.value.isAfter(LocalDate.now())) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
         }
         return new AddPetCommand(pet, warningMessage);
     }

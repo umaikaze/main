@@ -1,5 +1,6 @@
 package clzzz.helper.logic.commands.slot;
 
+import static clzzz.helper.commons.core.Messages.MESSAGE_SLOTS_LISTED_OVERVIEW;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.NAME_DESC_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_NAME_GARFIELD;
@@ -86,5 +87,15 @@ class FindSlotCommandTest {
         expectedModel.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         assertEquals(TypicalSlots.getTypicalSlots(), expectedModel.getFilteredSlotList());
         assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.SCHEDULE);
+    }
+
+    @Test
+    public void execute_partialKeyWords_multipleSlotsFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 2);
+        Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(" " + PREFIX_NAME + "CO garf");
+        FindSlotCommand command = new FindSlotCommand(predicate, "");
+        expectedModel.updateFilteredSlotList(predicate);
+        //TODO:later add assertFindCommandSuccess after merging stats pr
+        assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
     }
 }
