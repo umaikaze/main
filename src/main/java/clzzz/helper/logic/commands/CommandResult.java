@@ -23,7 +23,6 @@ public class CommandResult {
      */
     private final boolean exit;
 
-    private final boolean showStats;
 
     /**
      * The system to be displayed.
@@ -34,12 +33,11 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         DisplaySystemType type, boolean showStats) {
+                         DisplaySystemType type) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.type = type;
-        this.showStats = showStats;
     }
 
     /**
@@ -47,7 +45,7 @@ public class CommandResult {
      * while setting {@code changeDisplay} to its default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE, false);
+        this(feedbackToUser, showHelp, exit, DisplaySystemType.NO_CHANGE);
     }
 
     /**
@@ -55,15 +53,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE, false);
+        this(feedbackToUser, false, false, DisplaySystemType.NO_CHANGE);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
-    }
-
-    public boolean isShowStats() {
-        return showStats;
     }
 
     public boolean isShowHelp() {
@@ -91,7 +85,6 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showStats == otherCommandResult.showStats
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && type == otherCommandResult.type;
@@ -99,7 +92,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, type, showStats);
+        return Objects.hash(feedbackToUser, showHelp, exit, type);
     }
 
 }

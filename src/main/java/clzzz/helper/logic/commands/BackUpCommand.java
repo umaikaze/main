@@ -38,6 +38,6 @@ public class BackUpCommand extends Command {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, now.format(BACK_UP_FORMAT) + ".json"),
-                false, false, DisplaySystemType.NO_CHANGE, false);
+                false, false, DisplaySystemType.NO_CHANGE);
     }
 }

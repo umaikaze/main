@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import clzzz.helper.commons.core.index.Index;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.commands.pet.EditPetCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand;
@@ -113,7 +114,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
-        } catch (CommandException ce) {
+        } catch (CommandException | IllegalValueException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -133,12 +134,13 @@ public class CommandTestUtil {
      * {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertFindPetCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                                   Model expectedModel) {
+    public static void assertFindCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                   Model expectedModel, DisplaySystemType type) {
         CommandResult expectedCommandResult =
-                new CommandResult(expectedMessage, false, false, DisplaySystemType.PETS, false);
+                new CommandResult(expectedMessage, false, false, type);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

@@ -2,6 +2,7 @@ package clzzz.helper.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.model.Model;
 import clzzz.helper.ui.DisplaySystemType;
 
@@ -14,14 +15,11 @@ public class StatsCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Overall statistics for pets, recent schedule, and list of food.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws IllegalValueException {
         requireNonNull(model);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
-        model.updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS);
-        model.updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS);
-        //TODO: change stats to make use of the display switching feature
-        // current code below does not make use of it.
-        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.NO_CHANGE, true);
+        model.updateAll();
+        model.changeDisplaySystem(DisplaySystemType.STATISTICS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, DisplaySystemType.STATISTICS);
     }
 
 }

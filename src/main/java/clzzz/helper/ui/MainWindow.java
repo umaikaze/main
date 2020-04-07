@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.Logic;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.DisplayCommand;
@@ -134,8 +135,14 @@ public class MainWindow extends UiPart<Stage> {
             calendarPanel.construct();
             resultDisplayPlaceholder.getChildren().set(0, calendarPanel.getRoot());
             break;
+        case STATISTICS:
+            resultDisplayPlaceholder.getChildren().clear();
+            overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
+                    logic.getFilteredFoodCollectionList());
+            resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
+            break;
         case NO_CHANGE:
-            // do nothing since system does not change
+            handleChangeDisplay(logic.getDisplaySystemType());
             break;
         default:
             throw new CommandException(DisplayCommand.MESSAGE_INVALID_SYSTEM_TYPE);
@@ -158,16 +165,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
     }
 
-    /**
-     *  Display overall statistics
-     */
-    public void handleStats() {
-        //TODO: move this under the display switching
-        resultDisplayPlaceholder.getChildren().clear();
-        overallStats = new OverallStats(logic.getFilteredPetList(), logic.getFilteredSlotList(),
-                logic.getFilteredFoodCollectionList());
-        resultDisplayPlaceholder.getChildren().add(overallStats.getRoot());
-    }
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -206,15 +203,11 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see clzzz.helper.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, IllegalValueException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowStats()) {
-                handleStats();
-            }
 
             handleChangeDisplay(commandResult.getDisplaySystemType());
 
