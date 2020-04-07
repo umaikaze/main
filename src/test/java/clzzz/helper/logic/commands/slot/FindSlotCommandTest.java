@@ -90,11 +90,12 @@ class FindSlotCommandTest {
     }
 
     @Test
-    public void execute_partialKeyWords_multipleSlotsFound() throws ParseException {
+    public void execute_partialKeyWords_multipleSlotsFound() throws IllegalValueException {
         String expectedMessage = String.format(MESSAGE_SLOTS_LISTED_OVERVIEW, 2);
         Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(" " + PREFIX_NAME + "CO garf");
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
+        expectedModel.changeDisplaySystem(DisplaySystemType.SCHEDULE);
         assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.SCHEDULE);
         assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
     }
