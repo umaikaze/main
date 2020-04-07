@@ -10,6 +10,7 @@ import clzzz.helper.logic.commands.DisplayCommand;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.ui.calendar.CalendarPanel;
+import clzzz.helper.ui.help.HelpWindow;
 import clzzz.helper.ui.list.DisplayListPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

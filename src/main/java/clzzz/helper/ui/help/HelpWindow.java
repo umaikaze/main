@@ -1,13 +1,15 @@
-package clzzz.helper.ui;
+package clzzz.helper.ui.help;
 
 import java.util.logging.Logger;
 
 import clzzz.helper.commons.core.LogsCenter;
+import clzzz.helper.ui.UiPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -19,13 +21,16 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String FXML = "HelpWindow.fxml";
+    private static final String FXML = "help/HelpWindow.fxml";
 
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private VBox vbox;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        //vbox.getChildren().add((new CommandListPanel().getRoot()));
     }
 
     /**
