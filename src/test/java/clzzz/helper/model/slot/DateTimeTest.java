@@ -44,8 +44,7 @@ class DateTimeTest {
         assertFalse(DateTime.isValidDateTime("7/3/2020 45")); // HHmm not a 4 digit number
         assertFalse(DateTime.isValidDateTime("7/3/2020 12345")); // HHmm not a 4 digit number
         assertFalse(DateTime.isValidDateTime("7/3/2020 -1000")); // HHmm not a 4 digit number
-        assertFalse(DateTime.isValidDateTime("7/3/2020 2500")); // HH greater than 24
-        assertFalse(DateTime.isValidDateTime("7/3/2020 2401")); // mm not 00 when HH is 24
+        assertFalse(DateTime.isValidDateTime("7/3/2020 2400")); // HH greater than 23
         assertFalse(DateTime.isValidDateTime("7/3/2020 0060")); // mm greater than 59
 
         // Other invalid date-times
@@ -59,7 +58,5 @@ class DateTimeTest {
         assertTrue(DateTime.isValidDateTime("07/03/2020 2130")); // dd/MM/yyyy
         assertTrue(DateTime.isValidDateTime("7/03/2020 2130")); // d/MM/yyyy
         assertTrue(DateTime.isValidDateTime("07/3/2020 2130")); // dd/M/yyyy
-
-        assertTrue(DateTime.isValidDateTime("7/3/2020 2400")); // equivalent to 8/3/2020 0000
     }
 }

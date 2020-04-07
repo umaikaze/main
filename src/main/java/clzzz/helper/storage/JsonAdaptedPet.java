@@ -18,6 +18,7 @@ import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.tag.Tag;
 
+
 /**
  * Jackson-friendly version of {@link Pet}.
  */

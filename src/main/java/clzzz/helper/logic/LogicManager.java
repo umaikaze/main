@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.core.LogsCenter;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.Command;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.parser.PetTrackerParser;
-import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.pet.FoodCollection;
@@ -40,7 +40,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, IllegalValueException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;

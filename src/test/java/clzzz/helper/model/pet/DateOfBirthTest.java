@@ -34,10 +34,16 @@ class DateOfBirthTest {
         assertFalse(DateOfBirth.isValidDateOfBirth("2020")); // year only
         assertFalse(DateOfBirth.isValidDateOfBirth("7-3")); // date and month only
 
+        //Invalid dates
+        assertFalse(DateOfBirth.isValidDateOfBirth("29/2/2019"));
+        assertFalse(DateOfBirth.isValidDateOfBirth("-1/1/2019"));
+        assertFalse(DateOfBirth.isValidDateOfBirth("31/4/2019"));
+
+
         // Good dates
-        assertTrue(DateOfBirth.isValidDateOfBirth("7/3/2020")); // d/M/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("07/03/2020")); // dd/MM/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("7/03/2020")); // d/MM/yyyy
-        assertTrue(DateOfBirth.isValidDateOfBirth("07/3/2020")); // dd/M/yyyy
+        assertTrue(DateOfBirth.isValidDateOfBirth("7/3/2020")); // d/M/uuuu
+        assertTrue(DateOfBirth.isValidDateOfBirth("07/03/2020")); // dd/MM/uuuu
+        assertTrue(DateOfBirth.isValidDateOfBirth("7/03/2020")); // d/MM/uuuu
+        assertTrue(DateOfBirth.isValidDateOfBirth("07/3/2020")); // dd/M/uuuu
     }
 }

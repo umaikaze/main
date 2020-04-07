@@ -7,6 +7,7 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import clzzz.helper.commons.core.Messages;
@@ -74,6 +75,11 @@ public class AddSlotCommandParser implements Parser<AddSlotCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+        if (dateTime.toLocalDate().isBefore(LocalDate.EPOCH)) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+        } else if (dateTime.toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
+            warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
         }
 
         return new AddSlotCommand(slot, warningMessage);

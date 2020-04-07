@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.commons.util.StringUtil;
@@ -88,9 +89,9 @@ public class SlotParserUtil {
         String trimmedDate = date.trim();
         LocalDate parsedDate;
         try {
-            parsedDate = LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
+            parsedDate = DateTimeUtil.parseLocalDate(trimmedDate);
         } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }

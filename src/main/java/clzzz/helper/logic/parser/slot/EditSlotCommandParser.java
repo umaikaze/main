@@ -7,6 +7,7 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import clzzz.helper.commons.core.Messages;
@@ -18,6 +19,7 @@ import clzzz.helper.logic.parser.ArgumentTokenizer;
 import clzzz.helper.logic.parser.Parser;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
+import clzzz.helper.model.slot.DateTime;
 
 /**
  * Parses input arguments and creates a new EditSlotCommand object
@@ -29,7 +31,6 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
     public EditSlotCommandParser(Model model) {
         this.model = model;
     }
-
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditSlotCommand
@@ -51,25 +52,6 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
 
         EditSlotDescriptor editSlotDescriptor = new EditSlotDescriptor();
 
-        Optional<String> newPetNameString = argMultimap.getValue(PREFIX_NAME);
-        if (newPetNameString.isPresent()) {
-            editSlotDescriptor.setPet(SlotParserUtil.parsePet(newPetNameString.get(), model));
-        }
-
-        Optional<String> newDateTimeString = argMultimap.getValue(PREFIX_DATETIME);
-        if (newDateTimeString.isPresent()) {
-            editSlotDescriptor.setDateTime(SlotParserUtil.parseDateTime(newDateTimeString.get()));
-        }
-
-        Optional<String> newSlotDurationString = argMultimap.getValue(PREFIX_DURATION);
-        if (newSlotDurationString.isPresent()) {
-            editSlotDescriptor.setDuration(SlotParserUtil.parseSlotDuration(newSlotDurationString.get()));
-        }
-
-        if (!editSlotDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditSlotCommand.MESSAGE_NOT_EDITED);
-        }
-
         String warningMessage = "";
         if (argMultimap.getAllValues(PREFIX_NAME).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
@@ -79,6 +61,31 @@ public class EditSlotCommandParser implements Parser<EditSlotCommand> {
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;
+        }
+
+        Optional<String> newPetNameString = argMultimap.getValue(PREFIX_NAME);
+        if (newPetNameString.isPresent()) {
+            editSlotDescriptor.setPet(SlotParserUtil.parsePet(newPetNameString.get(), model));
+        }
+
+        Optional<String> newDateTimeString = argMultimap.getValue(PREFIX_DATETIME);
+        if (newDateTimeString.isPresent()) {
+            DateTime newDateTime = SlotParserUtil.parseDateTime(newDateTimeString.get());
+            editSlotDescriptor.setDateTime(newDateTime);
+            if (newDateTime.toLocalDate().isBefore(LocalDate.EPOCH)) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_EARLY;
+            } else if (newDateTime.toLocalDate().isAfter(LocalDate.now().plusYears(5))) {
+                warningMessage += Messages.WARNING_MESSAGE_DATE_TOO_LATE;
+            }
+        }
+
+        Optional<String> newSlotDurationString = argMultimap.getValue(PREFIX_DURATION);
+        if (newSlotDurationString.isPresent()) {
+            editSlotDescriptor.setDuration(SlotParserUtil.parseSlotDuration(newSlotDurationString.get()));
+        }
+
+        if (!editSlotDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditSlotCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditSlotCommand(index, editSlotDescriptor, warningMessage);
