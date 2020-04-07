@@ -83,7 +83,7 @@ public class FindPetCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Ca El na");
         FindPetCommand command = new FindPetCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
-        assertFindPetCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.PETS);
         assertEquals(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GARFIELD), model.getFilteredPetList());
     }
 

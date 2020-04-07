@@ -95,7 +95,7 @@ class FindSlotCommandTest {
         Predicate<Slot> predicate = FindSlotCommandParser.getPredicates(" " + PREFIX_NAME + "CO garf");
         FindSlotCommand command = new FindSlotCommand(predicate, "");
         expectedModel.updateFilteredSlotList(predicate);
-        //TODO:later add assertFindCommandSuccess after merging stats pr
+        assertFindCommandSuccess(command, model, expectedMessage, expectedModel, DisplaySystemType.SCHEDULE);
         assertEquals(TypicalSlots.getTypicalSlots(), model.getFilteredSlotList());
     }
 }
