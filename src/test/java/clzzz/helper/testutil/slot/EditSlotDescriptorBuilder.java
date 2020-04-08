@@ -52,7 +52,7 @@ public class EditSlotDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Duration} of the {@code EditSlotDescriptor} that we are building.
+     * Sets the {@code SlotDuration} of the {@code EditSlotDescriptor} that we are building.
      */
     public EditSlotDescriptorBuilder withDuration(String dateOfBirth) {
         descriptor.setDuration(new SlotDuration(dateOfBirth));

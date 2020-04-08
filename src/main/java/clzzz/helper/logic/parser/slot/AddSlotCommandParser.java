@@ -71,7 +71,7 @@ public class AddSlotCommandParser implements Parser<AddSlotCommand> {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
         }
         if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_TIME;
+            warningMessage += Messages.WARNING_MESSAGE_DATETIME;
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;

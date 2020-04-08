@@ -3,7 +3,7 @@ package clzzz.helper.logic.parser.slot;
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DURATION;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
-import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_TIME;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DATETIME;
 import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
@@ -46,7 +46,7 @@ public class AddSlotCommandParserTest {
 
         // Multiple dateTime - last dateTime accepted
         CommandParserTestUtil.assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_GARFIELD + DATETIME_DESC_COCO
-                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, WARNING_MESSAGE_TIME));
+                + DURATION_DESC_COCO, new AddSlotCommand(expectedSlot, WARNING_MESSAGE_DATETIME));
 
         // Multiple durations - last duration accepted
         CommandParserTestUtil.assertParseSuccess(parser, NAME_DESC_COCO + DATETIME_DESC_COCO + DURATION_DESC_GARFIELD

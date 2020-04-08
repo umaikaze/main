@@ -54,7 +54,7 @@ public class SlotBuilder {
     }
 
     /**
-     * Sets the {@code Duration} of the {@code Slot} that we are building.
+     * Sets the {@code SlotDuration} of the {@code Slot} that we are building.
      */
     public SlotBuilder withDuration(String duration) {
         this.duration = new SlotDuration(duration);

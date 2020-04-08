@@ -111,7 +111,7 @@ public class SlotParserUtil {
     }
 
     /**
-     * Parses a {@code String duration} into an {@code Duration}.
+     * Parses a {@code String duration} into an {@code SlotDuration}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code duration} is invalid.
