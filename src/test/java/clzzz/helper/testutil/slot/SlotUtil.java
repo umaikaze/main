@@ -27,7 +27,7 @@ public class SlotUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + slot.getPet().getName().toString() + " ");
         sb.append(PREFIX_DATETIME + slot.getDateTime().toString() + " ");
-        sb.append(PREFIX_DURATION + String.valueOf(slot.getDuration().toMinutes()) + " ");
+        sb.append(PREFIX_DURATION + slot.getDuration().toString() + " ");
         return sb.toString();
     }
 
@@ -40,7 +40,7 @@ public class SlotUtil {
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME)
                 .append(dateTime.toString()).append(" "));
         descriptor.getDuration().ifPresent(duration -> sb.append(PREFIX_DURATION)
-                .append(duration.toMinutes()).append(" "));
+                .append(duration.toString()).append(" "));
         return sb.toString();
     }
 }
