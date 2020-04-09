@@ -15,7 +15,8 @@ import clzzz.helper.commons.util.DateTimeUtil;
 public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of birth must follow the format of d/M/yyyy.";
+            String.format("Date of birth must be valid, and follow the format of %s.",
+            DateTimeUtil.DATE_PATTERN.replaceAll("u", "y"));
 
     public final LocalDate value;
 

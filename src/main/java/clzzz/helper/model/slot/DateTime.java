@@ -18,7 +18,8 @@ import clzzz.helper.commons.util.DateTimeUtil;
 public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date and time must follow format " + DateTimeUtil.DATETIME_PATTERN + ".";
+            String.format("Date and time must be valid, and follow the format of %s.",
+            DateTimeUtil.DATETIME_PATTERN.replaceAll("u", "y"));
 
     private final LocalDateTime value;
 
