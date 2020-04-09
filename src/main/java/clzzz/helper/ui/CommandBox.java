@@ -1,8 +1,8 @@
 package clzzz.helper.ui;
 
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.exceptions.CommandException;
-import clzzz.helper.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -36,7 +36,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandTextField.getText());
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | IllegalValueException e) {
             setStyleToIndicateCommandFailure();
         }
     }
@@ -71,7 +71,7 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see clzzz.helper.logic.Logic#execute(String)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText) throws CommandException, IllegalValueException;
     }
 
 }

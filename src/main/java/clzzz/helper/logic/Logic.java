@@ -3,6 +3,7 @@ package clzzz.helper.logic;
 import java.nio.file.Path;
 
 import clzzz.helper.commons.core.GuiSettings;
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.CommandResult;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.logic.parser.exceptions.ParseException;
@@ -18,6 +19,7 @@ import javafx.collections.ObservableList;
  * API of the Logic component for Pet Store Helper
  */
 public interface Logic {
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -25,7 +27,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, IllegalValueException;
 
     /**
      * Returns the PetTracker.

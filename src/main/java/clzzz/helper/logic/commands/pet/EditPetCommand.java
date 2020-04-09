@@ -6,7 +6,6 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_GENDER;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_SPECIES;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_TAG;
-import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_PETS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
@@ -107,7 +106,7 @@ public class EditPetCommand extends Command {
         }
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList(model.PREDICATE_SHOW_ALL_PETS);
         return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet) + warningMessage);
 
     }

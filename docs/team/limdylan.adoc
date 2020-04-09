@@ -1,0 +1,74 @@
+= John Doe - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 3
+
+---
+
+== Overview
+
+Pet Store Helper is a desktop application designed for owners of pet stores to help them manage their store and operations. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
+== Summary of contributions
+
+=== Major contributions
+* *Display*: Added the ability to switch between different displays.
+** What it does: _WIP_
+** Justification: _WIP_
+** Highlights: _WIP_
+
+* *Calendar*: Added a calendar view of slots
+** What it does: _WIP_
+** Justification: _WIP_
+** Highlights: _WIP_
+
+=== Minor contributions
+* Refactored slots-related commands
+** What it does: _WIP_
+** Justification: _WIP_
+** Highlights: _WIP_
+
+=== Other contributions
+
+* Project management:
+** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* Enhancements to existing features:
+** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+* Documentation:
+** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+* Community:
+** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=features]
+
+include::../UserGuide.adoc[tag=display]
+
+include::../UserGuide.adoc[tag=schedule_commands]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=design_ui]
+
+include::../DeveloperGuide.adoc[tag=implementation_display]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

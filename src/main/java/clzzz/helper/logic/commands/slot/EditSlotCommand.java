@@ -2,7 +2,6 @@ package clzzz.helper.logic.commands.slot;
 
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
-import static clzzz.helper.model.Model.PREDICATE_SHOW_ALL_SLOTS;
 import static java.util.Objects.requireNonNull;
 
 import java.time.Duration;
@@ -87,7 +86,7 @@ public class EditSlotCommand extends Command {
         }
 
         model.setSlot(slotToEdit, editedSlot);
-        model.updateFilteredSlotList(PREDICATE_SHOW_ALL_SLOTS);
+        model.updateFilteredSlotList(model.PREDICATE_SHOW_ALL_SLOTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SLOT_SUCCESS, editedSlot) + warningMessage);
     }
 

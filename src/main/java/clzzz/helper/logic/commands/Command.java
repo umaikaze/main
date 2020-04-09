@@ -1,5 +1,6 @@
 package clzzz.helper.logic.commands;
 
+import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.logic.commands.exceptions.CommandException;
 import clzzz.helper.model.Model;
 
@@ -15,6 +16,6 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult execute(Model model) throws CommandException, IllegalValueException;
 
 }
