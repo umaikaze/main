@@ -171,8 +171,11 @@ public class CalendarPanel extends UiPart<Region> {
 
     private int getColIndex(LocalTime earliestTime, LocalTime slotTime) {
         assert slotTime.isBefore(earliestTime) : "Given slot time is earlier than the earliest time!";
-        return CalendarDate.getWidth()
-                + Math.toIntExact(SlotDuration.between(earliestTime, slotTime).toMinutes());
+        int delta = 0;
+        if (earliestTime.isBefore(slotTime)) {
+            delta = Math.toIntExact(SlotDuration.between(earliestTime, slotTime).toMinutes());
+        }
+        return CalendarDate.getWidth() + delta;
     }
 
     private int getColSpan(SlotDuration duration) {
