@@ -1,10 +1,12 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model.foodcollection;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
 
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.pet.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

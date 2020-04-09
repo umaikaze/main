@@ -1,4 +1,4 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model.foodcollection;
 
 import static clzzz.helper.testutil.Assert.assertThrows;
 import static clzzz.helper.testutil.pet.TypicalPets.AMY;
@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.pet.Pet;
 
 public class FoodCollectionListTest {
     private final FoodCollectionList foodCollectionList = new FoodCollectionList(getTypicalPets());

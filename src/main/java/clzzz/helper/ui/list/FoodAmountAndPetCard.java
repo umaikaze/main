@@ -2,7 +2,7 @@ package clzzz.helper.ui.list;
 
 import static java.util.Objects.requireNonNull;
 
-import clzzz.helper.model.pet.FoodAmountAndPet;
+import clzzz.helper.model.foodcollection.FoodAmountAndPet;
 import clzzz.helper.ui.UiPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

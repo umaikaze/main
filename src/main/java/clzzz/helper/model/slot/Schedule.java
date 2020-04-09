@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 /**
  * A collection of slots that does not allow nulls.
  *
- * Unlike {@link package clzzz.helper.model.pet.UniquePetList}, a schedule is allowed to contain duplicate slots.
+ * Unlike {@link package clzzz.helper.model.UniquePetList}, a schedule is allowed to contain duplicate slots.
  *
  * Supports a minimal set of list operations.
  */

@@ -12,7 +12,7 @@ import clzzz.helper.commons.core.LogsCenter;
 import clzzz.helper.commons.exceptions.IllegalValueException;
 import clzzz.helper.commons.util.CollectionUtil;
 import clzzz.helper.logic.commands.DisplayCommand;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;

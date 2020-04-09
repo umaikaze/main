@@ -1,7 +1,7 @@
 package clzzz.helper.ui.list;
 
 import clzzz.helper.commons.util.CollectionUtil;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.ui.UiPart;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

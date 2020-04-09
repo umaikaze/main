@@ -20,7 +20,7 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.PetTracker;
 import clzzz.helper.model.ReadOnlyPetTracker;
 import clzzz.helper.model.ReadOnlyUserPrefs;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;

@@ -1,9 +1,10 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model.foodcollection;
 
 import static clzzz.helper.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import clzzz.helper.model.pet.Pet;
 import clzzz.helper.testutil.pet.PetBuilder;
 
 class FoodAmountAndPetTest {

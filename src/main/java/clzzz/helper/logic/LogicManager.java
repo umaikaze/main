@@ -13,7 +13,7 @@ import clzzz.helper.logic.parser.PetTrackerParser;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.ReadOnlyPetTracker;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.storage.Storage;

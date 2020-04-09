@@ -1,10 +1,12 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model.foodcollection;
 
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.pet.Pet;
 import clzzz.helper.ui.DisplaySystemType;
 import clzzz.helper.ui.list.DisplayItem;
 import javafx.collections.FXCollections;
