@@ -60,7 +60,7 @@ UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
 FoodCollection *--> "*" PetAmountAndPet
-PetAmountAndPet *--> "1" Pet
+PetAmountAndPet o--> "1" Pet
 
 Pet *--> Name
 Pet *--> Species
@@ -73,9 +73,9 @@ Name -[hidden]right-> DateOfBirth
 DateOfBirth -[hidden]right-> Gender
 Species -[hidden]right-> Food
 
-UniquePetList *--> "1" Schedule
+UniquePetList o--> "1" Schedule
 Schedule o--> "*" Slot
-Slot *--> "1" Pet
+Slot o--> "1" Pet
 
 ModelManager -->"1" Pet : filtered list
 ModelManager -->"1" Slot : filtered list
