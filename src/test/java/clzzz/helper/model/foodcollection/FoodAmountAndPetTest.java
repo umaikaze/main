@@ -18,6 +18,7 @@ class FoodAmountAndPetTest {
     void constructor_invalidFoodAmount_throwsIllegalArgumentException() {
         Pet validPet = new PetBuilder().build();
         int invalidAmount = -1;
-        assertThrows(IllegalArgumentException.class, () -> new FoodAmountAndPet(invalidAmount, validPet));
+        assertThrows(IllegalArgumentException.class, () -> new FoodAmountAndPet(invalidAmount,
+                validPet.getName().fullName));
     }
 }

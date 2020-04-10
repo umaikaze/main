@@ -39,7 +39,7 @@ Class Slot
 Package FoodCollection {
 Class FoodCollection
 Class FoodCollectionList
-Class PetAmountAndPet
+Class FoodAmountAndPet
 }
 
 }
@@ -59,8 +59,7 @@ PetTracker *--> "1" UniquePetList
 UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
-FoodCollection *--> "*" PetAmountAndPet
-PetAmountAndPet o--> "1" Pet
+FoodCollection *--> "*" FoodAmountAndPet
 
 Pet *--> Name
 Pet *--> Species

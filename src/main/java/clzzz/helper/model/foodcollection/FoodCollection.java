@@ -35,25 +35,24 @@ public class FoodCollection implements DisplayItem {
 
     /**
      * Constructs a {@code Food}.
-     *
-     * @param food A valid food to generate Food Collection from.
-     * @param pet The owner of the food being added.
+     *  @param foodName A valid food name to generate Food Collection from.
+     * @param petName The owner of the food being added.
      */
-    private FoodCollection(Food food, Pet pet) {
-        requireNonNull(food);
-        requireNonNull(pet);
-        checkArgument(isValidFoodCollectionName(food.foodName), MESSAGE_NAME_CONSTRAINTS);
-        this.name = food.foodName;
-        checkArgument(isValidFoodCollectionAmount(food.foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
-        this.amount = food.foodAmount;
-        this.foodAmountAndPets.add(new FoodAmountAndPet(food.foodAmount, pet));
+    private FoodCollection(String foodName, Integer foodAmount, String petName) {
+        requireNonNull(foodName);
+        requireNonNull(petName);
+        checkArgument(isValidFoodCollectionName(foodName), MESSAGE_NAME_CONSTRAINTS);
+        this.name = foodName;
+        checkArgument(isValidFoodCollectionAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
+        this.amount = foodAmount;
+        this.foodAmountAndPets.add(new FoodAmountAndPet(foodAmount, petName));
     }
 
     /**
      * Generates a food collection from a given food object.
      */
     public static FoodCollection generateFoodCollection(Food food, Pet pet) {
-        return new FoodCollection(food, pet);
+        return new FoodCollection(food.foodName, food.foodAmount, pet.getName().fullName);
     }
 
     /**
@@ -80,7 +79,7 @@ public class FoodCollection implements DisplayItem {
     public boolean addFoodToCollection(Food other, Pet pet) {
         if (isSameType(other)) {
             amount += other.foodAmount;
-            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet));
+            this.foodAmountAndPets.add(new FoodAmountAndPet(other.foodAmount, pet.getName().fullName));
             return true;
         } else {
             return false;

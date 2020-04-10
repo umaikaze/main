@@ -31,7 +31,7 @@ public class FoodAmountAndPetCard extends UiPart<Region> {
         requireNonNull(foodAmountAndPet);
         this.foodAmountAndPet = foodAmountAndPet;
 
-        petName.setText(foodAmountAndPet.getPet().getName().toString());
+        petName.setText(foodAmountAndPet.getPetName());
         foodAmount.setText(foodAmountAndPet.getFoodAmount().toString());
     }
 
