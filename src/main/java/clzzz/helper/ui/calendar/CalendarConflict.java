@@ -1,6 +1,5 @@
 package clzzz.helper.ui.calendar;
 
-import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.stream.IntStream;
 
 import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -47,7 +47,7 @@ public class CalendarConflict extends CalendarRegion {
     private Label petName;
 
     public CalendarConflict(List<Slot> conflictSlots, LocalTime start, LocalTime end, int lastDisplayedIndex) {
-        super(FXML, Duration.between(start, end).toMinutes());
+        super(FXML, SlotDuration.between(start, end).toMinutes());
         Slot lastSlot = conflictSlots.get(conflictSlots.size() - 1);
 
         String idsString = IntStream.rangeClosed(lastDisplayedIndex - conflictSlots.size() + 1, lastDisplayedIndex)

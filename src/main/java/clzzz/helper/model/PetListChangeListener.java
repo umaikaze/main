@@ -32,8 +32,8 @@ public abstract class PetListChangeListener implements ListChangeListener<Pet> {
         }
     }
 
-    protected Slot petReplacedSlot(Slot slot, Pet pet) {
-        return new Slot(pet, slot.getDateTime(), slot.getDuration());
+    protected Slot petReplacedSlot(Slot slot, Pet newPet) {
+        return slot.replacePetWith(newPet);
     }
 
     /**

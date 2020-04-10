@@ -1,11 +1,11 @@
 package clzzz.helper.ui.calendar;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 import clzzz.helper.commons.util.DateTimeUtil;
+import clzzz.helper.model.slot.SlotDuration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -16,7 +16,7 @@ public class CalendarDate extends CalendarRegion {
     /**
      * Used to determine the width of this component.
      */
-    public static final Duration DURATION = Duration.ofMinutes(60);
+    public static final SlotDuration DURATION = new SlotDuration("60");
 
     private static final String FXML = "calendar/CalendarDate.fxml";
 

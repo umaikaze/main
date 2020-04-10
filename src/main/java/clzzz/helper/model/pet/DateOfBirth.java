@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.util.DateTimeUtil;
 
 /**
@@ -16,7 +15,8 @@ import clzzz.helper.commons.util.DateTimeUtil;
 public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of birth must follow the format of d/M/yyyy.";
+            String.format("Date of birth must be valid, and follow the format of %s.",
+            DateTimeUtil.DATE_PATTERN.replaceAll("u", "y"));
 
     public final LocalDate value;
 
@@ -27,30 +27,16 @@ public class DateOfBirth {
      */
     public DateOfBirth(String dateOfBirth) {
         requireNonNull(dateOfBirth);
-        checkArgument(isValidDateFormat(dateOfBirth), MESSAGE_CONSTRAINTS);
-        checkArgument(isValidDate(dateOfBirth), Messages.MESSAGE_INVALID_DATE);
+        checkArgument(isValidDateOfBirth(dateOfBirth), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(dateOfBirth, DateTimeUtil.DATE_FORMAT);
     }
 
     /**
      * Returns if a given string is a valid format of date of birth.
      */
-    public static boolean isValidDateFormat(String test) {
+    public static boolean isValidDateOfBirth(String test) {
         try {
-            LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
-            return true;
-        } catch (DateTimeParseException p) {
-            return false;
-        }
-    }
-
-    /**
-     * This method is used after checking the date is in correct format.
-     * It return true if a given string is a valid date.
-     */
-    public static boolean isValidDate(String test) {
-        try {
-            LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.STRICT_DATE_FORMAT);
+            DateTimeUtil.parseLocalDate(test); // parsed date is never used
             return true;
         } catch (DateTimeParseException p) {
             return false;

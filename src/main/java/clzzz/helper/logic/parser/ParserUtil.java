@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import clzzz.helper.commons.core.Messages;
 import clzzz.helper.commons.core.index.Index;
 import clzzz.helper.commons.util.StringUtil;
 import clzzz.helper.logic.parser.exceptions.ParseException;
@@ -92,11 +91,8 @@ public class ParserUtil {
     public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
         requireNonNull(dateOfBirth);
         String trimmedDateOfBirth = dateOfBirth.trim();
-        if (!DateOfBirth.isValidDateFormat(trimmedDateOfBirth)) {
+        if (!DateOfBirth.isValidDateOfBirth(trimmedDateOfBirth)) {
             throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
-        }
-        if (!DateOfBirth.isValidDate(trimmedDateOfBirth)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
         return new DateOfBirth(trimmedDateOfBirth);
     }

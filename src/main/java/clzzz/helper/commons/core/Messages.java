@@ -31,8 +31,8 @@ public class Messages {
             + "species field s/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_DOB = "Warning: You have entered more than 1 entries for "
             + "date of birth field b/." + " " + WARNING_MESSAGE_END;
-    public static final String WARNING_MESSAGE_TIME = "Warning: You have entered more than 1 entries for "
-            + "time field t/." + " " + WARNING_MESSAGE_END;
+    public static final String WARNING_MESSAGE_DATETIME = "Warning: You have entered more than 1 entries for "
+            + "datetime field t/." + " " + WARNING_MESSAGE_END;
     public static final String WARNING_MESSAGE_DURATION = "Warning: You have entered more than 1 entries for "
             + "duration field d/." + " " + WARNING_MESSAGE_END;
 }

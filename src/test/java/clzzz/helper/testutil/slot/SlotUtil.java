@@ -4,7 +4,6 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
-import clzzz.helper.commons.util.DateTimeUtil;
 import clzzz.helper.logic.commands.slot.AddSlotCommand;
 import clzzz.helper.logic.commands.slot.EditSlotCommand.EditSlotDescriptor;
 import clzzz.helper.model.slot.Slot;
@@ -27,8 +26,8 @@ public class SlotUtil {
     public static String getSlotDetails(Slot slot) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + slot.getPet().getName().toString() + " ");
-        sb.append(PREFIX_DATETIME + slot.getDateTime().format(DateTimeUtil.DATETIME_FORMAT) + " ");
-        sb.append(PREFIX_DURATION + String.valueOf(slot.getDuration().toMinutes()) + " ");
+        sb.append(PREFIX_DATETIME + slot.getDateTime().toString() + " ");
+        sb.append(PREFIX_DURATION + slot.getDuration().toString() + " ");
         return sb.toString();
     }
 
@@ -39,9 +38,9 @@ public class SlotUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getPet().ifPresent(name -> sb.append(PREFIX_NAME).append(name.getName()).append(" "));
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME)
-                .append(dateTime.format(DateTimeUtil.DATETIME_FORMAT)).append(" "));
+                .append(dateTime.toString()).append(" "));
         descriptor.getDuration().ifPresent(duration -> sb.append(PREFIX_DURATION)
-                .append(duration.toMinutes()).append(" "));
+                .append(duration.toString()).append(" "));
         return sb.toString();
     }
 }
