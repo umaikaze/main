@@ -1,8 +1,8 @@
 package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DATETIME;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_NAME;
-import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_TIME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -73,7 +73,7 @@ public class FindSlotCommandParser implements Parser<FindSlotCommand> {
             warningMessage += WARNING_MESSAGE_NAME;
         }
         if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
-            warningMessage += WARNING_MESSAGE_TIME;
+            warningMessage += WARNING_MESSAGE_DATETIME;
         }
 
         return new FindSlotCommand(predicates, warningMessage);

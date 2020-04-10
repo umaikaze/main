@@ -1,9 +1,8 @@
 package clzzz.helper.ui;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +12,7 @@ import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -121,14 +121,14 @@ public class OverallStats extends UiPart<Region> {
     public void getScheduleStats(ObservableList<Slot> slots) {
         for (Slot s : slots) {
             if (s.getDate().equals(LocalDate.now())) {
-                createRectangles(s.getDateTime(), s.getDuration(),
-                        timeTablePlaceHolder.widthProperty().divide(10000000), false, false);
+                createRectangles(s.getTime(), s.getDuration(),
+                        timeTablePlaceHolder.widthProperty().divide(10000000));
             } else if (s.getDate().equals(LocalDate.now().plusDays(1))) {
-                createRectangles(s.getDateTime(), s.getDuration(),
-                        timeTablePlaceHolder.widthProperty().divide(3), true, false);
+                createRectangles(s.getTime(), s.getDuration(),
+                        timeTablePlaceHolder.widthProperty().divide(3));
             } else if (s.getDate().equals(LocalDate.now().plusDays(2))) {
-                createRectangles(s.getDateTime(), s.getDuration(),
-                        timeTablePlaceHolder.widthProperty().divide(3).multiply(2), false, true);
+                createRectangles(s.getTime(), s.getDuration(),
+                        timeTablePlaceHolder.widthProperty().divide(3).multiply(2));
             }
         }
     }
@@ -138,13 +138,11 @@ public class OverallStats extends UiPart<Region> {
      * @param time start time of the appointment
      * @param duration duration of the appointment
      * @param xCoordinate x coordinate of the rectangle
-     * @param isLastDay if the date is third day from now
      */
-    public void createRectangles(LocalDateTime time, Duration duration,
-                                 DoubleBinding xCoordinate, boolean isSecondDay, boolean isLastDay) {
+    public void createRectangles(LocalTime time, SlotDuration duration, DoubleBinding xCoordinate) {
         Rectangle rec = new Rectangle();
         //find start point of the rectangle
-        long minutes = ChronoUnit.MINUTES.between(time.toLocalDate().atStartOfDay(), time);
+        long minutes = time.get(ChronoField.MINUTE_OF_DAY);
         //set position of the rectangles
         rec.xProperty().bind(xCoordinate);
         rec.yProperty().bind(timeTablePlaceHolder.heightProperty().multiply(minutes).divide(60 * 24));
@@ -156,26 +154,7 @@ public class OverallStats extends UiPart<Region> {
         rec.setStrokeWidth(0);
         //set size of rectangle
         rec.widthProperty().bind(timeTablePlaceHolder.widthProperty().divide(3));
-        if (duration.toMinutes() > 24 * 60 - minutes) {
-            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
-                    .multiply(24 * 60 - minutes).divide(24 * 60));
-            if (!isLastDay) {
-                if (isSecondDay) {
-                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
-                            timeTablePlaceHolder.widthProperty().divide(3).multiply(2),
-                            false, true);
-                } else {
-                    createRectangles(time.toLocalDate().plusDays(1).atStartOfDay(),
-                            Duration.ofMinutes(duration.toMinutes() - (24 * 60 - minutes)),
-                            timeTablePlaceHolder.widthProperty().divide(3),
-                            true, false);
-                }
-            }
-        } else {
-            rec.heightProperty().bind(timeTablePlaceHolder.heightProperty()
-                    .multiply(duration.toMinutes()).divide(24 * 60));
-        }
+        rec.heightProperty().bind(timeTablePlaceHolder.heightProperty().multiply(duration.toMinutes()).divide(24 * 60));
         rectangles.add(rec);
     }
 

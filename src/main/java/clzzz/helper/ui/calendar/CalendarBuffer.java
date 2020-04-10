@@ -1,7 +1,8 @@
 package clzzz.helper.ui.calendar;
 
-import java.time.Duration;
 import java.time.LocalTime;
+
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * A region of a calendar view that acts a buffer between other regions, for padding purposes.
@@ -19,6 +20,6 @@ public class CalendarBuffer extends CalendarRegion {
      */
 
     public CalendarBuffer(LocalTime start, LocalTime end) {
-        super(FXML, Duration.between(start, end).toMinutes());
+        super(FXML, SlotDuration.between(start, end).toMinutes());
     }
 }

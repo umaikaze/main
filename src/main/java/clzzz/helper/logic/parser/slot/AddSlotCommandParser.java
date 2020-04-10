@@ -7,9 +7,7 @@ import static clzzz.helper.logic.parser.CliSyntax.PREFIX_DURATION;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_INDEX;
 import static clzzz.helper.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import clzzz.helper.commons.core.Messages;
@@ -21,7 +19,9 @@ import clzzz.helper.logic.parser.Prefix;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Pet;
+import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * Parses input arguments and creates a new AddSlotCommand object
@@ -57,8 +57,8 @@ public class AddSlotCommandParser implements Parser<AddSlotCommand> {
         }
 
         Pet pet = SlotParserUtil.parsePet(argMultimap.getValue(PREFIX_NAME).get(), model);
-        LocalDateTime dateTime = SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        Duration duration = SlotParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
+        DateTime dateTime = SlotParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        SlotDuration duration = SlotParserUtil.parseSlotDuration(argMultimap.getValue(PREFIX_DURATION).get());
 
         Slot slot = new Slot(pet, dateTime, duration);
 
@@ -71,7 +71,7 @@ public class AddSlotCommandParser implements Parser<AddSlotCommand> {
             warningMessage += Messages.WARNING_MESSAGE_NAME;
         }
         if (argMultimap.getAllValues(PREFIX_DATETIME).size() > 1) {
-            warningMessage += Messages.WARNING_MESSAGE_TIME;
+            warningMessage += Messages.WARNING_MESSAGE_DATETIME;
         }
         if (argMultimap.getAllValues(PREFIX_DURATION).size() > 1) {
             warningMessage += Messages.WARNING_MESSAGE_DURATION;

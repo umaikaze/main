@@ -1,8 +1,8 @@
 package clzzz.helper.logic.parser.slot;
 
 import static clzzz.helper.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DATETIME;
 import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_DURATION;
-import static clzzz.helper.commons.core.Messages.WARNING_MESSAGE_TIME;
 import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_COCO;
 import static clzzz.helper.logic.commands.CommandTestUtil.DATETIME_DESC_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.DURATION_DESC_COCO;
@@ -116,7 +116,7 @@ class EditSlotCommandParserTest {
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
         EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor,
-                WARNING_MESSAGE_TIME + WARNING_MESSAGE_DURATION);
+                WARNING_MESSAGE_DATETIME + WARNING_MESSAGE_DURATION);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -128,7 +128,7 @@ class EditSlotCommandParserTest {
         Index targetIndex = INDEX_FIRST_SLOT;
         String userInput = targetIndex.getOneBased() + INVALID_DATETIME_DESC + DATETIME_DESC_GARFIELD;
         EditSlotDescriptor descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD).build();
-        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, WARNING_MESSAGE_TIME);
+        EditSlotCommand expectedCommand = new EditSlotCommand(targetIndex, descriptor, WARNING_MESSAGE_DATETIME);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
@@ -136,7 +136,8 @@ class EditSlotCommandParserTest {
                 + DATETIME_DESC_GARFIELD;
         descriptor = new EditSlotDescriptorBuilder().withDateTime(VALID_DATETIME_GARFIELD)
                 .withDuration(VALID_DURATION_GARFIELD).build();
-        expectedCommand = new EditSlotCommand(targetIndex, descriptor, WARNING_MESSAGE_TIME + WARNING_MESSAGE_DURATION);
+        expectedCommand = new EditSlotCommand(targetIndex, descriptor,
+                WARNING_MESSAGE_DATETIME + WARNING_MESSAGE_DURATION);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

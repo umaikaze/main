@@ -1,12 +1,12 @@
 package clzzz.helper.ui.calendar;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.SlotDuration;
 import clzzz.helper.ui.UiPart;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -171,16 +171,19 @@ public class CalendarPanel extends UiPart<Region> {
 
     private int getColIndex(LocalTime earliestTime, LocalTime slotTime) {
         assert slotTime.isBefore(earliestTime) : "Given slot time is earlier than the earliest time!";
-        return CalendarDate.getWidth()
-                + Math.toIntExact(Duration.between(earliestTime, slotTime).toMinutes());
+        int delta = 0;
+        if (earliestTime.isBefore(slotTime)) {
+            delta = Math.toIntExact(SlotDuration.between(earliestTime, slotTime).toMinutes());
+        }
+        return CalendarDate.getWidth() + delta;
     }
 
-    private int getColSpan(Duration duration) {
+    private int getColSpan(SlotDuration duration) {
         return Math.toIntExact(duration.toMinutes());
     }
 
     private int getColSpan(LocalTime startTime, LocalTime endTime) {
-        return getColSpan(Duration.between(startTime, endTime));
+        return getColSpan(SlotDuration.between(startTime, endTime));
     }
 
     /**

@@ -1,9 +1,5 @@
 package clzzz.helper.model.util;
 
-import static clzzz.helper.commons.util.DateTimeUtil.DATETIME_FORMAT;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,15 +14,16 @@ import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
 import clzzz.helper.model.pet.Tag;
+import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
-
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * Contains utility methods for populating {@code Pet Tracker} with sample data.
  */
 public class SampleDataUtil {
     public static Pet[] getSamplePets() {
-        return new Pet[]{
+        return new Pet[] {
             new Pet(new Name("Alex"), Gender.MALE, new DateOfBirth("1/12/2005"), new Species("cat"),
                         getFoodSet("cat food:10"), getTagSet("dumb")),
             new Pet(new Name("Bob"), Gender.FEMALE, new DateOfBirth("10/12/2001"), new Species("cat"),
@@ -78,51 +75,52 @@ public class SampleDataUtil {
             new Pet(new Name("Yolo"), Gender.MALE, new DateOfBirth("1/1/2011"), new Species("rabbit"),
                         getFoodSet("rabbit food:10"), getTagSet("new")),
             new Pet(new Name("Zoo"), Gender.MALE, new DateOfBirth("1/1/2011"), new Species("hamster"),
-                        getFoodSet("hamster food:10"), getTagSet("new"))};
+                        getFoodSet("hamster food:10"), getTagSet("new"))
+        };
     }
 
     public static Slot[] getSampleSlots(PetTracker samplePt) {
-        return new Slot[]{
-            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("8/4/2020 1500", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("75"))),
-            new Slot(samplePt.getPet(new Name("David")), LocalDateTime.parse("8/4/2020 2000", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("88"))),
-            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("18/4/2020 1200", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("60"))),
-            new Slot(samplePt.getPet(new Name("Xavi")), LocalDateTime.parse("18/4/2020 1600", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("60"))),
-            new Slot(samplePt.getPet(new Name("Foo")), LocalDateTime.parse("18/4/2020 1800", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("80"))),
-            new Slot(samplePt.getPet(new Name("Gru")), LocalDateTime.parse("6/4/2020 1300", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Helen")), LocalDateTime.parse("7/4/2020 1600", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("40"))),
-            new Slot(samplePt.getPet(new Name("Oligay")), LocalDateTime.parse("8/4/2020 1800", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Zoo")), LocalDateTime.parse("8/4/2020 1000", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Yolo")), LocalDateTime.parse("12/4/2020 1200", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("40"))),
-            new Slot(samplePt.getPet(new Name("Villa")), LocalDateTime.parse("12/4/2020 1300", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Windy")), LocalDateTime.parse("12/4/2020 1500", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("20"))),
-            new Slot(samplePt.getPet(new Name("Elsa")), LocalDateTime.parse("13/4/2020 1900", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Kelly")), LocalDateTime.parse("14/4/2020 1300", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("90"))),
-            new Slot(samplePt.getPet(new Name("Leo")), LocalDateTime.parse("15/4/2020 1300", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Alex")), LocalDateTime.parse("9/4/2020 1700", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Bob")), LocalDateTime.parse("9/4/2020 1200", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100"))),
-            new Slot(samplePt.getPet(new Name("Newbie")), LocalDateTime.parse("10/4/2020 1200", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("60"))),
-            new Slot(samplePt.getPet(new Name("Molly")), LocalDateTime.parse("17/4/2020 1200", DATETIME_FORMAT),
-                    Duration.ofMinutes(Long.parseLong("100")))};
+        return new Slot[] {
+            new Slot(samplePt.getPet(new Name("Alex")), new DateTime("8/4/2020 1500"),
+                    new SlotDuration("75")),
+            new Slot(samplePt.getPet(new Name("David")), new DateTime("8/4/2020 2000"),
+                    new SlotDuration("88")),
+            new Slot(samplePt.getPet(new Name("Elsa")), new DateTime("18/4/2020 1200"),
+                    new SlotDuration("60")),
+            new Slot(samplePt.getPet(new Name("Xavi")), new DateTime("18/4/2020 1600"),
+                    new SlotDuration("60")),
+            new Slot(samplePt.getPet(new Name("Foo")), new DateTime("18/4/2020 1800"),
+                    new SlotDuration("80")),
+            new Slot(samplePt.getPet(new Name("Gru")), new DateTime("6/4/2020 1300"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Helen")), new DateTime("7/4/2020 1600"),
+                    new SlotDuration("40")),
+            new Slot(samplePt.getPet(new Name("Oligay")), new DateTime("8/4/2020 1800"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Zoo")), new DateTime("8/4/2020 1000"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Yolo")), new DateTime("12/4/2020 1200"),
+                    new SlotDuration("40")),
+            new Slot(samplePt.getPet(new Name("Villa")), new DateTime("12/4/2020 1300"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Windy")), new DateTime("12/4/2020 1500"),
+                    new SlotDuration("20")),
+            new Slot(samplePt.getPet(new Name("Elsa")), new DateTime("13/4/2020 1900"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Kelly")), new DateTime("14/4/2020 1300"),
+                    new SlotDuration("90")),
+            new Slot(samplePt.getPet(new Name("Leo")), new DateTime("15/4/2020 1300"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Alex")), new DateTime("9/4/2020 1700"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Bob")), new DateTime("9/4/2020 1200"),
+                    new SlotDuration("100")),
+            new Slot(samplePt.getPet(new Name("Newbie")), new DateTime("10/4/2020 1200"),
+                    new SlotDuration("60")),
+            new Slot(samplePt.getPet(new Name("Molly")), new DateTime("17/4/2020 1200"),
+                    new SlotDuration("100"))
+        };
     }
-
 
     public static ReadOnlyPetTracker getSamplePetTrackerWithSlots() {
         PetTracker samplePt = new PetTracker();

@@ -2,9 +2,8 @@ package clzzz.helper.logic.parser.slot;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,8 @@ import clzzz.helper.model.Model;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
-import clzzz.helper.model.slot.Slot;
+import clzzz.helper.model.slot.DateTime;
+import clzzz.helper.model.slot.SlotDuration;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,9 +25,7 @@ import clzzz.helper.model.slot.Slot;
 public class SlotParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATETIME =
-            "Date and time must follow format d/M/yyyy HHmm.";
-    public static final String MESSAGE_INVALID_DATE = "Date must follow format d/M/yyyy.";
+    public static final String MESSAGE_INVALID_DATE = "Date must follow format " + DateTimeUtil.DATE_PATTERN + ".";
     public static final String MESSAGE_INVALID_DURATION = "Duration is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PETNAME = "Pet name is invalid.";
     public static final String MESSAGE_PET_DOES_NOT_EXIST = "Pet name does not match any pet in record.";
@@ -71,22 +69,13 @@ public class SlotParserUtil {
      *
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
-    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        if (!Slot.isValidDateTimeFormat(trimmedDateTime)) {
-            throw new ParseException(MESSAGE_INVALID_DATETIME);
+        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        if (!Slot.isValidDate(trimmedDateTime) && !Slot.isValidTime(trimmedDateTime)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_DATE_TIME);
-        }
-        if (!Slot.isValidDate(trimmedDateTime)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_DATE);
-        }
-        if (!Slot.isValidTime(trimmedDateTime)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
-        }
-        return LocalDateTime.parse(trimmedDateTime, DateTimeUtil.DATETIME_FORMAT);
+        return new DateTime(trimmedDateTime);
     }
 
     /**
@@ -98,13 +87,13 @@ public class SlotParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Slot.isValidDateFormat(trimmedDate)) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
-        }
-        if (!Slot.isValidDate(trimmedDate)) {
+        LocalDate parsedDate;
+        try {
+            parsedDate = DateTimeUtil.parseLocalDate(trimmedDate);
+        } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_DATE);
         }
-        return LocalDate.parse(trimmedDate, DateTimeUtil.DATE_FORMAT);
+        return parsedDate;
     }
 
     /**
@@ -122,23 +111,17 @@ public class SlotParserUtil {
     }
 
     /**
-     * Parses a {@code String duration} into an {@code Duration}.
+     * Parses a {@code String duration} into an {@code SlotDuration}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code duration} is invalid.
      */
-    public static Duration parseDuration(String duration) throws ParseException {
+    public static SlotDuration parseSlotDuration(String duration) throws ParseException {
         requireNonNull(duration);
         String trimmedDuration = duration.trim();
-        Duration newDuration;
-        try {
-            newDuration = Duration.ofMinutes(Long.parseLong(trimmedDuration));
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
+        if (!SlotDuration.isValidDuration(trimmedDuration)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        if (newDuration.isNegative() || newDuration.isZero()) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
-        }
-        return newDuration;
+        return new SlotDuration(trimmedDuration);
     }
 }

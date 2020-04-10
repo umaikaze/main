@@ -2,11 +2,8 @@ package clzzz.helper.model.slot;
 
 import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,13 +19,13 @@ import clzzz.helper.ui.list.DisplayItem;
 public class Slot implements Comparable<Slot>, DisplayItem {
 
     private final Pet pet;
-    private final LocalDateTime dateTime;
-    private final Duration duration;
+    private final DateTime dateTime;
+    private final SlotDuration duration;
 
     /**
      * Every field must be present and not null.
      */
-    public Slot(Pet pet, LocalDateTime dateTime, Duration duration) {
+    public Slot(Pet pet, DateTime dateTime, SlotDuration duration) {
         requireAllNonNull(pet, dateTime, duration);
         this.pet = pet;
         this.dateTime = dateTime;
@@ -39,11 +36,11 @@ public class Slot implements Comparable<Slot>, DisplayItem {
         return pet;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
-    public Duration getDuration() {
+    public SlotDuration getDuration() {
         return duration;
     }
 
@@ -65,7 +62,7 @@ public class Slot implements Comparable<Slot>, DisplayItem {
      * Returns the ending datetime of the slot, based on its starting datetime and duration.
      */
 
-    public LocalDateTime getEndDateTime() {
+    public DateTime getEndDateTime() {
         return getDateTime().plus(duration);
     }
 
@@ -74,59 +71,6 @@ public class Slot implements Comparable<Slot>, DisplayItem {
      */
     public LocalTime getEndTime() {
         return getTime().plus(duration);
-    }
-
-
-    /**
-     * Returns true if the string is in correct datetime format (might be invalid datetime)
-     */
-    public static boolean isValidDateTimeFormat(String test) {
-        try {
-            LocalDateTime mightBeValid = LocalDateTime.parse(test, DateTimeUtil.DATETIME_FORMAT);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Returns true if the string is in correct date format (might be invalid date)
-     */
-    public static boolean isValidDateFormat(String test) {
-        try {
-            LocalDate mightBeValid = LocalDate.parse(test, DateTimeUtil.DATE_FORMAT);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * This method should be called after making sure the format is correct.
-     * It checks if the date entered is valid.
-     */
-    public static boolean isValidDate(String test) {
-        try {
-            String[] tests = test.split("\\s+");
-            LocalDate date = LocalDate.parse(tests[0], DateTimeUtil.STRICT_DATE_FORMAT);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-
-    /**
-     * This method should be called after making sure the format is correct.
-     * It checks if the time entered is valid.
-     */
-    public static boolean isValidTime(String test) {
-        try {
-            String[] tests = test.split("\\s+");
-            LocalTime time = LocalTime.parse(tests[1], DateTimeUtil.STRICT_TIME_FORMAT);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     /**
@@ -158,10 +102,10 @@ public class Slot implements Comparable<Slot>, DisplayItem {
             // and having the same duration must be in conflict with each other.
             return true;
         }
-        LocalDateTime start = getDateTime();
-        LocalDateTime end = getEndDateTime();
-        LocalDateTime otherStart = otherSlot.getDateTime();
-        LocalDateTime otherEnd = otherSlot.getEndDateTime();
+        DateTime start = getDateTime();
+        DateTime end = getEndDateTime();
+        DateTime otherStart = otherSlot.getDateTime();
+        DateTime otherEnd = otherSlot.getEndDateTime();
         return start.isBefore(otherEnd) && otherStart.isBefore(end);
     }
 
@@ -171,6 +115,13 @@ public class Slot implements Comparable<Slot>, DisplayItem {
     public boolean hasConflict(List<Slot> allSlots) {
         return allSlots.stream()
                 .anyMatch(otherSlot -> isInConflictWith(otherSlot));
+    }
+
+    /**
+     * Returns a new slot, with the current pet replaced with {@code newPet}.
+     */
+    public Slot replacePetWith(Pet newPet) {
+        return new Slot(newPet, dateTime, duration);
     }
 
     /**
