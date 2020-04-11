@@ -240,15 +240,36 @@ slots:
 * `SlotDateTimePredicate()` -- Internally stores the `LocalDateTime` to search for (Timing will be ignored), and
 compares it with `getDate()`.
 
+Given below is an example usage scenario that demonstrates how the `Schedule` system is integrated with the `Pet` system
+
+Step 1. The user launches the application with a pet stored: `Garfield`. `ObservableList<Slot>`
+in `Schedule` is occupied with a single instance of `Slot`, whose parameters are: `petName: Garfield`,
+`dateTime: 11/4/2020 1200`, `duration: 40`. Upon launch, a `PetListChangeListener` will be attached to `internalList` of
+`UniquePetList`.
+
+Step 2. The user executes `deletepet 1` command to delete `Garfield` from the `UniquePetList`. When the pet is deleted,
+function `onChanged` in `PetListChangeListener` is called. This function calls `removeExcessSlot` within the
+`PetListChangeListener` for each pet that is being removed.
+
+Step 3. `removeExcessSlot` calls `remove` in `Schedule` to remove slots based on the name of the removed pet.
+
+Step 4. The user now have successfully removed `Garfield` and all the slots the pet used to occupy.
+
+The sequence diagram below is an illustration of the flow of events that happen in the model component when the steps
+above occurs.
+
+image::SlotAutoUpdateSequenceDiagram.png[]
+
 ==== Design Considerations
 ===== Aspect: How schedule stores the pets internally
 
 * **Alternative 1 (current choice):** Makes a reference to the the memory address in `ModelManager` .
-** Pros: When the pet is edited, the slot is also updated.
-** Cons: Hard to implement and test.
+** Pros: When the pet is edited, it is easier to update the corresponding slot. Also reduces save file size and
+conserve system memory as there will be no duplicate information.
+** Cons: Harder to implement and test. Testing requires a sample list of pets to be instantiated first.
 * **Alternative 2:** Simply create a new Pet.
 ** Pros: Easy to implement and test (A refactor of `Pet`), low coupling with `Model`.
-** Cons: Does not update when original pet is edited, which is not something the user will expect.
+** Cons: Harder to synchronize with any changes in `UniquePetList`
 
 // end::schedule[]
 
