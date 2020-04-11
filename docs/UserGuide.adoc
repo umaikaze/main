@@ -56,7 +56,7 @@ Details about each pet kept track of are its name, gender, species, date of birt
 
 ==== Pet Food Inventory
 
-This shows the a list of all pet food (inventory) and the needed amount per week. Double-click on each food item to view the breakdown for each pet individually.
+This shows the a list of all pet food (inventory) and the needed amount per week. Double-click on each food item to view the breakdown for each pet individually. This feature is integrated under the `display` feature as `display i`.
 
 === Schedule System
 
