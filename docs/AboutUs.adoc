@@ -1,7 +1,7 @@
 = About Us
 :site-section: AboutUs
 :relfileprefix: team/
-:imagesDir: images
+:imagesDir: images/photo
 :stylesDir: stylesheets
 
 Pet Store Helper was developed by the https://github.com/AY1920S2-CS2103-W15-4[AY1920S2-CS2103-W15-4] team. +

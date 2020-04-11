@@ -1,6 +1,6 @@
 = Using Checkstyle-IDEA
 :site-section: DeveloperGuide
-:imagesDir: images
+:imagesDir: images/checkstyle-guide
 :stylesDir: stylesheets
 :experimental:
 ifdef::env-github[]
