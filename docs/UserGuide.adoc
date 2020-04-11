@@ -94,7 +94,7 @@ This view is obtained by the command `display c`.
 
 === Statistics
 
-The statistics of the pet store shown are:
+The statistics of the pet store, which can be shown via `stats`, are:
 
 - The proportion of species of pets,
 - The planned schedule for the next 3 days, and
@@ -349,7 +349,7 @@ Edits the details of an existing occupied slot in the schedule.
 
 Format: `editslot INDEX [n/PETNAME] [t/DATETIME] [d/DURATION]`
 
-The index passed in is intepreted differently, based on current display of the program. 
+The index passed in is intepreted differently, based on current display of the program.
 
 - If the program is displaying slots (via `display s`, `display c` or `findslots`), then the index is based on the index numbers shown in the current display (indicated with blue boxes).
 
