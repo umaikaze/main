@@ -264,7 +264,7 @@ A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the foll
 * Changes in FoodCollection occurs only if there is a change in `UniquePetList#internalList`.
 
 Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
-`ModelManager` then passes the list of `FoodCollection` to ui for display as a list of `DisplayItem` when `display i` is called.
+`ModelManager` then passes the list of `FoodCollection` to UI for display as a list of `DisplayItem` when `display i` is called.
 
 The following shows a typical usage scenario that involves the Display Inventory feature.
 
