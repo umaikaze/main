@@ -270,13 +270,21 @@ Examples:
 
 ==== Finding slots: `findslots`
 
-Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. Slots that matched the query will be returned and displayed sequentially as a list.
+Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. Slots that
+matched the query will be returned and displayed sequentially as a list.
 
-Format: `findslots [n/PETNAME] [t/DATE]`
+Format: `findslots [n/PETNAMES] [t/DATES]`
 
 ****
 - This command can take one pet name, one date, or one pet name and one date.
 - Slots with pets matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+- Slots with dates matching at least one date will be returned (i.e. OR search). e.g. `8/4/2020 9/4/2020` will return
+slots from both dates
+- If both optional fields are filled, slots that meet both criteria will be returned. (i.e. AND search). e.g.
+`n/Alex t/9/4/2020` will return slots occupied by Alex on 9/4/2020. `n/Alex Bob t/8/4/2020 9/4/2020` will return slots
+from 8 to 9th of April, but only if they are occupied by either Alex or Bob. This behaviour, although more complicated
+when more then one input per field is entered, allows the user to check for the slots occupied by a specific pet on one
+particular date, should they use one input per field only.
 
 - The date must be in `d/M/yyyy` format.
 
