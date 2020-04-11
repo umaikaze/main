@@ -5,10 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.pet.UniquePetList;
 import clzzz.helper.model.slot.Slot;
 import javafx.collections.ObservableList;
 

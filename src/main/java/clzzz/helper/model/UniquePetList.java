@@ -1,4 +1,4 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model;
 
 import static clzzz.helper.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
@@ -8,7 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import clzzz.helper.model.PetListChangeListener;
+import clzzz.helper.model.foodcollection.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollectionList;
+import clzzz.helper.model.pet.Food;
+import clzzz.helper.model.pet.Name;
+import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.DuplicatePetException;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 import clzzz.helper.model.slot.Schedule;

@@ -16,7 +16,7 @@ import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
-import clzzz.helper.model.tag.Tag;
+import clzzz.helper.model.pet.Tag;
 
 
 /**

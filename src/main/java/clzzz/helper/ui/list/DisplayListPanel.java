@@ -3,8 +3,8 @@ package clzzz.helper.ui.list;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import clzzz.helper.model.pet.FoodAmountAndPet;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodAmountAndPet;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.ui.UiPart;

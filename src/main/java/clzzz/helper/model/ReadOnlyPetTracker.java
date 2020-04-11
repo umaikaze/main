@@ -1,6 +1,6 @@
 package clzzz.helper.model;
 
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;
 import javafx.collections.ObservableList;

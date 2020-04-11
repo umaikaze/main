@@ -1,4 +1,4 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model;
 
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_SPECIES_GARFIELD;
 import static clzzz.helper.logic.commands.CommandTestUtil.VALID_TAG_FAT;
@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.exceptions.DuplicatePetException;
 import clzzz.helper.model.pet.exceptions.PetNotFoundException;
 import clzzz.helper.testutil.pet.PetBuilder;

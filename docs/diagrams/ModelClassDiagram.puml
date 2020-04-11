@@ -4,6 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+
+
+
 Package Model <<Rectangle>>{
 Interface ReadOnlyPetTracker <<Interface>>
 Interface Model <<Interface>>
@@ -14,6 +17,8 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class UniquePetList
+
 
 Package Pet {
 Class Pet
@@ -22,10 +27,8 @@ Class Food
 Class Gender
 Class Name
 Class Species
-Class UniquePetList
-Class FoodCollection
-Class FoodCollectionList
-Class PetAmountAndPet
+Class Tag
+
 }
 
 Package Schedule {
@@ -33,9 +36,12 @@ Class Schedule
 Class Slot
 }
 
-Package Tag {
-Class Tag
+Package FoodCollection {
+Class FoodCollection
+Class FoodCollectionList
+Class FoodAmountAndPet
 }
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -53,9 +59,7 @@ PetTracker *--> "1" UniquePetList
 UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
-FoodCollection *--> "*" PetAmountAndPet
-PetAmountAndPet o--> "1" Pet
-UniquePetList -[hidden]right> FoodCollectionList
+FoodCollection *--> "*" FoodAmountAndPet
 
 Pet *--> Name
 Pet *--> Species
@@ -68,9 +72,9 @@ Name -[hidden]right-> DateOfBirth
 DateOfBirth -[hidden]right-> Gender
 Species -[hidden]right-> Food
 
-PetTracker *--> "1" Schedule
+UniquePetList o--> "1" Schedule
 Schedule o--> "*" Slot
-Slot *--> "1" Pet
+Slot o--> "1" Pet
 
 ModelManager -->"1" Pet : filtered list
 ModelManager -->"1" Slot : filtered list

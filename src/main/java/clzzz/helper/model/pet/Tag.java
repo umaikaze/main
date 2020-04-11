@@ -1,4 +1,4 @@
-package clzzz.helper.model.tag;
+package clzzz.helper.model.pet;
 
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;

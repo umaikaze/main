@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import clzzz.helper.commons.exceptions.IllegalValueException;
-import clzzz.helper.model.tag.Tag;
+import clzzz.helper.model.pet.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.
