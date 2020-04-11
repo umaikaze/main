@@ -1,0 +1,47 @@
+= John Doe - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 3
+
+---
+
+== Overview
+
+Pet Store Helper(PSH) is a desktop application used for pet store owners to manage different aspects of their pet store including pet logging, scheduling and inventory management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10kLOC.
+== Summary of contributions
+
+* *Major enhancement*: added *the inventory display system*
+** What it does: allows the user to view the summary of weekly food types and amounts required to maintain the pets in the store.
+** Justification: This feature improves the usefulness of the product for pet store owners significantly as it helps the user to visualize, understand and organize food consumptions in the pet shop.
+** Highlights: This enhancement uses a split screen which led to the redesign of the UI component. A major challenge tackled was the synchronization of data of the Inventory system with the Pet system, which required an in-depth analysis of design alternatives of the data model.
+
+* *Minor enhancement*: added a feature where users can click on each food item in the inventory to view the breakdown of food amounts by pet names.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Contribution to Documentation:
+*** Maintained the Model component(2.4) of the Developer Guide.
+*** Maintained Inventory feature(3.3) of Developer Guide.
+*** Compiled and edited the materials for the Final Demo.
+
+** Enhancements to existing features:
+*** Refactored Model package of AB3 for the use of PSH
+*** In charge of resolving major integration issues at the end of the morphing phase.
+
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+include::../DeveloperGuide.adoc[tag=Model]
+
+include::../DeveloperGuide.adoc[tag=inventory_feature]
+

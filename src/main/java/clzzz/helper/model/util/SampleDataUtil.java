@@ -13,10 +13,10 @@ import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.pet.Species;
+import clzzz.helper.model.pet.Tag;
 import clzzz.helper.model.slot.DateTime;
 import clzzz.helper.model.slot.Slot;
 import clzzz.helper.model.slot.SlotDuration;
-import clzzz.helper.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code Pet Tracker} with sample data.

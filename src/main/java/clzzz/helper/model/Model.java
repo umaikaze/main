@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import clzzz.helper.commons.core.GuiSettings;
 import clzzz.helper.commons.exceptions.IllegalValueException;
-import clzzz.helper.model.pet.FoodCollection;
+import clzzz.helper.model.foodcollection.FoodCollection;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Pet;
 import clzzz.helper.model.slot.Slot;

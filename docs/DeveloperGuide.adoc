@@ -125,6 +125,7 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::Model[]
 [[Design-Model]]
 === Model component
 
@@ -139,7 +140,7 @@ The `Model`,
 * stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
 * exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
+// end::Model[]
 
 [[Design-Storage]]
 === Storage component
@@ -251,7 +252,7 @@ compares it with `getDate()`.
 
 // end::schedule[]
 
-// tag::intentoryfeature
+// tag::inventory_feature[]
 === Inventory feature
 ==== Implementation
 
@@ -294,7 +295,7 @@ image::DisplayInventorySequenceDiagram.png[]
 * Alternative 2: Modify `FoodCollection` affected by the command.
 ** Pros: Less computationally intensive and more responsive given a large database.
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
-// end::intentoryfeature
+// end::inventory_feature[]
 
 === Logging
 

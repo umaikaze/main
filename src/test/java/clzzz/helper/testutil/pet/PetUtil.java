@@ -12,7 +12,7 @@ import java.util.Set;
 import clzzz.helper.logic.commands.pet.AddPetCommand;
 import clzzz.helper.logic.commands.pet.EditPetCommand.EditPetDescriptor;
 import clzzz.helper.model.pet.Pet;
-import clzzz.helper.model.tag.Tag;
+import clzzz.helper.model.pet.Tag;
 
 /**
  * A utility class for Pet.

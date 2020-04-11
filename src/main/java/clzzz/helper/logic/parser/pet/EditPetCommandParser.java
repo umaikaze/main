@@ -24,7 +24,7 @@ import clzzz.helper.logic.parser.Parser;
 import clzzz.helper.logic.parser.ParserUtil;
 import clzzz.helper.logic.parser.exceptions.ParseException;
 import clzzz.helper.model.pet.Food;
-import clzzz.helper.model.tag.Tag;
+import clzzz.helper.model.pet.Tag;
 
 /**
  * Parses input arguments and creates a new EditPetCommand object

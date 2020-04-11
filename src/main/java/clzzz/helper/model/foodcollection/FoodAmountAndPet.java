@@ -1,4 +1,4 @@
-package clzzz.helper.model.pet;
+package clzzz.helper.model.foodcollection;
 
 import static clzzz.helper.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
@@ -17,18 +17,20 @@ public class FoodAmountAndPet implements DisplayItem {
     public static final String MESSAGE_AMOUNT_CONSTRAINTS = "Food amount must be a positive integer number.";
 
     private final Integer foodAmount;
-    private final Pet pet;
+    private final String petName;
 
 
     /**
      * Instantiates a FoodAmountAndPet object which represents the relationship that the given pet requires
      * the given amount of a certain type of food.
+     * @param foodAmount the Amount of Food
+     * @param petName the Name of the pet.
      */
-    public FoodAmountAndPet(int foodAmount, Pet pet) {
-        requireNonNull(pet);
+    public FoodAmountAndPet(Integer foodAmount, String petName) {
+        requireNonNull(petName);
         checkArgument(isValidFoodAmount(foodAmount), MESSAGE_AMOUNT_CONSTRAINTS);
         this.foodAmount = foodAmount;
-        this.pet = pet;
+        this.petName = petName;
     }
 
     /**
@@ -51,19 +53,19 @@ public class FoodAmountAndPet implements DisplayItem {
     }
 
     /**
-     * Returns the pet involved in this relationship.
+     * Returns the petName involved in this relationship.
      */
-    public Pet getPet() {
-        return pet;
+    public String getPetName() {
+        return petName;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(foodAmount, pet);
+        return Objects.hash(foodAmount, petName);
     }
 
     @Override
     public String toString() {
-        return "FoodAmountAndPet{" + "foodAmount=" + foodAmount + ", pet=" + pet + '}';
+        return "FoodAmountAndPet{" + "foodAmount=" + foodAmount + ", pet=" + petName + '}';
     }
 }
