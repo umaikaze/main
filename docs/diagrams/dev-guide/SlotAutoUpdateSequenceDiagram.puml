@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 
 box Model MODEL_COLOR_T1
 participant ":UniquePetList" as UniquePetList MODEL_COLOR

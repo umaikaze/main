@@ -1,4 +1,6 @@
 @startuml
+!include ../style.puml
+
 (*)  --> "check arguments"
 If "both name prefix and dateTime prefix are empty" then
 --> [Yes] "throw new parse exception"
