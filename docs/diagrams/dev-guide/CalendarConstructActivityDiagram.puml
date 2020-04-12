@@ -39,7 +39,7 @@ while () is ([i < total number of slots])
         endif
         :Remove all slot(s) in holding;
     else ([else])
-    
+
     endif
     :Add CS to holding;
     :Increment i;
