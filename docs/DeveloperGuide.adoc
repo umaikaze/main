@@ -372,6 +372,7 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+// tag::appendix[]
 [appendix]
 == Product Scope
 
@@ -533,3 +534,4 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+// end::appendix[]
