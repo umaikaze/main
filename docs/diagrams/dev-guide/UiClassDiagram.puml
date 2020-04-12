@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
@@ -15,7 +15,7 @@ Class FeedbackDisplay
 Class CommandBox
 Class HelpWindow
 
-Class OverallStatistics
+Class OverallStats
 
 package Calendar <<Rectangle>> {
 Class HiddenCalendar #FFFFFF
@@ -44,10 +44,10 @@ UiManager -down-> MainWindow
 UiManager --> Logic
 MainWindow -down-> Logic
 
-MainWindow *-up-> StatusBarFooter
-MainWindow *-up-> FeedbackDisplay
-MainWindow *-up-> CommandBox
-MainWindow *-up-> HelpWindow
+MainWindow *-up-> "1" StatusBarFooter
+MainWindow *-up-> "1" FeedbackDisplay
+MainWindow *-up-> "1" CommandBox
+MainWindow *-up-> "1" HelpWindow
 
 MainWindow -up-|> UiPart
 StatusBarFooter -up-|> UiPart
@@ -56,13 +56,13 @@ CommandBox -up-|> UiPart
 HelpWindow -up-|> UiPart
 
 
-MainWindow *--> OverallStatistics
-OverallStatistics .down.> Model
-OverallStatistics -up-|> UiPart
+MainWindow *--> "1   " OverallStats
+OverallStats .down.> Model
+OverallStats -up-|> UiPart
 
-MainWindow *--> DisplayList
+MainWindow "1 " *--> DisplayList
 DisplayList ..> Model
 
-MainWindow *--> Calendar
+MainWindow *--> "1\n\n\n\n" Calendar
 Calendar ..> Model
 @enduml

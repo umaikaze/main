@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
@@ -19,12 +19,12 @@ package Model <<Rectangle>> {
 Class HiddenModel #FFFFFF
 }
 
-MainWindow *--> DisplayListPanel
+MainWindow *--> "1" DisplayListPanel
 
-DisplayListPanel --> PetCard
-DisplayListPanel --> SlotCard
-DisplayListPanel --> FoodCollectionCard
-DisplayListPanel --> FoodAmountAndPetCard
+DisplayListPanel *--> "*" PetCard
+DisplayListPanel *--> "*" SlotCard
+DisplayListPanel *--> "*" FoodCollectionCard
+DisplayListPanel *--> "*" FoodAmountAndPetCard
 
 PetCard ---|> UiPart
 SlotCard --|> UiPart
