@@ -31,19 +31,13 @@ deactivate PetTrackerParser
 LogicManager -> StatsCommand : execute()
 activate StatsCommand
 
-StatsCommand -> Model : updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS)
+StatsCommand -> Model : updateAll()
 activate Model
 
 Model --> StatsCommand
 deactivate Model
 
-StatsCommand -> Model : updateFilteredSlotList(Model.PREDICATE_SHOW_ALL_SLOTS)
-activate Model
-
-Model --> StatsCommand
-deactivate Model
-
-StatsCommand -> Model : updateFilteredFoodCollectionList(Model.PREDICATE_SHOW_ALL_FOOD_COLLECTIONS)
+StatsCommand -> Model : changeDisplaySystem(DisplaySystemType.STATISTICS)
 activate Model
 
 Model --> StatsCommand
