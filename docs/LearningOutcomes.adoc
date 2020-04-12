@@ -3,7 +3,7 @@
 :toc: macro
 :toc-title:
 :toclevels: 1
-:imagesDir: images
+:imagesDir: images/learning-outcomes
 :stylesDir: stylesheets
 ifdef::env-github[]
 :note-caption: :information_source:

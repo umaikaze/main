@@ -4,7 +4,7 @@
 :toc-title:
 :toc-placement: preamble
 :sectnums:
-:imagesDir: images
+:imagesDir: images/dev-guide
 :stylesDir: stylesheets
 :xrefstyle: full
 ifdef::env-github[]
@@ -125,6 +125,7 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::Model[]
 [[Design-Model]]
 === Model component
 
@@ -139,7 +140,7 @@ The `Model`,
 * stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
 * exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
+// end::Model[]
 
 [[Design-Storage]]
 === Storage component
@@ -239,19 +240,45 @@ slots:
 * `SlotDateTimePredicate()` -- Internally stores the `LocalDateTime` to search for (Timing will be ignored), and
 compares it with `getDate()`.
 
+The activity diagram below is an illustration of the flow of events that happen in the model component when the steps
+above occurs.
+
+image::FindSlotParserDiagram.png[]
+
+Given below is an example usage scenario that demonstrates how the `Schedule` system integrates with the `Pet` system.
+
+Step 1. The user launches the application with a pet stored: `Garfield`. A single instance of `Slot` occupies
+`ObservableList<Slot>` in `Schedule`, whose parameters are: `petName: Garfield`,
+`dateTime: 11/4/2020 1200`, `duration: 40`. Upon launch, a `PetListChangeListener` will be attached to `internalList` of
+`UniquePetList`.
+
+Step 2. The user executes `deletepet 1` command to delete `Garfield` from the `UniquePetList`. When user deletes the pet,
+function `onChanged` in `PetListChangeListener` is called. This function calls `removeExcessSlot` within the
+`PetListChangeListener` for each pet removed.
+
+Step 3. `removeExcessSlot` calls `remove` in `Schedule` to remove slots based on the name of the removed pet.
+
+Step 4. The user now have successfully removed `Garfield` and all the slots the pet used to occupy.
+
+The sequence diagram below is an illustration of the flow of events that happen in the model component when the steps
+above occurs.
+
+image::SlotAutoUpdateSequenceDiagram.png[]
+
 ==== Design Considerations
 ===== Aspect: How schedule stores the pets internally
 
 * **Alternative 1 (current choice):** Makes a reference to the the memory address in `ModelManager` .
-** Pros: When the pet is edited, the slot is also updated.
-** Cons: Hard to implement and test.
+** Pros: When the pet is edited, it is easier to update the corresponding slot. Also reduces save file size and
+conserve system memory as there will be no duplicate information.
+** Cons: Harder to implement and test. Testing requires a sample list of pets to be instantiated first.
 * **Alternative 2:** Simply create a new Pet.
 ** Pros: Easy to implement and test (A refactor of `Pet`), low coupling with `Model`.
-** Cons: Does not update when original pet is edited, which is not something the user will expect.
+** Cons: Harder to synchronize with any changes in `UniquePetList`
 
 // end::schedule[]
 
-// tag::intentoryfeature
+// tag::inventory_feature[]
 === Inventory feature
 ==== Implementation
 
@@ -294,7 +321,7 @@ image::DisplayInventorySequenceDiagram.png[]
 * Alternative 2: Modify `FoodCollection` affected by the command.
 ** Pros: Less computationally intensive and more responsive given a large database.
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
-// end::intentoryfeature
+// end::inventory_feature[]
 
 === Logging
 

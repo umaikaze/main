@@ -25,7 +25,7 @@ import clzzz.helper.model.pet.DateOfBirth;
 import clzzz.helper.model.pet.Gender;
 import clzzz.helper.model.pet.Name;
 import clzzz.helper.model.pet.Species;
-import clzzz.helper.model.tag.Tag;
+import clzzz.helper.model.pet.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

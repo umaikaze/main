@@ -1,6 +1,6 @@
 = Travis CI
 :site-section: DeveloperGuide
-:imagesDir: images
+:imagesDir: images/travis-guide
 :stylesDir: stylesheets
 ifdef::env-github[]
 :note-caption: :information_source:

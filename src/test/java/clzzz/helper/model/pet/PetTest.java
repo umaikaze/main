@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import clzzz.helper.model.tag.Tag;
 import clzzz.helper.testutil.pet.PetBuilder;
 
 public class PetTest {

@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyPetTracker <<Interface>>
+Interface Model <<Interface>>
+Interface ObservableList <<Interface>>
+Class PetTracker
+Class ReadOnlyPetTracker
+Class Model
+Class ModelManager
+Class UserPrefs
+Class ReadOnlyUserPrefs
+Class UniquePetList
+
+
+Package Pet {
+Class Pet
+Class DateOfBirth
+Class Food
+Class Gender
+Class Name
+Class Species
+Class Tag
+
+}
+
+Package Schedule {
+Class Schedule
+Class Slot
+}
+
+Package FoodCollection {
+Class FoodCollection
+Class FoodCollectionList
+Class FoodAmountAndPet
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+PetTracker .up.|> ReadOnlyPetTracker
+
+ModelManager .up.|> Model
+Model .right.> ObservableList
+ModelManager o--> "1" PetTracker
+ModelManager o-left-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+PetTracker *--> "1" UniquePetList
+UniquePetList o--> "*" Pet
+UniquePetList o--> "1" FoodCollectionList
+FoodCollectionList o--> "*" FoodCollection
+FoodCollection *--> "*" FoodAmountAndPet
+
+Pet *--> Name
+Pet *--> Species
+Pet *--> DateOfBirth
+Pet *--> Gender
+Pet *--> "*" Food
+Pet *--> "*" Tag
+
+Name -[hidden]right-> DateOfBirth
+DateOfBirth -[hidden]right-> Gender
+Species -[hidden]right-> Food
+
+UniquePetList o--> "1" Schedule
+Schedule o--> "*" Slot
+Slot o--> "1" Pet
+
+ModelManager -->"1" Pet : filtered list
+ModelManager -->"1" Slot : filtered list
+ModelManager -->"1" FoodCollection : filtered list
+
+
+
+@enduml

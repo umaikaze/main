@@ -1,0 +1,48 @@
+= Zhu Ruicong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images/dev-guide
+:stylesDir: ../stylesheets
+
+== PROJECT: Pet Store Helper
+
+---
+
+== Overview
+
+Pet Store Helper(PSH) is a desktop application used for pet store owners to manage different aspects of their pet store including pet logging, scheduling and inventory management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15kLOC.
+
+== Summary of contributions
+
+* *Major enhancement*: *added the inventory display system*
+** What it does: allows the user to view the summary of weekly food types and amounts required to maintain the pets in the store.
+** Justification: This feature improves the usefulness of the product for pet store owners significantly as it helps the user to visualize, understand and organize food consumptions in the pet shop.
+** Highlights: This enhancement uses a split screen which led to the redesign of the UI component. A major challenge tackled was the synchronization of data of the Inventory system with the Pet system, which required an in-depth analysis of design alternatives of the data model.
+
+* *Minor enhancement*: added a feature where users can click on each food item in the inventory to view the breakdown of food amounts by pet names.
+
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Zhu-Ruicong&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Zhu-Ruicong&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Test code]]
+
+* *Other contributions*:
+
+** Contribution to Documentation:
+*** Maintained the AboutUs page.[https://github.com/AY1920S2-CS2103-W15-4/main/pull/6[#6]]
+*** Maintained the Model component(2.4) of the Developer Guide.[https://github.com/AY1920S2-CS2103-W15-4/main/pull/74[#74]]
+*** Maintained Inventory feature(3.3) of Developer Guide.[https://github.com/AY1920S2-CS2103-W15-4/main/pull/74[#74]]
+*** Compiled and edited the materials for the Final Demo.
+
+** Enhancements to existing features:
+*** Refactored Model package of AB3 and UI component for the use of PSH[https://github.com/AY1920S2-CS2103-W15-4/main/pull/13[#13]][https://github.com/AY1920S2-CS2103-W15-4/main/pull/19[#19]]
+*** In charge of resolving major integration issues at the end of the morphing phase.[https://github.com/AY1920S2-CS2103-W15-4/main/pull/35[#35]]
+
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/23[#23], https://github.com/AY1920S2-CS2103-W15-4/main/pull/48[#48], https://github.com/AY1920S2-CS2103-W15-4/main/pull/64[#64], https://github.com/AY1920S2-CS2103-W15-4/main/pull/78[#78], https://github.com/AY1920S2-CS2103-W15-4/main/pull/137[#137]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+include::../DeveloperGuide.adoc[tag=Model]
+
+include::../DeveloperGuide.adoc[tag=inventory_feature]
