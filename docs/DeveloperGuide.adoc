@@ -240,16 +240,21 @@ slots:
 * `SlotDateTimePredicate()` -- Internally stores the `LocalDateTime` to search for (Timing will be ignored), and
 compares it with `getDate()`.
 
-Given below is an example usage scenario that demonstrates how the `Schedule` system is integrated with the `Pet` system
+The activity diagram below is an illustration of the flow of events that happen in the model component when the steps
+above occurs.
 
-Step 1. The user launches the application with a pet stored: `Garfield`. `ObservableList<Slot>`
-in `Schedule` is occupied with a single instance of `Slot`, whose parameters are: `petName: Garfield`,
+image::FindSlotParserDiagram.png[]
+
+Given below is an example usage scenario that demonstrates how the `Schedule` system integrates with the `Pet` system.
+
+Step 1. The user launches the application with a pet stored: `Garfield`. A single instance of `Slot` occupies
+`ObservableList<Slot>` in `Schedule`, whose parameters are: `petName: Garfield`,
 `dateTime: 11/4/2020 1200`, `duration: 40`. Upon launch, a `PetListChangeListener` will be attached to `internalList` of
 `UniquePetList`.
 
-Step 2. The user executes `deletepet 1` command to delete `Garfield` from the `UniquePetList`. When the pet is deleted,
+Step 2. The user executes `deletepet 1` command to delete `Garfield` from the `UniquePetList`. When user deletes the pet,
 function `onChanged` in `PetListChangeListener` is called. This function calls `removeExcessSlot` within the
-`PetListChangeListener` for each pet that is being removed.
+`PetListChangeListener` for each pet removed.
 
 Step 3. `removeExcessSlot` calls `remove` in `Schedule` to remove slots based on the name of the removed pet.
 

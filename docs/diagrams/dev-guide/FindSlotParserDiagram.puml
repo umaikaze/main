@@ -1,0 +1,22 @@
+@startuml
+(*)  --> "check arguments"
+If "both name prefix and dateTime prefix are empty" then
+--> [Yes] "throw new parse exception"
+else
+--> [No] "check for names in argMultimap"
+If "name prefix is present" then
+--> [Yes] "add new SlotPetNamePredicate to list of predicates"
+--> "check for dateTime in argMultimap"
+else
+--> "check for dateTime in argMultimap"
+If "dateTime prefix is present"
+--> [Yes] "add new SlotDatePredicate to list of predicates"
+--> "reduce list of predicates with Predicate::and"
+else
+--> "reduce list of predicates with Predicate::and"
+Endif
+Endif
+Endif
+--> "return new FindSlotCommand"
+-->(*)
+@enduml
