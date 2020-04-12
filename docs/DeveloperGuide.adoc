@@ -346,10 +346,13 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 === Statistics
 
+==== Implementation
+
 We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
 
 * `OverallStatistics` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
-* Data is obtained from `Logic`.
+* Data in `OverallStatistics` is obtained from `Logic`.
+* The statistics displayed will automatically update if there is a change  in any related information.
 
 How we implemented overall statistic on UI:
 
@@ -357,8 +360,29 @@ How we implemented overall statistic on UI:
 * The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
 * The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
 
+Here is the process of how the overall statistics is displayed to the user:
+
+* Step 1: The user key in the command 'stats', then the Logic component processes the input and creates an instance of `StatsCommand`.
+The `StatsCommand` first calls `Model#updateAll()` to make sure that the model will update `filteredPets`, `filteredSlots`, and `filteredFoodCollections` to show the full list of `Pet`, `Slot` and `FoodCollection` in the `PetTracker`.
+After that, the `StatsCommand` calls `Model#changeDisplaySystem(DisplaySystemType.STATISTICS`) such that the application will later switch the window to show `OverallStatistics`.
+In the Ui component, there is a new instance of `OverallStatistics` created, while `Model#getFilteredPets`, `Model#getFilteredSlots`, and `Model#getFilteredFoodCollections` are passed in the instance for processing. `OverallStatistics` then generates diagrams according to the data passes in.
+
+* Step 2: The user inputs a command that modifies the UniquePetList, e.g 'editpet 1 s/cat'. The `CommandResult` of any `EditPetCommand` has `type` with `DisplaySystemType.NO_CHANGE`. The Ui component identifies the `type` in the `CommandResult` and then refresh the window if it is `NO_CHANGE`. In this case, the window will refresh and create another new instance of `OverallStatistics` with the updated list of pets. Therefore the window always shows statistics of the most updated list of pets, slots and food collections.
+
 Following is the sequential diagram of the command `stats`
 image:StatsSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: How to update diagrams when there are changes
+* Alternative 1 (current choice): Refresh the screen
+** Pros: Easy to implement and only need to refer to `model` to get data.
+** Cons: Takes time to process the whole lists of data even though there is only one small change in one of the item (pets, slots or foo collection). This approach might be time consuming when the data size is too large.
+* Alternative 2: Make use of `Listener` to detect change in `UniquePetList` and make changes accordingly
+** Pros: Avoid unnecessary processing of data. e.g. The diagrams need not be regenerated when there is no change in pet species, pet food, and recent schedule.
+** Cons: More complicated implementation. There might be more coupling between `OverallStatistics` under Ui component and Listener class under Model component.
+
+
+
 
 == Documentation
 

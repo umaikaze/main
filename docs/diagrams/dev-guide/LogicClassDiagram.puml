@@ -37,6 +37,7 @@ HiddenOutside ..> Logic
 LogicManager .up.|> Logic
 LogicManager -->"1" PetTrackerParser
 PetTrackerParser .left.> XYZCommandParser: creates >
+PetTrackerParser ...> XYZCommand: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
 XYZCommandParser ..|> Parser
@@ -53,7 +54,7 @@ LogicManager .left.> Command : executes >
 
 LogicManager --> Model
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+note right of XYZCommand: XYZCommand = AddPetCommand, \nFindPetCommand,  HelpCommand etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
