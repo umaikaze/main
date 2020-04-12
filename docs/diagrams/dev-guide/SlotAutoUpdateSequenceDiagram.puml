@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":UniquePetList" as UniquePetList MODEL_COLOR
+participant ":PetListChangeListener" as PetListChangeListener MODEL_COLOR
+participant ":Schedule" as Schedule MODEL_COLOR
+end box
+
+UniquePetList -> PetListChangeListener
+activate PetListChangeListener
+
+PetListChangeListener --> UniquePetList : internalList.addListener()
+deactivate PetListChangeListener
+
+[-> UniquePetList : deletePet(1)
+activate UniquePetList
+
+UniquePetList -> PetListChangeListener : onChanged(petChange)
+activate PetListChangeListener
+
+PetListChangeListener -> PetListChangeListener : removeExcessSlot
+
+PetListChangeListener -> Schedule : remove(slot)
+activate Schedule
+
+Schedule -> Schedule : internalList.remove(slot)
+
+Schedule --> PetListChangeListener
+deactivate Schedule
+
+PetListChangeListener --> UniquePetList
+deactivate PetListChangeListener
+
+[<--UniquePetList
+deactivate UniquePetList
+@enduml
