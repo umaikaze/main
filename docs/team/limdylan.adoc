@@ -40,7 +40,7 @@ My code contribution can be viewed https://nus-cs2103-ay1920s2.github.io/tp-dash
 *** Added screenshots in the User Guide to illustrate the various types of display of the program.
 *** Wrote sections as indicated in <<contributions-user-guide>>.
 ** Developer Guide:
-*** Integrated information from other various guides into a 
+*** Integrated information from other various guides into the developer guide.
 *** Wrote sections as indicated in <<contributions-dev-guide>>.
 * Community:
 ** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/13[#13], https://github.com/AY1920S2-CS2103-W15-4/main/pull/24[#24], https://github.com/AY1920S2-CS2103-W15-4/main/pull/66[#66], https://github.com/AY1920S2-CS2103-W15-4/main/pull/107[#107]
