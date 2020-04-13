@@ -26,7 +26,7 @@ Pet Store Helper is a desktop application used for pet store owner to manage the
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3.1` (1 release) on GitHub
+*** Managed releases `v1.3.1`, `v1.4` (2 releases) on GitHub
 ** Enhancements to existing features:
 *** Refactored Logic component of AB3 to adapt to Pet Store Helper. (Pull Request https://github.com/AY1920S2-CS2103-W15-4/main/pull/15[#15])
 *** Added warning message (Pull request https://github.com/AY1920S2-CS2103-W15-4/main/pull/81[#81])
