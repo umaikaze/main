@@ -1,4 +1,4 @@
-= (WIP) Pet Store Helper - Developer Guide
+= Pet Store Helper - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,11 +14,72 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103-W15-4/main/tree/master
 
-By: `W15-4`      Since: `Feb 2020`      Licence: `MIT`
+By: `AY1920S2-CS2103-W15-4`      Since: `Feb 2020`      Licence: `MIT`
 
 == Setting up
 
-Refer to the guide <<SettingUp#, here>>.
+=== Prerequisites
+
+. *JDK `11`* or above
+. *IntelliJ* IDE
++
+[NOTE]
+IntelliJ by default has Gradle and JavaFx plugins installed. +
+Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+
+=== Setting up the project in your computer
+
+. Fork this repo, and clone the fork to your computer
+. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+. Set up the correct JDK version for Gradle
+.. Click `Configure` > `Project Defaults` > `Project Structure`
+.. Click `New...` and find the directory of the JDK
+. Click `Import Project`
+. Locate the `build.gradle` file and select it. Click `OK`
+. Click `Open as Project`
+. Click `OK` to accept the default settings.
+
+=== Verifying the setup
+
+. Run the `clzzz.helper.Main` and try a few commands
+. <<Running-Tests,Run the tests>> to ensure they all pass.
+
+=== Configurations to do before writing code
+
+==== Configuring the coding style
+
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+
+. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
+. Select `Editor` > `Code Style` > `Java`
+. Click on the `Imports` tab to set the order
+
+* For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
+* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
+
+==== Updating documentation to match your fork
+
+After forking the repo, the documentation will still have the SE-EDU branding and refer to the `AY1920S2-CS2103-W15-4/main` repo.
+
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `AY1920S2-CS2103-W15-4/main`), you should do the following:
+
+. Configure the site-wide documentation settings in `build.gradle`, such as the `site-name`, to suit your own project.
+
+. Replace the URL in the attribute `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
+
+==== Setting up CI
+
+Set up Travis to perform Continuous Integration (CI) for your fork.
+
+After setting up Travis, you can optionally set up coverage reporting for your team fork.
+
+[NOTE]
+Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
+
+Optionally, you can set up AppVeyor as a second CI.
+
+[NOTE]
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
 
 == Design
 
@@ -31,25 +92,24 @@ image::ArchitectureDiagram.png[]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
-Refer to the <<UsingPlantUml#, Using PlantUML guide>> to learn how to create and edit diagrams.
+The `.puml` files used to create diagrams in this document can be found in the diagrams folder at `docs/diagrams`.
 
-`Main` has two classes called link:{repoURL}/src/main/java/clzzz/helper/Main.java[`Main`] and link:{repoURL}/src/main/java/clzzz/helper/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has two classes called `Main` and `MainApp`. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components.
+`Commons` represents a collection of classes used by multiple other components.
 The following class plays an important role at the architecture level:
 
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
-* <<Design-Ui,*`UI`*>>: The UI of the App.
-* <<Design-Logic,*`Logic`*>>: The command executor.
-* <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
-* <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+* `UI`: The UI of the App.
+* `Logic`: The command executor.
+* `Model`: Holds the data of the App in-memory.
+* `Storage`: Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -58,8 +118,10 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
+//tag::logic_diagram[]
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
+//end::logic_diagram[]
 
 [discrete]
 ==== How the architecture components interact with each other
@@ -71,19 +133,22 @@ image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
 
+
+// tag::design-ui[]
 [[Design-Ui]]
 === UI component
+
+_Written by Dylan Lim_
 
 .Structure of the UI Component
 image::UiClassDiagram.png[]
 
+[[Calendar-Class-Diagram]]
 .Structure of the Calendar Component in UI
 image::UiCalendarDiagram.png[]
 
 .Structure of the DisplayList Component in UI
 image::UiDisplayListDiagram.png[]
-
-*API* : link:{repoURL}/src/main/java/clzzz/helper/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` class that is made up of parts which can be classified broadly into 2 groups:
 
@@ -92,7 +157,7 @@ The UI consists of a `MainWindow` class that is made up of parts which can be cl
 
 All the UI classes, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/clzzz/helper/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`].
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`.
 
 In addition, each UI part has been styled using CSS. The custom CSS styling rules are defined in multiple CSS stylesheets, which can be found in the `src/main/resources/view/stylesheets` folder.
 
@@ -102,15 +167,14 @@ The `UI` component does the following:
 * Listens for changes to `Model` data to update the UI with the modified data.
 * Handles a returned `CommandResult` to perform additional actions, e.g. show the help window, exit the program, display the appropriate part or component from Group 2, etc.
 
+// end::design-ui[]
+
 [[Design-Logic]]
 === Logic component
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
 image::LogicClassDiagram.png[]
-
-*API* :
-link:{repoURL}/src/main/java/clzzz/helper/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `PetTrackerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -127,33 +191,35 @@ NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker
 
 // tag::Model[]
 [[Design-Model]]
+_Written by Zhu Ruicong_
+
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/clzzz/helper/model/Model.java[`Model.java`]
-
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
+* stores the Pet Store Helper data. Note that the Pet Tracker keeps track of a UniquePetList, which in turn maintains the Pet system, Schedule system and Inventory(FoodCollection) system.
 * exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 // end::Model[]
 
+// tag::Storage[]
 [[Design-Storage]]
 === Storage component
 
+_Written by Chen Shenghao_
+
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
-
-*API* : link:{repoURL}/src/main/java/clzzz/helper/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Pet Tracker data in json format and read it back.
+// end::Storage[]
 
 [[Design-Commons]]
 === Common classes
@@ -164,40 +230,62 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::display[]
-=== Display
+// tag::implementation-display[]
+=== Display switching feature
+
+_Written by Dylan Lim_
+
 ==== Implementation
 
-The display mechanism is facilitated by an `ObservableList` of `DisplayItem` called `filteredDisplayItems`, which is an attribute stored in `ModelManager`.
+The display mechanism is facilitated by an `ObservableList` of `DisplayItem` s called `filteredDisplayItems`, which is an attribute stored in `ModelManager`.
 
-Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot` and `FoodCollection` classes implement this interface.
+Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot`, `FoodCollection`, and `FoodAmountAndPet` classes implement this interface.
 
-Step 1. The user opens the app the the 1st time. A few things happen at start-up:
+Given below is an example usage scenario and how the display mechanism behaves at each step.
+
+**Step 1**. The user opens the app the the 1st time. A few things happen at start-up:
 
 - In `Model` (`ModelManager`), `filteredDisplayItems` is created, and is set to bind to `filteredPets`. This way, `filteredDisplayItems` contains all the elements of `filteredPets`, and any changes to `filteredPets` will also be automatically propogated to `filteredDisplayItems`.
 
-- In the `MainWindow`, a `DisplayListPanel` and a `CalendarPanel` are initialized. The `DisplayListPanel` is created with `filteredDisplayItems` as its backing list, while the `CalendarPanel` will be initialized with the `List` of `Slot`s obtained from `logic.getPetTracker().getSlotList()`.
+- In the `MainWindow`, a `DisplayListPanel` and a `CalendarPanel` are initialized. The `DisplayListPanel` is created with `filteredDisplayItems` as its backing list, while the `CalendarPanel` will be initialized with the `List` of `Slot` s obtained from `logic.getPetTracker().getSlotList()`.
 
 - The `resultDisplayPlaceholder` component in the `MainWindow` is set to display the `DisplayListPanel`. As such, the user sees the list of pets as the initial display.
 
-The following \____ diagram summarises Step 1 and shows what happens at initialization: (WIP)
+**Step 2**. The user executes `display c` to have the slots displayed in calendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`.
 
-image::displayDiagram1.png[]
+The following sequence diagrams shows how the display is switched to calendar:
 
-Step 2. The user executes `display s` to have the **s**lots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to be re-binded to `filteredSlots` instead. Because the display is still making use of `DisplayListPanel`, no change is made to `resultDisplayPlaceholder` afterwards.
+.Sequence diagram for switching display to calendar
+image::DisplayCalendarSequenceDiagram0.png[]
 
-Step 3. The user executes `display c` to have the slots displayed in **c**alendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`.
+.Excecution of "display c" in Logic component
+image::DisplayCalendarSequenceDiagram1.png[]
 
-Step 4. The user executes `display p` to view the list of **p**ets. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredPets`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`.
+NOTE: The lifeline for `CommandResult`, `DisplayParser`, and `DisplayCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following \____ diagram shows how the display operation works: (WIP)
+**Step 3**. The user executes `display s` to have the slots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredSlots`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`.
 
-image::displayDiagram2.png[]
+The following sequence diagrams shows how the display is switched to slots list view:
 
-// end::display[]
+.Sequence diagram for switching display to slots list view
+image::DisplaySlotSequenceDiagram0.png[]
+
+.Excecution of "display s" in Logic component
+image::DisplaySlotSequenceDiagram1.png[]
+
+NOTE: The lifeline for `CommandResult`, `DisplayParser`, and `DisplayCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens in `MainWindow#executeCommand` upon the return of a command result:
+
+image::DisplaySwitchingActivityDiagram.png[]
+
+// end::implementation-display[]
 
 // tag::schedule[]
 === Schedule feature
+
+_Written by Zhao Mingjian_
+
 ==== Implementation
 
 The schedule feature uses instances of class `Slot` to organise bathing schedule for the pets. Each `Slot` contains a
@@ -278,8 +366,59 @@ conserve system memory as there will be no duplicate information.
 
 // end::schedule[]
 
+// tag::implementation-calendar[]
+=== Calendar feature
+
+_Written by Dylan Lim_
+
+==== Implementation
+
+The class diagram for calendar-related components, as shown in <<Calendar-Class-Diagram>> previously, is reproduced in this section for convenience.
+
+.Structure of the Calendar Component in UI
+image::UiCalendarDiagram.png[]
+
+The construction of the calendar is accomplished by the `construct()` method in `CalendarPanel`. Based on the list of all slots in the system, it determines which type of `CalendarRegion` is to be placed at which position of the `GridPane` in `CalendarPanel`.
+
+.Respective `CalendarRegion` s marked out
+image::CalendarViewAnnotated.png[]
+
+In tha above annotated screenshot, rectangles with the following border color correspond to the following `CalendarRegion` (from left to right, on 7/4/2020):
+
+- Purple: `CalendarDate`. It is used to display the day and date of slots in the same row, and it always positioned to the left.
+- Green: `CalendarSlot`. It constitutes a single slot.
+- Yellow: `CalendarBuffer`. It acts a buffer between other regions, for padding purposes.
+- Blue: `CalendarConflict`. It represents a region of more than two or more conflicted slots.
+
+
+The following activity diagram outlines the rough flow of `calendarPanel#construct`:
+
+.Activity diagram for construction of calendar.
+image::CalendarConstructActivityDiagram.png[]
+
+.Activity diagram for creating new `CalendarRegion` for slot(s) in holding.
+image::CalendarNewRegionHoldingActivityDiagram.png[]
+
+
+`CalendarRegion` s are created sequentially, from left to right (increasing time of day), then top to bottom (increasing date). Each time a `CalendarRegion` is created, it is placed onto a `GridPane` based on the row index, and its starting time.
+
+==== Design Considerations
+===== Aspect: Construction of calendar upon addition / deletion / edition of slot(s)
+
+* **Alternative 1 (current choice):** Clear all components in `CalendarPanel` and redraw everything.
+** Pros: Relatively simpler to implement.
+** Cons: Might take a long time to draw if system has many slots.
+* **Alternative 2:** Modify only the component that is related the affected slot.
+** Pros: Better performance.
+** Cons: More complex implementation needed to determine and resolve  conflicts, if any.
+
+// end::implementation-calendar[]
+
 // tag::inventory_feature[]
 === Inventory feature
+
+_Written by Zhu Ruicong_
+
 ==== Implementation
 
 The Inventory feature gives a summary of all the food items involved in a pet tracker system.
@@ -292,16 +431,27 @@ A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the foll
 Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
 `ModelManager` then passes the list of `FoodCollection` to UI for display as a list of `DisplayItem` when `display i` is called.
 
+// tag::inventory_diagram[]
 The following shows a typical usage scenario that involves the Display Inventory feature.
 
 * Step 1: The user launches the application. A `UniquePetList` is initialized in `PetTracker`, upon which a `FoodCollectionList` item is created to store the food data of the pets in the list(if it is an empty list, `FoodCollectionList` is also stores an empty list of `FoodCollection`)
-* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model$getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
-* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList$internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList$updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
+* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model#getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
+* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList#internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList#updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
 
 The sequence diagram below is an illustration of the flow of events that happen in the logical component when `Step 2` above occurs.
 
 .Interactions Inside the Logic Component for the `display i` Command
 image::DisplayInventorySequenceDiagram.png[]
+
+Note that there is no explicit initialization or update for `FoodCollection` in `FoodCollectionList`. `FoodCollectionList` is synchronized to the list of pet(`UniquePetList#internalList`) in the `UniquePetList` through `ListChangeListener<Pet>`, which is triggered whenever there is a change in the pet list. The sequence diagram below and the steps illustrates this process:
+
+* Step 1: `UniquePetList` passes its `internalList`(referred to as `petList` in the sequence diagram below).
+* Step 2: `FoodCollectionList` creates a new `FoodCollectionList` object `temp` and extracts `temp#internalList`.
+* Step 3: Replaces the content in the current `internalList` with the content in the extracted `temp#internalist`.
+
+.Interactions Inside Model Class when `ListChangeListener<Pet>` is triggered
+image::FoodCollectionListChangeSequenceDiagram.png[]
+// end::inventory_diagram[]
 
 ==== Design Considerations
 ===== Aspect: Maintaining the collection of food in a pet tracker
@@ -322,6 +472,121 @@ image::DisplayInventorySequenceDiagram.png[]
 ** Pros: Less computationally intensive and more responsive given a large database.
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
 // end::inventory_feature[]
+
+//tag::conflict[]
+=== Conflict feature
+_Written by Zhao Tianqi_
+
+==== Implementation
+The conflict feature shows a list of all slots that has overlapping time period.
+
+* It makes uses of `SlotConflictPredicate` which implements `SlotPredicate` to filter slots that has a conflicting timing with some other slots.
+* If the screen is displaying shortlisted slots, `conflics` only shows slots with conflicts among the shortlisted list. Otherwise, it shows conflicts in the full slot list
+* The command automatically switch display to slots.
+
+Below is a scenario of using `conflicts` command:
+
+* Step 1: The user inputs "conflicts" in the command line. The Logic component processes the input and creates a new instance of `ConflictCommand`
+* Step 2: The `ConflictCommand` access `filteredSlots` in `Model`, and create a new instance of `SlotConflictPredicate` with `filteredSlots`.
+* Step 3: `Model` filters slots that is conflicting among the `filteredSlots` using the `SlotConflictPredicate`.
+* Step 4: `ConflictCommand` changes `currentDisplaySystemType` in `Model` to `DisplaySystemType.SCHEDULE` such that the window will display shortlisted conflicting slots.
+
+.Interactions Inside the Logic Component for the `conflicts` Command
+image::ConflictSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: Data structure to store slots and method of checking for conflicts:
+* Alternative 1 (current choice): Store slots in a list, with pairwise comparison between elements to find out conflicts
+** Pros: More straightforward in implementation
+** Cons: The performance might not be scalable. Algorithm does not minimize the computation time.
+* Alternative 2: Store slots in an interval tree
+** Pros: Searching for conflicting slots takes less time. The algorithm is more efficient.
+** Cons: Implementation of the data structure needs relatively high level of commitment.
+//end::conflict[]
+
+//tag::stats[]
+=== Statistics
+_Written by Zhao Tianqi_
+
+==== Implementation
+
+We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
+
+* `OverallStats` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
+* Data in `OverallStats` is obtained from `Logic`.
+* The statistics displayed will automatically update if there is a change  in any related information.
+
+How we implemented overall statistic on UI:
+
+* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
+* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
+* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
+
+Here is the process of how the overall statistics is displayed to the user:
+
+* Step 1: The user key in the command 'stats', then the Logic component processes the input and creates an instance of `StatsCommand`.
+The `StatsCommand` first calls `Model#updateAll()` to make sure that the model will update `filteredPets`, `filteredSlots`, and `filteredFoodCollections` to show the full list of `Pet`, `Slot` and `FoodCollection` in the `PetTracker`.
+After that, the `StatsCommand` calls `Model#changeDisplaySystem(DisplaySystemType.STATISTICS`) such that the application will later switch the window to show `OverallStats`.
+In the Ui component, there is a new instance of `OverallStats` created, while `Model#getFilteredPets`, `Model#getFilteredSlots`, and `Model#getFilteredFoodCollections` are passed in the instance for processing. `OverallStats` then generates diagrams according to the data passes in.
+
+* Step 2: The user inputs a command that modifies the UniquePetList, e.g 'editpet 1 s/cat'. The `CommandResult` of any `EditPetCommand` has `type` with `DisplaySystemType.NO_CHANGE`. The Ui component identifies the `type` in the `CommandResult` and then refresh the window if it is `NO_CHANGE`. In this case, the window will refresh and create another new instance of `OverallStats` with the updated list of pets. Therefore the window always shows statistics of the most updated list of pets, slots and food collections.
+
+Following is the sequential diagram of the command `stats`
+
+.Interactions Inside the *Logic* Component for the `stats` Command
+image::StatsLogicSequenceDiagram.png[]
+
+.Interactions Inside the *Ui* Component for the `stats` Command
+image::StatsUiSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: How to update diagrams when there are changes
+* Alternative 1 (current choice): Refresh the screen
+** Pros: Easy to implement and only need to refer to `model` to get data.
+** Cons: Takes time to process the whole lists of data even though there is only one small change in one of the item (pets, slots or foo collection). This approach might be time consuming when the data size is too large.
+* Alternative 2: Make use of `Listener` to detect change in `UniquePetList` and make changes accordingly
+** Pros: Avoid unnecessary processing of data. e.g. The diagrams need not be regenerated when there is no change in pet species, pet food, and recent schedule.
+** Cons: More complicated implementation. There might be more coupling between `OverallStats` under Ui component and Listener class under Model component.
+//end::stats[]
+
+//tag::backup_and_load_feature[]
+
+=== Back up and load feature
+
+_Written by Chen Shenghao_
+
+==== Implementation
+The back up/load mechanism is facilitated by `Storage`.
+
+`Storage` is extended to implement the following operations:
+
+* `savePetTracker#(ReadOnlyPetTracker, LocalDateTime)` -- calls `savePetTracker#(ReadOnlyPetTracker, Path)` after converting LocalDateTime to Path
+* `savePetTracker#(ReadOnlyPetTracker, Path)` -- saves pet tracker data to specified path
+
+The back up/load mechanism follows the exact same steps taken when data is saved after each operation and read at initialization. This ensures maximum compatibility and reduces the need for additional code.
+
+`backup` should never fail unless the saving of data after every operation also fails. For 'load', there are two additional caveats, the specified file should exist and be in the correct format. This is unlike the reading of data at initialization which simply resorts to an empty file instead if these issues occur.
+
+The following sequence diagram shows how the backup operation works:
+
+image::BackUpSequenceDiagram.png[]
+
+The following sequence diagram shows how the load operation works:
+
+image::LoadSequenceDiagram.png[]
+
+==== Design Considerations
+
+===== Aspect: How back up & load executes
+
+* **Alternative 1 (current choice):** Executed by Command, following general pattern for Command
+** Pros: Easy to implement, able to rely on established pattern for Command.
+** Cons: Storage is exposed to classes in the `parser` package, which should not have access to its methods
+* **Alternative 2:** Executed by LogicManager, which already saves data to hard disk after every operation
+** Pros: Storage does not have to be passed to classes in the `parser` package
+** Cons: Requires passing instruction back to LogicManager, actual operation performed after end of Command#execute(), unable to obtain reliable success/error message.
+
+//end::backup_and_load_feature[]
 
 === Logging
 
@@ -344,61 +609,176 @@ just its size
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-=== Statistics
-
-==== Implementation
-
-We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
-
-* `OverallStatistics` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
-* Data in `OverallStatistics` is obtained from `Logic`.
-* The statistics displayed will automatically update if there is a change  in any related information.
-
-How we implemented overall statistic on UI:
-
-* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
-* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
-* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
-
-Here is the process of how the overall statistics is displayed to the user:
-
-* Step 1: The user key in the command 'stats', then the Logic component processes the input and creates an instance of `StatsCommand`.
-The `StatsCommand` first calls `Model#updateAll()` to make sure that the model will update `filteredPets`, `filteredSlots`, and `filteredFoodCollections` to show the full list of `Pet`, `Slot` and `FoodCollection` in the `PetTracker`.
-After that, the `StatsCommand` calls `Model#changeDisplaySystem(DisplaySystemType.STATISTICS`) such that the application will later switch the window to show `OverallStatistics`.
-In the Ui component, there is a new instance of `OverallStatistics` created, while `Model#getFilteredPets`, `Model#getFilteredSlots`, and `Model#getFilteredFoodCollections` are passed in the instance for processing. `OverallStatistics` then generates diagrams according to the data passes in.
-
-* Step 2: The user inputs a command that modifies the UniquePetList, e.g 'editpet 1 s/cat'. The `CommandResult` of any `EditPetCommand` has `type` with `DisplaySystemType.NO_CHANGE`. The Ui component identifies the `type` in the `CommandResult` and then refresh the window if it is `NO_CHANGE`. In this case, the window will refresh and create another new instance of `OverallStatistics` with the updated list of pets. Therefore the window always shows statistics of the most updated list of pets, slots and food collections.
-
-Following is the sequential diagram of the command `stats`
-image:StatsSequenceDiagram.png[]
-
-==== Design Considerations
-===== Aspect: How to update diagrams when there are changes
-* Alternative 1 (current choice): Refresh the screen
-** Pros: Easy to implement and only need to refer to `model` to get data.
-** Cons: Takes time to process the whole lists of data even though there is only one small change in one of the item (pets, slots or foo collection). This approach might be time consuming when the data size is too large.
-* Alternative 2: Make use of `Listener` to detect change in `UniquePetList` and make changes accordingly
-** Pros: Avoid unnecessary processing of data. e.g. The diagrams need not be regenerated when there is no change in pet species, pet food, and recent schedule.
-** Cons: More complicated implementation. There might be more coupling between `OverallStatistics` under Ui component and Listener class under Model component.
 
 
 
 
 == Documentation
 
-Refer to the guide <<Documentation#, here>>.
+We use Asciidoc for writing documentation.
+
+[NOTE]
+We chose Asciidoc over Markdown because Asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+
+=== Editing Documentation
+
+We used Gradle to render `.adoc` files locally to preview the end results of edits. Also, we downloaded the AsciiDoc plugin for Intellij, which allowed use to preview the changes made to the `.adoc` files in real-time.
+
+=== Editing Diagrams
+
+We used the PlantUML plugin for Intellij to create and update the UML diagrams.
+
+=== Publishing Documentation
+
+We used Travis for deployment of Github Pages for publishing documentation.
+
+=== Converting Documentation to PDF format
+
+We use Google Chrome for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+[[Docs-SiteWideDocSettings]]
+=== Site-wide Documentation Settings
+
+The `build.gradle` file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
+
+[TIP]
+Attributes left unset in the `build.gradle` file will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of site-wide attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-name`
+|The name of the website.
+If set, the name will be displayed near the top of the page.
+|_not set_
+
+|`site-githuburl`
+|URL to the site's repository on https://github.com[GitHub].
+Setting this will add a "View on GitHub" link in the navigation bar.
+|_not set_
+
+|`site-seedu`
+|Define this attribute if the project is an official SE-EDU project.
+This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
+|_not set_
+
+|===
+
+[[Docs-PerFileDocSettings]]
+=== Per-file Documentation Settings
+
+Each `.adoc` file may also specify some file-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how the file is rendered.
+
+Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built-in attributes] may be specified and used as well.
+
+[TIP]
+Attributes left unset in `.adoc` files will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of per-file attributes, excluding Asciidoctor's built-in attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-section`
+|Site section that the document belongs to.
+This will cause the associated item in the navigation bar to be highlighted.
+One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+
+_{asterisk} Official SE-EDU projects only_
+|_not set_
+
+|`no-site-header`
+|Set this attribute to remove the site navigation bar.
+|_not set_
+
+|===
+
+=== Site Template
+
+The files in `docs/stylesheets` are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
+You can modify them to change some properties of the site's design.
+
+The files in `docs/templates` controls the rendering of `.adoc` files into HTML5.
+These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
+
+[WARNING]
+====
+Modifying the template files in `docs/templates` requires some knowledge and experience with Ruby and Asciidoctor's API.
+You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
+The SE-EDU team does not provide support for modified template files.
+====
 
 == Testing
 
-Refer to the guide <<Testing#, here>>.
+[[Running-Tests]]
+=== Running Tests
+
+There are two ways to run tests.
+
+*Method 1: Using IntelliJ JUnit test runner*
+
+* To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose `Run 'ABC'`
+
+*Method 2: Using Gradle*
+
+* Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
+
+=== Types of tests
+
+We have three types of tests:
+
+.  _Unit tests_ targeting the lowest level methods/classes. +
+e.g. `clzzz.helper.commons.util.StringUtilTest`
+.  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
+e.g. `clzzz.helper.storage.StorageManagerTest`
+.  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
+e.g. `clzzz.helper.logic.LogicManagerTest`
 
 == Dev Ops
 
-Refer to the guide <<DevOps#, here>>.
+=== Build Automation
+
+We use Gradle for build automation.
+
+=== Continuous Integration
+
+We use Travis CI and AppVeyor to perform Continuous Integration.
+
+=== Coverage Reporting
+
+We use Coveralls to track the code coverage.
+
+=== Documentation Previews
+
+When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged.
+
+=== Making a Release
+
+Here are the steps to create a new release.
+
+.  Update the version number in `MainApp.java`.
+.  Generate a JAR file using Gradle.
+.  Tag the repo with the version number. e.g. `v0.1`
+.  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
+
+=== Managing Dependencies
+
+Project dependencies are managed by Gradle, and are not included in this repository.
+
+List of dependencies:
+
+* https://github.com/FasterXML/jackson[Jackson]
+* https://junit.org/junit5/[JUnit 5]
+* https://openjfx.io/[JavaFX]
 
 // tag::appendix[]
 [appendix]
 == Product Scope
+
+_Written collaboratively, collated by Zhao Mingjian_
 
 *Target user profile*:
 
@@ -413,6 +793,8 @@ Refer to the guide <<DevOps#, here>>.
 
 [appendix]
 == User Stories
+
+_Written collaboratively, collated by Zhao Mingjian_
 
 Priorities: High (must have) - `* * \*`, Low (nice to have) - `* *`
 
@@ -444,6 +826,8 @@ Priorities: High (must have) - `* * \*`, Low (nice to have) - `* *`
 
 [appendix]
 == Use Cases
+
+_Written by Zhao Mingjian_
 
 (For all use cases below, the *System* is the `PSH` and the *Actor* is the `user`, unless specified otherwise)
 
@@ -514,6 +898,8 @@ Windows, Linux, Unix, OS-X
 [appendix]
 == Instructions for Manual Testing
 
+_Applied from AB3 by Zhao Mingjian_
+
 Given below are instructions to test the app manually.
 
 [NOTE]
@@ -533,17 +919,79 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Switching display
+
+. Change display of the program
+.. Prerequisites: Program is pre-populated with the sample data of pets and slots.
+... Test case: `display s` +
+    Expected: Program display is changed to show list of slots.
+... Test case: `display c` +
+    Expected: Program display is changed to show slots in calendar view.
+... Test case: `display i` +
+    Expected: Program display is changed to show inventory.
+... Test case: `display p` +
+    Expected: Program display is changed to back show list of pets.
+... Test case: `display x` +
+    Expected: Program display does not change. Error message shown.
+... Other incorrect display commands to try: `display`, `display I`, `Display i` +
+    Expected: Similar to previous.
+
+=== Adding a pet
+
+. Adding a pet while all pets are displayed
+.. Prerequisites: Program is showing list of pets to (run `display p`)
+... Test case: `addpet n/Alice g/female b/13/11/2015 s/dog f/Dog Food: 10 t/cute` +
+    Expected: A new pet "Alice" is added to the end of the pet list. Details of the newly added pet shown above the list of pets.
+... Test case: `addpet n/Alice g/female b/24/12/2015 s/rabbit f/Rabbit Food: 15 t/fluffy` +
+    Expected: No pet is added. Error details shown above the list of pets.
+... Other incorrect addpet commands to try: `addpet n/Bubbles g/helicopter b/8/10/2015 s/cat f/Cat Food: 15 t/white`, `addpet n/Bubbles g/female b/78/10/2015 s/cat f/Cat Food: 15 t/white` +
+   Expected: No pet is added, with the relevant and appropriate error details shown above the list of pets.
+
 === Deleting a pet
 
 . Deleting a pet while all pets are displayed
 
 .. Prerequisites: Display all pets using the `display p` command. Multiple pets in the display.
 .. Test case: `deletepet 1` +
-   Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Slots that the pet used to occupy is also deleted.
+   Expected: First pet is deleted from the list. Details of the deleted pet shown above the list of pets. Slots that the pet used to occupy is also deleted.
 .. Test case: `deletepet 0` +
-   Expected: No pet is deleted. Error details shown in the status message. Slots remain the same.
+   Expected: No pet is deleted. Error details shown above the list of pets. Slots remain the same.
 .. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+=== Adding a slot
+
+. Adding a slot while all slots are displayed
+.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots.
+... Test case: `addslot n/Bob t/6/4/2020 1000 d/60` +
+    Expected: A new slot is added to slot list. Details of the newly added slot shown above the list of slots. Because it is the earliest of all slots, it appears at the 1st slot in the list.
+... Test case: `addslot n/Cindy t/67/4/2020 1000 d/60` +
+    Expected: No slot is added. Error details shown above the list of slots.
+... Other incorrect addslot commands to try: `addslot`, `addslot n/Duke t/6/4/2020 1130 d/60`, `addslot n/Cindy t/6/4/2020 2300 d/120` +
+   Expected: No slot is added, with the relevant and appropriate error details shown above the list of slots.
+
+=== Deleting a slot
+
+. Deleting a slot while all slots are displayed
+.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots.
+... Test case: `deleteslot 1` +
+    Expected: First slot is deleted from the list. Details of the deleted slot shown above the list of slots.
+... Test case: `deleteslot 0` +
+    Expected: No slot is deleted. Error details shown above the list of slots.
+... Other incorrect deleteslot commands to try: `deleteslot`, `deleteslot x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== View conflicted slots
+
+. Viewing slots with conflicts
+.. Prerequisites: Program is pre-populated with the sample data of pets and slots. +
+   Initial view: On Mon 6/4/2020, there is a single slot occupied by "Gru" from 13:00 - 14:40 (as per the sample data). It is not in conflict.
+... Test case: `conflicts` +
+    Expected: Program successfully shows no slots with message "0 slots listed!", as the sample data has no slots in conflict.
+... Test case: `addslot n/Bob t/6/4/2020 1400 d/60` +
+    Expected: A new slot is added to slot list. Details of the newly added slot shown above the list of slots. This newly added slot and the slot occupied by Gru are now marked as "[CONFLICT]"
+... Test case: `conflicts` +
+    Expected: Program successfully shows only the two slots on 6/4/2020 with message "2 slots listed!"
 
 === Saving data
 

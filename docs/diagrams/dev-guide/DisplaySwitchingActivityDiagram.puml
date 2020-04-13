@@ -1,0 +1,39 @@
+@startuml DisplaySwitchingActivityDiagram
+start
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:CommandResult returned from \n successful command execution;
+
+:Display feedback (success \n message) from command;
+
+if () then ([result exits \n program])
+    :Close the program window;
+    stop
+else ([else])
+endif
+
+if () then ([result shows help])
+    :Show the help window to the user;
+else([else])
+endif
+
+:Determine type of view to be displayed;
+-> switch based on display type;
+if ( ""PETS"" \n or ""SCHEDULE"" \n or ""INVENTORY"")
+    :Fetch ""filteredDisplayItems"";
+    :Update ""displayListPanel"" \n with ""filteredDisplayItems"";
+    :Set ""resultDisplayPlaceholder"" \n to display ""displayListPanel"";
+elseif (""CALENDAR"")
+    :Construct calendar \n in ""calendarPanel"";
+    :Set ""resultDisplayPlaceholder"" \n to display ""calendarPanel"";
+else ([default case])
+    :Show error message \n for invalid display \n type as feedback;
+    stop
+endif
+
+:Display the contents of \n ""resultDisplayPlaceholder"";
+
+stop
+@enduml

@@ -1,0 +1,95 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetTrackerParser" as PetTrackerParser LOGIC_COLOR
+participant ":LoadCommandParser" as LoadCommandParser LOGIC_COLOR
+participant "l:LoadCommand" as LoadCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("load sample")
+activate LogicManager
+
+LogicManager -> PetTrackerParser : parseCommand("load sample")
+activate PetTrackerParser
+
+create LoadCommandParser
+PetTrackerParser -> LoadCommandParser
+activate LoadCommandParser
+
+LoadCommandParser --> PetTrackerParser
+deactivate LoadCommandParser
+
+PetTrackerParser -> LoadCommandParser : parse("sample")
+activate LoadCommandParser
+
+create LoadCommand
+LoadCommandParser -> LoadCommand
+activate LoadCommand
+
+LoadCommand --> LoadCommandParser : l
+deactivate LoadCommand
+
+LoadCommandParser --> PetTrackerParser : l
+deactivate LoadCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LoadCommandParser -[hidden]-> PetTrackerParser
+destroy LoadCommandParser
+
+PetTrackerParser --> LogicManager : l
+deactivate PetTrackerParser
+
+LogicManager -> LoadCommand : execute()
+activate LoadCommand
+
+LoadCommand -> Storage : readPetTracker()
+activate Storage
+
+Storage --> LoadCommand
+deactivate Storage
+
+LoadCommand -> Model : setPetTracker()
+activate Model
+
+Model --> LoadCommand
+deactivate Model
+
+LoadCommand -> Model : updateFilteredPetList()
+activate Model
+
+Model --> LoadCommand
+deactivate Model
+
+LoadCommand -> Model : updateFilteredSlotList()
+activate Model
+
+Model --> LoadCommand
+deactivate Model
+
+
+
+
+create CommandResult
+LoadCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LoadCommand
+deactivate CommandResult
+
+LoadCommand --> LogicManager : result
+deactivate LoadCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
