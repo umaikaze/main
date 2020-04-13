@@ -1,0 +1,12 @@
+@startuml CalendarNewRegionHoldingActivityDiagram
+title Activity: Create new ""CalendarRegion"" \n for slot(s) in holding
+start
+
+if () then ([exactly 1 slot in holding])
+    :Create new ""CalendarSlot"", \n given that slot in holding;
+else ([else])
+    :Create new ""CalendarConflict"", \n given all slots in holding;
+endif;
+
+stop
+@enduml
