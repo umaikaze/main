@@ -483,8 +483,19 @@ e.g. `editslot 12 n/Teddy`
 e.g. `deleteslot 2`
 - **Show conflicts**: `conflicts`
 
-
+//tag::faq[]
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Store Helper folder.
+
+*Q*: Why did I added a schedule slot and it is not showing in the statistics page? +
+*A*: The statistics page only provides the schedules of the nearest 3 days, according to the system time PSH operates on.
+
+*Q*: What if I edit an attribute of a pet multiple times in a single command? eg. `editpet 1 n/Andy n/Andrew` +
+*A*: For `f/` and `t/`, you can provide them for multiple times and all of them will be added to the attributes of the pet. However, for the other attributes, only the last entry is accepted, with a warning message generated.
+
+*Q*: How do I start an empty application without the sample data? +
+*A*: First start PSH, and then use `exit` to quit the application. Go to the data directory, and open `pettracker.json`. Delete all information in the json file and leave `pettracker.json` as an empty file. Restart PSH and PSH will be empty.
+
+//end::faq[]
