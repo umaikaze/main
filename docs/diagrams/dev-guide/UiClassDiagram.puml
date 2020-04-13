@@ -1,4 +1,4 @@
-@startuml
+@startuml UiClassDiagram
 !include ../style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
@@ -9,6 +9,7 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+Class ResizeHelper
 
 Class StatusBarFooter
 Class FeedbackDisplay
@@ -39,6 +40,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .up.|> Ui
+UiManager .up.> ResizeHelper
 UiManager -down-> MainWindow
 
 UiManager --> Logic
