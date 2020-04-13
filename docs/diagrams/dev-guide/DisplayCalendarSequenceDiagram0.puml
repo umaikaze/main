@@ -1,0 +1,48 @@
+@startuml DisplayCalendarSequenceDiagram0
+!include ../style.puml
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":CalendarPanel" as CalendarPanel UI_COLOR
+participant "rdp:StackPane" as Rdp UI_COLOR
+note over Rdp: rdp is short for \n resultDisplayPlaceholder
+end box
+
+box Logic LOGIC_COLOR_T1
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> MainWindow : handleCommandEntered("display c")
+activate MainWindow
+
+ref over MainWindow : Execute "display c"
+
+MainWindow -> CommandResult : getDisplaySystemType()
+activate CommandResult
+
+MainWindow <-- CommandResult : DisplaySystemType.CALENDAR
+deactivate CommandResult
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CommandResult -[hidden]-> MainWindow
+destroy CommandResult
+
+MainWindow -> CalendarPanel : construct()
+activate CalendarPanel
+
+MainWindow <-- CalendarPanel
+deactivate CalendarPanel
+
+MainWindow -> CalendarPanel : getRoot()
+activate CalendarPanel
+
+MainWindow <-- CalendarPanel : calendarPanelRoot
+deactivate CalendarPanel
+
+MainWindow -> Rdp : set(calendarPanelRoot)
+activate Rdp
+
+MainWindow <-- Rdp : //Show calendar in screen//
+deactivate Rdp
+
+[<-- MainWindow
+@enduml

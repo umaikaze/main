@@ -1,0 +1,70 @@
+= Zhao Mingjian - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images/dev-guide
+:stylesDir: ../stylesheets
+
+== PROJECT: Pet Store Helper
+
+---
+
+== Overview
+
+Pet Store Helper is a desktop application designed for owners of pet stores to help them manage their store and
+operations. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java,
+and has about 15 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added the ability to *schedule when to bathe my own (in-store) pets*
+** What it does: allows the user to add/delete/edit/find slots with a specified timing and duration for their (in-store)
+pets
+** Justification: This feature allows the user to manage the slots for their pets to avoid clashes.
+** Highlights: This enhancement is the foundation to other systems such as calendar view and slot list view.
+Integration between Pets and slots need to be carefully handled in order to achieve both immutability of the two systems
+and synchronization between the two systems. It required an in-depth analysis of structural design to avoid promoting
+high coupling.
+** Credits: The use of a listener on the internal UniquePetList to update Slots automatically was inspired by my
+teammates' efforts to synchronize the inventory system with the pet system.
+
+* *Minor enhancement*: Changed the color scheme and modified the window properties of the UI to give the application a
+cute look to fit its function
+** Credits: Window resizing and dragging function implementation referenced from Alexander.Berg, Evgenii Kanivets,
+Zachary Perales from stackoverflow.com, retrieved:
+https://stackoverflow.com/questions/19455059/allow-user-to-resize-an-undecorated-stage
+
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=umaikaze&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=umaikaze&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.2` & `v1.3.2` (2 releases) on GitHub
+** Enhancements to existing features:
+*** Updated the GUI color scheme (Pull request https://github.com/AY1920S2-CS2103-W15-4/main/pull/107[#107])
+*** Wrote additional tests for existing features, however Covaralls was not implemented at that time so coverage change
+was unclear.
+(Pull requests https://github.com/AY1920S2-CS2103-W15-4/main/pull/14[#14], https://github.com/AY1920S2-CS2103-W15-4/main/pull/61[#61])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103-W15-4/main/pull/75[#75]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/18[#18],
+https://github.com/AY1920S2-CS2103-W15-4/main/pull/19[#19], https://github.com/AY1920S2-CS2103-W15-4/main/pull/20[#20],
+https://github.com/AY1920S2-CS2103-W15-4/main/pull/21[#21], https://github.com/AY1920S2-CS2103-W15-4/main/pull/22[#22],
+https://github.com/AY1920S2-CS2103-W15-4/main/pull/55[#55], https://github.com/AY1920S2-CS2103-W15-4/main/pull/106[#106],
+https://github.com/AY1920S2-CS2103-W15-4/main/pull/146[#146]
+*** Contributed to forum discussions: https://github.com/nus-cs2103-AY1920S2/forum/issues/63[63]
+*** Reported bugs and suggestions for other teams in the class
+https://github.com/AY1920S2-CS2103T-W17-4/main/issues/295[295], https://github.com/AY1920S2-CS2103T-W17-4/main/issues/296[296]
+https://github.com/AY1920S2-CS2103T-W17-4/main/issues/297[297], https://github.com/AY1920S2-CS2103T-W17-4/main/issues/298[298]
+
+** Tools:
+*** Integrated a new Github plugin (TravisCI) to the team repo
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write a technical
+documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=schedule]
+include::../DeveloperGuide.adoc[tag=appendix]

@@ -84,7 +84,7 @@ public class FoodCollectionList {
      * @param pets The list of pets used to replace the original list.
      */
     public void update(List<Pet> pets) {
-        internalList.setAll(new FoodCollectionList(pets).internalList);
+        internalList.setAll(new FoodCollectionList(pets).asUnmodifiableObservableList());
     }
 
     /**

@@ -1,0 +1,33 @@
+@startuml
+!include ../style.puml
+
+box Model MODEL_COLOR_T1
+participant ":UniquePetList" as UniquePetList MODEL_COLOR
+participant ":FoodCollectionList" as FoodCollectionList MODEL_COLOR
+participant "temp:FoodCollectionList" as FoodCollectionListTemp MODEL_COLOR
+end box
+
+[-> UniquePetList : updateFoodCollectionList()
+activate UniquePetList
+
+UniquePetList -> FoodCollectionList : update(petList)
+activate FoodCollectionList
+
+create FoodCollectionListTemp
+FoodCollectionList-> FoodCollectionListTemp: FoodCollectionList(petList)
+activate FoodCollectionListTemp
+
+FoodCollectionList<-- FoodCollectionListTemp:
+FoodCollectionList->FoodCollectionListTemp: asUnmodifiableObservableList()
+FoodCollectionList<-- FoodCollectionListTemp:
+deactivate FoodCollectionListTemp
+FoodCollectionListTemp -[hidden]-> FoodCollectionList
+destroy FoodCollectionListTemp
+
+UniquePetList <-- FoodCollectionList
+deactivate FoodCollectionList
+
+[<--UniquePetList
+deactivate UniquePetList
+
+@enduml
