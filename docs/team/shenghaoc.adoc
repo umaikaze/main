@@ -1,6 +1,5 @@
 = Chen Shenghao - Project Portfolio
 :site-section: AboutUs
-:imagesDir: ../images/dev-guide
 :stylesDir: ../stylesheets
 
 == PROJECT: Pet Store Helper
@@ -23,7 +22,7 @@ Pet Store Helper (PSH) is a desktop application used for pet store owners to man
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=shenghaoc&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Reposense]]
 
-* *Other contributions*:
+* *Other contributions*: Refactored Storage package and tests for Logic package
 
 ** Project management:
 *** Managed releases `v1.2.1` and `v1.3.3` (2 releases) on GitHub
@@ -37,13 +36,19 @@ Pet Store Helper (PSH) is a desktop application used for pet store owners to man
 ** Tools:
 *** Integrated multiple new Github plugins (AppVeyor, Coveralls, CircleCI and Netlify) to the team repo
 
+:imagesDir: ../images/user-guide
 == Contributions to the User Guide
 
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+include::../UserGuide.adoc[tag=backup-and-load]
 
+
+
+
+:imagesDir: ../images/dev-guide
 == Contributions to the Developer Guide
 
 |===
