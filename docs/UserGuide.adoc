@@ -29,7 +29,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 .  Ensure you have Java 11 or above installed in your Computer.
 .  Download the latest `.jar` file from link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Pet Shop Helper.
+.  Copy the file to the folder you want to use as the home folder for your Pet Store Helper.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Welcome.png[width="790"]
@@ -70,7 +70,7 @@ There are 2 ways of displaying the slots tracked by the schedule system: either 
 
 ==== Slots list view
 
-Slots displayed here are arranged in chronological order, with the earliest slot displayed first. In the case where multiple slots start at the same time, the slot with the shortest duration is shown first.
+Slots displayed here are arranged in ascending chronological order, with the earliest slot displayed first. In the case where multiple slots start at the same time, the slot with the shortest duration is shown first. If both starting time and duration are the same, they are sorted by pet names in ascending alphabetical order.
 
 image::slotListView.png[]
 
@@ -487,4 +487,4 @@ e.g. `deleteslot 2`
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Shop Helper folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pet Store Helper folder.
