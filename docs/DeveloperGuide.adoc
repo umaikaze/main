@@ -468,6 +468,8 @@ image::FoodCollectionListChangeSequenceDiagram.png[]
 
 //tag::conflict[]
 === Conflict feature
+_Written by Zhao Tianqi_
+
 ==== Implementation
 The conflict feature shows a list of all slots that has overlapping time period.
 
@@ -497,6 +499,7 @@ image::ConflictSequenceDiagram.png[]
 
 //tag::stats[]
 === Statistics
+_Written by Zhao Tianqi_
 
 ==== Implementation
 
