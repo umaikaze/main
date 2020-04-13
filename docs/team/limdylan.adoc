@@ -25,6 +25,9 @@ Pet Store Helper is a desktop application designed for owners of pet stores to h
 ** Justification: This feature improves the usability of the program significantly because such a view allows many more slots to be seen at once, as opposed to when slots out listed one-by-one. Apart from that, from a quick glance, the relative durations and timings apart between slots can be seen.
 ** Highlights: Implementation was challenging as it required a non-trivial way of laying out the positions of each slot. It also required an in-depth knowledge of the various components in JavaFX, as well as their interactions with each other.
 
+{nbsp} +
+{nbsp} +
+
 === Minor enhancements
 * Refactored slots-related commands (https://github.com/AY1920S2-CS2103-W15-4/main/pull/22[#22], https://github.com/AY1920S2-CS2103-W15-4/main/pull/25[#25], https://github.com/AY1920S2-CS2103-W15-4/main/pull/63[#63])
 * Organized date and time related methods into a single class (https://github.com/AY1920S2-CS2103-W15-4/main/pull/45[#45])
@@ -41,6 +44,7 @@ My code contribution can be viewed https://nus-cs2103-ay1920s2.github.io/tp-dash
 *** Wrote sections as indicated in <<contributions-user-guide>>.
 ** Developer Guide:
 *** Integrated information from other various guides into the developer guide.
+*** Came up with instructions for manual testing.
 *** Wrote sections as indicated in <<contributions-dev-guide>>.
 * Community:
 ** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/13[#13], https://github.com/AY1920S2-CS2103-W15-4/main/pull/24[#24], https://github.com/AY1920S2-CS2103-W15-4/main/pull/66[#66], https://github.com/AY1920S2-CS2103-W15-4/main/pull/107[#107]
@@ -55,10 +59,10 @@ My code contribution can be viewed https://nus-cs2103-ay1920s2.github.io/tp-dash
 
 Sections of the User Guide written by me include:
 
-- Overview of the schedule system under "Features"
-- Limitations of the program
-- Usage of the `display` command
-- Usage of schedule-related commands
+- Overview of the https://ay1920s2-cs2103-w15-4.github.io/main/UserGuide.html#schedule-system[schedule system]
+- https://ay1920s2-cs2103-w15-4.github.io/main/UserGuide.html#Limitations[Limitations] of the program
+- Usage of the https://ay1920s2-cs2103-w15-4.github.io/main/UserGuide.html#changing-the-display-code-display-code[`display` command]
+- Usage of https://ay1920s2-cs2103-w15-4.github.io/main/UserGuide.html#schedule-related-commands[schedule-related commands]
 
 ////
 include::../UserGuide.adoc[tag=schedule-system]
@@ -79,9 +83,9 @@ include::../UserGuide.adoc[tag=schedule-commands]
 
 Sections of the Developer Guide written by me include:
 
-- Overview of UI Component under "Design"
-- Implementation of the display switching feature
-- Implementation of the calendar feature
+- Overview of https://ay1920s2-cs2103-w15-4.github.io/main/DeveloperGuide.html#Design-Ui[UI Component]
+- Implementation of the https://ay1920s2-cs2103-w15-4.github.io/main/DeveloperGuide.html#display-switching-feature[display switching feature]
+- Implementation of the https://ay1920s2-cs2103-w15-4.github.io/main/DeveloperGuide.html#calendar-feature[calendar feature]
 
 ////
 include::../DeveloperGuide.adoc[tag=design-ui]
