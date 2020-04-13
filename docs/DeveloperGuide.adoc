@@ -396,6 +396,7 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+// tag::appendix[]
 [appendix]
 == Product Scope
 
@@ -504,8 +505,6 @@ Use case resumes at step 2.
 .  Should be able to hold up to 500 pets + items in total without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-_{More to be added}_
-
 [appendix]
 == Glossary
 
@@ -534,26 +533,28 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 === Deleting a pet
 
 . Deleting a pet while all pets are displayed
 
 .. Prerequisites: Display all pets using the `display p` command. Multiple pets in the display.
 .. Test case: `deletepet 1` +
-   Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Timestamp in the status bar is updated.
+   Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Slots that the pet used to occupy is also deleted.
 .. Test case: `deletepet 0` +
-   Expected: No pet is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) _{give more}_ +
+   Expected: No pet is deleted. Error details shown in the status message. Slots remain the same.
+.. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: List of pets is well populated.
 
-_{ more test cases ... }_
+.. Test case: changing pet name manually to an invalid name in pettracker.json +
+Expected: Data is not loaded. Start with an empty Pet Tracker.
+
+.. Test case: changing pet name of a slot manually to pet that does not exist in pettracker.json +
+Expected: Data is not loaded. Start with an empty Pet Tracker.
+
+// end::appendix[]

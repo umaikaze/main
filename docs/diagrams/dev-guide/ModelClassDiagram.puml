@@ -4,13 +4,11 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-
-
-
 Package Model <<Rectangle>>{
 Interface ReadOnlyPetTracker <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
+Abstract Class PetListChangeListener <<Abstract>>
 Class PetTracker
 Class ReadOnlyPetTracker
 Class Model
@@ -18,7 +16,6 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 Class UniquePetList
-
 
 Package Pet {
 Class Pet
@@ -73,6 +70,9 @@ DateOfBirth -[hidden]right-> Gender
 Species -[hidden]right-> Food
 
 UniquePetList o--> "1" Schedule
+UniquePetList o-left-> "1" PetListChangeListener
+PetListChangeListener ..> Pet
+PetListChangeListener ..> Slot
 Schedule o--> "*" Slot
 Slot o--> "1" Pet
 
