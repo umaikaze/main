@@ -24,7 +24,7 @@ image::umaikaze.png[width="150", align="left"]
 {empty}[http://github.com/umaikaze[github]] [<<umaikaze#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Dev Ops, UI
 
 '''
 
