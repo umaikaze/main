@@ -279,6 +279,9 @@ image::DisplaySwitchingActivityDiagram.png[]
 
 // tag::schedule[]
 === Schedule feature
+
+_Written by Zhao Mingjian_
+
 ==== Implementation
 
 The schedule feature uses instances of class `Slot` to organise bathing schedule for the pets. Each `Slot` contains a
@@ -733,6 +736,8 @@ List of dependencies:
 [appendix]
 == Product Scope
 
+_Written collaboratively, collated by Zhao Mingjian_
+
 *Target user profile*:
 
 * has a need to manage their pet store with a variety of animals and features
@@ -746,6 +751,8 @@ List of dependencies:
 
 [appendix]
 == User Stories
+
+_Written collaboratively, collated by Zhao Mingjian_
 
 Priorities: High (must have) - `* * \*`, Low (nice to have) - `* *`
 
@@ -777,6 +784,8 @@ Priorities: High (must have) - `* * \*`, Low (nice to have) - `* *`
 
 [appendix]
 == Use Cases
+
+_Written by Zhao Mingjian_
 
 (For all use cases below, the *System* is the `PSH` and the *Actor* is the `user`, unless specified otherwise)
 
@@ -846,6 +855,8 @@ Windows, Linux, Unix, OS-X
 
 [appendix]
 == Instructions for Manual Testing
+
+_Applied from AB3 by Zhao Mingjian_
 
 Given below are instructions to test the app manually.
 
