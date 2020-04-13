@@ -29,7 +29,7 @@ Pet Store Helper (PSH) is a desktop application used for pet store owners to man
 ** Enhancements to existing features:
 *** Wrote additional tests for new JSON-adapted classes to maintain coverage (Pull requests https://github.com/AY1920S2-CS2103-W15-4/main/pull/21[#21], https://github.com/AY1920S2-CS2103-W15-4/main/pull/83/files[#83])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/AY1920S2-CS2103-W15-4/main/pull/90[#90]
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/AY1920S2-CS2103-W15-4/main/pull/90[#90] (mainly adjusting the UML diagrams and removing references to AB3)
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/134[#134], https://github.com/AY1920S2-CS2103-W15-4/main/pull/144[#144]
 *** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1920S2/forum/issues/41[1], https://github.com/nus-cs2103-AY1920S2/forum/issues/56[2], https://github.com/nus-cs2103-AY1920S2/forum/issues/94[3])

@@ -1,0 +1,62 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetTrackerParser" as PetTrackerParser LOGIC_COLOR
+participant "b:BackUpCommand" as BackUpCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+
+[-> LogicManager : execute("backup")
+activate LogicManager
+
+LogicManager -> PetTrackerParser : parseCommand("backup")
+activate PetTrackerParser
+
+create BackUpCommand
+PetTrackerParser -> BackUpCommand : new BackUpCommand()
+activate BackUpCommand
+
+BackUpCommand --> PetTrackerParser : b
+deactivate BackUpCommand
+
+PetTrackerParser --> LogicManager : b
+deactivate PetTrackerParser
+
+LogicManager -> BackUpCommand : execute()
+activate BackUpCommand
+
+BackUpCommand -> Model : getPetTracker()
+activate Model
+Model --> BackUpCommand : petTracker
+deactivate Model
+
+BackUpCommand -> Storage : savePetTracker()
+activate Storage
+
+Storage --> BackUpCommand
+deactivate Storage
+
+create CommandResult
+BackUpCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> BackUpCommand
+deactivate CommandResult
+
+BackUpCommand --> LogicManager : result
+deactivate BackUpCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
