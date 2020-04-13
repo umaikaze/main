@@ -46,3 +46,12 @@ Pet Store Helper(PSH) is a desktop application used for pet store owners to mana
 include::../DeveloperGuide.adoc[tag=Model]
 
 include::../DeveloperGuide.adoc[tag=inventory_feature]
+
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../UserGuide.adoc[tag=faq]
