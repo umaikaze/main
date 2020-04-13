@@ -3,8 +3,9 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/AY1920S2-CS2103-W15-4/main[image:https://travis-ci.org/AY1920S2-CS2103-W15-4/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/shenghaoc/main[image:https://ci.appveyor.com/api/projects/status/7vh2vthj4okxwq76/branch/master?svg=true[Build status]]
+https://circleci.com/gh/AY1920S2-CS2103-W15-4/main[image:https://circleci.com/gh/AY1920S2-CS2103-W15-4/main.svg?style=svg[CircleCI]]
 https://coveralls.io/github/AY1920S2-CS2103-W15-4/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103-W15-4/main/badge.svg?branch=master[Coverage Status]]
-
+https://app.netlify.com/sites/romantic-jepsen-ed679c/deploys[image:https://api.netlify.com/api/v1/badges/ec53095e-7378-4b7b-85da-e08551ec089a/deploy-status[Netlify Status]]
 
 
 ifdef::env-github[]
