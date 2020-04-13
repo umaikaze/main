@@ -83,21 +83,17 @@ public class CalendarPanel extends UiPart<Region> {
         flushOutBuffer(earliestTime, rowIndex, earliestTime, firstSlot.getTime());
         for (int slotIndex = 0; slotIndex < allSlots.size(); slotIndex++) {
             Slot currSlot = allSlots.get(slotIndex);
-            if (h.size() == 0 || h.overlaps(currSlot)) {
-                h.add(currSlot);
-                continue;
-            }
-            flushOutHolding(earliestTime, rowIndex, h, slotIndex);
-            if (h.sameDay(currSlot)) {
-                flushOutBuffer(earliestTime, rowIndex, h.end(), currSlot.getTime());
+            if (h.size() > 0 && !h.overlaps(currSlot)) {
+                flushOutHolding(earliestTime, rowIndex, h, slotIndex);
+                if (h.sameDay(currSlot)) {
+                    flushOutBuffer(earliestTime, rowIndex, h.end(), currSlot.getTime());
+                } else {
+                    rowIndex++;
+                    flushOutDate(rowIndex, currSlot.getDate());
+                    flushOutBuffer(earliestTime, rowIndex, earliestTime, currSlot.getTime());
+                }
                 h.reset();
-                h.add(currSlot);
-                continue;
             }
-            h.reset();
-            rowIndex++;
-            flushOutDate(rowIndex, currSlot.getDate());
-            flushOutBuffer(earliestTime, rowIndex, earliestTime, currSlot.getTime());
             h.add(currSlot);
         }
         flushOutHolding(earliestTime, rowIndex, h, allSlots.size());

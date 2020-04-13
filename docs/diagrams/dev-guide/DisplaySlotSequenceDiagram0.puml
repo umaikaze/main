@@ -1,0 +1,65 @@
+@startuml DisplaySlotSequenceDiagram0
+!include ../style.puml
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":DisplayListPanel" as DisplayListPanel UI_COLOR
+participant "rdp:StackPane" as Rdp UI_COLOR
+note over Rdp: rdp is short for \n resultDisplayPlaceholder
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> MainWindow : handleCommandEntered("display s")
+activate MainWindow
+
+ref over MainWindow : Execute "display s"
+
+MainWindow -> CommandResult : getDisplaySystemType()
+activate CommandResult
+
+MainWindow <-- CommandResult : DisplaySystemType.SCHEDULE
+deactivate CommandResult
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CommandResult -[hidden]-> MainWindow
+destroy CommandResult
+
+MainWindow -> LogicManager : getFilteredDisplayList()
+activate LogicManager
+
+LogicManager -> ModelManager : getFilteredDisplayList()
+activate ModelManager
+
+LogicManager <-- ModelManager : list
+deactivate ModelManager
+
+MainWindow <-- LogicManager : list
+deactivate LogicManager
+
+MainWindow -> DisplayListPanel : updateWith(list)
+activate DisplayListPanel
+
+MainWindow <-- DisplayListPanel
+deactivate DisplayListPanel
+
+MainWindow -> DisplayListPanel : getRoot()
+activate DisplayListPanel
+
+MainWindow <-- DisplayListPanel : displayListPanelRoot
+deactivate DisplayListPanel
+
+MainWindow -> Rdp : set(sisplayListPanelRoot)
+activate Rdp
+
+MainWindow <-- Rdp : //Show list of slots in screen//
+deactivate Rdp
+
+[<-- MainWindow
+@enduml
