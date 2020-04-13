@@ -209,15 +209,15 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             feedbackDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            handleChangeDisplay(commandResult.getDisplaySystemType());
+            if (commandResult.isExit()) {
+                handleExit();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
-                handleExit();
-            }
+            handleChangeDisplay(commandResult.getDisplaySystemType());
 
             return commandResult;
         } catch (CommandException | ParseException e) {
