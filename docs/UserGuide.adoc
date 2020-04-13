@@ -64,6 +64,8 @@ image::inventoryView.png[]
 // tag::schedule-system[]
 === Schedule System
 
+_Written by Dylan Lim_
+
 There are 2 ways of displaying the slots tracked by the schedule system: either sequentially as a list of slots, or in the form of a calendar view.
 
 ==== Slots list view
@@ -107,6 +109,8 @@ image::stats.png[]
 [[Limitations]]
 == Limitations
 
+_Written by Dylan Lim_
+
 - If the duration of a slot is sufficiently short, then information about the slot can be displayed only partially in calendar view. Workarounds available:
 * Hover the cursor over the slot, and a tooltip containing all the information about that slot will be shown.
 * Taking note of the index number of the slot, do `display s` and look up the slot with that index number.
@@ -142,6 +146,8 @@ Format: `exit`
 
 // tag::display[]
 ==== Changing the display: `display`
+
+_Written by Dylan Lim_
 
 Changes the display board to show the specified system.
 
@@ -286,6 +292,8 @@ Deletes 2nd pet in the whole pet list.
 
 // tag::schedule-commands[]
 === Schedule-related commands
+
+_Written by Dylan Lim_
 
 ==== Adding a slot: `addslot`
 
