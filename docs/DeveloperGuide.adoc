@@ -210,6 +210,8 @@ The `Model`,
 [[Design-Storage]]
 === Storage component
 
+_Written by Chen Shenghao_
+
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
@@ -550,6 +552,9 @@ image::StatsUiSequenceDiagram.png[]
 //tag::backup_and_load_feature[]
 
 === Back up and load feature
+
+_Written by Chen Shenghao_
+
 ==== Implementation
 The back up/load mechanism is facilitated by `Storage`.
 
