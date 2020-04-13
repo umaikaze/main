@@ -54,6 +54,7 @@ include::../UserGuide.adoc[tag=backup-and-load]
 |===
 
 include::../DeveloperGuide.adoc[tag=Storage]
+
 include::../DeveloperGuide.adoc[tag=backup_and_load_feature]
 
 
