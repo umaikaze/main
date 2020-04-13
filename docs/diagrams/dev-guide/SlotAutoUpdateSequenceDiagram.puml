@@ -1,17 +1,13 @@
 @startuml
-!include style.puml
+!include ../style.puml
+
+skinparam ParticipantPadding 45
 
 box Model MODEL_COLOR_T1
 participant ":UniquePetList" as UniquePetList MODEL_COLOR
 participant ":PetListChangeListener" as PetListChangeListener MODEL_COLOR
 participant ":Schedule" as Schedule MODEL_COLOR
 end box
-
-UniquePetList -> PetListChangeListener
-activate PetListChangeListener
-
-PetListChangeListener --> UniquePetList : internalList.addListener()
-deactivate PetListChangeListener
 
 [-> UniquePetList : deletePet(1)
 activate UniquePetList
@@ -24,7 +20,7 @@ PetListChangeListener -> PetListChangeListener : removeExcessSlot
 PetListChangeListener -> Schedule : remove(slot)
 activate Schedule
 
-Schedule -> Schedule : internalList.remove(slot)
+Schedule -> Schedule : internalList\n.remove(slot)
 
 Schedule --> PetListChangeListener
 deactivate Schedule

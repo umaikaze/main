@@ -9,7 +9,7 @@
 
 == Overview
 
-Pet Store Helper(PSH) is a desktop application used for pet store owners to manage different aspects of their pet store including pet logging, scheduling and inventory management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15kLOC.
+Pet Store Helper(PSH) is a desktop application used for pet store owners to manage different aspects of their pet store including pet logging, scheduling and inventory management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 16kLOC.
 
 == Summary of contributions
 
