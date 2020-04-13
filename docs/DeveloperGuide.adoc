@@ -297,6 +297,7 @@ A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the foll
 Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
 `ModelManager` then passes the list of `FoodCollection` to UI for display as a list of `DisplayItem` when `display i` is called.
 
+// tag::inventory_diagram[]
 The following shows a typical usage scenario that involves the Display Inventory feature.
 
 * Step 1: The user launches the application. A `UniquePetList` is initialized in `PetTracker`, upon which a `FoodCollectionList` item is created to store the food data of the pets in the list(if it is an empty list, `FoodCollectionList` is also stores an empty list of `FoodCollection`)
@@ -316,6 +317,7 @@ Note that there is no explicit initialization or update for `FoodCollection` in 
 
 .Interactions Inside Model Class when `ListChangeListener<Pet>` is triggered
 image::FoodCollectionListChangeSequenceDiagram.png[]
+// end::inventory_diagram[]
 
 ==== Design Considerations
 ===== Aspect: Maintaining the collection of food in a pet tracker
