@@ -1,0 +1,75 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetTrackerParser" as PetTrackerParser LOGIC_COLOR
+participant "c:ConflictCommand" as ConflictCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+participant "s:SlotConflictPredicate" as SlotConflictPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("conflicts")
+activate LogicManager
+
+LogicManager -> PetTrackerParser : parseCommand("conflicts")
+activate PetTrackerParser
+
+create ConflictCommand
+PetTrackerParser -> ConflictCommand
+activate ConflictCommand
+
+ConflictCommand --> PetTrackerParser : c
+deactivate ConflictCommand
+
+PetTrackerParser --> LogicManager : c
+deactivate PetTrackerParser
+
+LogicManager -> ConflictCommand : execute()
+activate ConflictCommand
+
+ConflictCommand -> Model : getFilteredSlotList()
+activate Model
+
+Model --> ConflictCommand : filteredSlots
+deactivate Model
+
+create SlotConflictPredicate
+ConflictCommand -> SlotConflictPredicate : SlotConflictPredicate(filteredSlots)
+activate SlotConflictPredicate
+
+SlotConflictPredicate --> ConflictCommand : s
+deactivate SlotConflictPredicate
+
+ConflictCommand -> Model : updateFilteredSlotList(s)
+activate Model
+
+Model --> ConflictCommand
+deactivate Model
+
+
+ConflictCommand -> Model : changeDisplaySystem(DisplaySystemType.SCHEDULE)
+activate Model
+
+Model --> ConflictCommand
+deactivate Model
+
+create CommandResult
+ConflictCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ConflictCommand : cr
+deactivate CommandResult
+
+ConflictCommand --> LogicManager : cr
+deactivate ConflictCommand
+
+[<--LogicManager : cr
+deactivate LogicManager
+
+@enduml
+

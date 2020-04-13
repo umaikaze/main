@@ -1,0 +1,65 @@
+= Zhao Tianqi - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images/dev-guide
+:stylesDir: ../stylesheets
+
+== PROJECT: Pet Store Helper
+
+---
+
+== Overview
+
+Pet Store Helper is a desktop application used for pet store owner to manage the store. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 16 kLoC.
+
+== Summary of contributions
+
+* *Major Enhancement*: *Added the command to display overall statistics*
+** What it does: Allows the user to take a look at the overall statistics of pets, recent schedule, and food data in the application.
+** Justification: This feature is important because it allows users, mostly pet store owners, to have an overview of the situation in his store. The owner can refer to the data to decide which species he should buy in more. Also, it allows him to have a rough idea of  when are the busy hours in recent days, and the weekly food consumption as well. Also, it saves effort for users to click into different displays one by one to check the situation of the store.
+** Highlights: This feature uses a pie chart, a timetable, and a bar chart to show the statistics of pet, recent schedule, and food respectively. It is allows visualisation of the overall situation of the pet store in a user friendly manner.
+** Credits: Resizing of charts and panes as the window resizes. Source from the link: https://www.javacodegeeks.com/2014/04/javafx-tip-1-resizable-canvas.html
+
+* *Minor enhancement*: Added warning messages to the user. When the user input contains more than 1 entry for name, species, date of birth, gender, slot time, and slot duration, there will be a warning message displayed to user. It states that the application only accepts the last entry for each field.
+
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=tianqi77&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=15-4&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=tianqi77&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.3.1`, `v1.4` (2 releases) on GitHub
+** Enhancements to existing features:
+*** Refactored Logic component of AB3 to adapt to Pet Store Helper. (Pull Request https://github.com/AY1920S2-CS2103-W15-4/main/pull/15[#15])
+*** Added warning message (Pull request https://github.com/AY1920S2-CS2103-W15-4/main/pull/81[#81])
+*** Changed find commands to filter pets that contain the keyword (instead of pets that has certain word which match the keyword exactly) (Pull Request https://github.com/AY1920S2-CS2103-W15-4/main/pull/136[#136])
+*** Make find commands to switch display automatically. (e.g. `findslots n/keyword` will switch to display of filtered slots.) Allowed find slots by more than 1 dates (Pull Request https://github.com/AY1920S2-CS2103-W15-4/main/pull/79[#79])
+*** Avoid confusion in index involved commands (i.e. edit and delete commands). Make sure the index refers to the whole list when commands is in different system with displayed screen. (e.g. editpet when screen is displaying inventory)(Pull Request https://github.com/AY1920S2-CS2103-W15-4/main/pull/87[#87])
+*** Fix bugs reported after practical exam dry run (https://github.com/AY1920S2-CS2103-W15-4/main/pull/134[#134], https://github.com/AY1920S2-CS2103-W15-4/main/pull/136[#136], https://github.com/AY1920S2-CS2103-W15-4/main/pull/133[#133])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103-W15-4/main/pull/48[#48]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/61[#61]
+
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=stats]
+
+include::../UserGuide.adoc[tag=pet_commands]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=logic_diagram]
+
+include::../DeveloperGuide.adoc[tag=stats]
+
+include::../DeveloperGuide.adoc[tag=conflict]
