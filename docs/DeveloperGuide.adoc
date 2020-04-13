@@ -823,17 +823,79 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Switching display
+
+. Change display of the program
+.. Prerequisites: Program is pre-populated with the sample data of pets and slots.
+... Test case: `display s` +
+    Expected: Program display is changed to show list of slots.
+... Test case: `display c` +
+    Expected: Program display is changed to show slots in calendar view.
+... Test case: `display i` +
+    Expected: Program display is changed to show inventory.
+... Test case: `display p` +
+    Expected: Program display is changed to back show list of pets.
+... Test case: `display x` +
+    Expected: Program display does not change. Error message shown.
+... Other incorrect display commands to try: `display`, `display I`, `Display i` +
+    Expected: Similar to previous.
+
+=== Adding a pet
+
+. Adding a pet while all pets are displayed
+.. Prerequisites: Program is showing list of pets to (run `display p`)
+... Test case: `addpet n/Alice g/female b/13/11/2015 s/dog f/Dog Food: 10 t/cute` +
+    Expected: A new pet "Alice" is added to the end of the pet list. Details of the newly added pet shown above the list of pets.
+... Test case: `addpet n/Alice g/female b/24/12/2015 s/rabbit f/Rabbit Food: 15 t/fluffy` +
+    Expected: No pet is added. Error details shown above the list of pets.
+... Other incorrect addpet commands to try: `addpet n/Bubbles g/helicopter b/8/10/2015 s/cat f/Cat Food: 15 t/white`, `addpet n/Bubbles g/female b/78/10/2015 s/cat f/Cat Food: 15 t/white` +
+   Expected: No pet is added, with the relevant and appropriate error details shown above the list of pets.
+
 === Deleting a pet
 
 . Deleting a pet while all pets are displayed
 
 .. Prerequisites: Display all pets using the `display p` command. Multiple pets in the display.
 .. Test case: `deletepet 1` +
-   Expected: First pet is deleted from the list. Details of the deleted pet shown in the status message. Slots that the pet used to occupy is also deleted.
+   Expected: First pet is deleted from the list. Details of the deleted pet shown above the list of pets. Slots that the pet used to occupy is also deleted.
 .. Test case: `deletepet 0` +
-   Expected: No pet is deleted. Error details shown in the status message. Slots remain the same.
+   Expected: No pet is deleted. Error details shown above the list of pets. Slots remain the same.
 .. Other incorrect delete commands to try: `deletepet`, `deletepet x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+=== Adding a slot
+
+. Adding a slot while all slots are displayed
+.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots.
+... Test case: `addslot n/Bob t/6/4/2020 1000 d/60` +
+    Expected: A new slot is added to slot list. Details of the newly added slot shown above the list of slots. Because it is the earliest of all slots, it appears at the 1st slot in the list.
+... Test case: `addslot n/Cindy t/67/4/2020 1000 d/60` +
+    Expected: No slot is added. Error details shown above the list of slots.
+... Other incorrect addslot commands to try: `addslot`, `addslot n/Duke t/6/4/2020 1130 d/60`, `addslot n/Cindy t/6/4/2020 2300 d/120` +
+   Expected: No slot is added, with the relevant and appropriate error details shown above the list of slots.
+
+=== Deleting a slot
+
+. Deleting a slot while all slots are displayed
+.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots.
+... Test case: `deleteslot 1` +
+    Expected: First slot is deleted from the list. Details of the deleted slot shown above the list of slots.
+... Test case: `deleteslot 0` +
+    Expected: No slot is deleted. Error details shown above the list of slots.
+... Other incorrect deleteslot commands to try: `deleteslot`, `deleteslot x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== View conflicted slots
+
+. Viewing slots with conflicts
+.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots. +
+   Initial view: On Mon 6/4/2020, there is a single slot occupied by "Gru" from 13:00 - 14:40 (as per the sample data). It is not in conflict.
+... Test case: `conflicts` +
+    Expected: Program successfully shows no slots with message "0 slots listed!", as the sample data has no slots in conflict.
+... Test case: `addslot n/Bob t/6/4/2020 1400 d/60` +
+    Expected: A new slot is added to slot list. Details of the newly added slot shown above the list of slots. This newly added slot and the slot occupied by Gru are now marked as "[CONFLICT]"
+... Test case: `conflicts` +
+    Expected: Program successfully shows only the two slots on 6/4/2020 with message "2 slots listed!"
 
 === Saving data
 
