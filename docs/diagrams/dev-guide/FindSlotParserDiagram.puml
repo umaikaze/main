@@ -1,25 +1,34 @@
 @startuml
 !include ../style.puml
 
-(*)  --> "PetTrackerParser matches command `findslots`"
---> "Initialize new FindSlotCommandParser"
-if "[if both name prefix and dateTime prefix are empty]" then
---> [then] "throw new parse exception"
-else
---> [ else] "check for names in argMultimap"
-if "[if name prefix is present]" then
---> [then] "add new SlotPetNamePredicate to list of predicates"
---> "check for dateTime in argMultimap"
-else
---> [ else] "check for dateTime in argMultimap"
-if "dateTime prefix is present"
---> [then] "add new SlotDatePredicate to list of predicates"
---> "reduce list of predicates with Predicate::and"
-else
---> [ else] "reduce list of predicates with Predicate::and"
+start
+
+:PetTrackerParser matches command ""findslots"";
+
+:Initialize new FindSlotCommandParser;
+
+if () then ([both name prefix\n and dateTime\n prefix are empty]\n)
+    :throw new parse exception;
+    stop
+else ([else])
+
 endif
+
+:check for names in argMultimap;
+if () then ([name prefix is present])
+    :add new SlotPetNamePredicate to list of predicates;
+else ([else]) 
+
 endif
+
+:check for dateTime in argMultimap;
+if () then ([dateTime prefix is present])
+    :add new SlotDatePredicate to list of predicates;
+else ([else])
+
 endif
---> "return new FindSlotCommand"
--->(*)
+
+:reduce list of predicates with Predicate::and;
+:return new ""FindSlotCommand"";
+stop
 @enduml
