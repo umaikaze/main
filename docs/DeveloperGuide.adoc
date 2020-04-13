@@ -127,6 +127,8 @@ NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker
 
 // tag::Model[]
 [[Design-Model]]
+_Written by Zhu Ruicong_
+
 === Model component
 
 .Structure of the Model Component
@@ -137,7 +139,7 @@ image::ModelClassDiagram.png[]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
+* stores the Pet Store Helper data. Note that the Pet Tracker keeps track of a UniquePetList, which in turn maintains the Pet system, Schedule system and Inventory(FoodCollection) system.
 * exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 // end::Model[]
@@ -280,6 +282,9 @@ conserve system memory as there will be no duplicate information.
 
 // tag::inventory_feature[]
 === Inventory feature
+
+_Written by Zhu Ruicong_
+
 ==== Implementation
 
 The Inventory feature gives a summary of all the food items involved in a pet tracker system.
@@ -292,16 +297,27 @@ A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the foll
 Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
 `ModelManager` then passes the list of `FoodCollection` to UI for display as a list of `DisplayItem` when `display i` is called.
 
+// tag::inventory_diagram[]
 The following shows a typical usage scenario that involves the Display Inventory feature.
 
 * Step 1: The user launches the application. A `UniquePetList` is initialized in `PetTracker`, upon which a `FoodCollectionList` item is created to store the food data of the pets in the list(if it is an empty list, `FoodCollectionList` is also stores an empty list of `FoodCollection`)
-* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model$getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
-* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList$internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList$updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
+* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model#getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
+* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList#internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList#updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
 
 The sequence diagram below is an illustration of the flow of events that happen in the logical component when `Step 2` above occurs.
 
 .Interactions Inside the Logic Component for the `display i` Command
 image::DisplayInventorySequenceDiagram.png[]
+
+Note that there is no explicit initialization or update for `FoodCollection` in `FoodCollectionList`. `FoodCollectionList` is synchronized to the list of pet(`UniquePetList#internalList`) in the `UniquePetList` through `ListChangeListener<Pet>`, which is triggered whenever there is a change in the pet list. The sequence diagram below and the steps illustrates this process:
+
+* Step 1: `UniquePetList` passes its `internalList`(referred to as `petList` in the sequence diagram below).
+* Step 2: `FoodCollectionList` creates a new `FoodCollectionList` object `temp` and extracts `temp#internalList`.
+* Step 3: Replaces the content in the current `internalList` with the content in the extracted `temp#internalist`.
+
+.Interactions Inside Model Class when `ListChangeListener<Pet>` is triggered
+image::FoodCollectionListChangeSequenceDiagram.png[]
+// end::inventory_diagram[]
 
 ==== Design Considerations
 ===== Aspect: Maintaining the collection of food in a pet tracker
