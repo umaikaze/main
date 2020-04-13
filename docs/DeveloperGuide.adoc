@@ -485,19 +485,19 @@ Below is a scenario of using `conflicts` command:
 * Step 1: The user inputs "conflicts" in the command line. The Logic component processes the input and creates a new instance of `ConflictCommand`
 * Step 2: The `ConflictCommand` access `filteredSlots` in `Model`, and create a new instance of `SlotConflictPredicate` with `filteredSlots`.
 * Step 3: `Model` filters slots that is conflicting among the `filteredSlots` using the `SlotConflictPredicate`.
-* Step 4: `ConflictCommand` changes `currentDisplaySystemType` in `Model` to `DisplaySystemType.SCHEDUEL` such that the window will display shorlisted conflicting slots.
+* Step 4: `ConflictCommand` changes `currentDisplaySystemType` in `Model` to `DisplaySystemType.SCHEDULE` such that the window will display shortlisted conflicting slots.
 
 .Interactions Inside the Logic Component for the `conflicts` Command
 image::ConflictSequenceDiagram.png[]
 
 ==== Design Considerations
-===== Aspect: How to filter conflicting slots
-* Alternative 1 (current choice): Make use of Predicate
-** Pros: More organised and more object-oriented style of programming. Also, the use of predicate can be extended to other commands, e.g. `findslots`.
-** Cons: Relatively more complicated to implement
-* Alternative 2: Directly check for conflicting timing among the list of slots
+===== Aspect: Data structure to store slots and method of checking for conflicts:
+* Alternative 1 (current choice): Store slots in a list, with pairwise comparison between elements to find out conflicts
 ** Pros: More straightforward in implementation
-** Cons: Low level of OOP. It should not be encouraged.
+** Cons: The performance might not be scalable. Algorithm does not minimize the computation time.
+* Alternative 2: Store slots in an interval tree
+** Pros: Searching for conflicting slots takes less time. The algorithm is more efficient.
+** Cons: Implementation of the data structure needs relatively high level of commitment.
 //end::conflict[]
 
 //tag::stats[]
@@ -942,7 +942,7 @@ These instructions only provide a starting point for testers to work on; testers
 === View conflicted slots
 
 . Viewing slots with conflicts
-.. Prerequisites: Program is showing list of slots to (run `display s`). Program is pre-populated with the sample data of pets and slots. +
+.. Prerequisites: Program is pre-populated with the sample data of pets and slots. +
    Initial view: On Mon 6/4/2020, there is a single slot occupied by "Gru" from 13:00 - 14:40 (as per the sample data). It is not in conflict.
 ... Test case: `conflicts` +
     Expected: Program successfully shows no slots with message "0 slots listed!", as the sample data has no slots in conflict.
