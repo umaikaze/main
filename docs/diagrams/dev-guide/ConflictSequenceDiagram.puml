@@ -35,20 +35,20 @@ activate ConflictCommand
 ConflictCommand -> Model : getFilteredSlotList()
 activate Model
 
-Model -> ConflictCommand : filteredSlots
+Model --> ConflictCommand : filteredSlots
 deactivate Model
 
 create SlotConflictPredicate
 ConflictCommand -> SlotConflictPredicate : SlotConflictPredicate(filteredSlots)
 activate SlotConflictPredicate
 
-SlotConflictPredicate -> ConflictCommand : s
+SlotConflictPredicate --> ConflictCommand : s
 deactivate SlotConflictPredicate
 
 ConflictCommand -> Model : updateFilteredSlotList(s)
 activate Model
 
-Model -> ConflictCommand
+Model --> ConflictCommand
 deactivate Model
 
 

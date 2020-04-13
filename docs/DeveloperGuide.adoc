@@ -398,8 +398,11 @@ In the Ui component, there is a new instance of `OverallStats` created, while `M
 
 Following is the sequential diagram of the command `stats`
 
-.Interactions Inside the Logic Component for the `stats` Command
-image::StatsSequenceDiagram.png[]
+.Interactions Inside the *Logic* Component for the `stats` Command
+image::StatsLogicSequenceDiagram.png[]
+
+.Interactions Inside the *Ui* Component for the `stats` Command
+image::StatsUiSequenceDiagram.png[]
 
 ==== Design Considerations
 ===== Aspect: How to update diagrams when there are changes
