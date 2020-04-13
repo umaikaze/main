@@ -17,7 +17,7 @@ endif
 :check for names in argMultimap;
 if () then ([name prefix is present])
     :add new SlotPetNamePredicate to list of predicates;
-else ([else]) 
+else ([else])
 
 endif
 
