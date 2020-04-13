@@ -250,10 +250,10 @@ Given below is an example usage scenario and how the display mechanism behaves a
 The following sequence diagrams shows how the display is switched to calendar:
 
 .Sequence diagram for switching display to calendar
-image::displayCalendarSequenceDiagram0.png[]
+image::DisplayCalendarSequenceDiagram0.png[]
 
 .Excecution of "display c" in Logic component
-image::displayCalendarSequenceDiagram1.png[]
+image::DisplayCalendarSequenceDiagram1.png[]
 
 NOTE: The lifeline for `CommandResult`, `DisplayParser`, and `DisplayCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
