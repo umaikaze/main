@@ -142,6 +142,7 @@ The `Model`,
 * does not depend on any of the other three components.
 // end::Model[]
 
+// tag::Storage[]
 [[Design-Storage]]
 === Storage component
 
@@ -154,6 +155,7 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Pet Tracker data in json format and read it back.
+// end::Storage[]
 
 [[Design-Commons]]
 === Common classes
