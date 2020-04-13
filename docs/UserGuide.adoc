@@ -314,15 +314,19 @@ Examples:
 
 ==== Finding slots: `findslots`
 
-Finds slots occupied by a pet based on pet name / date of slot.
+Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. At least a
+name, or a date, must be provided. Slots that matched the query will be returned and displayed sequentially as a list.
 
 Format: `findslots [n/PETNAME [MORE_PETNAMES]] [t/DATE [MORE_DATES]]`
 
-Finds slots occupied by a pet matching the specified name, or slots occupied on the given date, or both. At least a name, or a date, must be provided.
+- This command can take one pet name, one date, or one pet name and one date.
+- Slots with pets matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return
+`Hans Gruber`, `Bo Yang`. The similar case applies for dates. Thus, informally, given
+`findslots n/name1 name2 t/date1 date2`, it is equivalent to searching for slots that match
+`(name1 OR name2) AND (date1 OR date2)`.
 
-Slots with pet name matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return slots with `Hans Gruber`, and slots with `Bo Yang`. The similar case applies for dates. Thus, informally, given `findslots n/name1 name2 t/date1 date2`, it is equivalent to searching for slots that match `(name1 OR name2) AND (date1 OR date2)`.
-
-The program display will be switched to show the slots that are matched. These slots are shown sequentially as a list and are ordered chronologically, from earliest to latest.
+The program display will be switched to show the slots that are matched. These slots are shown sequentially as a list
+and are ordered chronologically, from earliest to latest.
 
 Details about the arguments:
 
