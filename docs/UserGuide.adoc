@@ -104,6 +104,37 @@ The statistics of the pet store, which can be shown via `stats`, are:
 
 image::stats.png[]
 
+// tag::backup-and-load[]
+=== Back Up and Load
+The back up and load commands together allow data to be stored and managed directly.
+
+==== Back up
+To back up the current state of the pet store, enter the `backup` command.
+
+The file name is generated based on the current date and time and reported back.
+
+It is stored in the same directory as the default data file.
+
+
+image::backup.png[]
+
+==== Load
+To load a file, enter the `load` command followed by the file name.
+
+The file should be stored in the same directory as the default data file.
+
+For example, after removing a few pets and slots, the screen will be different from when we backed up previously.
+
+image::load1.png[]
+
+In this case, entering `load 20200413_20_23_57` restores the system to its backed-up state.
+
+image::load2.png[]
+
+The file name can be any valid file name under the curent operating system and need not conform to the backup file naming scheme.
+
+// end::backup-and-load[]
+
 // tag::limitations[]
 
 [[Limitations]]

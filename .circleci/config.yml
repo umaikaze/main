@@ -39,4 +39,5 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: gradle test
+      - run: gradle clean checkstyleMain checkstyleTest test coverage coveralls
+      - run: ./config/travis/run-checks.sh

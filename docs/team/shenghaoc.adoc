@@ -1,0 +1,65 @@
+= Chen Shenghao - Project Portfolio
+:site-section: AboutUs
+:stylesDir: ../stylesheets
+
+== PROJECT: Pet Store Helper
+
+---
+
+== Overview
+
+Pet Store Helper (PSH) is a desktop application used for pet store owners to manage different aspects of their pet store including pet logging, scheduling and inventory management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15k LOC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to back up/load app data*
+** What it does: allows the user to back up the current state of the app and load app data from any compatible JSON file
+** Justification: This feature improves the product significantly because a store should maintain backups of their system files so that data can be recovered in case of a system failure. It is also important to retain past data so that they can be extracted for analysis in the future.
+** Highlights: This enhancement does not affect existing commands, allowing it to integrate seamlessly with the rest of the app. However, this is reliant on the fact that currently the commands are only affected by the data of the app. If an undo/redo command is added, past and undone commands would also need to be saved to avoid errors arising from mismatch of commands and app data.
+** Credits: Code from Address Book Level 4 was referenced to set up temporary files for testing.
+
+* *Minor enhancement*: Updated Storage to allow saving of new/refactored classes to JSON format.
+
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=shenghaoc&tabRepo=AY1920S2-CS2103-W15-4%2Fmain%5Bmaster%5D[Reposense]]
+
+* *Other contributions*: Refactored Storage package and tests for Logic package
+
+** Project management:
+*** Managed releases `v1.2.1` and `v1.3.3` (2 releases) on GitHub
+** Enhancements to existing features:
+*** Wrote additional tests for new JSON-adapted classes to maintain coverage (Pull requests https://github.com/AY1920S2-CS2103-W15-4/main/pull/21[#21], https://github.com/AY1920S2-CS2103-W15-4/main/pull/83/files[#83])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the Developer Guide: https://github.com/AY1920S2-CS2103-W15-4/main/pull/90[#90] (mainly adjusting the UML diagrams and removing references to AB3)
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103-W15-4/main/pull/134[#134], https://github.com/AY1920S2-CS2103-W15-4/main/pull/144[#144]
+*** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1920S2/forum/issues/41[1], https://github.com/nus-cs2103-AY1920S2/forum/issues/56[2], https://github.com/nus-cs2103-AY1920S2/forum/issues/94[3])
+** Tools:
+*** Integrated multiple new Github plugins (AppVeyor, Coveralls, CircleCI and Netlify) to the team repo
+
+:imagesDir: ../images/user-guide
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+include::../UserGuide.adoc[tag=backup-and-load]
+
+
+:imagesDir: ../images/dev-guide
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=Storage]
+
+include::../DeveloperGuide.adoc[tag=backup_and_load_feature]
+
+
+== PROJECT: RTOS-Based Robotic Car
+
+---
+
+Under a computer engineering module, I am also currently involved in the development of RTOS-based software that allows a robotic car to be controlled for maze navigation via an Android app.
