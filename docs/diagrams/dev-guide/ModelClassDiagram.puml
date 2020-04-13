@@ -31,6 +31,8 @@ Class Tag
 Package Schedule {
 Class Schedule
 Class Slot
+Class DateTime
+Class SlotDuration
 }
 
 Package FoodCollection {
@@ -56,13 +58,13 @@ PetTracker *--> "1" UniquePetList
 UniquePetList o--> "*" Pet
 UniquePetList o--> "1" FoodCollectionList
 FoodCollectionList o--> "*" FoodCollection
-FoodCollection *--> "*" FoodAmountAndPet
+FoodCollection *--> "1..*" FoodAmountAndPet
 
-Pet *--> Name
-Pet *--> Species
-Pet *--> DateOfBirth
-Pet *--> Gender
-Pet *--> "*" Food
+Pet *--> "1" Name
+Pet *--> "1" Species
+Pet *--> "1" DateOfBirth
+Pet *--> "1" Gender
+Pet *--> "1..*" Food
 Pet *--> "*" Tag
 
 Name -[hidden]right-> DateOfBirth
@@ -70,15 +72,16 @@ DateOfBirth -[hidden]right-> Gender
 Species -[hidden]right-> Food
 
 UniquePetList o--> "1" Schedule
-UniquePetList o-left-> "1" PetListChangeListener
-PetListChangeListener ..> Pet
-PetListChangeListener ..> Slot
+
+
 Schedule o--> "*" Slot
 Slot o--> "1" Pet
+Slot *--> "1" SlotDuration
+Slot *--> "1" DateTime
 
-ModelManager -->"1" Pet : filtered list
-ModelManager -->"1" Slot : filtered list
-ModelManager -->"1" FoodCollection : filtered list
+ModelManager o-->"1" Pet : filtered list
+ModelManager o-->"1" Slot : filtered list
+ModelManager o-->"1" FoodCollection : filtered list
 
 
 
