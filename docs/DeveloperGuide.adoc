@@ -118,8 +118,10 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
+//tag::logic_diagram[]
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[]
+//end::logic_diagram[]
 
 [discrete]
 ==== How the architecture components interact with each other
@@ -464,6 +466,83 @@ image::FoodCollectionListChangeSequenceDiagram.png[]
 ** Cons: Adaptations for each pet related commands is required since the food list can be affected in different ways.(e.g addition, modification, deletion)
 // end::inventory_feature[]
 
+//tag::conflict[]
+=== Conflict feature
+_Written by Zhao Tianqi_
+
+==== Implementation
+The conflict feature shows a list of all slots that has overlapping time period.
+
+* It makes uses of `SlotConflictPredicate` which implements `SlotPredicate` to filter slots that has a conflicting timing with some other slots.
+* If the screen is displaying shortlisted slots, `conflics` only shows slots with conflicts among the shortlisted list. Otherwise, it shows conflicts in the full slot list
+* The command automatically switch display to slots.
+
+Below is a scenario of using `conflicts` command:
+
+* Step 1: The user inputs "conflicts" in the command line. The Logic component processes the input and creates a new instance of `ConflictCommand`
+* Step 2: The `ConflictCommand` access `filteredSlots` in `Model`, and create a new instance of `SlotConflictPredicate` with `filteredSlots`.
+* Step 3: `Model` filters slots that is conflicting among the `filteredSlots` using the `SlotConflictPredicate`.
+* Step 4: `ConflictCommand` changes `currentDisplaySystemType` in `Model` to `DisplaySystemType.SCHEDUEL` such that the window will display shorlisted conflicting slots.
+
+.Interactions Inside the Logic Component for the `conflicts` Command
+image::ConflictSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: How to filter conflicting slots
+* Alternative 1 (current choice): Make use of Predicate
+** Pros: More organised and more object-oriented style of programming. Also, the use of predicate can be extended to other commands, e.g. `findslots`.
+** Cons: Relatively more complicated to implement
+* Alternative 2: Directly check for conflicting timing among the list of slots
+** Pros: More straightforward in implementation
+** Cons: Low level of OOP. It should not be encouraged.
+//end::conflict[]
+
+//tag::stats[]
+=== Statistics
+_Written by Zhao Tianqi_
+
+==== Implementation
+
+We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
+
+* `OverallStats` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
+* Data in `OverallStats` is obtained from `Logic`.
+* The statistics displayed will automatically update if there is a change  in any related information.
+
+How we implemented overall statistic on UI:
+
+* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
+* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
+* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
+
+Here is the process of how the overall statistics is displayed to the user:
+
+* Step 1: The user key in the command 'stats', then the Logic component processes the input and creates an instance of `StatsCommand`.
+The `StatsCommand` first calls `Model#updateAll()` to make sure that the model will update `filteredPets`, `filteredSlots`, and `filteredFoodCollections` to show the full list of `Pet`, `Slot` and `FoodCollection` in the `PetTracker`.
+After that, the `StatsCommand` calls `Model#changeDisplaySystem(DisplaySystemType.STATISTICS`) such that the application will later switch the window to show `OverallStats`.
+In the Ui component, there is a new instance of `OverallStats` created, while `Model#getFilteredPets`, `Model#getFilteredSlots`, and `Model#getFilteredFoodCollections` are passed in the instance for processing. `OverallStats` then generates diagrams according to the data passes in.
+
+* Step 2: The user inputs a command that modifies the UniquePetList, e.g 'editpet 1 s/cat'. The `CommandResult` of any `EditPetCommand` has `type` with `DisplaySystemType.NO_CHANGE`. The Ui component identifies the `type` in the `CommandResult` and then refresh the window if it is `NO_CHANGE`. In this case, the window will refresh and create another new instance of `OverallStats` with the updated list of pets. Therefore the window always shows statistics of the most updated list of pets, slots and food collections.
+
+Following is the sequential diagram of the command `stats`
+
+.Interactions Inside the *Logic* Component for the `stats` Command
+image::StatsLogicSequenceDiagram.png[]
+
+.Interactions Inside the *Ui* Component for the `stats` Command
+image::StatsUiSequenceDiagram.png[]
+
+==== Design Considerations
+===== Aspect: How to update diagrams when there are changes
+* Alternative 1 (current choice): Refresh the screen
+** Pros: Easy to implement and only need to refer to `model` to get data.
+** Cons: Takes time to process the whole lists of data even though there is only one small change in one of the item (pets, slots or foo collection). This approach might be time consuming when the data size is too large.
+* Alternative 2: Make use of `Listener` to detect change in `UniquePetList` and make changes accordingly
+** Pros: Avoid unnecessary processing of data. e.g. The diagrams need not be regenerated when there is no change in pet species, pet food, and recent schedule.
+** Cons: More complicated implementation. There might be more coupling between `OverallStats` under Ui component and Listener class under Model component.
+//end::stats[]
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -485,42 +564,6 @@ just its size
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-=== Statistics
-
-==== Implementation
-
-We are generating the overall statistics of Pet Store Helper and translate the data in a user-friendly manner.
-
-* `OverallStatistics` under UI component handles the translation of three sets of data: list of pets, schedule, and list of inventory.
-* Data in `OverallStatistics` is obtained from `Logic`.
-* The statistics displayed will automatically update if there is a change  in any related information.
-
-How we implemented overall statistic on UI:
-
-* The statistics for pets are shown in a form of pie chart, while the pets are grouped according to their species.
-* The schedule statistics is in the form of a timetable of recent 3 days. Each slot is represented as a shaded rectangle in the timetable.
-* The inventory data are generated from the list of pets, and grouped together by their names, such that users have a better understanding of overall food consumption. The list of inventory is represented as a bar chart.
-
-Here is the process of how the overall statistics is displayed to the user:
-
-* Step 1: The user key in the command 'stats', then the Logic component processes the input and creates an instance of `StatsCommand`.
-The `StatsCommand` first calls `Model#updateAll()` to make sure that the model will update `filteredPets`, `filteredSlots`, and `filteredFoodCollections` to show the full list of `Pet`, `Slot` and `FoodCollection` in the `PetTracker`.
-After that, the `StatsCommand` calls `Model#changeDisplaySystem(DisplaySystemType.STATISTICS`) such that the application will later switch the window to show `OverallStatistics`.
-In the Ui component, there is a new instance of `OverallStatistics` created, while `Model#getFilteredPets`, `Model#getFilteredSlots`, and `Model#getFilteredFoodCollections` are passed in the instance for processing. `OverallStatistics` then generates diagrams according to the data passes in.
-
-* Step 2: The user inputs a command that modifies the UniquePetList, e.g 'editpet 1 s/cat'. The `CommandResult` of any `EditPetCommand` has `type` with `DisplaySystemType.NO_CHANGE`. The Ui component identifies the `type` in the `CommandResult` and then refresh the window if it is `NO_CHANGE`. In this case, the window will refresh and create another new instance of `OverallStatistics` with the updated list of pets. Therefore the window always shows statistics of the most updated list of pets, slots and food collections.
-
-Following is the sequential diagram of the command `stats`
-image:StatsSequenceDiagram.png[]
-
-==== Design Considerations
-===== Aspect: How to update diagrams when there are changes
-* Alternative 1 (current choice): Refresh the screen
-** Pros: Easy to implement and only need to refer to `model` to get data.
-** Cons: Takes time to process the whole lists of data even though there is only one small change in one of the item (pets, slots or foo collection). This approach might be time consuming when the data size is too large.
-* Alternative 2: Make use of `Listener` to detect change in `UniquePetList` and make changes accordingly
-** Pros: Avoid unnecessary processing of data. e.g. The diagrams need not be regenerated when there is no change in pet species, pet food, and recent schedule.
-** Cons: More complicated implementation. There might be more coupling between `OverallStatistics` under Ui component and Listener class under Model component.
 
 
 

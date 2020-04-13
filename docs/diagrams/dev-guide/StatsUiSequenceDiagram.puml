@@ -1,0 +1,66 @@
+@startuml
+!include ../style.puml
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "os:OverallStats" as OverallStats UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":Logic" as Logic LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+
+[-> MainWindow : executeCommand("stats")
+activate MainWindow
+
+MainWindow -> Logic : execute("stats")
+activate Logic
+
+Logic --> MainWindow : cr
+deactivate Logic
+
+MainWindow -> CommandResult : getDisplaySystemType()
+activate CommandResult
+
+CommandResult --> MainWindow : DisplaySystemType.STATISTICS
+deactivate CommandResult
+
+MainWindow -> MainWindow : handleChangeDisplay(DisplaySystemType.STATISTICS)
+activate MainWindow
+
+MainWindow -> Logic : getFilteredPetList()
+activate Logic
+
+Logic --> MainWindow : pets
+deactivate Logic
+
+MainWindow -> Logic : getFilteredSlotList()
+activate Logic
+
+Logic --> MainWindow : slots
+deactivate Logic
+
+MainWindow -> Logic : getFilteredFoodCollectionList()
+activate Logic
+
+Logic --> MainWindow : food
+deactivate Logic
+
+create OverallStats
+MainWindow -> OverallStats : OverallStats(pets, slots, food)
+activate OverallStats
+
+OverallStats --> MainWindow : os
+deactivate OverallStats
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+[<--MainWindow : cr
+deactivate MainWindow
+
+@enduml
+
