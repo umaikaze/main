@@ -547,6 +547,42 @@ image::StatsUiSequenceDiagram.png[]
 ** Cons: More complicated implementation. There might be more coupling between `OverallStats` under Ui component and Listener class under Model component.
 //end::stats[]
 
+//tag::backup_and_load_feature[]
+
+=== Back up and load feature
+==== Implementation
+The back up/load mechanism is facilitated by `Storage`.
+`Storage` is extended to implement the following operations:
+
+* `savePetTracker#(ReadOnlyPetTracker, LocalDateTime)` -- calls `savePetTracker#(ReadOnlyPetTracker, Path)` after converting LocalDateTime to Path
+* `savePetTracker#(ReadOnlyPetTracker, Path)` -- saves pet tracker data to specified path
+
+The back up/load mechanism follows the exact same steps taken when data is saved after each operation and read at initialization.
+
+This ensures maximum compatibility and reduces the need for additional code.
+
+`backup` should never fail unless the saving of data after every operation also fails. For 'load', there are two additional caveats, the specified file should exist and be in the correct format. This is unlike the reading of data at initialization which simply resorts to an empty file instead.
+
+The following sequence diagram shows how the backup operation works:
+
+image::BackUpSequenceDiagram.png[]
+
+The following sequence diagram shows how the load operation works:
+
+image::LoadSequenceDiagram.png[]
+
+==== Design Considerations
+
+===== Aspect: How back up & load executes
+
+* **Alternative 1 (current choice):** Executed by Command, following general pattern for Command
+** Pros: Easy to implement, able to rely on established pattern for Command.
+** Cons: Storage is exposed to classes in the `parser` package, which should not have access to its methods
+* **Alternative 2:** Executed by LogicManager, which already saves data to hard disk after every operation
+** Pros: Storage does not have to be passed to classes in the `parser` package
+** Cons: Requires passing instruction back to LogicManager, actual operation performed after end of Command#execute(), unable to obtain reliable success/error message.
+
+//end::backup_and_load_feature[]
 
 === Logging
 

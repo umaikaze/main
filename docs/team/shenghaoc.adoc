@@ -46,8 +46,6 @@ Pet Store Helper (PSH) is a desktop application used for pet store owners to man
 include::../UserGuide.adoc[tag=backup-and-load]
 
 
-
-
 :imagesDir: ../images/dev-guide
 == Contributions to the Developer Guide
 
@@ -56,7 +54,7 @@ include::../UserGuide.adoc[tag=backup-and-load]
 |===
 
 include::../DeveloperGuide.adoc[tag=Storage]
-
+include::../DeveloperGuide.adoc[tag=backup_and_load_feature]
 
 
 == PROJECT: RTOS-Based Robotic Car
