@@ -1,0 +1,51 @@
+@startuml CalendarConstructActivityDiagram
+start
+
+:Construct calendar;
+
+:Clear all current calendar components;
+
+if () then ([no slots \n in system])
+    :Set calendar to \n display "No Slots!";
+    stop
+else ([else])
+
+endif
+
+:Calculate ET;
+note right: ET stands for earliest time \n of day of all slots
+
+:Create new ""CalendarDate"", \n given date of 1st slot;
+
+:Create new ""CalendarBuffer"", \n given ET and starting time of 1st slot;
+
+:Initialize variables:
+ holding = empty list of slots
+ row index = 0
+ i = 0;
+
+while () is ([i < total number of slots])
+    :Assign the i-th slot to CS;
+    note right: CS stands for current slot
+    if () then ([at least 1 slot is in holding \n and CS overlaps with \n none of the slots in holding]\n\n\n)
+        :Create new ""CalendarRegion"" \n for slot(s) in holding **<U+22D4>**;
+        if () then ([CS falls on the same day \n as the slot(s) in holding]\n)
+            :Determine the latest ending time \n of all slots in holding;
+            :Create new ""CalendarBuffer"", \n given the latest ending time \n and starting time of CS;
+        else ([else]\n)
+            :Increment the row index;
+            :Create new ""CalendarDate"", \n given date of CS;
+            :Create new ""CalendarBuffer"", \n given ET and starting time of CS;
+        endif
+        :Remove all slot(s) in holding;
+    else ([else])
+
+    endif
+    :Add CS to holding;
+    :Increment i;
+endwhile ([else])
+
+:Create new ""CalendarRegion"" \n for slot(s) in holding **<U+22D4>**;
+
+stop
+@enduml

@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Zhu Ruicong
 image::zhu-ruicong.png[width="150", align="left"]
-{empty}[http://github.com/Zhu-Ruicong[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/Zhu-Ruicong[github]] [<<zhu-ruicong#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
@@ -21,7 +21,7 @@ Responsibilities: UI
 
 === Zhao Mingjian
 image::umaikaze.png[width="150", align="left"]
-{empty}[http://github.com/umaikaze[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/umaikaze[github]] [<<umaikaze#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
@@ -30,7 +30,7 @@ Responsibilities: Data
 
 === Chen Shenghao
 image::shenghaoc.png[width="150", align="left"]
-{empty}[http://github.com/shenghaoc[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/shenghaoc[github]] [<<shenghaoc#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
@@ -39,7 +39,7 @@ Responsibilities: Dev Ops + Threading
 
 === Lim Wei Yang, Dylan
 image::limdylan.png[width="150", align="left"]
-{empty}[http://github.com/limdylan[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/limdylan[github]] [<<limdylan#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
@@ -48,7 +48,7 @@ Responsibilities: UI
 
 === Zhao Tianqi
 image::tianqi77.png[width="150", align="left"]
-{empty}[http://github.com/tianqi77[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/tianqi77[github]] [<<tianqi77#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading

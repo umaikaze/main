@@ -1,4 +1,4 @@
-= (WIP) Pet Store Helper - Developer Guide
+= Pet Store Helper - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,11 +14,72 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103-W15-4/main/tree/master
 
-By: `W15-4`      Since: `Feb 2020`      Licence: `MIT`
+By: `AY1920S2-CS2103-W15-4`      Since: `Feb 2020`      Licence: `MIT`
 
 == Setting up
 
-Refer to the guide <<SettingUp#, here>>.
+=== Prerequisites
+
+. *JDK `11`* or above
+. *IntelliJ* IDE
++
+[NOTE]
+IntelliJ by default has Gradle and JavaFx plugins installed. +
+Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+
+=== Setting up the project in your computer
+
+. Fork this repo, and clone the fork to your computer
+. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+. Set up the correct JDK version for Gradle
+.. Click `Configure` > `Project Defaults` > `Project Structure`
+.. Click `New...` and find the directory of the JDK
+. Click `Import Project`
+. Locate the `build.gradle` file and select it. Click `OK`
+. Click `Open as Project`
+. Click `OK` to accept the default settings.
+
+=== Verifying the setup
+
+. Run the `clzzz.helper.Main` and try a few commands
+. <<Running-Tests,Run the tests>> to ensure they all pass.
+
+=== Configurations to do before writing code
+
+==== Configuring the coding style
+
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+
+. Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
+. Select `Editor` > `Code Style` > `Java`
+. Click on the `Imports` tab to set the order
+
+* For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
+* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
+
+==== Updating documentation to match your fork
+
+After forking the repo, the documentation will still have the SE-EDU branding and refer to the `AY1920S2-CS2103-W15-4/main` repo.
+
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `AY1920S2-CS2103-W15-4/main`), you should do the following:
+
+. Configure the site-wide documentation settings in `build.gradle`, such as the `site-name`, to suit your own project.
+
+. Replace the URL in the attribute `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
+
+==== Setting up CI
+
+Set up Travis to perform Continuous Integration (CI) for your fork.
+
+After setting up Travis, you can optionally set up coverage reporting for your team fork.
+
+[NOTE]
+Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
+
+Optionally, you can set up AppVeyor as a second CI.
+
+[NOTE]
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
 
 == Design
 
@@ -31,25 +92,24 @@ image::ArchitectureDiagram.png[]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
-Refer to the <<UsingPlantUml#, Using PlantUML guide>> to learn how to create and edit diagrams.
+The `.puml` files used to create diagrams in this document can be found in the diagrams folder at `docs/diagrams`.
 
-`Main` has two classes called link:{repoURL}/src/main/java/clzzz/helper/Main.java[`Main`] and link:{repoURL}/src/main/java/clzzz/helper/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has two classes called `Main` and `MainApp`. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components.
+`Commons` represents a collection of classes used by multiple other components.
 The following class plays an important role at the architecture level:
 
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
-* <<Design-Ui,*`UI`*>>: The UI of the App.
-* <<Design-Logic,*`Logic`*>>: The command executor.
-* <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
-* <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+* `UI`: The UI of the App.
+* `Logic`: The command executor.
+* `Model`: Holds the data of the App in-memory.
+* `Storage`: Reads data from, and writes data to, the hard disk.
 
 Each of the four components
 
@@ -71,19 +131,22 @@ image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
 
+
+// tag::design-ui[]
 [[Design-Ui]]
 === UI component
+
+_Written by Dylan Lim_
 
 .Structure of the UI Component
 image::UiClassDiagram.png[]
 
+[[Calendar-Class-Diagram]]
 .Structure of the Calendar Component in UI
 image::UiCalendarDiagram.png[]
 
 .Structure of the DisplayList Component in UI
 image::UiDisplayListDiagram.png[]
-
-*API* : link:{repoURL}/src/main/java/clzzz/helper/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` class that is made up of parts which can be classified broadly into 2 groups:
 
@@ -92,7 +155,7 @@ The UI consists of a `MainWindow` class that is made up of parts which can be cl
 
 All the UI classes, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/clzzz/helper/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`].
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`.
 
 In addition, each UI part has been styled using CSS. The custom CSS styling rules are defined in multiple CSS stylesheets, which can be found in the `src/main/resources/view/stylesheets` folder.
 
@@ -102,15 +165,14 @@ The `UI` component does the following:
 * Listens for changes to `Model` data to update the UI with the modified data.
 * Handles a returned `CommandResult` to perform additional actions, e.g. show the help window, exit the program, display the appropriate part or component from Group 2, etc.
 
+// end::design-ui[]
+
 [[Design-Logic]]
 === Logic component
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
 image::LogicClassDiagram.png[]
-
-*API* :
-link:{repoURL}/src/main/java/clzzz/helper/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `PetTrackerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -127,17 +189,17 @@ NOTE: The lifeline for `DeletePetCommandParser` should end at the destroy marker
 
 // tag::Model[]
 [[Design-Model]]
+_Written by Zhu Ruicong_
+
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/clzzz/helper/model/Model.java[`Model.java`]
-
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Pet Tracker data. Note that the Pet Tracker keeps track of both the schedule system and the pet system.
+* stores the Pet Store Helper data. Note that the Pet Tracker keeps track of a UniquePetList, which in turn maintains the Pet system, Schedule system and Inventory(FoodCollection) system.
 * exposes an `ObservableList<Pet>`, an `ObservableList<Slot>`, and an `ObservableList<FoodCollection>` that are unmodifiable and can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 // end::Model[]
@@ -148,8 +210,6 @@ The `Model`,
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
-
-*API* : link:{repoURL}/src/main/java/clzzz/helper/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -166,37 +226,56 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::display[]
-=== Display
+// tag::implementation-display[]
+=== Display switching feature
+
+_Written by Dylan Lim_
+
 ==== Implementation
 
-The display mechanism is facilitated by an `ObservableList` of `DisplayItem` called `filteredDisplayItems`, which is an attribute stored in `ModelManager`.
+The display mechanism is facilitated by an `ObservableList` of `DisplayItem` s called `filteredDisplayItems`, which is an attribute stored in `ModelManager`.
 
-Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot` and `FoodCollection` classes implement this interface.
+Any class that is to be displayed as an item in a list implements the `DisplayItem` interface. This interface has a single method named `getDisplaySystemType` which returns the type of system to be displayed. In our program, the `Pet`, `Slot`, `FoodCollection`, and `FoodAmountAndPet` classes implement this interface.
 
-Step 1. The user opens the app the the 1st time. A few things happen at start-up:
+Given below is an example usage scenario and how the display mechanism behaves at each step.
+
+**Step 1**. The user opens the app the the 1st time. A few things happen at start-up:
 
 - In `Model` (`ModelManager`), `filteredDisplayItems` is created, and is set to bind to `filteredPets`. This way, `filteredDisplayItems` contains all the elements of `filteredPets`, and any changes to `filteredPets` will also be automatically propogated to `filteredDisplayItems`.
 
-- In the `MainWindow`, a `DisplayListPanel` and a `CalendarPanel` are initialized. The `DisplayListPanel` is created with `filteredDisplayItems` as its backing list, while the `CalendarPanel` will be initialized with the `List` of `Slot`s obtained from `logic.getPetTracker().getSlotList()`.
+- In the `MainWindow`, a `DisplayListPanel` and a `CalendarPanel` are initialized. The `DisplayListPanel` is created with `filteredDisplayItems` as its backing list, while the `CalendarPanel` will be initialized with the `List` of `Slot` s obtained from `logic.getPetTracker().getSlotList()`.
 
 - The `resultDisplayPlaceholder` component in the `MainWindow` is set to display the `DisplayListPanel`. As such, the user sees the list of pets as the initial display.
 
-The following \____ diagram summarises Step 1 and shows what happens at initialization: (WIP)
+**Step 2**. The user executes `display c` to have the slots displayed in calendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`.
 
-image::displayDiagram1.png[]
+The following sequence diagrams shows how the display is switched to calendar:
 
-Step 2. The user executes `display s` to have the **s**lots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to be re-binded to `filteredSlots` instead. Because the display is still making use of `DisplayListPanel`, no change is made to `resultDisplayPlaceholder` afterwards.
+.Sequence diagram for switching display to calendar
+image::displayCalendarSequenceDiagram0.png[]
 
-Step 3. The user executes `display c` to have the slots displayed in **c**alendar view. Since `filteredDisplayItems` is not used for displaying the calendar, it is not changed when the `display` command calls `Model#changeDisplaySystem`. Upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `CalendarPanel` instead of the `DisplayListPanel`.
+.Excecution of "display c" in Logic component
+image::displayCalendarSequenceDiagram1.png[]
 
-Step 4. The user executes `display p` to view the list of **p**ets. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredPets`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`.
+NOTE: The lifeline for `CommandResult`, `DisplayParser`, and `DisplayCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following \____ diagram shows how the display operation works: (WIP)
+**Step 3**. The user executes `display s` to have the slots displayed in a list. The `display` command calls `Model#changeDisplaySystem`, which causes `filteredDisplayItems` to re-binded to `filteredSlots`. Since the program should now display a list of items instead of a calendar, upon receiving back the result of the command in `MainWindow`, `resultDisplayPlaceholder` is changed to display the `DisplayListPanel` from `CalendarPanel`.
 
-image::displayDiagram2.png[]
+The following sequence diagrams shows how the display is switched to slots list view:
 
-// end::display[]
+.Sequence diagram for switching display to slots list view
+image::DisplaySlotSequenceDiagram0.png[]
+
+.Excecution of "display s" in Logic component
+image::DisplaySlotSequenceDiagram1.png[]
+
+NOTE: The lifeline for `CommandResult`, `DisplayParser`, and `DisplayCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens in `MainWindow#executeCommand` upon the return of a command result:
+
+image::DisplaySwitchingActivityDiagram.png[]
+
+// end::implementation-display[]
 
 // tag::schedule[]
 === Schedule feature
@@ -280,8 +359,59 @@ conserve system memory as there will be no duplicate information.
 
 // end::schedule[]
 
+// tag::implementation-calendar[]
+=== Calendar feature
+
+_Written by Dylan Lim_
+
+==== Implementation
+
+The class diagram for calendar-related components, as shown in <<Calendar-Class-Diagram>> previously, is reproduced in this section for convenience.
+
+.Structure of the Calendar Component in UI
+image::UiCalendarDiagram.png[]
+
+The construction of the calendar is accomplished by the `construct()` method in `CalendarPanel`. Based on the list of all slots in the system, it determines which type of `CalendarRegion` is to be placed at which position of the `GridPane` in `CalendarPanel`.
+
+.Respective `CalendarRegion` s marked out
+image::CalendarViewAnnotated.png[]
+
+In tha above annotated screenshot, rectangles with the following border color correspond to the following `CalendarRegion` (from left to right, on 7/4/2020):
+
+- Purple: `CalendarDate`. It is used to display the day and date of slots in the same row, and it always positioned to the left.
+- Green: `CalendarSlot`. It constitutes a single slot.
+- Yellow: `CalendarBuffer`. It acts a buffer between other regions, for padding purposes.
+- Blue: `CalendarConflict`. It represents a region of more than two or more conflicted slots.
+
+
+The following activity diagram outlines the rough flow of `calendarPanel#construct`:
+
+.Activity diagram for construction of calendar.
+image::CalendarConstructActivityDiagram.png[]
+
+.Activity diagram for creating new `CalendarRegion` for slot(s) in holding.
+image::CalendarNewRegionHoldingActivityDiagram.png[]
+
+
+`CalendarRegion` s are created sequentially, from left to right (increasing time of day), then top to bottom (increasing date). Each time a `CalendarRegion` is created, it is placed onto a `GridPane` based on the row index, and its starting time.
+
+==== Design Considerations
+===== Aspect: Construction of calendar upon addition / deletion / edition of slot(s)
+
+* **Alternative 1 (current choice):** Clear all components in `CalendarPanel` and redraw everything.
+** Pros: Relatively simpler to implement.
+** Cons: Might take a long time to draw if system has many slots.
+* **Alternative 2:** Modify only the component that is related the affected slot.
+** Pros: Better performance.
+** Cons: More complex implementation needed to determine and resolve  conflicts, if any.
+
+// end::implementation-calendar[]
+
 // tag::inventory_feature[]
 === Inventory feature
+
+_Written by Zhu Ruicong_
+
 ==== Implementation
 
 The Inventory feature gives a summary of all the food items involved in a pet tracker system.
@@ -294,16 +424,27 @@ A `FoodCollectionList` is stored as an attribute of `UniquePetList` for the foll
 Data stored in `FoodCollectionList` is exposed to `ModelManager` through `UniquePetList` and `PetTracker` as an unmodifiable `ObservableList<FoodCollection>`.
 `ModelManager` then passes the list of `FoodCollection` to UI for display as a list of `DisplayItem` when `display i` is called.
 
+// tag::inventory_diagram[]
 The following shows a typical usage scenario that involves the Display Inventory feature.
 
 * Step 1: The user launches the application. A `UniquePetList` is initialized in `PetTracker`, upon which a `FoodCollectionList` item is created to store the food data of the pets in the list(if it is an empty list, `FoodCollectionList` is also stores an empty list of `FoodCollection`)
-* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model$getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
-* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList$internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList$updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
+* Step 2: The user executes 'display i' command. The `display` command calls Model#ChangeDisplaySystem() and the `i` display type determines the displayed list is switched to `ObservableList<FoodCollection>`. `Model#getFilteredDisplayList()` then acquires the list and sends it to Ui unit for display.
+* Step 3: The user inputs a command that modifies the `UniquePetList`, e.g 'editpet 1 f/catfood:100'. `UniquePetList#internalList` is an instance of `ObservableList<Pet>`. Thus when it is modified, a `ListChangeListener<Pet>` is woken up and it calls `UniquePetList#updateFoodCollectionList()` to update the `FoodCollectionList` according to the modified Pet list.
 
 The sequence diagram below is an illustration of the flow of events that happen in the logical component when `Step 2` above occurs.
 
 .Interactions Inside the Logic Component for the `display i` Command
 image::DisplayInventorySequenceDiagram.png[]
+
+Note that there is no explicit initialization or update for `FoodCollection` in `FoodCollectionList`. `FoodCollectionList` is synchronized to the list of pet(`UniquePetList#internalList`) in the `UniquePetList` through `ListChangeListener<Pet>`, which is triggered whenever there is a change in the pet list. The sequence diagram below and the steps illustrates this process:
+
+* Step 1: `UniquePetList` passes its `internalList`(referred to as `petList` in the sequence diagram below).
+* Step 2: `FoodCollectionList` creates a new `FoodCollectionList` object `temp` and extracts `temp#internalList`.
+* Step 3: Replaces the content in the current `internalList` with the content in the extracted `temp#internalist`.
+
+.Interactions Inside Model Class when `ListChangeListener<Pet>` is triggered
+image::FoodCollectionListChangeSequenceDiagram.png[]
+// end::inventory_diagram[]
 
 ==== Design Considerations
 ===== Aspect: Maintaining the collection of food in a pet tracker
@@ -388,15 +529,164 @@ image:StatsSequenceDiagram.png[]
 
 == Documentation
 
-Refer to the guide <<Documentation#, here>>.
+We use Asciidoc for writing documentation.
+
+[NOTE]
+We chose Asciidoc over Markdown because Asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+
+=== Editing Documentation
+
+We used Gradle to render `.adoc` files locally to preview the end results of edits. Also, we downloaded the AsciiDoc plugin for Intellij, which allowed use to preview the changes made to the `.adoc` files in real-time.
+
+=== Editing Diagrams
+
+We used the PlantUML plugin for Intellij to create and update the UML diagrams.
+
+=== Publishing Documentation
+
+We used Travis for deployment of Github Pages for publishing documentation.
+
+=== Converting Documentation to PDF format
+
+We use Google Chrome for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+[[Docs-SiteWideDocSettings]]
+=== Site-wide Documentation Settings
+
+The `build.gradle` file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
+
+[TIP]
+Attributes left unset in the `build.gradle` file will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of site-wide attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-name`
+|The name of the website.
+If set, the name will be displayed near the top of the page.
+|_not set_
+
+|`site-githuburl`
+|URL to the site's repository on https://github.com[GitHub].
+Setting this will add a "View on GitHub" link in the navigation bar.
+|_not set_
+
+|`site-seedu`
+|Define this attribute if the project is an official SE-EDU project.
+This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
+|_not set_
+
+|===
+
+[[Docs-PerFileDocSettings]]
+=== Per-file Documentation Settings
+
+Each `.adoc` file may also specify some file-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how the file is rendered.
+
+Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built-in attributes] may be specified and used as well.
+
+[TIP]
+Attributes left unset in `.adoc` files will use their *default value*, if any.
+
+[cols="1,2a,1", options="header"]
+.List of per-file attributes, excluding Asciidoctor's built-in attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-section`
+|Site section that the document belongs to.
+This will cause the associated item in the navigation bar to be highlighted.
+One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+
+_{asterisk} Official SE-EDU projects only_
+|_not set_
+
+|`no-site-header`
+|Set this attribute to remove the site navigation bar.
+|_not set_
+
+|===
+
+=== Site Template
+
+The files in `docs/stylesheets` are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
+You can modify them to change some properties of the site's design.
+
+The files in `docs/templates` controls the rendering of `.adoc` files into HTML5.
+These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
+
+[WARNING]
+====
+Modifying the template files in `docs/templates` requires some knowledge and experience with Ruby and Asciidoctor's API.
+You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
+The SE-EDU team does not provide support for modified template files.
+====
 
 == Testing
 
-Refer to the guide <<Testing#, here>>.
+[[Running-Tests]]
+=== Running Tests
+
+There are two ways to run tests.
+
+*Method 1: Using IntelliJ JUnit test runner*
+
+* To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose `Run 'ABC'`
+
+*Method 2: Using Gradle*
+
+* Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
+
+=== Types of tests
+
+We have three types of tests:
+
+.  _Unit tests_ targeting the lowest level methods/classes. +
+e.g. `clzzz.helper.commons.util.StringUtilTest`
+.  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
+e.g. `clzzz.helper.storage.StorageManagerTest`
+.  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
+e.g. `clzzz.helper.logic.LogicManagerTest`
 
 == Dev Ops
 
-Refer to the guide <<DevOps#, here>>.
+=== Build Automation
+
+We use Gradle for build automation.
+
+=== Continuous Integration
+
+We use Travis CI and AppVeyor to perform Continuous Integration.
+
+=== Coverage Reporting
+
+We use Coveralls to track the code coverage.
+
+=== Documentation Previews
+
+When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged.
+
+=== Making a Release
+
+Here are the steps to create a new release.
+
+.  Update the version number in `MainApp.java`.
+.  Generate a JAR file using Gradle.
+.  Tag the repo with the version number. e.g. `v0.1`
+.  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
+
+=== Managing Dependencies
+
+Project dependencies are managed by Gradle, and are not included in this repository.
+
+List of dependencies:
+
+* https://github.com/FasterXML/jackson[Jackson]
+* https://junit.org/junit5/[JUnit 5]
+* https://openjfx.io/[JavaFX]
 
 // tag::appendix[]
 [appendix]

@@ -1,4 +1,4 @@
-@startuml
+@startuml UiCalendarDiagram
 !include ../style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
@@ -20,13 +20,13 @@ package Model <<Rectangle>> {
 Class HiddenModel #FFFFFF
 }
 
-MainWindow *--> CalendarPanel
+MainWindow *--> "1" CalendarPanel
 CalendarPanel ..> Model
 
-CalendarPanel --> CalendarBuffer
-CalendarPanel --> CalendarConflict
-CalendarPanel --> CalendarDate
-CalendarPanel --> CalendarSlot
+CalendarPanel *--> "*" CalendarBuffer
+CalendarPanel *--> "*" CalendarConflict
+CalendarPanel *--> "*" CalendarDate
+CalendarPanel *--> "*" CalendarSlot
 
 CalendarBuffer --|> CalendarRegion
 CalendarConflict --|> CalendarRegion
