@@ -8,7 +8,6 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyPetTracker <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Abstract Class PetListChangeListener <<Abstract>>
 Class PetTracker
 Class ReadOnlyPetTracker
 Class Model

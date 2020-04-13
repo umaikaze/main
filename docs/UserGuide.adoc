@@ -227,7 +227,9 @@ Loads the file 20200402_21_54_52.json from the hard disk.
 * `load pettracker` +
 Loads the file pettracker.json from the hard disk.
 
+// tag::stats[]
 ==== Statistics: `stats`
+_Written by Zhao Tianqi_
 
 Provides statistics about the pet tracker, schedule system, and inventory. +
 ====
@@ -235,8 +237,13 @@ Provides statistics about the pet tracker, schedule system, and inventory. +
 - A timetable that shows an overall schedule for recent 3 days. +
 - A bar chart that shows the weekly consumption of different pet food.
 ====
+// end::stats[]
+
+//tag::pet_commands[]
 
 === Pet-related commands
+
+_Written by Zhao Tianqi_
 
 ==== Adding a pet: `addpet`
 
@@ -246,7 +253,7 @@ Format: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD : AMOUNT [t/TAG
 
 ****
 - The date of birth must be in the format of d/M/yyyy, e.g. 01/01/2019, 1/7/2018
-- The gender must be either `female` or `male`.
+- The gender must be either `female` or `male`. Letter case does not matter.
 - Food is specified as a type of food complied with quantity of weekly consumption in an arbitrary unit. The food name and amount should be separated by a colon ":". There can be more than 1 types of food for one pet.
 - A pet can have any number of tags (including 0). Each tag must be restricted to one word .
 - The application ignores letter case of user input. The name, species, gender of pets, and name of food will be displayed in the format of  "Xxx Xxx ...".
@@ -320,6 +327,8 @@ Deletes the 2nd pet in the results of the `findpets garfield` command.
 - `display i` +
 `deletepet 2`
 Deletes 2nd pet in the whole pet list.
+//end::pet_commands[]
+
 
 // tag::schedule-commands[]
 === Schedule-related commands
@@ -458,7 +467,8 @@ Format: `conflicts`
 Displays the slots that have a conflict, i.e., an overlap in time with another occupied slot.
 
 
-Upon calling this command, the program display will be switched to show all conflicted slots. These conflicted slots are shown sequentially as a list and are ordered chronologically, from earliest to latest.
+* If the screen is not displaying the ful list of slots due to previous commands (e.g. findslots), command `conflicts` will show a list of conflicting slots among the shortlisted slots.
+* Otherwise, upon calling this command, the program display will be switched to show all conflicted slots. These conflicted slots are shown sequentially as a list and are ordered chronologically, from earliest to latest.
 
 This command takes in no arguments.
 
@@ -481,8 +491,8 @@ e.g. `load 20200402_21_54_52`
 . Pet-related commands
 - **Add pet**: `addpet n/NAME g/GENDER b/DATE OF BIRTH s/SPECIES f/FOOD NAME: AMOUNT [f/FOOD NAME: AMOUNT] [t/TAG]...` +
 e.g. `addpet n/Garfield g/male b/01/01/2019 s/cat tabby t/lazy f/Brand A: 30 t/lasagna`
-- **Find pet**: `findpets [n/NAME]... [t/TAG]...` +
-e.g. `findpets n/garfield n/odie t/jon`
+- **Find pet**: `findpets PETNAME [MORE PETNAMES]... +
+e.g. `findpets garfield odie`
 - **Edit pet**: `editpet INDEX [n/name] [b/DATE OF BIRTH]  [t/TAG]...` +
 e.g. `editpet 2 n/garfield t/cuddly`
 - **Delete pet**: `deletepet INDEX` +
