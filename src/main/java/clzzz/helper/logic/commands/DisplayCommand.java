@@ -21,7 +21,7 @@ public class DisplayCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Display changed to %s. \nShowing all.";
 
-    public static final String ADDITIONAL_MESSAGE_INVENTORY = "Click on each item to view list breakdown.";
+    public static final String ADDITIONAL_MESSAGE_INVENTORY = "Double click on each item to view list breakdown.";
 
     public static final String MESSAGE_INVALID_SYSTEM_TYPE = "Invalid system type specified.";
 
